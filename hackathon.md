@@ -84,11 +84,14 @@
   - Implemented centralized DNS resolver in `src/research_agent/dns_patch.py` to seamlessly route AWS ALBs (`litellm`, `crustdata`, `neatlogs`) without local ISP drops.
 - **Status:** Complete & verified live.
 
-### [2026-10-10] Continuous Memory & Versioning with Entire
+### [2026-10-10] Continuous Memory & Versioning with Entire CLI v0.11.4
 - **Actions:**
+  - Installed official Entire CLI v0.11.4 on Windows via `https://entire.io/install.ps1`.
   - Authorized GitHub App and connected repository to Entire platform: [https://entire.io/gh/ibochivincent-lang/proof-of-search-ai](https://entire.io/gh/ibochivincent-lang/proof-of-search-ai).
-  - Synchronized repository commit history (6 verified commits indexed) including Crustdata intelligence integration and SHA-256 provenance hashes.
-- **Status:** Complete & tracked in Entire dashboard.
+  - Configured repository with `entire enable --agent antigravity`.
+  - Verified active status (`entire status` -> `● Enabled · branch master, Agents · Antigravity, Checkpoints sync to: origin`).
+  - Generated `.entire/settings.json` and `.agents/hooks.json` for continuous memory checkpointing.
+- **Status:** Complete & verified (`entire status` active).
 
 ### [2026-10-10] cfo.ai Unit Economics & Business Model Finalization
 - **Actions:**
