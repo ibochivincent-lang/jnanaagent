@@ -393,14 +393,27 @@ def serve_index():
     return FileResponse(index_file)
 
 
-# Mount static assets if present
+# Mount static directories
 if WEB_DIR.exists():
     app.mount("/static", StaticFiles(directory=str(WEB_DIR)), name="static")
+    if (WEB_DIR / "css").exists():
+        app.mount("/css", StaticFiles(directory=str(WEB_DIR / "css")), name="css")
+    if (WEB_DIR / "scripts").exists():
+        app.mount("/scripts", StaticFiles(directory=str(WEB_DIR / "scripts")), name="scripts")
+    if (WEB_DIR / "images").exists():
+        app.mount("/images", StaticFiles(directory=str(WEB_DIR / "images")), name="images")
+    if (WEB_DIR / "fonts").exists():
+        app.mount("/fonts", StaticFiles(directory=str(WEB_DIR / "fonts")), name="fonts")
+    if (WEB_DIR / "models").exists():
+        app.mount("/models", StaticFiles(directory=str(WEB_DIR / "models")), name="models")
 
 
 @app.get("/{full_path:path}")
 def catch_all(full_path: str):
-    """SPA fallback: serve index.html for any browser route."""
+    """Serve physical static files if they exist, else SPA fallback."""
+    target_file = (WEB_DIR / full_path).resolve()
+    if target_file.is_file() and str(target_file).startswith(str(WEB_DIR.resolve())):
+        return FileResponse(target_file)
     index_file = WEB_DIR / "index.html"
     if index_file.exists():
         return FileResponse(index_file)
