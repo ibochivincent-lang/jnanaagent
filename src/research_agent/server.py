@@ -401,6 +401,15 @@ if WEB_DIR.exists():
     app.mount("/static", StaticFiles(directory=str(WEB_DIR)), name="static")
 
 
+@app.get("/{full_path:path}")
+def catch_all(full_path: str):
+    """SPA fallback: serve index.html for any browser route."""
+    index_file = WEB_DIR / "index.html"
+    if index_file.exists():
+        return FileResponse(index_file)
+    raise HTTPException(status_code=404, detail="Page not found")
+
+
 def main():
     import argparse
     import uvicorn
