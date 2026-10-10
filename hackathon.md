@@ -172,6 +172,21 @@
 
 ---
 
+### [2026-10-10] Autonomous SWE Issue Resolution & Code Fix Engine
+- **Strategic Context:**
+  - Expanded Dala Proof of Search to natively resolve complex engineering issues, bug reports, and GitHub PR/issue references end-to-end.
+  - Combines live GitHub REST API issue ingestion, closed PR prior-art discovery, and Entire Memory semantic vector recall to diagnose root causes and synthesize production-grade unified diff patches.
+- **Actions & Implementations:**
+  - **Live GitHub Issue Ingestion:** Added `parse_github_issue_ref()` and `github_fetch_issue()` extracting title, body, labels, maintainer comments, and state from GitHub REST API (`api.github.com/repos/{owner}/{repo}/issues/{id}`).
+  - **Cross-Repository Prior Art & PR Recall:** Enhanced `github_search_issues()` with merged PR search (`is:pr is:merged`) to locate historical code fixes for related errors.
+  - **Entire Brain Vector Memory Integration:** Built `entire_search_memory()` invoking `entire brain recall` to extract verified architectural facts, locus paths, and prior commit provenance into verified `Source` objects.
+  - **Specialized SWE Reasoning Prompts:** Engineered `SWE_PLAN_PROMPT` and `SWE_SYNTHESIZE_PROMPT` enforcing 5 rigorous sections: Executive Summary, Similar Issues & Prior Art (GitHub + Entire Memory), Root Cause Analysis, Unified Diff Code Patch (`diff --git a/... b/...`), and Executable Reproduction & Verification Test Plan.
+  - **Console Drawer "💻 Code Fix & Patch" Viewer:** Added interactive tab with syntax-highlighted unified diffs (color-coded additions, deletions, chunk headers), "📋 Copy Patch", "⬇️ Download .patch", "📋 Copy Test Code", and cards linking similar external issues and Entire Memory provenance.
+  - **Unit Testing:** Added 6 new unit tests (`test_is_code_issue_task`, `test_extract_code_patch`, `test_extract_test_verification`, `test_extract_similar_issues`, `test_parse_github_issue_ref`, `test_entire_search_memory_live`). Total suite now **21 passed in 6.5s (100% green)**.
+- **Status:** Complete, verified, and pushed to production.
+
+---
+
 ## Submission Checklist
 - [x] Project name & problem description
 - [x] GitHub repository created and synchronized
@@ -185,7 +200,9 @@
 - [x] 4 official neatHack benchmark stems implemented and verified (`/api/stems`)
 - [x] Autonomous tool recovery and failure handling implemented (`ToolRecovery` log)
 - [x] Ground-truth proof quote extraction and deterministic verification audit
+- [x] Autonomous SWE Code Fix Engine with unified diff patch viewer and reproduction test suite
 - [x] Working reproduction commands and sample verified report generated
+
 
 
 
