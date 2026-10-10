@@ -59,11 +59,25 @@ def test_fetch_skips_failed_pages(monkeypatch):
         return Source(title=title, url=url, text="x" * 300) if "good" in url else None
 
     monkeypatch.setattr(nodes.tools, "fetch_page", fake_fetch)
+    monkeypatch.setattr(nodes.tools, "crustdata_enrich_company", lambda d: None)
     out = nodes.fetch(
         {"search_results": [SearchResult(title="g", url="https://good.com"),
                             SearchResult(title="b", url="https://bad.com")]}
     )
     assert len(out["sources"]) == 1
+
+
+def test_fetch_adds_crustdata_enrichment(monkeypatch):
+    monkeypatch.setattr(nodes.tools, "fetch_page", lambda u, **kw: Source(title=u, url=u, text="x" * 300))
+    monkeypatch.setattr(
+        nodes.tools,
+        "crustdata_enrich_company",
+        lambda d: Source(title=f"Crustdata: {d}", url=f"https://{d}", text="Company details", source_type="crustdata_live")
+    )
+    monkeypatch.setenv("CRUSTDATA_API_KEY", "dummy_key")
+    out = nodes.fetch({"search_results": [SearchResult(title="Stripe", url="https://stripe.com/about")]})
+    assert len(out["sources"]) == 2
+    assert any(s.source_type == "crustdata_live" for s in out["sources"])
 
 
 @pytest.mark.parametrize(
@@ -80,3 +94,25 @@ def test_route_after_fetch(n_sources, search_round, expected):
         "search_round": search_round,
     }
     assert nodes.route_after_fetch(state) == expected
+
+
+def test_synthesize_appends_proof_of_search_audit(monkeypatch):
+    class StubLLMResponse:
+        text = "# Sample Report\n\nExecutive summary."
+    
+    class StubSynthesizeLLM:
+        def invoke(self, prompt):
+            return StubLLMResponse()
+
+    monkeypatch.setattr(nodes.llm, "get_llm", lambda **kw: StubSynthesizeLLM())
+    state = {
+        "topic": "Payments",
+        "plan": {"objective": "Explain payments", "outline": ["Overview"]},
+        "sources": [
+            Source(title="Stripe", url="https://stripe.com", text="Stripe info", sha256="abc1234567890def", verified=True)
+        ],
+    }
+    out = nodes.synthesize(state)
+    assert "Proof of Search: Cryptographic Provenance Audit" in out["report"]
+    assert "abc1234567890def"[:16] in out["report"]
+

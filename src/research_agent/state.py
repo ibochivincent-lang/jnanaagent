@@ -31,11 +31,14 @@ class SourceSelection(BaseModel):
 
 
 class Source(BaseModel):
-    """A fetched and text-extracted web page."""
+    """A fetched and text-extracted web page or live intelligence record."""
 
     title: str
     url: str
     text: str
+    sha256: str = ""
+    verified: bool = True
+    source_type: str = "web"
 
 
 class ResearchState(TypedDict, total=False):

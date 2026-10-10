@@ -20,8 +20,8 @@
 | **Observability & Tracing** | **Neatlogs** | Telemetry, span logging, LLM token metrics, trace dashboard | SDK v1.4.26 Installed & Graph Callback Handler Hooked |
 | **Continuous Memory & Versioning** | **Entire** | CLI session capture, Checkpoints, Entire Graph & Brain | Pending CLI init & first checkpoint |
 | **Unit Economics & Financial Plan** | **cfo.ai** | Agent pricing, per-query cost modeling, revenue, runway plan | Financial modeling in progress |
-| **Live B2B & Executive Data** | **Crustdata** | Live company & people search intelligence (Zero Mock Data) | Promo code `NEATLOGS-OCT2026` ready |
-| **Agent Core Orchestration** | **LangGraph / Python** | StateGraph, interrupt-based HITL gate, citation synthesis | Initialized in workspace |
+| **Live B2B & Executive Data** | **Crustdata** | Live company & people search intelligence (Zero Mock Data) | Live API Verified (`/company/enrich`, SHA-256 Hashed) |
+| **Agent Core Orchestration** | **LangGraph / Python** | StateGraph, interrupt-based HITL gate, citation synthesis | Initialized & Full Test Suite Passing (11/11 tests) |
 
 ---
 
@@ -65,31 +65,40 @@
   - Verified ingestion finalized in Neatlogs backend.
 - **Status:** Complete & verified end-to-end.
 
+### [2026-10-10] Crustdata Live Intelligence & Cryptographic Provenance Audit ("Proof of Search")
+- **Actions:**
+  - Connected live Crustdata API key `cd_...` (Zero Mock Data).
+  - Built `crustdata_enrich_company()` in `src/research_agent/tools.py` targeting `https://api.crustdata.com/company/enrich` with DNS fallback resilience for AWS ALBs.
+  - Integrated automatic entity cross-enrichment inside the LangGraph `fetch` node.
+  - Implemented cryptographic SHA-256 content hashing on every retrieved source.
+  - Added automated Proof of Search Cryptographic Provenance Audit generation at the bottom of synthesized reports.
+  - Expanded unit test coverage in `tests/test_nodes.py` (11/11 tests passing).
+- **Status:** Complete, tested, and verified with live Crustdata responses.
+
 ---
 
 ## Demo
-- **Status:** In development
+- **Status:** Functional CLI agent with live Crustdata & Neatlogs telemetry
 - **CLI / Web URL:** [https://github.com/ibochivincent-lang/proof-of-search-ai](https://github.com/ibochivincent-lang/proof-of-search-ai)
 - **Reproduction Instructions:**
   ```bash
   git clone https://github.com/ibochivincent-lang/proof-of-search-ai.git
   cd proof-of-search-ai
   pip install -e .
-  # Set ANTHROPIC_API_KEY and NEATLOGS_API_KEY in .env
-  python -m research_agent "Your Research Topic" --auto
+  # Set ANTHROPIC_API_KEY, NEATLOGS_API_KEY, and CRUSTDATA_API_KEY in .env
+  python -m research_agent "Emerging cross-border payment corridors using stablecoins" --auto
   ```
 
 ---
 
 ## Known Limitations & Next Steps
 1. **Prerequisite Inputs Needed:**
-   - Entire CLI installation and repo authorization.
+   - Entire CLI installation and repo authorization (`https://entire.io/gh/ibochivincent-lang/proof-of-search-ai`).
    - cfo.ai business plan generation.
-   - Crustdata API key using promo code `NEATLOGS-OCT2026`.
 2. **Next Steps:**
-   - Structure live agent graph combining web and Crustdata entity intelligence (zero mock data).
-   - Capture initial Entire checkpoint (`entire checkpoint explain HEAD`).
+   - Authorize Entire GitHub App and record first agent memory checkpoint.
    - Finalize cfo.ai financial plan.
+   - Build lightweight web UI dashboard for the demo video.
 
 ---
 
@@ -98,9 +107,10 @@
 - [x] GitHub repository created and synchronized
 - [x] neatlogs SDK integrated with native LangGraph callbacks & flush lifecycle
 - [x] neatlogs verified trace links in dashboard (Doctor probe PASSED, finalized)
+- [x] Crustdata live intelligence integration functioning (zero mock data, 100% verified)
 - [ ] Entire connected with accessible checkpoint link & ID
 - [ ] cfo.ai business plan & unit economics report attached
-- [ ] Crustdata live intelligence integration functioning (zero mock data)
 - [ ] Demo video & working reproduction commands
+
 
 
