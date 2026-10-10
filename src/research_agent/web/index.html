@@ -7,7 +7,7 @@
   <meta name="description" content="Dala: Distributed intelligence & verifiable research agent. Constellation floating on black velvet.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/index.css">
   <script src="/static/marked.min.js"></script>
   <script>if (typeof marked === 'undefined') { document.write('<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"><\\/script>'); }</script>
 
@@ -23,8 +23,9 @@
       --color-saffron-spark: #ffb829;
       --color-deep-verdant: #15846e;
 
-      /* Typography */
-      --font-family: 'PPNeueMontreal', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      /* Typography — Font Families */
+      --font-ppneuemontreal: 'PPNeueMontreal', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-family: var(--font-ppneuemontreal);
       --font-mono: 'JetBrains Mono', monospace;
 
       /* Type Scale */
