@@ -118,12 +118,18 @@
 - **Entire Repository Index:** [https://entire.io/gh/ibochivincent-lang/proof-of-search-ai](https://entire.io/gh/ibochivincent-lang/proof-of-search-ai)
 - **Financial Model:** [`financial_plan.md`](./financial_plan.md)
 - **Sample Verified Research Report:** [`reports/report-stripe-and-openai-collaboration-in-financial-ai.md`](./reports/report-stripe-and-openai-collaboration-in-financial-ai.md)
+- **AWS Cloud Deployment (EC2 / Docker)**:
+  - Dockerfile & `docker-compose.yml` included in root.
+  - Automated EC2 User Data bootstrap script at [`deploy/ec2-userdata.sh`](./deploy/ec2-userdata.sh).
+  - Target AWS Region: `eu-north-1` (Stockholm).
 - **Reproduction Instructions:**
   ```bash
   git clone https://github.com/ibochivincent-lang/proof-of-search-ai.git
   cd proof-of-search-ai
   pip install -e .
-  # Configure your .env (LiteLLM or Anthropic + Neatlogs + Crustdata)
+  # Option A: Run web console
+  python -m research_agent.server --port 8000
+  # Option B: Run CLI autonomous research
   python -m research_agent "Stripe and OpenAI collaboration in financial AI" --auto
   ```
 

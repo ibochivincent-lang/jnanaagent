@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  proofsearch:
+    build: .
+    container_name: proof-of-search-ai
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - RESEARCH_AGENT_MODEL=claude-haiku
+      - LITELLM_BASE_URL=https://litellm.vision.aivar.app/v1
+      - LITELLM_API_KEY=${LITELLM_API_KEY}
+      - NEATLOGS_API_KEY=${NEATLOGS_API_KEY}
+      - CRUSTDATA_API_KEY=${CRUSTDATA_API_KEY}
+    volumes:
+      - ./reports:/app/reports

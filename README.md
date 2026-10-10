@@ -111,6 +111,24 @@ Proof of Search AI is instrumented with the **Entire CLI v0.11.4**, **entire-gra
 
 ---
 
+## ☁️ Deployment: Docker & AWS (EC2 / Cloud)
+
+### Option 1: Docker / Docker Compose
+Run with a single command:
+```bash
+docker-compose up --build -d
+```
+Then access `http://localhost:8000`.
+
+### Option 2: AWS EC2 (Automated Cloud Launch)
+1. In the AWS Management Console (`eu-north-1` Stockholm or your preferred region), navigate to **EC2** &rarr; **Launch Instance**.
+2. Select **Ubuntu 24.04 LTS** (t3.micro or t3.small).
+3. In **Network Settings**, allow HTTP traffic on port `80` and Custom TCP on port `8000`.
+4. Under **Advanced Details** &rarr; **User data**, paste the contents of [`deploy/ec2-userdata.sh`](deploy/ec2-userdata.sh).
+5. Click **Launch Instance**. In under 2 minutes, your public IP will serve the live Web Console!
+
+---
+
 ## 🏆 neatHack 2026 Submission
 - **Team**: Vincci001 (Leader: Ibochi Vincent)
 - **Repository**: [https://github.com/ibochivincent-lang/proof-of-search-ai](https://github.com/ibochivincent-lang/proof-of-search-ai)

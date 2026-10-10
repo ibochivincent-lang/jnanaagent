@@ -1,0 +1,15 @@
+.git
+.github
+.agents
+.entire
+.pytest_cache
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.env
+.venv
+venv/
+traces/
+video_frames/
+get-brain.sh
