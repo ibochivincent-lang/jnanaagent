@@ -44,23 +44,36 @@
   - Implemented one-shot process lifecycle flush (`neatlogs.flush()`) and shutdown (`neatlogs.shutdown()`) in a `finally` block.
 - **Status:** Complete. Ready for probe verification and live tracing.
 
+### [2026-10-10] Repository Publishing & Remote Sync
+- **Actions:**
+  - Published project to GitHub under team lead profile: [https://github.com/ibochivincent-lang/proof-of-search-ai](https://github.com/ibochivincent-lang/proof-of-search-ai).
+  - Configured git remotes and pushed all tracking commits and documentation.
+- **Status:** Synchronized with GitHub.
+
 ---
 
 ## Demo
 - **Status:** In development
-- **CLI / Web URL:** TBD
-- **Reproduction Instructions:** TBD
+- **CLI / Web URL:** [https://github.com/ibochivincent-lang/proof-of-search-ai](https://github.com/ibochivincent-lang/proof-of-search-ai)
+- **Reproduction Instructions:**
+  ```bash
+  git clone https://github.com/ibochivincent-lang/proof-of-search-ai.git
+  cd proof-of-search-ai
+  pip install -e .
+  # Set ANTHROPIC_API_KEY and NEATLOGS_API_KEY in .env
+  python -m research_agent "Your Research Topic" --auto
+  ```
 
 ---
 
 ## Known Limitations & Next Steps
 1. **Prerequisite Inputs Needed:**
-   - Neatlogs Project API Key (from `app.neatlogs.com` -> Settings -> API Keys).
+   - Neatlogs Project API Key inserted into `.env` (from `app.neatlogs.com` -> Settings -> API Keys).
    - Entire CLI installation and repo authorization.
    - cfo.ai business plan generation.
    - Crustdata API key using promo code `NEATLOGS-OCT2026`.
 2. **Next Steps:**
-   - Install `neatlogs`, `crustdata` SDK / API clients, and verify with synthetic probe.
+   - Run synthetic probe check (`python -m neatlogs doctor --probe`) once key is inserted.
    - Structure live agent graph combining web and Crustdata entity intelligence.
    - Capture initial Entire checkpoint (`entire checkpoint explain HEAD`).
 
@@ -68,8 +81,11 @@
 
 ## Submission Checklist
 - [x] Project name & problem description
-- [ ] neatlogs integrated with verified trace links in dashboard
+- [x] GitHub repository created and synchronized
+- [x] neatlogs SDK integrated with native LangGraph callbacks & flush lifecycle
+- [ ] neatlogs verified trace links in dashboard
 - [ ] Entire connected with accessible checkpoint link & ID
 - [ ] cfo.ai business plan & unit economics report attached
 - [ ] Crustdata live intelligence integration functioning (zero mock data)
 - [ ] Demo video & working reproduction commands
+
