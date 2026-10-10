@@ -46,6 +46,7 @@ Type=simple
 User=root
 WorkingDirectory=/opt/proof-of-search-ai
 EnvironmentFile=/opt/proof-of-search-ai/.env
+ExecStartPre=-/usr/bin/git -C /opt/proof-of-search-ai pull origin master
 ExecStart=/opt/proof-of-search-ai/venv/bin/python -m research_agent.server --host 0.0.0.0 --port 8000
 Restart=always
 RestartSec=5

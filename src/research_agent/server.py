@@ -193,16 +193,13 @@ def get_report(filename: str) -> Dict[str, Any]:
     }
 
 
-def _run_research_sync(run_id: str, topic: str, auto: bool, model: Optional[str]) -> None:
+def _run_research_sync(run_id: str, topic: str, auto: bool, model: Optional[str], main_loop: asyncio.AbstractEventLoop) -> None:
     """Worker function that runs the LangGraph agent in a separate thread."""
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-
     run_state = RUNS[run_id]
     queue: asyncio.Queue = run_state["queue"]
 
     def emit(event: Dict[str, Any]) -> None:
-        loop.call_soon_threadsafe(queue.put_nowait, event)
+        main_loop.call_soon_threadsafe(queue.put_nowait, event)
 
     if model:
         os.environ["RESEARCH_AGENT_MODEL"] = model
@@ -316,7 +313,7 @@ async def start_research(req: ResearchRequest) -> Dict[str, Any]:
         raise HTTPException(status_code=400, detail="Topic cannot be empty")
 
     run_id = str(uuid.uuid4())
-    loop = asyncio.get_event_loop()
+    loop = asyncio.get_running_loop()
     queue = asyncio.Queue()
 
     RUNS[run_id] = {
@@ -333,7 +330,7 @@ async def start_research(req: ResearchRequest) -> Dict[str, Any]:
 
     thread = threading.Thread(
         target=_run_research_sync,
-        args=(run_id, req.topic, req.auto, req.model),
+        args=(run_id, req.topic, req.auto, req.model, loop),
         daemon=True,
     )
     thread.start()

@@ -111,7 +111,15 @@ Proof of Search AI is instrumented with the **Entire CLI v0.11.4**, **entire-gra
 
 ---
 
-## ☁️ Deployment: Docker & AWS (EC2 / Cloud)
+## ☁️ Deployment: Live AWS Cloud & Docker
+
+### 🌐 Live Production Cloud Deployment (neatHack AWS Credits)
+- **Live Public URL**: **[http://34.227.107.171:8000](http://34.227.107.171:8000)**
+- **Cloud Provider**: Amazon Web Services (AWS)
+- **Region**: `us-east-1` (US East, N. Virginia)
+- **Instance ID**: `i-0442ddfa2604f5923` (`t2.micro`, Ubuntu 24.04 LTS)
+- **Status Endpoint**: [http://34.227.107.171:8000/api/status](http://34.227.107.171:8000/api/status) (HTTP 200 OK — all sponsor integrations online)
+- **System Service**: Managed by `systemd` (`proofsearch.service`) running 24/7 with automatic restart and crash recovery.
 
 ### Option 1: Docker / Docker Compose
 Run with a single command:
@@ -120,12 +128,16 @@ docker-compose up --build -d
 ```
 Then access `http://localhost:8000`.
 
-### Option 2: AWS EC2 (Automated Cloud Launch)
-1. In the AWS Management Console (`eu-north-1` Stockholm or your preferred region), navigate to **EC2** &rarr; **Launch Instance**.
-2. Select **Ubuntu 24.04 LTS** (t3.micro or t3.small).
-3. In **Network Settings**, allow HTTP traffic on port `80` and Custom TCP on port `8000`.
-4. Under **Advanced Details** &rarr; **User data**, paste the contents of [`deploy/ec2-userdata.sh`](deploy/ec2-userdata.sh).
-5. Click **Launch Instance**. In under 2 minutes, your public IP will serve the live Web Console!
+### Option 2: AWS EC2 (Automated Cloud Launch via User Data)
+1. In the AWS Management Console (`us-east-1` N. Virginia or preferred region), navigate to **EC2** → **Launch Instance**.
+2. Select **Ubuntu 24.04 LTS** (`t2.micro` or `t3.micro`).
+3. In **Network Settings**, allow Custom TCP port `8000` (and `80`/`22`).
+4. Under **Advanced Details** → **User data**, paste the contents of [`deploy/ec2-userdata.sh`](deploy/ec2-userdata.sh).
+5. Click **Launch Instance**. The automated userdata bootstrap installs Python, dependencies, clones the repo, and launches the service in ~90 seconds!
+6. If connecting via **EC2 Instance Connect** in the AWS console:
+   - User name: `ubuntu`
+   - Click orange **Connect** button (no key pair required in browser).
+   - Check status: `sudo systemctl status proofsearch`
 
 ---
 
