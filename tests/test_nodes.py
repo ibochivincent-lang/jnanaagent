@@ -116,3 +116,62 @@ def test_synthesize_appends_proof_of_search_audit(monkeypatch):
     assert "Proof of Search: Cryptographic Provenance Audit" in out["report"]
     assert "abc1234567890def"[:16] in out["report"]
 
+
+def test_is_code_issue_task():
+    from research_agent.nodes import is_code_issue_task
+    assert is_code_issue_task("Investigate LangGraph memory leak in checkpointing") is True
+    assert is_code_issue_task("https://github.com/langchain-ai/langgraph/issues/3898") is True
+    assert is_code_issue_task("langchain-ai/langgraph#3898") is True
+    assert is_code_issue_task("Fix bug in nodes.py: KeyError on state") is True
+    assert is_code_issue_task("Stripe vs Adyen market share") is False
+
+
+def test_extract_code_patch():
+    from research_agent.nodes import extract_code_patch
+    report = """# Resolution
+Some explanation.
+```diff
+diff --git a/pkg/graph.py b/pkg/graph.py
+--- a/pkg/graph.py
++++ b/pkg/graph.py
+@@ -10,3 +10,3 @@
+- old_leaky_cache.clear()
++ weakref_cache.clear()
+```
+Further notes.
+"""
+    patch = extract_code_patch(report)
+    assert "diff --git a/pkg/graph.py b/pkg/graph.py" in patch
+    assert "+ weakref_cache.clear()" in patch
+
+
+def test_extract_test_verification():
+    from research_agent.nodes import extract_test_verification
+    report = """# Resolution
+## 5. Reproduction & Verification Test Plan
+```python
+def test_checkpoint_memory_leak():
+    assert True
+```
+"""
+    test_code = extract_test_verification(report)
+    assert "def test_checkpoint_memory_leak():" in test_code
+
+
+def test_extract_similar_issues():
+    from research_agent.nodes import extract_similar_issues
+    from research_agent.state import Source
+    sources = [
+        Source(title="Issue 3898", url="https://github.com/langchain/langgraph/issues/3898", text="leak", source_type="github_issue", sha256="123"),
+        Source(title="PR 4001", url="https://github.com/langchain/langgraph/pull/4001", text="fix", source_type="github_pr", sha256="456"),
+        Source(title="Memory Invariant", url="entire://repo", text="arch", source_type="entire_memory", sha256="789"),
+        Source(title="Blog Post", url="https://medium.com/post", text="article", source_type="web", sha256="abc"),
+    ]
+    similar = extract_similar_issues(sources)
+    assert len(similar) == 3
+    types = [s["type"] for s in similar]
+    assert "github_issue" in types
+    assert "github_pr" in types
+    assert "entire_memory" in types
+
+

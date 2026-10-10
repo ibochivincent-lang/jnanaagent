@@ -38,7 +38,7 @@ class Source(BaseModel):
     text: str
     sha256: str = ""
     verified: bool = True
-    source_type: str = "web"  # "web" | "crustdata_live" | "github_issue"
+    source_type: str = "web"  # "web" | "crustdata_live" | "github_issue" | "github_pr" | "entire_memory"
     evidence_quote: str = ""  # Direct extracted quote proving the citation
     status_code: int = 200
     domain: str = ""
@@ -54,4 +54,7 @@ class ResearchState(TypedDict, total=False):
     report: str
     recoveries: list[dict]  # Tool recovery events for hackathon failure handling
     disagreements: list[dict]  # Detected and resolved source contradictions
+    code_patch: str  # Unified diff patch for autonomous SWE resolution
+    similar_issues: list[dict]  # Similar GitHub issues & Entire memory records
+    test_verification: str  # Executable reproduction/verification test code
 

@@ -2,6 +2,7 @@
 
 import logging
 import os
+import re
 
 from langgraph.types import Command, interrupt
 
@@ -19,6 +20,27 @@ PLAN_PROMPT = """You are a research planner. Produce a research plan for this to
 Design 3-5 web search queries that together cover the topic from complementary angles
 (definitions/background, current state, data or evidence, criticism or open questions),
 and an outline of 4-6 section headings for the final report."""
+
+SWE_PLAN_PROMPT = """You are an autonomous Software Engineering (SWE) issue resolution planner. Produce a rigorous technical investigation and code-patching plan for this GitHub issue, bug report, or codebase task:
+
+<topic>
+{topic}
+</topic>
+{feedback_block}
+Design 3-5 targeted search queries:
+1) The specific issue, repository, or error traceback
+2) Similar GitHub issues, discussions, and previous bug reports
+3) Merged PR fixes and commits for similar bugs
+4) Entire repository memory layer, architectural invariants, or module design
+5) Reproduction patterns and test assertions
+
+And an outline of 5-6 section headings covering:
+- Executive Summary & Fault Localization
+- Similar Issues & Prior Art (GitHub + Entire Memory)
+- Technical Root Cause Analysis
+- Unified Diff Code Patch
+- Reproduction & Verification Test Plan
+"""
 
 SELECT_PROMPT = """You are selecting sources for a research report.
 
@@ -54,6 +76,91 @@ Requirements:
 - End with a `## Sources` section listing each source as `[n] Title — URL`.
 - Do not invent facts that are not in the sources."""
 
+SWE_SYNTHESIZE_PROMPT = """Write a Software Engineering (SWE) issue resolution and code fix report in markdown on the topic below, using the provided sources as evidence.
+
+<topic>
+{topic}
+</topic>
+
+Objective: {objective}
+
+Follow this outline:
+{outline}
+
+<sources>
+{sources}
+</sources>
+
+CRITICAL SWE RESOLUTION REQUIREMENTS:
+- Start with a `# [Code Fix] <Clear Title>` heading and an Executive Summary pinpointing the exact fault localization (repository, files, functions).
+- In the Similar Issues & Prior Art section, compare with similar GitHub issues/PRs and Entire Memory records from the sources. Cite inline source numbers like [1] or [2].
+- In the Root Cause Analysis section, provide an in-depth technical diagnosis of why the bug or error occurs.
+- In the Unified Diff Code Patch section, you MUST output a complete, valid unified diff patch inside a ```diff code block.
+  Follow standard git patch format:
+  ```diff
+  diff --git a/path/to/file.py b/path/to/file.py
+  --- a/path/to/file.py
+  +++ b/path/to/file.py
+  @@ -line,count +line,count @@
+  - old faulty line
+  + new fixed line
+  ```
+- In the Reproduction & Verification Test Plan section, you MUST output an executable test inside a ```python code block that reproduces the error and verifies the patch.
+- End with a `## Sources` section listing each source as `[n] Title — URL`.
+- Do not invent facts that are not in the sources.
+"""
+
+
+def is_code_issue_task(topic: str) -> bool:
+    """Detect if topic is a code bug, GitHub issue, traceback, or SWE task."""
+    topic_lower = topic.lower()
+    keywords = (
+        "github", "issue", "bug", "pr", "repo", "traceback", "error", "patch",
+        "fix", "diff", "leak", "exception", "langgraph", "langchain", "entire",
+        "commit", "test", "regression", "codebase", "pull request"
+    )
+    if any(k in topic_lower for k in keywords):
+        return True
+    if tools.parse_github_issue_ref(topic) is not None:
+        return True
+    return False
+
+
+def extract_code_patch(report: str) -> str:
+    """Extract the primary unified diff block from markdown report."""
+    match = re.search(r"```diff\s*\n([\s\S]*?)\n```", report)
+    if match:
+        return match.group(1).strip()
+    return ""
+
+
+def extract_test_verification(report: str) -> str:
+    """Extract the reproduction test python code block from markdown report."""
+    match = re.search(r"## .*?(?:Reproduction|Verification|Test)[\s\S]*?```python\s*\n([\s\S]*?)\n```", report, re.IGNORECASE)
+    if match:
+        return match.group(1).strip()
+    for m in re.finditer(r"```python\s*\n([\s\S]*?)\n```", report):
+        code = m.group(1).strip()
+        if "test_" in code or "def test" in code or "assert " in code:
+            return code
+    return ""
+
+
+def extract_similar_issues(sources: list[Source]) -> list[dict]:
+    """Filter sources for GitHub issues/PRs and Entire Memory records."""
+    items = []
+    for s in sources:
+        st = getattr(s, "source_type", "web")
+        if st in ("github_issue", "github_pr", "entire_memory"):
+            items.append({
+                "title": s.title,
+                "url": s.url,
+                "type": st,
+                "quote": getattr(s, "evidence_quote", ""),
+                "sha256": getattr(s, "sha256", ""),
+            })
+    return items
+
 
 def plan(state: ResearchState) -> dict:
     """Draft (or, with human feedback, redraft) the research plan."""
@@ -64,13 +171,15 @@ def plan(state: ResearchState) -> dict:
         if feedback
         else ""
     )
-    log.info("plan: drafting plan for topic %r%s", state["topic"], " (revision)" if feedback else "")
+    topic = state["topic"]
+    is_code = is_code_issue_task(topic)
+    log.info("plan: drafting %s plan for topic %r%s", "SWE code fix" if is_code else "research", topic, " (revision)" if feedback else "")
+    prompt_tpl = SWE_PLAN_PROMPT if is_code else PLAN_PROMPT
     planner = llm.get_llm().with_structured_output(ResearchPlan)
     research_plan = planner.invoke(
-        PLAN_PROMPT.format(topic=state["topic"], feedback_block=feedback_block)
+        prompt_tpl.format(topic=topic, feedback_block=feedback_block)
     )
     log.info("plan: objective=%r queries=%s", research_plan.objective, research_plan.search_queries)
-    # stored as a plain dict so checkpointed state stays serializer-friendly
     return {"plan": research_plan.model_dump(), "feedback": ""}
 
 
@@ -113,12 +222,14 @@ def search(state: ResearchState) -> dict:
     for q in queries:
         results.extend(tools.web_search(q))
 
-    # GitHub issue investigation check (neatHack Focus Area: Fix a GitHub issue)
-    topic_lower = state.get("topic", "").lower()
-    if any(k in topic_lower for k in ("github", "issue", "bug", "pr", "repo", "langgraph", "memory leak")):
-        log.info("search: topic references code/issues; invoking github_search_issues")
+    # GitHub issue investigation check & code resolution
+    if is_code_issue_task(state.get("topic", "")):
+        log.info("search: topic is code/issue; invoking github_search_issues and merged PR discovery")
         gh_results = tools.github_search_issues(state["topic"])
         results.extend(gh_results)
+        # Also discover closed/merged PR fixes
+        gh_prs = tools.github_search_issues(f"{state['topic']} is:pr is:merged", max_results=3)
+        results.extend(gh_prs)
 
     unique = tools.dedupe_results(results)
     log.info("search: round %d collected %d unique results", round_num, len(unique))
@@ -165,6 +276,13 @@ def fetch(state: ResearchState) -> dict:
             })
     log.info("fetch: %d/%d sources fetched successfully", len(sources), len(state["search_results"]))
 
+    # If code issue, enrich with Entire Brain Memory Layer (architectural invariants, repo facts)
+    if is_code_issue_task(state.get("topic", "")):
+        mem_facts = tools.entire_search_memory(state["topic"])
+        if mem_facts:
+            sources.extend(mem_facts)
+            log.info("fetch: enriched with %d verified Entire Memory records", len(mem_facts))
+
     # Cross-enrich entities with Crustdata Live B2B API if key is present (Zero Mock Data)
     if os.getenv("CRUSTDATA_API_KEY"):
         seen_domains = set()
@@ -207,9 +325,11 @@ def synthesize(state: ResearchState) -> dict:
         for i, s in enumerate(sources, start=1)
     )
     outline = "\n".join(f"- {h}" for h in state["plan"]["outline"])
-    log.info("synthesize: writing report from %d sources", len(sources))
+    is_code = is_code_issue_task(state["topic"])
+    prompt_tpl = SWE_SYNTHESIZE_PROMPT if is_code else SYNTHESIZE_PROMPT
+    log.info("synthesize: writing %s report from %d sources", "SWE code fix" if is_code else "research", len(sources))
     response = llm.get_llm().invoke(
-        SYNTHESIZE_PROMPT.format(
+        prompt_tpl.format(
             topic=state["topic"],
             objective=state["plan"]["objective"],
             outline=outline,
@@ -224,6 +344,11 @@ def synthesize(state: ResearchState) -> dict:
             usage.get("output_tokens"),
         )
 
+    # Extract SWE artifacts if code task
+    code_patch = extract_code_patch(response.text)
+    test_verification = extract_test_verification(response.text)
+    similar_issues = extract_similar_issues(sources)
+
     recoveries = state.get("recoveries", [])
     # Build verifiable Proof of Search audit table (Ground Truth + Quotes + No Crypto Slop)
     audit_rows = []
@@ -234,6 +359,10 @@ def synthesize(state: ResearchState) -> dict:
             engine_label = "Crustdata Live B2B"
         elif st == "github_issue":
             engine_label = "GitHub API (Issues)"
+        elif st == "github_pr":
+            engine_label = "GitHub API (Merged PR)"
+        elif st == "entire_memory":
+            engine_label = "Entire Memory Layer"
         else:
             engine_label = "Web Scrape"
 
@@ -275,5 +404,10 @@ def synthesize(state: ResearchState) -> dict:
         "- **Gross Margin:** 97.7% at $2.50 / query\n"
     )
 
-    return {"report": response.text + audit_table}
+    result_dict: dict = {"report": response.text + audit_table}
+    if is_code or code_patch:
+        result_dict["code_patch"] = code_patch
+        result_dict["test_verification"] = test_verification
+        result_dict["similar_issues"] = similar_issues
+    return result_dict
 

@@ -537,6 +537,108 @@
     margin-top: 4px;
   }
 
+  /* Code Fix & Diff Viewer */
+  .btn-diff-action {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: inherit;
+  }
+  .btn-diff-action:hover {
+    background: rgba(128, 82, 255, 0.2);
+    border-color: #8052ff;
+    color: #fff;
+  }
+  .diff-viewer-container {
+    background: rgba(8, 8, 12, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 12px 0;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+    font-size: 12px;
+    line-height: 1.55;
+    max-height: 420px;
+    overflow-y: auto;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+  }
+  .diff-line {
+    padding: 1px 16px;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+  .diff-line.add {
+    background: rgba(52, 211, 153, 0.12);
+    color: #34d399;
+    border-left: 3px solid #34d399;
+  }
+  .diff-line.del {
+    background: rgba(248, 113, 113, 0.12);
+    color: #f87171;
+    border-left: 3px solid #f87171;
+  }
+  .diff-line.hdr {
+    background: rgba(128, 82, 255, 0.12);
+    color: #c4b5fd;
+    font-weight: 600;
+    border-left: 3px solid #8052ff;
+  }
+  .diff-line.meta {
+    color: #93c5fd;
+    font-weight: 600;
+  }
+  .diff-line.ctx {
+    color: #9ca3af;
+  }
+  .test-viewer-container {
+    background: rgba(8, 8, 12, 0.95);
+    border: 1px solid rgba(52, 211, 153, 0.25);
+    border-radius: 12px;
+    padding: 14px;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+    font-size: 12px;
+    color: #e5e7eb;
+    line-height: 1.55;
+    max-height: 250px;
+    overflow-y: auto;
+    margin: 0;
+  }
+  .similar-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: all 0.2s;
+  }
+  .similar-card:hover {
+    border-color: rgba(128, 82, 255, 0.4);
+    background: rgba(255, 255, 255, 0.04);
+  }
+  .similar-card-badge {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 4px;
+    display: inline-block;
+  }
+  .similar-card-badge.gh-issue { background: rgba(255, 184, 41, 0.15); color: #ffb829; border: 1px solid #ffb829; }
+  .similar-card-badge.gh-pr { background: rgba(52, 211, 153, 0.15); color: #34d399; border: 1px solid #34d399; }
+  .similar-card-badge.entire { background: rgba(128, 82, 255, 0.15); color: #c4b5fd; border: 1px solid #8052ff; }
+
   /* HITL Banner */
   .hitl-banner {
     display: none;
@@ -627,6 +729,7 @@
       <!-- Tabs -->
       <div class="drawer-tabs">
         <button class="drawer-tab active" onclick="switchDrawerTab('report')">Verified Report</button>
+        <button class="drawer-tab" id="tab-btn-diff" onclick="switchDrawerTab('diff')">💻 Code Fix & Patch <span id="diff-badge" style="display:none; background: #8052ff; color:#fff; font-size:9px; padding:1px 6px; border-radius:9999px; margin-left:4px; font-weight:700;">PATCH</span></button>
         <button class="drawer-tab" onclick="switchDrawerTab('provenance')">Ground-Truth Audit</button>
         <button class="drawer-tab" onclick="switchDrawerTab('recovery')">Tool Recovery Log</button>
         <button class="drawer-tab" onclick="switchDrawerTab('neatlogs')">neatlogs Telemetry</button>
@@ -639,6 +742,50 @@
       <div class="drawer-pane active" id="pane-report">
         <div class="report-content" id="drawer-report-content">
           <p style="color: #9a9a9a; font-weight: 200;">Your synthesized intelligence report with inline citations and ground-truth proof will stream here.</p>
+        </div>
+      </div>
+
+      <div class="drawer-pane" id="pane-diff">
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <!-- Patch Header & Controls -->
+          <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(128, 82, 255, 0.08); border: 1px solid rgba(128, 82, 255, 0.3); border-radius: 12px; padding: 12px 16px; flex-wrap: wrap; gap: 10px;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="background: #8052ff; color: #fff; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 9999px; text-transform: uppercase;">Autonomous Code Fix</span>
+                <span id="diff-file-target" style="font-family: monospace; font-size: 13px; color: #fff; font-weight: 600;">Unified Diff Patch</span>
+              </div>
+              <div style="font-size: 11px; color: #bdbdbd; margin-top: 4px;">Verified root-cause fix generated with zero mock data. Ready for <code>git apply</code>.</div>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button onclick="copyPatchToClipboard()" class="btn-diff-action" id="btn-copy-patch">📋 Copy Patch</button>
+              <button onclick="downloadPatchFile()" class="btn-diff-action">⬇️ Download .patch</button>
+            </div>
+          </div>
+
+          <!-- Unified Diff Display Container -->
+          <div>
+            <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; color: #ffb829; letter-spacing: 0.05em; margin-bottom: 6px;">Unified Diff Viewer</div>
+            <div class="diff-viewer-container" id="diff-viewer-body">
+              <div style="color: #9a9a9a; padding: 20px; text-align: center; font-size: 13px;">No code patch generated yet. Enter a GitHub issue or codebase bug query to synthesize a fix.</div>
+            </div>
+          </div>
+
+          <!-- Reproduction & Verification Test Box -->
+          <div id="test-verification-box" style="display: none;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span style="font-size: 11px; font-weight: 600; text-transform: uppercase; color: #34d399; letter-spacing: 0.05em;">Reproduction & Verification Test Plan</span>
+              <button onclick="copyTestToClipboard()" class="btn-diff-action" style="padding: 4px 10px; font-size: 11px;" id="btn-copy-test">📋 Copy Test Code</button>
+            </div>
+            <pre class="test-viewer-container"><code id="test-viewer-code"></code></pre>
+          </div>
+
+          <!-- Similar Issues & Prior Art Section -->
+          <div>
+            <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; color: #9a9a9a; letter-spacing: 0.05em; margin-bottom: 8px;">Similar Issues & Prior Art (GitHub + Entire Memory)</div>
+            <div id="similar-issues-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px;">
+              <div style="color: #6b7280; font-size: 12px; font-style: italic;">Similar issues and Entire memory provenance will appear here upon completion.</div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -757,7 +904,7 @@
     const stem = cachedStems.find(s => s.id === stemId);
     const query = stem ? stem.prompt : (
       stemId === 'research_sources' ? 'Compare Stripe vs Adyen enterprise market share, processing fees, and resolve conflicting reports on growth metrics' :
-      stemId === 'github_issue' ? 'Investigate GitHub issue for memory leaks in LangGraph checkpointing, analyze open discussions, and identify commits' :
+      stemId === 'github_issue' ? 'Investigate GitHub issue for memory leaks in LangGraph checkpointing, research similar issues in GitHub and Entire memory, and formulate a unified diff code patch' :
       stemId === 'multi_agent_consensus' ? 'Synthesize conflicting valuation, annualized revenue, and compute commitments for OpenAI and Anthropic across primary sources' :
       'Execute deep research with simulated 404 links to demonstrate autonomous tool recovery, query expansion, and fallback search'
     );
@@ -914,8 +1061,18 @@
         setDrawerStep('synth', 'done');
         setDrawerStep('verify', 'done');
         if (data.report) {
-          renderDrawerReport(data.report, data.recoveries || []);
-          switchDrawerTab('report');
+          renderDrawerReport(
+            data.report,
+            data.recoveries || [],
+            data.code_patch || '',
+            data.test_verification || '',
+            data.similar_issues || []
+          );
+          if (data.code_patch) {
+            switchDrawerTab('diff');
+          } else {
+            switchDrawerTab('report');
+          }
         }
       }
     } else if (data.type === 'interrupt') {
@@ -952,9 +1109,163 @@
     });
   }
 
-  function renderDrawerReport(markdown, recoveries = []) {
+  let currentPatchText = '';
+  let currentTestText = '';
+
+  function renderDiffPatch(diffText, testText, similarList = []) {
+    currentPatchText = diffText || '';
+    currentTestText = testText || '';
+
+    const badge = document.getElementById('diff-badge');
+    if (diffText) {
+      if (badge) badge.style.display = 'inline-block';
+    } else {
+      if (badge) badge.style.display = 'none';
+    }
+
+    // Format Diff Lines
+    const viewer = document.getElementById('diff-viewer-body');
+    if (!diffText) {
+      viewer.innerHTML = '<div style="color: #9a9a9a; padding: 20px; text-align: center; font-size: 13px;">No code patch generated for this query. Enter a GitHub issue or bug description to synthesize a unified diff.</div>';
+    } else {
+      const lines = diffText.split('\n');
+      const formatted = lines.map(line => {
+        let cls = 'ctx';
+        if (line.startsWith('+++') || line.startsWith('---') || line.startsWith('diff --git') || line.startsWith('index ')) {
+          cls = 'meta';
+        } else if (line.startsWith('@@')) {
+          cls = 'hdr';
+        } else if (line.startsWith('+')) {
+          cls = 'add';
+        } else if (line.startsWith('-')) {
+          cls = 'del';
+        }
+        const escaped = line.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return `<div class="diff-line ${cls}">${escaped || ' '}</div>`;
+      }).join('');
+      viewer.innerHTML = formatted;
+    }
+
+    // Reproduction / Verification Test Code
+    const testBox = document.getElementById('test-verification-box');
+    const testCode = document.getElementById('test-viewer-code');
+    if (testText) {
+      testBox.style.display = 'block';
+      testCode.textContent = testText;
+    } else {
+      testBox.style.display = 'none';
+    }
+
+    // Similar Issues & Entire Memory Grid
+    const grid = document.getElementById('similar-issues-grid');
+    if (similarList && similarList.length) {
+      grid.innerHTML = similarList.map(item => {
+        const isEntire = item.type === 'entire_memory';
+        const isPR = item.type === 'github_pr';
+        const badgeCls = isEntire ? 'entire' : (isPR ? 'gh-pr' : 'gh-issue');
+        const badgeLabel = isEntire ? 'Entire Memory' : (isPR ? 'Merged PR Fix' : 'GitHub Issue');
+        const quote = item.quote ? `<div style="font-size: 11px; color: #9ca3af; font-style: italic; margin-top: 4px;">${item.quote}</div>` : '';
+        const urlLink = item.url && !item.url.startsWith('entire://') ?
+          `<a href="${item.url}" target="_blank" rel="noopener" style="font-size: 11px; color: #ffb829; text-decoration: none; display: inline-flex; align-items: center; gap: 2px;">View Issue &rarr;</a>` :
+          `<span style="font-size: 11px; color: #8052ff; font-family: monospace;">${item.url}</span>`;
+        return `
+          <div class="similar-card">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="similar-card-badge ${badgeCls}">${badgeLabel}</span>
+              ${urlLink}
+            </div>
+            <div style="font-size: 13px; font-weight: 500; color: #fff;">${item.title}</div>
+            ${quote}
+          </div>
+        `;
+      }).join('');
+    } else {
+      grid.innerHTML = '<div style="color: #6b7280; font-size: 12px; font-style: italic;">No similar external issues found for this query.</div>';
+    }
+  }
+
+  function copyPatchToClipboard() {
+    if (!currentPatchText) {
+      alert('No patch to copy');
+      return;
+    }
+    navigator.clipboard.writeText(currentPatchText).then(() => {
+      const btn = document.getElementById('btn-copy-patch');
+      const orig = btn.textContent;
+      btn.textContent = '✓ Copied!';
+      btn.style.color = '#34d399';
+      setTimeout(() => {
+        btn.textContent = orig;
+        btn.style.color = '#fff';
+      }, 2000);
+    });
+  }
+
+  function downloadPatchFile() {
+    if (!currentPatchText) {
+      alert('No patch to download');
+      return;
+    }
+    const blob = new Blob([currentPatchText], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `dala-fix-${Date.now()}.patch`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  function copyTestToClipboard() {
+    if (!currentTestText) return;
+    navigator.clipboard.writeText(currentTestText).then(() => {
+      const btn = document.getElementById('btn-copy-test');
+      const orig = btn.textContent;
+      btn.textContent = '✓ Copied!';
+      btn.style.color = '#34d399';
+      setTimeout(() => {
+        btn.textContent = orig;
+        btn.style.color = '#fff';
+      }, 2000);
+    });
+  }
+
+  function renderDrawerReport(markdown, recoveries = [], patchText = '', testText = '', similarList = []) {
     const reportDiv = document.getElementById('drawer-report-content');
     reportDiv.innerHTML = marked.parse(markdown);
+
+    // Extract Diff & Test if not directly passed
+    let extractedPatch = patchText;
+    let extractedTest = testText;
+    let extractedSimilar = (similarList && similarList.length) ? similarList : [];
+
+    if (!extractedPatch) {
+      const diffMatch = markdown.match(/```diff\s*\n([\s\S]*?)\n```/);
+      if (diffMatch) extractedPatch = diffMatch[1].trim();
+    }
+    if (!extractedTest) {
+      const testMatch = markdown.match(/## .*?(?:Reproduction|Verification|Test)[\s\S]*?```python\s*\n([\s\S]*?)\n```/i);
+      if (testMatch) extractedTest = testMatch[1].trim();
+    }
+    if (!extractedSimilar.length) {
+      const srcMatches = markdown.matchAll(/\[(\d+)\]\s+(.+?)\s+(?:—|-)\s+(https?:\/\/[^\s]+|entire:\/\/[^\s]+)/g);
+      for (const sm of srcMatches) {
+        const title = sm[2].trim();
+        const url = sm[3].trim();
+        if (url.includes('github.com') || url.includes('entire://') || title.toLowerCase().includes('entire')) {
+          const isEntire = url.includes('entire://') || title.toLowerCase().includes('entire');
+          const isPR = url.includes('/pull/') || title.toLowerCase().includes('pull request') || title.toLowerCase().includes('pr');
+          extractedSimilar.push({
+            title: title,
+            url: url,
+            type: isEntire ? 'entire_memory' : (isPR ? 'github_pr' : 'github_issue'),
+            quote: '',
+          });
+        }
+      }
+    }
+    renderDiffPatch(extractedPatch, extractedTest, extractedSimilar);
 
     // Crustdata Extract
     const crustMatch = markdown.match(/### Crustdata Verified B2B Intelligence[\s\S]*?(?=###|\n\n\n|$)/);
@@ -1018,7 +1329,7 @@
       list.innerHTML = reports.map(r => `
         <div style="border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="loadArchivedReport('${r.filename}')">
           <div>
-            <div style="font-size: 14px; color: #fff;">${r.title}</div>
+            <div style="font-size: 14px; color: #fff;">${r.title} ${r.has_code_patch ? '<span style="background: rgba(128,82,255,0.2); color:#c4b5fd; font-size:9px; padding:2px 6px; border-radius:9999px; border:1px solid #8052ff; margin-left:6px;">DIFF PATCH</span>' : ''}</div>
             <div style="font-size: 11px; color: #9a9a9a; margin-top: 2px;">${r.modified.split('T')[0]} · ${r.word_count} words</div>
           </div>
           <span style="font-size: 12px; color: #8052ff;">Read &rarr;</span>
@@ -1033,8 +1344,12 @@
     try {
       const res = await fetch(`/api/reports/${filename}`);
       const data = await res.json();
-      renderDrawerReport(data.content, []);
-      switchDrawerTab('report');
+      renderDrawerReport(data.content, [], data.code_patch || '', data.test_verification || '', []);
+      if (data.code_patch) {
+        switchDrawerTab('diff');
+      } else {
+        switchDrawerTab('report');
+      }
     } catch (e) {
       console.error(e);
     }

@@ -41,12 +41,168 @@ def extract_grounding_quote(text: str, max_chars: int = 240) -> str:
     return f'"{candidate}"'
 
 
+def parse_github_issue_ref(text: str) -> tuple[str, str, int] | None:
+    """Extract (owner, repo, issue_number) from a URL or shorthand reference."""
+    import re
+    # Match https://github.com/owner/repo/issues/123 or pull/123
+    m = re.search(r"(?:https?://github\.com/)?([a-zA-Z0-9_.-]+)/([a-zA-Z0-9_.-]+)/(?:issues|pull)/(\d+)", text)
+    if m:
+        return m.group(1), m.group(2), int(m.group(3))
+    # Match shorthand owner/repo#123
+    m2 = re.search(r"([a-zA-Z0-9_.-]+)/([a-zA-Z0-9_.-]+)#(\d+)", text)
+    if m2:
+        return m2.group(1), m2.group(2), int(m2.group(3))
+    return None
+
+
+def github_fetch_issue(url_or_ref: str) -> Source | None:
+    """Fetch complete GitHub issue details, labels, and maintainer comments via GitHub REST API."""
+    parsed = parse_github_issue_ref(url_or_ref)
+    if not parsed:
+        return None
+    owner, repo, number = parsed
+    api_url = f"https://api.github.com/repos/{owner}/{repo}/issues/{number}"
+    log.info("github_fetch_issue: fetching %s/%s#%d", owner, repo, number)
+    try:
+        resp = httpx.get(
+            api_url,
+            timeout=12,
+            headers={"User-Agent": "neatHack-research-agent/1.0", "Accept": "application/vnd.github.v3+json"},
+        )
+        if resp.status_code != 200:
+            log.warning("github_fetch_issue: HTTP %d for %s/%s#%d", resp.status_code, owner, repo, number)
+            return None
+        data = resp.json()
+        title = data.get("title", f"Issue #{number}")
+        state = data.get("state", "open")
+        author = data.get("user", {}).get("login", "unknown")
+        html_url = data.get("html_url", api_url)
+        labels = [l.get("name") for l in data.get("labels", []) if isinstance(l, dict)]
+        body = data.get("body") or "No issue description provided."
+
+        # Also fetch top comments to understand maintainer discussion and triage
+        comments_text = ""
+        comments_url = data.get("comments_url")
+        if comments_url and data.get("comments", 0) > 0:
+            c_resp = httpx.get(
+                f"{comments_url}?per_page=5",
+                timeout=10,
+                headers={"User-Agent": "neatHack-research-agent/1.0", "Accept": "application/vnd.github.v3+json"},
+            )
+            if c_resp.status_code == 200:
+                c_data = c_resp.json()
+                if isinstance(c_data, list) and c_data:
+                    c_blocks = []
+                    for c in c_data[:5]:
+                        user = c.get("user", {}).get("login", "user")
+                        c_body = (c.get("body") or "").strip()
+                        c_blocks.append(f"**@{user}:**\n{c_body}")
+                    comments_text = "\n\n### Maintainer & Contributor Discussion:\n" + "\n\n---\n\n".join(c_blocks)
+
+        full_text = (
+            f"# [{owner}/{repo} #{number}] {title}\n"
+            f"- **Repository:** `{owner}/{repo}`\n"
+            f"- **Issue Number:** `#{number}`\n"
+            f"- **State:** `{state.upper()}`\n"
+            f"- **Reporter:** `@{author}`\n"
+            f"- **Labels:** `{', '.join(labels) if labels else 'None'}`\n"
+            f"- **URL:** {html_url}\n\n"
+            f"### Issue Description:\n{body}\n"
+            f"{comments_text}"
+        )
+
+        digest = calculate_sha256(full_text)
+        evidence = extract_grounding_quote(body or title)
+        return Source(
+            title=f"GitHub Issue: {owner}/{repo}#{number} — {title}",
+            url=html_url,
+            text=full_text,
+            sha256=digest,
+            verified=True,
+            source_type="github_issue",
+            evidence_quote=evidence,
+            status_code=200,
+            domain="github.com",
+        )
+    except Exception as exc:
+        log.warning("github_fetch_issue: error for %s/%s#%d: %s", owner, repo, number, exc)
+        return None
+
+
+def entire_search_memory(query: str, max_facts: int = 5) -> list[Source]:
+    """Search repository Entire Brain memory layer for architectural invariants and prior decisions."""
+    log.info("entire_search_memory: querying Entire Brain for %r", query)
+    import subprocess
+    clean_query = query.strip()
+    if not clean_query:
+        return []
+    try:
+        proc = subprocess.run(
+            ["entire", "brain", "recall", clean_query, "--json"],
+            capture_output=True,
+            text=True,
+            timeout=10,
+        )
+        if proc.returncode != 0 or not proc.stdout.strip():
+            log.warning("entire_search_memory: command failed or returned empty: %s", proc.stderr[:100])
+            return []
+        data = json.loads(proc.stdout)
+        facts = data.get("facts", [])
+        sources = []
+        for f in facts[:max_facts]:
+            fact_id = f.get("id", "fact")
+            paths = f.get("paths", ["project"])
+            path_str = "/".join(paths) if isinstance(paths, list) else str(paths)
+            text = f.get("text", "")
+            kind = f.get("kind", "memory")
+            origin = f.get("origin", "authored")
+            fact_body = (
+                f"### Entire Memory Layer: {path_str} ({kind.upper()})\n"
+                f"- **Fact ID:** `{fact_id}`\n"
+                f"- **Locus/Path:** `{path_str}`\n"
+                f"- **Origin:** `{origin}`\n"
+                f"- **Memory Text:** {text}\n"
+            )
+            digest = calculate_sha256(fact_body)
+            sources.append(
+                Source(
+                    title=f"Entire Memory: {path_str}",
+                    url=f"entire://{path_str}",
+                    text=fact_body,
+                    sha256=digest,
+                    verified=True,
+                    source_type="entire_memory",
+                    evidence_quote=f'"{text[:200]}..."' if len(text) > 200 else f'"{text}"',
+                    status_code=200,
+                    domain="entire.local",
+                )
+            )
+        log.info("entire_search_memory: returned %d verified facts", len(sources))
+        return sources
+    except Exception as exc:
+        log.warning("entire_search_memory: error: %s", exc)
+        return []
+
+
 def github_search_issues(query: str, max_results: int = 5) -> list[SearchResult]:
     """Search public GitHub issues and PRs (neatHack Focus: Fix a GitHub issue & code investigations)."""
     log.info("github_search: %r (max %d results)", query, max_results)
     clean_query = query.strip()
     if not clean_query:
         return []
+    # If query is a direct issue link or ref, return it as a direct candidate
+    parsed = parse_github_issue_ref(clean_query)
+    results = []
+    if parsed:
+        owner, repo, number = parsed
+        results.append(
+            SearchResult(
+                title=f"GitHub Issue #{number}: {owner}/{repo}",
+                url=f"https://github.com/{owner}/{repo}/issues/{number}",
+                snippet=f"Direct target issue {owner}/{repo}#{number}",
+            )
+        )
+    # Search open and closed issues/PRs
     url = f"https://api.github.com/search/issues?q={urllib.parse.quote_plus(clean_query)}&per_page={max_results}"
     try:
         resp = httpx.get(
@@ -54,24 +210,25 @@ def github_search_issues(query: str, max_results: int = 5) -> list[SearchResult]
             timeout=10,
             headers={"User-Agent": "neatHack-research-agent/1.0", "Accept": "application/vnd.github.v3+json"},
         )
-        if resp.status_code != 200:
+        if resp.status_code == 200:
+            data = resp.json()
+            items = data.get("items", [])
+            for it in items:
+                title = it.get("title", "GitHub Issue")
+                issue_url = it.get("html_url", "")
+                state = it.get("state", "open")
+                is_pr = "pull_request" in it
+                type_label = "PR" if is_pr else "ISSUE"
+                body = (it.get("body") or "")[:300].replace("\n", " ").strip()
+                snippet = f"[{state.upper()} {type_label}] #{it.get('number', '')} {body}"
+                results.append(SearchResult(title=f"GitHub {type_label}: {title}", url=issue_url, snippet=snippet))
+        else:
             log.warning("github search returned status %d: %s", resp.status_code, resp.text[:100])
-            return []
-        data = resp.json()
-        items = data.get("items", [])
-        results = []
-        for it in items:
-            title = it.get("title", "GitHub Issue")
-            issue_url = it.get("html_url", "")
-            state = it.get("state", "open")
-            body = (it.get("body") or "")[:300].replace("\n", " ").strip()
-            snippet = f"[{state.upper()}] #{it.get('number', '')} {body}"
-            results.append(SearchResult(title=f"GitHub: {title}", url=issue_url, snippet=snippet))
         log.info("github_search: %r -> %d results", query, len(results))
         return results
     except Exception as exc:
         log.warning("github search failed for %r: %s", query, exc)
-        return []
+        return results
 
 
 def web_search(query: str, max_results: int | None = None) -> list[SearchResult]:
@@ -111,6 +268,12 @@ def dedupe_results(results: list[SearchResult]) -> list[SearchResult]:
 def fetch_page(url: str, title: str = "") -> Source | None:
     """Download a page and extract its main text with ground-truth verification."""
     log.info("fetch: %s", url)
+    # If URL is a GitHub issue/pull, fetch rich API data directly
+    if "github.com/" in url and ("/issues/" in url or "/pull/" in url):
+        gh_src = github_fetch_issue(url)
+        if gh_src:
+            return gh_src
+
     try:
         resp = httpx.get(
             url,

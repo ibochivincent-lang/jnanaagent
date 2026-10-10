@@ -125,11 +125,11 @@ def get_hackathon_stems() -> List[Dict[str, Any]]:
         },
         {
             "id": "github_issue",
-            "category": "Investigate a GitHub issue & codebase",
-            "title": "LangGraph Memory Leak Investigation",
-            "prompt": "Investigate GitHub issue for memory leaks in LangGraph checkpointing, analyze open discussions, and identify commits",
-            "focus_areas": ["Planning", "Tool Use (GitHub Search)", "Context Extraction", "Execution"],
-            "expected_tools": ["GitHub Issues API", "DuckDuckGo Web Search", "Page Extraction"],
+            "category": "Autonomous SWE Issue Resolution & Code Patch",
+            "title": "LangGraph Memory Leak & Unified Patch",
+            "prompt": "Investigate GitHub issue for memory leaks in LangGraph checkpointing, research similar issues in GitHub and Entire memory, and formulate a unified diff code patch",
+            "focus_areas": ["Planning", "Fault Localization", "GitHub & Entire Memory Research", "Unified Diff Patch", "Reproduction Test"],
+            "expected_tools": ["GitHub Issues API", "Entire Brain Memory", "DuckDuckGo Web Search", "Unified Diff Generator"],
         },
         {
             "id": "multi_agent_consensus",
@@ -240,6 +240,7 @@ def list_reports() -> List[Dict[str, Any]]:
             "word_count": len(content.split()),
             "has_crustdata": "Crustdata" in content,
             "has_sha256": "SHA-256" in content,
+            "has_code_patch": "```diff" in content,
             "sources_count": content.count("[Source #"),
         })
     return reports
@@ -254,11 +255,16 @@ def get_report(filename: str) -> Dict[str, Any]:
 
     content = target.read_text(encoding="utf-8")
     provenance = _extract_provenance_from_report(content)
+    from .nodes import extract_code_patch, extract_test_verification
+    code_patch = extract_code_patch(content)
+    test_verification = extract_test_verification(content)
 
     return {
         "filename": filename,
         "content": content,
         "provenance_table": provenance,
+        "code_patch": code_patch,
+        "test_verification": test_verification,
         "created_at": datetime.fromtimestamp(target.stat().st_mtime).isoformat(),
     }
 
@@ -336,8 +342,13 @@ def _run_research_sync(run_id: str, topic: str, auto: bool, model: Optional[str]
         # Extraction and synthesis completion
         report = result.get("report", "")
         sources = result.get("sources", [])
-        
         recoveries = result.get("recoveries", [])
+        
+        from .nodes import extract_code_patch, extract_test_verification, extract_similar_issues
+        code_patch = result.get("code_patch") or extract_code_patch(report)
+        test_verification = result.get("test_verification") or extract_test_verification(report)
+        similar_issues = result.get("similar_issues") or extract_similar_issues(sources)
+
         emit({
             "type": "stage",
             "step": "complete",
@@ -345,6 +356,9 @@ def _run_research_sync(run_id: str, topic: str, auto: bool, model: Optional[str]
             "report": report,
             "sources_count": len(sources),
             "recoveries": recoveries,
+            "code_patch": code_patch,
+            "test_verification": test_verification,
+            "similar_issues": similar_issues,
             "neatlogs_url": "https://app.neatlogs.com/projects/72082073-0485-4b6b-abb0-2a1ce5116f2b",
         })
 
