@@ -34,8 +34,8 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger("research_agent.server")
 
 app = FastAPI(
-    title="Proof of Search AI",
-    description="Verifiable, Hallucination-Resistant Research Engine with Live Crustdata & Neatlogs Tracing",
+    title="Dala · Proof of Search AI",
+    description="Your workplace has the answer. Just ask Dala for it. Verifiable research engine with live Crustdata & Neatlogs tracing.",
     version="1.0.0",
 )
 
@@ -417,7 +417,8 @@ def main():
     args = parser.parse_args()
 
     print(f"\n=======================================================")
-    print(f"  Proof of Search AI (ProofSearch AI) — Web Console")
+    print(f"  Dala (Proof of Search AI) — Web Console")
+    print(f"  'Your workplace has the answer. Just ask Dala for it.'")
     print(f"  neatHack 2026 Team: Vincci001 (Lead: Ibochi Vincent)")
     print(f"  Local URL: http://localhost:{args.port}")
     print(f"=======================================================\n")

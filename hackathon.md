@@ -1,7 +1,11 @@
-# neatHack 2026: Proof of Search AI (ProofSearch AI)
+# neatHack 2026: Dala (Proof of Search AI)
+
+> *"Your workplace has the answer. Just ask Dala for it."*
 
 ## Project Overview
-- **Name:** Proof of Search AI (ProofSearch AI)
+- **Name:** Dala (Proof of Search AI)
+- **Tagline:** Your workplace has the answer. Just ask Dala for it.
+- **Design Aesthetic:** Dala dark-stage environment — constellation floating on black velvet, Electric Iris violet (`#8052ff`) CTA pill buttons, Saffron Spark (`#ffb829`) punctuation, and interactive neural brain particle constellation.
 - **Purpose:** A decentralized, verifiable agentic research engine that combines real-time deep web search, live B2B/people intelligence via Crustdata, verifiable cryptographic and source provenance (Proof of Search), and full execution telemetry via Neatlogs, Continuous Memory with Entire, and economic unit sustainability modeled in cfo.ai.
 - **Problem Solved:** LLM research agents hallucinate sources, fabricate statistics, and cannot prove whether information was actually retrieved from ground truth or invented. Enterprise and intelligence research requires verifiable audit trails, real-time live data with zero mock records, transparent cost/token economics, and observable agent traces.
 

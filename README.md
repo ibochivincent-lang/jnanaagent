@@ -1,12 +1,16 @@
-# Proof of Search AI (ProofSearch AI)
+# Dala (Proof of Search AI)
+
+> *Your workplace has the answer. Just ask Dala for it.*  
+> **A dark-stage constellation floating on black velvet.**
 
 [![Hackathon](https://img.shields.io/badge/neatHack-2026-blue.svg)](https://neatlogs.com)
+[![Brand](https://img.shields.io/badge/Identity-Dala%20Constellation-8052ff.svg)](https://github.com/ibochivincent-lang/proof-of-search-ai)
 [![Tracing](https://img.shields.io/badge/Telemetry-Neatlogs%20v1.4.26-6366f1.svg)](https://app.neatlogs.com)
 [![Orchestration](https://img.shields.io/badge/Agent-LangGraph-brightgreen.svg)](https://github.com/langchain-ai/langgraph)
 [![Continuous Memory](https://img.shields.io/badge/Provenance-Entire%20Checkpoints-orange.svg)](https://entire.io)
 [![Live Data](https://img.shields.io/badge/Data-Crustdata%20Live%20API-emerald.svg)](https://crustdata.com)
 
-**Proof of Search AI** is a verifiable, hallucination-resistant research agent pipeline engineered for **neatHack 2026**. It tackles the critical problem of unverified citations, fabricated data, and opaque reasoning in AI agents by delivering end-to-end execution observability via **Neatlogs**, verifiable continuous session memory via **Entire**, live B2B/market ground truth via **Crustdata**, and sustainable per-query unit economics modeled on **cfo.ai**.
+**Dala (Proof of Search AI)** is a verifiable, hallucination-resistant research agent pipeline engineered for **neatHack 2026**. Designed with the monolithic, weightless **Dala Design System**—where black voids meet a single vivid violet accent (`#8052ff` Electric Iris) punctuated by amber sparks (`#ffb829` Saffron Spark) and an interactive particle brain constellation—it tackles unverified citations, fabricated data, and opaque reasoning through end-to-end execution observability via **Neatlogs**, verifiable continuous session memory via **Entire**, live B2B/market ground truth via **Crustdata**, and sustainable per-query unit economics modeled on **cfo.ai**.
 
 ---
 

@@ -3,35 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Proof of Search AI — Verifiable Agentic Research Engine</title>
-  <meta name="description" content="Verifiable, hallucination-resistant research agent pipeline combining live Crustdata B2B intelligence, SHA-256 cryptographic provenance, Neatlogs execution tracing, and Entire continuous memory.">
+  <title>Dala · Proof of Search AI — Your workplace has the answer. Just ask Dala for it.</title>
+  <meta name="description" content="Dala: Distributed intelligence & verifiable research agent. Combining live Crustdata B2B intelligence, cryptographic SHA-256 provenance, Neatlogs execution tracing, and Entire memory.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="/static/marked.min.js"></script>
   <script>if (typeof marked === 'undefined') { document.write('<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"><\\/script>'); }</script>
 
   <style>
     :root {
-      --bg-dark: #07090e;
-      --bg-card: rgba(15, 23, 42, 0.75);
-      --bg-card-hover: rgba(30, 41, 59, 0.85);
-      --border-color: rgba(255, 255, 255, 0.08);
-      --border-glow: rgba(16, 185, 129, 0.35);
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --accent-emerald: #10b981;
-      --accent-cyan: #06b6d4;
-      --accent-indigo: #6366f1;
-      --accent-amber: #f59e0b;
-      --accent-rose: #f43f5e;
-      --glass-blur: blur(16px);
-      --radius-sm: 8px;
-      --radius-md: 14px;
-      --radius-lg: 20px;
-      --font-display: 'Outfit', sans-serif;
-      --font-body: 'Plus Jakarta Sans', sans-serif;
+      /* Dala Design Tokens */
+      --color-void: #000000;
+      --color-bone-white: #ffffff;
+      --color-ash-gray: #9a9a9a;
+      --color-silver-mist: #bdbdbd;
+      --color-electric-iris: #8052ff;
+      --color-saffron-spark: #ffb829;
+      --color-deep-verdant: #15846e;
+
+      /* Typography */
+      --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
+
+      /* Scales */
+      --text-caption: 12px;
+      --text-nav-label: 14px;
+      --text-body: 18px;
+      --text-heading-2xs: 24px;
+      --text-heading-xs: 27px;
+      --text-subheading: 36px;
+      --text-heading-sm: 42px;
+      --text-heading: 48px;
+      --text-heading-lg: 78px;
+      --text-display: 113px;
+
+      /* Spacing */
+      --spacing-6: 6px;
+      --spacing-12: 12px;
+      --spacing-18: 18px;
+      --spacing-24: 24px;
+      --spacing-30: 30px;
+      --spacing-36: 36px;
+      --spacing-60: 60px;
+      --spacing-96: 96px;
+      --spacing-120: 120px;
+
+      --radius-pill: 24px;
+      --radius-soft: 18px;
+      --radius-full: 9999px;
+      --page-max-width: 1400px;
     }
 
     * {
@@ -40,842 +61,1075 @@
       padding: 0;
     }
 
-    body {
-      background-color: var(--bg-dark);
-      background-image: 
-        radial-gradient(circle at 15% 15%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 85% 20%, rgba(99, 102, 241, 0.09) 0%, transparent 45%),
-        radial-gradient(circle at 50% 80%, rgba(6, 182, 212, 0.06) 0%, transparent 50%);
-      background-attachment: fixed;
-      color: var(--text-main);
-      font-family: var(--font-body);
-      line-height: 1.6;
+    html, body {
+      background-color: var(--color-void);
+      color: var(--color-bone-white);
+      font-family: var(--font-family);
+      font-weight: 200;
+      line-height: 1.5;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     a {
-      color: var(--accent-cyan);
+      color: inherit;
       text-decoration: none;
-      transition: color 0.2s ease;
-    }
-    a:hover {
-      color: #38bdf8;
-      text-decoration: underline;
+      transition: color 0.15s ease;
     }
 
-    /* Layout */
+    /* Background Constellation Canvas */
+    #constellation-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .app-wrapper {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
     .container {
-      max-width: 1440px;
+      max-width: var(--page-max-width);
       margin: 0 auto;
-      padding: 1.5rem 2rem;
+      padding: 0 var(--spacing-24);
       width: 100%;
     }
 
-    /* Top Navigation Bar */
+    /* Top Navigation */
     header {
-      background: rgba(10, 15, 28, 0.85);
-      backdrop-filter: var(--glass-blur);
-      border-bottom: 1px solid var(--border-color);
+      background: transparent;
+      padding: var(--spacing-24) 0;
       position: sticky;
       top: 0;
       z-index: 100;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    .nav-content {
+    .nav-inner {
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-items: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
     }
 
-    .brand-group {
+    .logo-lockup {
       display: flex;
       align-items: center;
-      gap: 0.85rem;
+      gap: 12px;
     }
 
-    .logo-badge {
-      width: 44px;
-      height: 44px;
-      background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
-      border-radius: 12px;
+    .logo-mark {
+      width: 28px;
+      height: 28px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: var(--font-display);
-      font-weight: 800;
-      font-size: 1.4rem;
-      color: #051410;
-      box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
     }
 
-    .brand-titles h1 {
-      font-family: var(--font-display);
-      font-size: 1.35rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
+    .logo-mark svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 0 10px rgba(128, 82, 255, 0.6));
+    }
+
+    .logo-wordmark {
+      font-size: 22px;
+      font-weight: 400;
+      letter-spacing: -0.04em;
+      color: var(--color-bone-white);
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .logo-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-saffron-spark);
+    }
+
+    .nav-links {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: var(--spacing-30);
     }
 
-    .brand-titles .tagline {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      font-weight: 500;
+    .nav-link {
+      font-size: var(--text-nav-label);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.025em;
+      color: var(--color-ash-gray);
+      transition: color 0.2s ease;
     }
 
-    .hack-badge {
-      background: rgba(99, 102, 241, 0.15);
-      color: #a5b4fc;
-      border: 1px solid rgba(99, 102, 241, 0.3);
-      padding: 0.2rem 0.55rem;
-      border-radius: 6px;
-      font-size: 0.7rem;
+    .nav-link:hover, .nav-link.active {
+      color: var(--color-bone-white);
+    }
+
+    /* Dala Violet Pill Button */
+    .btn-violet-pill {
+      background: var(--color-electric-iris);
+      color: var(--color-bone-white);
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: 12px 24px;
+      font-family: var(--font-family);
+      font-size: var(--text-nav-label);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.025em;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 0 20px rgba(128, 82, 255, 0.35);
+    }
+
+    .btn-violet-pill:hover {
+      background: #9066ff;
+      transform: translateY(-1px);
+      box-shadow: 0 0 30px rgba(128, 82, 255, 0.6);
+    }
+
+    .btn-violet-pill:active {
+      transform: translateY(0);
+    }
+
+    .btn-violet-pill:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      padding: var(--spacing-60) 0 var(--spacing-36);
+    }
+
+    .eyebrow-label {
+      font-size: var(--text-nav-label);
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.05em;
+      color: var(--color-saffron-spark);
+      margin-bottom: var(--spacing-18);
+      display: inline-block;
     }
 
-    .team-badge {
-      background: rgba(16, 185, 129, 0.12);
-      color: #6ee7b7;
-      border: 1px solid rgba(16, 185, 129, 0.25);
-      padding: 0.2rem 0.55rem;
-      border-radius: 6px;
-      font-size: 0.7rem;
-      font-weight: 600;
+    .hero-headline {
+      font-size: clamp(40px, 5.5vw, var(--text-heading-lg));
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      color: var(--color-bone-white);
+      margin-bottom: var(--spacing-24);
+      max-width: 980px;
+    }
+
+    .hero-body {
+      font-size: var(--text-body);
+      font-weight: 200;
+      line-height: 1.6;
+      color: var(--color-silver-mist);
+      max-width: 720px;
+      margin-bottom: var(--spacing-36);
     }
 
     /* Sponsor Telemetry Bar */
-    .telemetry-bar {
+    .telemetry-strip {
       display: flex;
-      align-items: center;
-      gap: 0.75rem;
       flex-wrap: wrap;
+      gap: var(--spacing-12);
+      align-items: center;
+      margin-bottom: var(--spacing-36);
     }
 
-    .pill-link {
+    .telemetry-chip {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-full);
+      padding: 6px 14px;
+      font-size: 13px;
       display: inline-flex;
       align-items: center;
-      gap: 0.45rem;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border-color);
-      padding: 0.35rem 0.75rem;
-      border-radius: 30px;
-      font-size: 0.75rem;
-      color: var(--text-muted);
+      gap: 8px;
+      color: var(--color-ash-gray);
       transition: all 0.2s ease;
-      text-decoration: none;
     }
-    .pill-link:hover {
-      background: rgba(255, 255, 255, 0.08);
+
+    .telemetry-chip:hover {
       border-color: rgba(255, 255, 255, 0.2);
-      color: var(--text-main);
-      text-decoration: none;
-      transform: translateY(-1px);
+      color: var(--color-bone-white);
     }
 
-    .status-dot {
-      width: 8px;
-      height: 8px;
+    .telemetry-chip .dot {
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
-      background: var(--accent-emerald);
-      box-shadow: 0 0 8px var(--accent-emerald);
-    }
-    .status-dot.active {
-      animation: pulse 2s infinite;
+      background: var(--color-ash-gray);
     }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.6; transform: scale(0.9); }
+    .telemetry-chip.active .dot {
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+    }
+    .telemetry-chip.iris .dot {
+      background: var(--color-electric-iris);
+      box-shadow: 0 0 8px var(--color-electric-iris);
+    }
+    .telemetry-chip.amber .dot {
+      background: var(--color-saffron-spark);
+      box-shadow: 0 0 8px var(--color-saffron-spark);
     }
 
-    /* Main Grid */
-    .dashboard-grid {
+    /* Main Console Grid (Two-Column Asymmetric Layout) */
+    .console-grid {
       display: grid;
-      grid-template-columns: 460px 1fr;
-      gap: 1.75rem;
-      margin-top: 1.5rem;
-      flex: 1;
+      grid-template-columns: 1.15fr 1.35fr;
+      gap: var(--spacing-36);
+      padding-bottom: var(--spacing-96);
     }
 
     @media (max-width: 1024px) {
-      .dashboard-grid {
+      .console-grid {
         grid-template-columns: 1fr;
       }
     }
 
-    /* Cards */
-    .card {
-      background: var(--bg-card);
-      backdrop-filter: var(--glass-blur);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    /* Floating Void Containers (No heavy panels/borders) */
+    .void-container {
+      background: rgba(10, 10, 10, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: var(--radius-soft);
+      padding: var(--spacing-30);
       position: relative;
-      overflow: hidden;
     }
 
-    .card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.5), transparent);
-    }
-
-    .card-header {
+    .container-title-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: var(--spacing-24);
+      padding-bottom: var(--spacing-18);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    .card-title {
-      font-family: var(--font-display);
-      font-size: 1.15rem;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+    .container-title {
+      font-size: var(--text-heading-2xs);
+      font-weight: 400;
+      letter-spacing: -0.04em;
+      color: var(--color-bone-white);
     }
 
-    /* Form Inputs */
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
+    .team-badge-pill {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      background: rgba(128, 82, 255, 0.12);
+      border: 1px solid rgba(128, 82, 255, 0.3);
+      color: #c084fc;
     }
 
-    .form-label {
-      font-size: 0.8rem;
+    /* Form & Input Elements */
+    .field-group {
+      margin-bottom: var(--spacing-24);
+    }
+
+    .field-label {
+      display: block;
+      font-size: 13px;
       font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      color: var(--color-ash-gray);
+      margin-bottom: 8px;
     }
 
-    textarea.input-box {
+    .dala-input {
       width: 100%;
-      background: rgba(10, 15, 30, 0.8);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-sm);
-      padding: 0.85rem;
-      color: var(--text-main);
-      font-family: var(--font-body);
-      font-size: 0.95rem;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 16px;
+      color: var(--color-bone-white);
+      font-family: var(--font-family);
+      font-size: 16px;
+      font-weight: 200;
+      line-height: 1.5;
       resize: vertical;
       min-height: 90px;
       transition: all 0.2s ease;
     }
-    textarea.input-box:focus {
+
+    .dala-input:focus {
       outline: none;
-      border-color: var(--accent-emerald);
-      box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+      border-color: var(--color-electric-iris);
+      box-shadow: 0 0 16px rgba(128, 82, 255, 0.3);
+      background: rgba(255, 255, 255, 0.04);
     }
 
-    .quick-prompts {
+    /* Quick Prompt Chips */
+    .prompt-pills {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.4rem;
+      gap: 8px;
+      margin-top: 8px;
     }
 
-    .prompt-chip {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      padding: 0.25rem 0.55rem;
-      font-size: 0.72rem;
-      color: #cbd5e1;
+    .prompt-pill {
+      font-size: 12px;
+      font-weight: 400;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-full);
+      padding: 5px 12px;
+      color: var(--color-silver-mist);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .prompt-pill:hover {
+      border-color: var(--color-saffron-spark);
+      color: var(--color-saffron-spark);
+      background: rgba(255, 184, 41, 0.06);
+    }
+
+    .selectors-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-18);
+    }
+
+    .dala-select {
+      width: 100%;
+      background: #090909;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 12px 14px;
+      color: var(--color-bone-white);
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 400;
+      cursor: pointer;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .dala-select:focus {
+      border-color: var(--color-electric-iris);
+    }
+
+    /* Launch Button Row */
+    .launch-row {
+      margin-top: var(--spacing-24);
+      margin-bottom: var(--spacing-30);
+    }
+
+    .launch-btn {
+      width: 100%;
+      padding: 16px 24px;
+      font-size: 15px;
+    }
+
+    /* Pipeline Stepper */
+    .pipeline-progress {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: var(--spacing-24);
+    }
+
+    .progress-step {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.015);
+      border: 1px solid transparent;
+      font-size: 13px;
+      color: var(--color-ash-gray);
+      transition: all 0.2s ease;
+    }
+
+    .progress-step .step-marker {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--color-ash-gray);
+      flex-shrink: 0;
+    }
+
+    .progress-step.active {
+      border-color: rgba(128, 82, 255, 0.3);
+      background: rgba(128, 82, 255, 0.06);
+      color: var(--color-bone-white);
+    }
+    .progress-step.active .step-marker {
+      background: var(--color-electric-iris);
+      color: var(--color-bone-white);
+      box-shadow: 0 0 10px var(--color-electric-iris);
+    }
+
+    .progress-step.done {
+      border-color: rgba(21, 132, 110, 0.3);
+      color: #34d399;
+    }
+    .progress-step.done .step-marker {
+      background: #10b981;
+      color: #000;
+    }
+
+    /* Telemetry Log Terminal */
+    .telemetry-terminal {
+      background: #040404;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 10px;
+      padding: 14px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      height: 180px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .terminal-entry {
+      display: flex;
+      gap: 8px;
+      line-height: 1.4;
+      word-break: break-word;
+    }
+    .terminal-time {
+      color: #525252;
+      flex-shrink: 0;
+    }
+    .terminal-msg.info { color: var(--color-silver-mist); }
+    .terminal-msg.stage { color: var(--color-electric-iris); font-weight: 600; }
+    .terminal-msg.warn { color: var(--color-saffron-spark); }
+    .terminal-msg.error { color: #f87171; }
+
+    /* HITL Approval Banner */
+    .approval-modal {
+      display: none;
+      background: rgba(255, 184, 41, 0.08);
+      border: 1px solid var(--color-saffron-spark);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: var(--spacing-24);
+    }
+    .approval-modal.visible {
+      display: block;
+    }
+    .approval-modal strong {
+      color: var(--color-saffron-spark);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      display: block;
+      margin-bottom: 6px;
+    }
+    .approval-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .btn-approve {
+      background: var(--color-saffron-spark);
+      color: #000;
+      border: none;
+      border-radius: var(--radius-full);
+      padding: 8px 18px;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .btn-revise {
+      background: transparent;
+      color: var(--color-bone-white);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--radius-full);
+      padding: 8px 18px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    /* Right Column: Tabbed Output */
+    .tab-nav {
+      display: flex;
+      gap: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding-bottom: 14px;
+      margin-bottom: var(--spacing-24);
+      overflow-x: auto;
+    }
+
+    .tab-trigger {
+      background: transparent;
+      border: none;
+      color: var(--color-ash-gray);
+      font-family: var(--font-family);
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.025em;
+      padding: 8px 16px;
+      border-radius: var(--radius-full);
       cursor: pointer;
       transition: all 0.15s ease;
       white-space: nowrap;
     }
-    .prompt-chip:hover {
-      background: rgba(16, 185, 129, 0.15);
-      border-color: rgba(16, 185, 129, 0.4);
-      color: #6ee7b7;
+
+    .tab-trigger:hover {
+      color: var(--color-bone-white);
+      background: rgba(255, 255, 255, 0.03);
     }
 
-    .options-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem;
+    .tab-trigger.active {
+      color: var(--color-bone-white);
+      background: rgba(128, 82, 255, 0.16);
+      border: 1px solid rgba(128, 82, 255, 0.4);
     }
 
-    select.input-select {
-      width: 100%;
-      background: rgba(10, 15, 30, 0.8);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-sm);
-      padding: 0.65rem 0.75rem;
-      color: var(--text-main);
-      font-family: var(--font-body);
-      font-size: 0.85rem;
-      cursor: pointer;
-    }
-
-    .checkbox-toggle {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-size: 0.82rem;
-      color: #cbd5e1;
-      cursor: pointer;
-      margin-top: 0.25rem;
-    }
-    .checkbox-toggle input {
-      accent-color: var(--accent-emerald);
-      width: 16px;
-      height: 16px;
-      cursor: pointer;
-    }
-
-    /* Submit Button */
-    .btn-launch {
-      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-      color: #022c22;
-      border: none;
-      border-radius: var(--radius-sm);
-      padding: 0.85rem 1.25rem;
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 0.95rem;
-      letter-spacing: 0.02em;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      transition: all 0.2s ease;
-      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
-    }
-    .btn-launch:hover:not(:disabled) {
-      background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 22px rgba(16, 185, 129, 0.45);
-    }
-    .btn-launch:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      filter: grayscale(0.5);
-    }
-
-    /* Stepper */
-    .pipeline-stepper {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      background: rgba(0, 0, 0, 0.25);
-      padding: 1rem;
-      border-radius: var(--radius-sm);
-      border: 1px solid rgba(255, 255, 255, 0.04);
-    }
-
-    .step-item {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-size: 0.8rem;
-      color: #64748b;
-      transition: all 0.2s ease;
-    }
-
-    .step-icon {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: var(--text-muted);
-    }
-
-    .step-item.active {
-      color: var(--text-main);
-      font-weight: 600;
-    }
-    .step-item.active .step-icon {
-      background: rgba(16, 185, 129, 0.2);
-      border-color: var(--accent-emerald);
-      color: var(--accent-emerald);
-      box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
-    }
-
-    .step-item.done {
-      color: #94a3b8;
-    }
-    .step-item.done .step-icon {
-      background: var(--accent-emerald);
-      border-color: var(--accent-emerald);
-      color: #022c22;
-    }
-
-    /* Approval Dialog */
-    .approval-banner {
-      background: rgba(245, 158, 11, 0.15);
-      border: 1px solid rgba(245, 158, 11, 0.4);
-      border-radius: var(--radius-sm);
-      padding: 1rem;
+    .output-pane {
       display: none;
-      flex-direction: column;
-      gap: 0.75rem;
     }
-    .approval-banner.visible {
-      display: flex;
-    }
-    .approval-actions {
-      display: flex;
-      gap: 0.5rem;
-    }
-    .btn-approve {
-      background: #f59e0b;
-      color: #000;
-      font-weight: 700;
-      border: none;
-      padding: 0.4rem 0.8rem;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 0.8rem;
-    }
-
-    /* Execution Log Terminal */
-    .terminal-box {
-      background: #030712;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: var(--radius-sm);
-      padding: 0.75rem;
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      max-height: 180px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-    }
-    .terminal-line {
-      display: flex;
-      gap: 0.5rem;
-      word-break: break-all;
-    }
-    .terminal-time {
-      color: #475569;
-    }
-    .terminal-text {
-      color: #cbd5e1;
-    }
-    .terminal-text.info { color: #38bdf8; }
-    .terminal-text.stage { color: #34d399; font-weight: 600; }
-    .terminal-text.warn { color: #fbbf24; }
-    .terminal-text.error { color: #f87171; }
-
-    /* Right Column / Viewer */
-    .viewer-card {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
-
-    .tabs-header {
-      display: flex;
-      gap: 0.5rem;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 0.75rem;
-      flex-wrap: wrap;
-    }
-
-    .tab-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      font-family: var(--font-display);
-      font-weight: 600;
-      font-size: 0.85rem;
-      padding: 0.4rem 0.85rem;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-    .tab-btn:hover {
-      color: var(--text-main);
-      background: rgba(255, 255, 255, 0.04);
-    }
-    .tab-btn.active {
-      color: var(--accent-emerald);
-      background: rgba(16, 185, 129, 0.12);
-    }
-
-    .tab-pane {
-      display: none;
-      padding-top: 1rem;
-      overflow-y: auto;
-      flex: 1;
-    }
-    .tab-pane.active {
+    .output-pane.active {
       display: block;
     }
 
-    /* Markdown Styling */
-    .markdown-body {
-      color: #e2e8f0;
-      font-size: 0.95rem;
+    /* Markdown Report Body */
+    .report-content {
+      color: var(--color-silver-mist);
+      font-size: 16px;
+      font-weight: 200;
       line-height: 1.7;
     }
-    .markdown-body h1, .markdown-body h2, .markdown-body h3 {
-      font-family: var(--font-display);
-      color: #ffffff;
-      margin-top: 1.5rem;
-      margin-bottom: 0.75rem;
-      font-weight: 700;
+    .report-content h1, .report-content h2, .report-content h3 {
+      color: var(--color-bone-white);
+      font-weight: 400;
+      letter-spacing: -0.04em;
+      margin-top: var(--spacing-30);
+      margin-bottom: var(--spacing-12);
     }
-    .markdown-body h1 {
-      font-size: 1.6rem;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 0.5rem;
+    .report-content h1 {
+      font-size: 32px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 12px;
     }
-    .markdown-body h2 {
-      font-size: 1.25rem;
-      color: #6ee7b7;
+    .report-content h2 {
+      font-size: 24px;
+      color: #e2e8f0;
     }
-    .markdown-body p {
-      margin-bottom: 1rem;
+    .report-content p {
+      margin-bottom: 16px;
     }
-    .markdown-body ul, .markdown-body ol {
-      margin-left: 1.5rem;
-      margin-bottom: 1rem;
+    .report-content ul, .report-content ol {
+      margin-left: 24px;
+      margin-bottom: 18px;
     }
-    .markdown-body li {
-      margin-bottom: 0.35rem;
+    .report-content li {
+      margin-bottom: 6px;
     }
-    .markdown-body table {
+    .report-content table {
       width: 100%;
       border-collapse: collapse;
-      margin: 1.25rem 0;
-      font-size: 0.85rem;
+      margin: 20px 0;
+      font-size: 13px;
     }
-    .markdown-body th, .markdown-body td {
-      border: 1px solid var(--border-color);
-      padding: 0.6rem 0.75rem;
+    .report-content th, .report-content td {
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 10px 14px;
       text-align: left;
     }
-    .markdown-body th {
-      background: rgba(15, 23, 42, 0.9);
+    .report-content th {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--color-bone-white);
       font-weight: 600;
-      color: #94a3b8;
     }
-    .markdown-body tr:nth-child(even) {
-      background: rgba(255, 255, 255, 0.02);
-    }
-    .markdown-body code {
+    .report-content code {
       font-family: var(--font-mono);
-      background: rgba(0, 0, 0, 0.4);
-      padding: 0.15rem 0.35rem;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 2px 6px;
       border-radius: 4px;
-      font-size: 0.85rem;
-      color: #38bdf8;
+      font-size: 13px;
+      color: #c084fc;
+    }
+
+    /* Crustdata Intelligence Card */
+    .intel-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 20px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.6;
     }
 
     /* Provenance Table UI */
-    .prov-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.25rem;
-      padding: 0.2rem 0.45rem;
-      border-radius: 4px;
-      font-size: 0.7rem;
-      font-weight: 600;
-    }
-    .prov-badge.live {
-      background: rgba(16, 185, 129, 0.15);
-      color: #34d399;
-      border: 1px solid rgba(16, 185, 129, 0.3);
-    }
-    .hash-code {
+    .hash-badge {
       font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: #cbd5e1;
-      background: rgba(0, 0, 0, 0.3);
-      padding: 0.15rem 0.4rem;
+      font-size: 11px;
+      color: var(--color-electric-iris);
+      word-break: break-all;
+    }
+    .live-chip {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      padding: 2px 6px;
       border-radius: 4px;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
     }
 
     /* Past Reports List */
     .reports-list {
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
+      gap: 10px;
     }
-    .report-item {
+    .report-card {
       background: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-sm);
-      padding: 0.85rem 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 10px;
+      padding: 14px 18px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       cursor: pointer;
-      transition: all 0.15s ease;
+      transition: all 0.2s ease;
     }
-    .report-item:hover {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: rgba(16, 185, 129, 0.3);
-      transform: translateX(3px);
+    .report-card:hover {
+      border-color: var(--color-electric-iris);
+      background: rgba(128, 82, 255, 0.04);
+      transform: translateX(4px);
     }
-    .report-item-title {
-      font-weight: 600;
-      font-size: 0.9rem;
-      color: var(--text-main);
-    }
-    .report-item-meta {
-      font-size: 0.75rem;
-      color: var(--text-muted);
+    .report-meta {
+      font-size: 12px;
+      color: var(--color-ash-gray);
+      margin-top: 4px;
       display: flex;
-      gap: 0.75rem;
-      margin-top: 0.2rem;
+      gap: 12px;
     }
 
     /* Footer */
     footer {
-      border-top: 1px solid var(--border-color);
-      background: rgba(7, 9, 14, 0.9);
-      padding: 1.25rem 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding: var(--spacing-36) 0;
       margin-top: auto;
+      font-size: 13px;
+      color: var(--color-ash-gray);
     }
-    .footer-content {
+    .footer-inner {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.8rem;
-      color: var(--text-muted);
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: var(--spacing-18);
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Navigation Header -->
-  <header>
-    <div class="container nav-content">
-      <div class="brand-group">
-        <div class="logo-badge">P</div>
-        <div class="brand-titles">
-          <h1>PROOF OF SEARCH AI <span class="hack-badge">neatHack 2026</span></h1>
-          <div class="tagline">Verifiable Autonomous Research Engine · Zero Mock Data · Cryptographic SHA-256 Provenance</div>
-        </div>
-      </div>
+  <!-- Constellation Floating on Black Velvet -->
+  <canvas id="constellation-canvas"></canvas>
 
-      <!-- Sponsor Live Telemetry Links -->
-      <div class="telemetry-bar">
-        <a id="neatlogs-link" class="pill-link" href="https://app.neatlogs.com/projects/72082073-0485-4b6b-abb0-2a1ce5116f2b" target="_blank" rel="noopener">
-          <span class="status-dot active"></span>
-          <span>Neatlogs Tracing</span>
-        </a>
-        <a id="entire-link" class="pill-link" href="https://entire.io/gh/ibochivincent-lang/proof-of-search-ai" target="_blank" rel="noopener">
-          <span class="status-dot"></span>
-          <span>Entire Memory</span>
-        </a>
-        <span class="pill-link" title="Live B2B & Executive Data">
-          <span class="status-dot"></span>
-          <span>Crustdata Live API</span>
-        </span>
-        <span class="pill-link" title="neatHack Sponsored Allowance">
-          <span class="status-dot"></span>
-          <span>LiteLLM Proxy</span>
-        </span>
-        <a class="pill-link" href="https://github.com/ibochivincent-lang/proof-of-search-ai" target="_blank" rel="noopener">
-          <span>GitHub</span>
-        </a>
-      </div>
-    </div>
-  </header>
-
-  <!-- Main Content Dashboard -->
-  <main class="container dashboard-grid">
+  <div class="app-wrapper">
     
-    <!-- Left Column: Research Control Panel -->
-    <section class="card">
-      <div class="card-header">
-        <h2 class="card-title">Research Console</h2>
-        <span class="team-badge" id="team-badge">Team Vincci001</span>
+    <!-- Top Minimal Navigation -->
+    <header>
+      <div class="container nav-inner">
+        <div class="logo-lockup">
+          <div class="logo-mark">
+            <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="14,3 25,23 3,23" stroke="#8052ff" stroke-width="2.5" fill="none" />
+              <polygon points="14,9 20,20 8,20" stroke="#15846e" stroke-width="1.8" fill="rgba(128, 82, 255, 0.15)" />
+            </svg>
+          </div>
+          <div class="logo-wordmark">
+            <span>DALA</span>
+            <span class="logo-tag">Proof of Search AI</span>
+          </div>
+        </div>
+
+        <nav class="nav-links">
+          <a class="nav-link" href="#console">Console</a>
+          <a class="nav-link" href="https://app.neatlogs.com/projects/72082073-0485-4b6b-abb0-2a1ce5116f2b" target="_blank" rel="noopener">Neatlogs</a>
+          <a class="nav-link" href="https://entire.io/gh/ibochivincent-lang/proof-of-search-ai" target="_blank" rel="noopener">Entire Memory</a>
+          <a class="nav-link" href="https://github.com/ibochivincent-lang/proof-of-search-ai" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn-violet-pill" href="#console">Request Query</a>
+        </nav>
       </div>
+    </header>
 
-      <!-- Query Form -->
-      <div class="form-group">
-        <label class="form-label" for="topic-input">Research Objective / Topic</label>
-        <textarea id="topic-input" class="input-box" placeholder="e.g., Stripe and OpenAI collaboration in financial AI..."></textarea>
-      </div>
+    <!-- Hero Display Block -->
+    <section class="hero-section">
+      <div class="container">
+        <span class="eyebrow-label">DISTRIBUTED INTELLIGENCE & VERIFIABLE PROVENANCE</span>
+        <h1 class="hero-headline">Your workplace has the answer. Just ask Dala for it.</h1>
+        <p class="hero-body">
+          An autonomous, hallucination-resistant research agent pipeline. Grounded in live Crustdata B2B intelligence, audited by cryptographic SHA-256 source hashing, observed end-to-end on Neatlogs, and persistent in Entire Continuous Memory.
+        </p>
 
-      <!-- Quick Suggested Prompts -->
-      <div class="form-group">
-        <label class="form-label">Suggested Prompts</label>
-        <div class="quick-prompts">
-          <span class="prompt-chip" onclick="setTopic('Stripe and OpenAI collaboration in financial AI')">Stripe & OpenAI Financial AI</span>
-          <span class="prompt-chip" onclick="setTopic('Anthropic Claude 3.5 Sonnet benchmark and agent architecture')">Claude 3.5 Sonnet Benchmarks</span>
-          <span class="prompt-chip" onclick="setTopic('Databricks and Snowflake Apache Iceberg lakehouse federation')">Databricks & Snowflake Iceberg</span>
-        </div>
-      </div>
-
-      <!-- Options -->
-      <div class="options-row">
-        <div class="form-group">
-          <label class="form-label" for="model-select">Reasoning Model</label>
-          <select id="model-select" class="input-select">
-            <option value="claude-haiku">Claude 3 Haiku (LiteLLM Sponsored)</option>
-            <option value="claude-sonnet-4.6">Claude 3.5 Sonnet (LiteLLM Sponsored)</option>
-            <option value="nova-pro">AWS Nova Pro (LiteLLM Sponsored)</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="mode-select">Execution Mode</label>
-          <select id="mode-select" class="input-select">
-            <option value="auto">Autonomous (--auto)</option>
-            <option value="interactive">Human Review Gate</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Launch Action -->
-      <button id="btn-submit" class="btn-launch" onclick="launchResearch()">
-        <span id="btn-icon">⚡</span>
-        <span id="btn-text">Launch Verifiable Research</span>
-      </button>
-
-      <!-- HITL Approval Banner -->
-      <div id="approval-banner" class="approval-banner">
-        <strong>Human Review Required:</strong>
-        <div id="approval-plan-text" style="font-size: 0.8rem; color: #fde68a;"></div>
-        <div class="approval-actions">
-          <button class="btn-approve" onclick="submitApproval('approve')">Approve Plan</button>
-          <button class="btn-approve" style="background: #38bdf8;" onclick="submitApproval('revise')">Request Revision</button>
-        </div>
-      </div>
-
-      <!-- Pipeline Execution Stepper -->
-      <div class="pipeline-stepper">
-        <div class="step-item" id="step-planner">
-          <div class="step-icon">1</div>
-          <span>Plan Formulation & Search Strategy</span>
-        </div>
-        <div class="step-item" id="step-search">
-          <div class="step-icon">2</div>
-          <span>Live Multi-Query Web Search (DuckDuckGo)</span>
-        </div>
-        <div class="step-item" id="step-select">
-          <div class="step-icon">3</div>
-          <span>Candidate Source Filtering & Relevance</span>
-        </div>
-        <div class="step-item" id="step-fetch">
-          <div class="step-icon">4</div>
-          <span>Live Crustdata B2B Entity Enrichment (Zero Mock)</span>
-        </div>
-        <div class="step-item" id="step-synthesize">
-          <div class="step-icon">5</div>
-          <span>Cryptographic SHA-256 Provenance & Synthesis</span>
-        </div>
-        <div class="step-item" id="step-neatlogs">
-          <div class="step-icon">6</div>
-          <span>Neatlogs Trace Finalization & Observability</span>
-        </div>
-      </div>
-
-      <!-- Execution Log Terminal -->
-      <div class="form-group">
-        <label class="form-label">Live Pipeline Telemetry</label>
-        <div id="terminal-box" class="terminal-box">
-          <div class="terminal-line">
-            <span class="terminal-time">[SYS]</span>
-            <span class="terminal-text info">Proof of Search AI initialized. Ready for query.</span>
+        <!-- Live Integrations Telemetry Bar -->
+        <div class="telemetry-strip">
+          <div class="telemetry-chip active">
+            <span class="dot"></span>
+            <span>Crustdata Live API (Zero Mock Data)</span>
+          </div>
+          <div class="telemetry-chip iris active">
+            <span class="dot"></span>
+            <span>Neatlogs Tracing (Project 72082073...)</span>
+          </div>
+          <div class="telemetry-chip active">
+            <span class="dot"></span>
+            <span>LiteLLM Claude 3 Haiku</span>
+          </div>
+          <div class="telemetry-chip amber active">
+            <span class="dot"></span>
+            <span>Entire Memory & Graph</span>
+          </div>
+          <div class="telemetry-chip active">
+            <span class="dot"></span>
+            <span>cfo.ai: $0.056 / Query Unit Economics</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Right Column: Report Viewer & Audit -->
-    <section class="card viewer-card">
-      <div class="tabs-header">
-        <button class="tab-btn active" onclick="switchTab('report')">Verified Report</button>
-        <button class="tab-btn" onclick="switchTab('crustdata')">Crustdata Live Intelligence</button>
-        <button class="tab-btn" onclick="switchTab('provenance')">Proof of Search Cryptographic Audit</button>
-        <button class="tab-btn" onclick="switchTab('history')">Past Reports (<span id="history-count">0</span>)</button>
-      </div>
+    <!-- Main Two-Column Asymmetric Console Grid -->
+    <main class="container console-grid" id="console">
 
-      <!-- Tab 1: Rendered Markdown Report -->
-      <div id="tab-report" class="tab-pane active">
-        <div id="report-view" class="markdown-body">
-          <p style="color: var(--text-muted); font-style: italic;">
-            Select a topic on the left and click <strong>Launch Verifiable Research</strong> to run the multi-step LangGraph agent with live Crustdata enrichment and cryptographic source provenance.
-          </p>
+      <!-- Left Column: Research Control Panel -->
+      <section class="void-container">
+        <div class="container-title-row">
+          <h2 class="container-title">Ask Dala</h2>
+          <span class="team-badge-pill" id="team-badge">Team Vincci001 · neatHack 2026</span>
+        </div>
+
+        <!-- Objective Input -->
+        <div class="field-group">
+          <label class="field-label" for="topic-input">Research Objective</label>
+          <textarea id="topic-input" class="dala-input" placeholder="e.g. Stripe and OpenAI collaboration in financial AI..."></textarea>
+          
+          <!-- Suggested Prompts -->
+          <div class="prompt-pills">
+            <span class="prompt-pill" onclick="setTopic('Stripe and OpenAI collaboration in financial AI')">Stripe & OpenAI AI Expansion</span>
+            <span class="prompt-pill" onclick="setTopic('Anthropic Claude 3.5 Sonnet benchmark and agent architecture')">Claude 3.5 Sonnet Architecture</span>
+            <span class="prompt-pill" onclick="setTopic('Databricks and Snowflake Apache Iceberg lakehouse federation')">Databricks & Snowflake Iceberg</span>
+          </div>
+        </div>
+
+        <!-- Selectors Row -->
+        <div class="field-group selectors-row">
+          <div>
+            <label class="field-label" for="model-select">Reasoning Engine</label>
+            <select id="model-select" class="dala-select">
+              <option value="claude-haiku">Claude 3 Haiku (Sponsored)</option>
+              <option value="claude-sonnet-4.6">Claude 3.5 Sonnet (Sponsored)</option>
+              <option value="nova-pro">AWS Nova Pro (Sponsored)</option>
+            </select>
+          </div>
+          <div>
+            <label class="field-label" for="mode-select">Execution Gate</label>
+            <select id="mode-select" class="dala-select">
+              <option value="auto">Autonomous Flow (--auto)</option>
+              <option value="interactive">Human Review Gate</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Launch Button -->
+        <div class="launch-row">
+          <button id="btn-submit" class="btn-violet-pill launch-btn" onclick="launchResearch()">
+            <span id="btn-text">Synthesize Verifiable Answer</span>
+          </button>
+        </div>
+
+        <!-- HITL Approval Banner -->
+        <div id="approval-banner" class="approval-modal">
+          <strong>Review Strategy Before Execution:</strong>
+          <div id="approval-plan-text" style="font-size: 13px; color: var(--color-bone-white); margin-top: 4px;"></div>
+          <div class="approval-actions">
+            <button class="btn-approve" onclick="submitApproval('approve')">Approve Plan</button>
+            <button class="btn-revise" onclick="submitApproval('revise')">Request Revision</button>
+          </div>
+        </div>
+
+        <!-- Pipeline Progress Stepper -->
+        <div class="pipeline-progress">
+          <div class="progress-step" id="step-planner">
+            <div class="step-marker">1</div>
+            <span>Strategic Search Decomposition & Formulation</span>
+          </div>
+          <div class="progress-step" id="step-search">
+            <div class="step-marker">2</div>
+            <span>Live Multi-Query Retrieval (DuckDuckGo Search)</span>
+          </div>
+          <div class="progress-step" id="step-select">
+            <div class="step-marker">3</div>
+            <span>Relevance Filtering & Quality Scoring</span>
+          </div>
+          <div class="progress-step" id="step-fetch">
+            <div class="step-marker">4</div>
+            <span>Crustdata Live B2B & Executive Entity Enrichment</span>
+          </div>
+          <div class="progress-step" id="step-synthesize">
+            <div class="step-marker">5</div>
+            <span>SHA-256 Provenance Hashing & Synthesized Report</span>
+          </div>
+          <div class="progress-step" id="step-neatlogs">
+            <div class="step-marker">6</div>
+            <span>Neatlogs Distributed Span Telemetry Finalization</span>
+          </div>
+        </div>
+
+        <!-- Telemetry Terminal -->
+        <div class="field-group">
+          <label class="field-label">Real-Time Execution Telemetry</label>
+          <div id="terminal-box" class="telemetry-terminal">
+            <div class="terminal-entry">
+              <span class="terminal-time">[SYS]</span>
+              <span class="terminal-msg info">Dala Distributed Intelligence ready. Enter objective above.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column: Results & Provenance Ledger -->
+      <section class="void-container">
+        <div class="tab-nav">
+          <button class="tab-trigger active" onclick="switchTab('report')">Verified Report</button>
+          <button class="tab-trigger" onclick="switchTab('crustdata')">Crustdata Intelligence</button>
+          <button class="tab-trigger" onclick="switchTab('provenance')">SHA-256 Provenance Audit</button>
+          <button class="tab-trigger" onclick="switchTab('history')">Archives (<span id="history-count">0</span>)</button>
+        </div>
+
+        <!-- Tab 1: Verified Markdown Report -->
+        <div id="tab-report" class="output-pane active">
+          <div id="report-view" class="report-content">
+            <p style="color: var(--color-ash-gray); font-style: italic;">
+              Enter a question on the left and click <strong>Synthesize Verifiable Answer</strong>. Dala will query ground truth sources, enrich company profiles with Crustdata, verify every citation with SHA-256 hashes, and stream live traces to Neatlogs.
+            </p>
+          </div>
+        </div>
+
+        <!-- Tab 2: Crustdata B2B Intelligence -->
+        <div id="tab-crustdata" class="output-pane">
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 20px; font-weight: 400; color: #34d399; margin-bottom: 6px;">
+              Live Entity & Executive Profiling
+            </h3>
+            <p style="font-size: 13px; color: var(--color-silver-mist); font-weight: 200;">
+              Zero mock records. Extracted company and executive entities are enriched against Crustdata live API endpoints.
+            </p>
+          </div>
+          <div id="crustdata-details" class="intel-card">
+            <p style="color: var(--color-ash-gray);">No entity enrichment in view yet. Submit a research topic referencing a company to see real-time B2B metrics.</p>
+          </div>
+        </div>
+
+        <!-- Tab 3: Cryptographic Provenance Ledger -->
+        <div id="tab-provenance" class="output-pane">
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 20px; font-weight: 400; color: #c084fc; margin-bottom: 6px;">
+              Cryptographic SHA-256 Source Audit
+            </h3>
+            <p style="font-size: 13px; color: var(--color-silver-mist); font-weight: 200;">
+              Every web source inspected by Dala is cryptographically hashed at retrieval time to prevent post-hoc tampering or ungrounded model invention.
+            </p>
+          </div>
+          <div id="provenance-table-container">
+            <p style="color: var(--color-ash-gray); font-size: 13px;">Execute a research query to generate cryptographic source hashes.</p>
+          </div>
+        </div>
+
+        <!-- Tab 4: Archive History -->
+        <div id="tab-history" class="output-pane">
+          <div id="reports-archive" class="reports-list">
+            <p style="color: var(--color-ash-gray); font-size: 13px;">Loading archived reports...</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container footer-inner">
+        <div>
+          <strong>Dala</strong> · Distributed Intelligence & Proof of Search · Team <strong>Vincci001</strong>
+        </div>
+        <div>
+          Observability by <a href="https://neatlogs.com" target="_blank" style="color: var(--color-electric-iris);">Neatlogs</a> · Memory by <a href="https://entire.io" target="_blank" style="color: var(--color-saffron-spark);">Entire</a> · B2B Data by <a href="https://crustdata.com" target="_blank" style="color: #34d399;">Crustdata</a>
         </div>
       </div>
+    </footer>
 
-      <!-- Tab 2: Crustdata B2B Intelligence -->
-      <div id="tab-crustdata" class="tab-pane">
-        <div style="margin-bottom: 1rem;">
-          <h3 style="font-family: var(--font-display); font-size: 1.1rem; color: #6ee7b7; margin-bottom: 0.5rem;">
-            Live B2B & Executive Intelligence (Crustdata Verified)
-          </h3>
-          <p style="font-size: 0.85rem; color: var(--text-muted);">
-            Guaranteed Zero Mock Data. All company and executive entities mentioned in the research prompt are extracted and cross-referenced with live Crustdata API endpoints.
-          </p>
-        </div>
-        <div id="crustdata-details" style="background: rgba(0,0,0,0.3); padding: 1.25rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-family: var(--font-mono); font-size: 0.85rem;">
-          <p style="color: var(--text-muted);">No live company data in view yet. Run a research query with a company name (e.g. Stripe, OpenAI) to view live enriched profiles.</p>
-        </div>
-      </div>
+  </div>
 
-      <!-- Tab 3: Cryptographic Provenance Audit -->
-      <div id="tab-provenance" class="tab-pane">
-        <div style="margin-bottom: 1rem;">
-          <h3 style="font-family: var(--font-display); font-size: 1.1rem; color: #38bdf8; margin-bottom: 0.5rem;">
-            Cryptographic SHA-256 Source Provenance Ledger
-          </h3>
-          <p style="font-size: 0.85rem; color: var(--text-muted);">
-            Each web page downloaded by the agent is hashed with SHA-256 at ingest time. This ledger guarantees zero post-hoc source tampering or hallucinations.
-          </p>
-        </div>
-        <div id="provenance-table-container">
-          <p style="color: var(--text-muted); font-size: 0.85rem;">Run a query to generate cryptographic SHA-256 verification hashes.</p>
-        </div>
-      </div>
+  <!-- Interactive Constellation Canvas Script (Neural Brain of Triangles) -->
+  <script>
+    (function initConstellation() {
+      const canvas = document.getElementById('constellation-canvas');
+      const ctx = canvas.getContext('2d');
+      let width, height;
+      let particles = [];
+      const PARTICLE_COUNT = 240;
+      const PALETTE = ['#8052ff', '#ffb829', '#15846e', '#c084fc', '#38bdf8', '#ffffff'];
 
-      <!-- Tab 4: Past Reports Archive -->
-      <div id="tab-history" class="tab-pane">
-        <div id="reports-archive" class="reports-list">
-          <p style="color: var(--text-muted); font-size: 0.85rem;">Loading past reports...</p>
-        </div>
-      </div>
-    </section>
+      function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
 
-  </main>
+      let mouse = { x: width * 0.7, y: height * 0.4, active: false };
+      window.addEventListener('mousemove', (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+        mouse.active = true;
+      });
 
-  <!-- Footer -->
-  <footer>
-    <div class="container footer-content">
-      <div>
-        <strong>Proof of Search AI</strong> · Built for <strong>neatHack 2026</strong> by Team <strong>Vincci001</strong>
-      </div>
-      <div>
-        Powered by <a href="https://neatlogs.com" target="_blank">Neatlogs</a> · <a href="https://entire.io" target="_blank">Entire</a> · <a href="https://crustdata.com" target="_blank">Crustdata</a> · <a href="https://cfo.ai" target="_blank">cfo.ai</a>
-      </div>
-    </div>
-  </footer>
+      class Particle {
+        constructor() {
+          this.reset(true);
+        }
 
+        reset(initial = false) {
+          // Cluster roughly around a neural brain/constellation center on the right
+          const centerX = width > 900 ? width * 0.75 : width * 0.5;
+          const centerY = height * 0.4;
+          const radius = Math.min(width, height) * 0.35;
+          const angle = Math.random() * Math.PI * 2;
+          const dist = Math.pow(Math.random(), 0.7) * radius;
+
+          this.x = initial ? centerX + Math.cos(angle) * dist : Math.random() * width;
+          this.y = initial ? centerY + Math.sin(angle) * dist : Math.random() * height;
+          this.vx = (Math.random() - 0.5) * 0.4;
+          this.vy = (Math.random() - 0.5) * 0.4;
+          this.size = Math.random() * 3 + 2;
+          this.rotation = Math.random() * Math.PI * 2;
+          this.rotSpeed = (Math.random() - 0.5) * 0.02;
+          this.color = PALETTE[Math.floor(Math.random() * PALETTE.length)];
+          this.opacity = Math.random() * 0.5 + 0.25;
+        }
+
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          this.rotation += this.rotSpeed;
+
+          // Gentle drift wrap
+          if (this.x < 0) this.x = width;
+          if (this.x > width) this.x = 0;
+          if (this.y < 0) this.y = height;
+          if (this.y > height) this.y = 0;
+
+          // Mouse subtle attraction
+          if (mouse.active) {
+            const dx = mouse.x - this.x;
+            const dy = mouse.y - this.y;
+            const d = Math.sqrt(dx * dx + dy * dy);
+            if (d < 160) {
+              this.x += (dx / d) * 0.8;
+              this.y += (dy / d) * 0.8;
+            }
+          }
+        }
+
+        draw() {
+          ctx.save();
+          ctx.translate(this.x, this.y);
+          ctx.rotate(this.rotation);
+          ctx.globalAlpha = this.opacity;
+          ctx.strokeStyle = this.color;
+          ctx.lineWidth = 1;
+
+          // Draw outlined tiny triangle
+          const s = this.size;
+          ctx.beginPath();
+          ctx.moveTo(0, -s);
+          ctx.lineTo(s * 0.866, s * 0.5);
+          ctx.lineTo(-s * 0.866, s * 0.5);
+          ctx.closePath();
+          ctx.stroke();
+
+          ctx.restore();
+        }
+      }
+
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        particles.push(new Particle());
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+
+        // Draw faint constellation lines between nearby particles
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 75) {
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.strokeStyle = '#8052ff';
+              ctx.globalAlpha = (1 - dist / 75) * 0.12;
+              ctx.stroke();
+            }
+          }
+        }
+
+        // Draw triangles
+        for (let p of particles) {
+          p.update();
+          p.draw();
+        }
+
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
+  </script>
+
+  <!-- Dala App Controller & Logic -->
   <script>
     let currentRunId = null;
     let eventSource = null;
@@ -884,13 +1138,13 @@
       document.getElementById('topic-input').value = text;
     }
 
-    function logTerminal(message, type = 'text') {
+    function logTerminal(message, type = 'info') {
       const box = document.getElementById('terminal-box');
-      const line = document.createElement('div');
-      line.className = 'terminal-line';
+      const entry = document.createElement('div');
+      entry.className = 'terminal-entry';
       const now = new Date().toTimeString().split(' ')[0];
-      line.innerHTML = `<span class="terminal-time">[${now}]</span><span class="terminal-text ${type}">${escapeHtml(message)}</span>`;
-      box.appendChild(line);
+      entry.innerHTML = `<span class="terminal-time">[${now}]</span><span class="terminal-msg ${type}">${escapeHtml(message)}</span>`;
+      box.appendChild(entry);
       box.scrollTop = box.scrollHeight;
     }
 
@@ -910,10 +1164,10 @@
     }
 
     function switchTab(tabName) {
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-trigger').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.output-pane').forEach(p => p.classList.remove('active'));
 
-      const activeBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.textContent.toLowerCase().includes(tabName.toLowerCase()));
+      const activeBtn = Array.from(document.querySelectorAll('.tab-trigger')).find(b => b.textContent.toLowerCase().includes(tabName.toLowerCase()));
       if (activeBtn) activeBtn.classList.add('active');
 
       const targetPane = document.getElementById('tab-' + tabName);
@@ -924,7 +1178,9 @@
       try {
         const res = await fetch('/api/status');
         const data = await res.json();
-        document.getElementById('team-badge').textContent = `${data.team.name} (Lead: ${data.team.leader})`;
+        if (data.team) {
+          document.getElementById('team-badge').textContent = `${data.team.name} (Lead: ${data.team.leader}) · neatHack 2026`;
+        }
       } catch (e) {
         console.error('Failed to load status', e);
       }
@@ -938,27 +1194,26 @@
         
         const container = document.getElementById('reports-archive');
         if (!reports.length) {
-          container.innerHTML = '<p style="color: var(--text-muted);">No reports generated yet.</p>';
+          container.innerHTML = '<p style="color: var(--color-ash-gray);">No archived research reports yet.</p>';
           return;
         }
 
         container.innerHTML = reports.map(r => `
-          <div class="report-item" onclick="viewPastReport('${r.filename}')">
+          <div class="report-card" onclick="viewPastReport('${r.filename}')">
             <div>
-              <div class="report-item-title">${escapeHtml(r.title)}</div>
-              <div class="report-item-meta">
+              <div style="color: var(--color-bone-white); font-weight: 400; font-size: 15px;">${escapeHtml(r.title)}</div>
+              <div class="report-meta">
                 <span>📅 ${r.modified.split('T')[0]}</span>
                 <span>📝 ${r.word_count} words</span>
                 ${r.has_crustdata ? '<span style="color: #34d399;">✓ Crustdata</span>' : ''}
-                ${r.has_sha256 ? '<span style="color: #38bdf8;">✓ SHA-256</span>' : ''}
+                ${r.has_sha256 ? '<span style="color: #c084fc;">✓ SHA-256</span>' : ''}
               </div>
             </div>
-            <span style="font-size: 0.8rem; color: var(--accent-emerald);">View →</span>
+            <span style="font-size: 13px; color: var(--color-electric-iris);">Read →</span>
           </div>
         `).join('');
 
-        // If we have at least one report and none displayed, display the first
-        if (reports.length > 0 && document.getElementById('report-view').innerHTML.includes('Select a topic on the left')) {
+        if (reports.length > 0 && document.getElementById('report-view').innerHTML.includes('Enter a question on the left')) {
           viewPastReport(reports[0].filename);
         }
       } catch (e) {
@@ -981,16 +1236,16 @@
       const view = document.getElementById('report-view');
       view.innerHTML = marked.parse(markdown);
 
-      // Render Crustdata Intelligence Card
+      // Render Crustdata Intelligence
       const crustdataMatch = markdown.match(/### Crustdata Verified B2B Intelligence\s+([\s\S]*?)(?=###|\n\n\n|$)/);
       const crustContainer = document.getElementById('crustdata-details');
       if (crustdataMatch) {
         crustContainer.innerHTML = marked.parse(crustdataMatch[0]);
       } else {
-        crustContainer.innerHTML = '<p style="color: var(--text-muted);">No live company entities matched in this report.</p>';
+        crustContainer.innerHTML = '<p style="color: var(--color-ash-gray);">No verified company entities matched in this query.</p>';
       }
 
-      // Render Cryptographic Provenance Ledger Table
+      // Render Cryptographic Provenance Ledger
       const provContainer = document.getElementById('provenance-table-container');
       const tableMatch = markdown.match(/\| Source #[\s\S]*?(?=\n\n|$)/);
       if (tableMatch) {
@@ -999,16 +1254,16 @@
         provContainer.innerHTML = `
           <table>
             <thead>
-              <tr><th>#</th><th>Source Title</th><th>Status</th><th>Engine</th><th>SHA-256 Hash</th></tr>
+              <tr><th>#</th><th>Source Title</th><th>Status</th><th>Engine</th><th>SHA-256 Digest</th></tr>
             </thead>
             <tbody>
               ${provenanceTable.map(p => `
                 <tr>
                   <td>${p.index}</td>
                   <td>${escapeHtml(p.title)}</td>
-                  <td><span class="prov-badge ${p.verified ? 'live' : ''}">${p.verified ? 'LIVE' : 'VERIFIED'}</span></td>
+                  <td><span class="live-chip">${p.verified ? 'LIVE' : 'VERIFIED'}</span></td>
                   <td>${escapeHtml(p.engine)}</td>
-                  <td><code class="hash-code">${p.sha256}</code></td>
+                  <td><code class="hash-badge">${p.sha256}</code></td>
                 </tr>
               `).join('')}
             </tbody>
@@ -1020,7 +1275,7 @@
     async function launchResearch() {
       const topic = document.getElementById('topic-input').value.trim();
       if (!topic) {
-        alert('Please enter a research topic');
+        alert('Please enter a research objective');
         return;
       }
 
@@ -1030,10 +1285,10 @@
 
       const btn = document.getElementById('btn-submit');
       btn.disabled = true;
-      document.getElementById('btn-text').textContent = 'Executing Agent Pipeline...';
+      document.getElementById('btn-text').textContent = 'Synthesizing with Dala...';
       resetStepper();
 
-      logTerminal(`Starting verifiable research: "${topic}" (Model: ${model}, Auto: ${isAuto})`, 'stage');
+      logTerminal(`Query received: "${topic}" (Engine: ${model}, Auto: ${isAuto})`, 'stage');
       setStepState('planner', 'active');
 
       try {
@@ -1045,7 +1300,6 @@
         const data = await res.json();
         currentRunId = data.run_id;
 
-        // Connect SSE stream
         if (eventSource) eventSource.close();
         eventSource = new EventSource(`/api/research/${currentRunId}/stream`);
 
@@ -1058,13 +1312,13 @@
           console.error('SSE error', err);
           eventSource.close();
           btn.disabled = false;
-          document.getElementById('btn-text').textContent = 'Launch Verifiable Research';
+          document.getElementById('btn-text').textContent = 'Synthesize Verifiable Answer';
         };
 
       } catch (err) {
-        logTerminal(`Failed to launch: ${err.message}`, 'error');
+        logTerminal(`Launch failure: ${err.message}`, 'error');
         btn.disabled = false;
-        document.getElementById('btn-text').textContent = 'Launch Verifiable Research';
+        document.getElementById('btn-text').textContent = 'Synthesize Verifiable Answer';
       }
     }
 
@@ -1108,12 +1362,12 @@
       } else if (data.type === 'error') {
         logTerminal(data.message, 'error');
       } else if (data.type === 'finished') {
-        logTerminal(`Finished: ${data.message}`, 'stage');
+        logTerminal(`Pipeline completed: ${data.message}`, 'stage');
         setStepState('neatlogs', 'done');
         loadReports();
         const btn = document.getElementById('btn-submit');
         btn.disabled = false;
-        document.getElementById('btn-text').textContent = 'Launch Verifiable Research';
+        document.getElementById('btn-text').textContent = 'Synthesize Verifiable Answer';
       } else if (data.type === 'eof') {
         if (eventSource) eventSource.close();
       }
@@ -1121,7 +1375,7 @@
 
     async function submitApproval(action) {
       document.getElementById('approval-banner').classList.remove('visible');
-      logTerminal(`User decision submitted: ${action}`, 'info');
+      logTerminal(`HITL gate response: ${action}`, 'info');
       await fetch('/api/research/approve', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -1129,7 +1383,6 @@
       });
     }
 
-    // Initial page load
     loadStatus();
     loadReports();
   </script>
