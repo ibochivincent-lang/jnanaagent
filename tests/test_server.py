@@ -25,12 +25,12 @@ def test_api_reports_list():
 def test_web_index_serving():
     response = client.get("/")
     assert response.status_code == 200
-    assert "Dala" in response.text
-    assert "Proof of Search AI" in response.text
+    assert "Jnana Agent" in response.text
+    assert "Access Terminal" in response.text
 
 
 def test_spa_catch_all():
     response = client.get("/clients")
     assert response.status_code == 200
-    assert "Dala" in response.text
-    assert "Proof of Search AI" in response.text
+    assert "Jnana Agent" in response.text
+    assert "Access Terminal" in response.text

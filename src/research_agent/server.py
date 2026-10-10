@@ -34,8 +34,8 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger("research_agent.server")
 
 app = FastAPI(
-    title="Dala · Proof of Search AI",
-    description="Your workplace has the answer. Just ask Dala for it. Verifiable research engine with live Crustdata & Neatlogs tracing.",
+    title="Jnana Agent · Autonomous Software Engineering Intelligence",
+    description="Autonomous SWE issue resolver, unified diff patch engine, Entire memory recall, and deep research agent.",
     version="1.0.0",
 )
 
@@ -178,6 +178,8 @@ def get_status() -> Dict[str, Any]:
 
     return {
         "status": "online",
+        "agent": "Jnana Agent",
+        "tagline": "Autonomous Software Engineering & Deep Knowledge Intelligence",
         "timestamp": datetime.now().isoformat(),
         "team": {
             "name": "Vincci001",

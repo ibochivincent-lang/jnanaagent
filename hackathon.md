@@ -1,13 +1,14 @@
-# neatHack 2026: Dala (Proof of Search AI)
+# neatHack 2026: Jnana Agent
 
-> *"Your workplace has the answer. Just ask Dala for it."*
+> *"Autonomous Software Engineering & Deep Knowledge Intelligence."*
+> Sanskrit *Jnana* (ज्ञान) — direct cognitive realization through autonomous inquiry and deterministic code synthesis.
 
 ## Project Overview
-- **Name:** Dala (Proof of Search AI)
-- **Tagline:** Your workplace has the answer. Just ask Dala for it.
-- **Design Aesthetic:** Dala dark-stage environment — constellation floating on black velvet, Electric Iris violet (`#8052ff`) CTA pill buttons, Saffron Spark (`#ffb829`) punctuation, and interactive neural brain particle constellation.
-- **Purpose:** A decentralized, verifiable agentic research engine that combines real-time deep web search, live B2B/people intelligence via Crustdata, verifiable cryptographic and source provenance (Proof of Search), and full execution telemetry via Neatlogs, Continuous Memory with Entire, and economic unit sustainability modeled in cfo.ai.
-- **Problem Solved:** LLM research agents hallucinate sources, fabricate statistics, and cannot prove whether information was actually retrieved from ground truth or invented. Enterprise and intelligence research requires verifiable audit trails, real-time live data with zero mock records, transparent cost/token economics, and observable agent traces.
+- **Name:** Jnana Agent
+- **Tagline:** Autonomous Software Engineering & Deep Knowledge Intelligence
+- **Design Aesthetic:** Monolithic dark-stage environment — constellation floating on black velvet, Electric Iris violet (`#8052ff`) CTA pill buttons, Saffron Spark (`#ffb829`) punctuation, and interactive WebGL neural brain particle constellation.
+- **Purpose:** An autonomous software engineering and verifiable knowledge intelligence engine combining live GitHub issue ingestion, cross-repo prior-art discovery, Entire vector memory recall, unified diff code patch synthesis, end-to-end telemetry via Neatlogs, and sustainable per-query unit economics modeled on cfo.ai.
+- **Problem Solved:** Engineering teams lose over 40% of their bandwidth diagnosing regressions, localizing obscure bugs, and reconstructing missing architectural context across fragmented codebases. Jnana Agent autonomously traces root causes, recalls vector memory loci, and synthesizes production-ready unified diff code patches with zero mock data and deterministic verification.
 
 ---
 

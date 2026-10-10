@@ -1,35 +1,37 @@
-# Dala (Proof of Search AI)
+# Jnana Agent
 
-> *Your workplace has the answer. Just ask Dala for it.*  
-> **A dark-stage constellation floating on black velvet.**
+> *Autonomous Software Engineering & Deep Knowledge Intelligence.*  
+> **Sanskrit *Jnana* (ज्ञान) — direct cognitive insight through autonomous inquiry and deterministic code synthesis.**
 
 [![Hackathon](https://img.shields.io/badge/neatHack-2026-blue.svg)](https://neatlogs.com)
-[![Brand](https://img.shields.io/badge/Identity-Dala%20Constellation-8052ff.svg)](https://github.com/ibochivincent-lang/proof-of-search-ai)
+[![Brand](https://img.shields.io/badge/Identity-Jnana%20Agent-8052ff.svg)](https://github.com/ibochivincent-lang/proof-of-search-ai)
 [![Tracing](https://img.shields.io/badge/Telemetry-Neatlogs%20v1.4.26-6366f1.svg)](https://app.neatlogs.com)
 [![Orchestration](https://img.shields.io/badge/Agent-LangGraph-brightgreen.svg)](https://github.com/langchain-ai/langgraph)
-[![Continuous Memory](https://img.shields.io/badge/Provenance-Entire%20Checkpoints-orange.svg)](https://entire.io)
+[![Continuous Memory](https://img.shields.io/badge/Provenance-Entire%20Brain-orange.svg)](https://entire.io)
 [![Live Data](https://img.shields.io/badge/Data-Crustdata%20Live%20API-emerald.svg)](https://crustdata.com)
 
-**Dala (Proof of Search AI)** is a verifiable, hallucination-resistant research agent pipeline engineered for **neatHack 2026**. Designed with the monolithic, weightless **Dala Design System**—where black voids meet a single vivid violet accent (`#8052ff` Electric Iris) punctuated by amber sparks (`#ffb829` Saffron Spark) and an interactive particle brain constellation—it tackles unverified citations, fabricated data, and opaque reasoning through end-to-end execution observability via **Neatlogs**, verifiable continuous session memory via **Entire**, live B2B/market ground truth via **Crustdata**, and sustainable per-query unit economics modeled on **cfo.ai**.
+**Jnana Agent** is an autonomous software engineering and verifiable knowledge intelligence engine engineered for **neatHack 2026**. Designed on a monolithic, weightless dark-stage design system—where black voids meet Electric Iris (`#8052ff`), Saffron Spark (`#ffb829`), and an interactive WebGL particle brain constellation—Jnana Agent tackles complex codebase regressions, missing context, and unverified citations. It combines autonomous GitHub issue ingestion (`owner/repo#123`), cross-repository prior art discovery, Entire vector memory recall, production-ready unified diff code patch synthesis, end-to-end execution observability via **Neatlogs**, and sustainable per-query unit economics modeled on **cfo.ai**.
 
 ---
 
 ## 🌟 Key Architecture & Capabilities
 
-1. **Deterministic HITL Research Flow (LangGraph)**:
-   - Topic ingestion -> Plan proposal with complementary search angles.
-   - Human-in-the-loop (HITL) terminal gate for approval/revision prior to search execution.
-   - Autonomous multi-query retrieval, source selection, full-text extraction, and synthesis.
-2. **Deep Observability (Neatlogs)**:
+1. **Autonomous SWE Code Fix Engine**:
+   - Ingests GitHub issue URLs or shorthand refs (`owner/repo#123`).
+   - Investigates issue body, labels, maintainer comments, and closed PR prior-art (`is:pr is:merged`).
+   - Synthesizes production-ready unified diff patches (`diff --git a/... b/...`) and executable reproduction tests.
+2. **Access Terminal Console**:
+   - Sleek interactive terminal with live telemetry stream, 6-stage pipeline stepper, and dedicated 8-tab diagnostic drawer.
+   - Syntax-highlighted unified diff viewer with one-click "Copy Patch", "Download .patch", and "Copy Test Code".
+3. **Deep Observability (Neatlogs)**:
    - Native `neatlogs.langchain_handler()` captures graph execution, node transitions, token usage, latency, and LLM calls.
-   - Regional ingestion via `https://ingest.neatlogs.com`.
-   - Automatic buffered span flush and clean shutdown on one-shot process exits.
-3. **Live Entity & Market Intelligence (Crustdata)**:
-   - Ground truth company data, verified executives, funding history, and real-time signals with zero mock records.
-4. **Verifiable Agent Memory & History (Entire)**:
-   - Granular session checkpoints capturing code evolution, agent decisions, and execution artifacts.
-5. **Unit Economics & Sustainability (cfo.ai)**:
-   - Granular cost modeling across LLM generation, search API lookups, and pricing tiers.
+   - Regional ingestion via `https://ingest.neatlogs.com` with clean flush and lifecycle shutdown.
+4. **Verifiable Neural Memory (Entire Brain)**:
+   - Granular vector memory recall (`entire brain recall`) over historical architectural commits, loci, and decisions.
+5. **Live Entity & Market Intelligence (Crustdata)**:
+   - Ground-truth executive data, funding history, and real-time signals with zero mock records.
+6. **Unit Economics & Sustainability (cfo.ai)**:
+   - $0.056/query COGS with 97.7% gross margin across scalable enterprise tiers.
 
 ---
 
