@@ -4,17 +4,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dala (Proof of Search AI) — Your workplace has the answer. Just ask Dala for it.</title>
-  <meta name="description" content="Dala: Distributed intelligence & verifiable research agent. Constellation floating on black velvet.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta name="description" content="Your workplace has the answer. Just ask Dala for it. Dala's dark AI design system: Void #000000, Bone White #ffffff, PPNeueMontreal typography, and constellation floating on black velvet.">
   <link rel="stylesheet" href="/static/index.css">
   <script src="/static/marked.min.js"></script>
   <script>if (typeof marked === 'undefined') { document.write('<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"><\\/script>'); }</script>
 
   <style>
-    /* Dala Tokens strictly from DESIGN.md */
+    /* PPNeueMontreal from official source with Inter/system fallback */
+    @font-face {
+      font-family: 'PPNeueMontreal';
+      font-weight: 200;
+      src: url('https://dala.craftedbygc.com/fonts/PPNeueMontreal-Light.woff2') format('woff2');
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'PPNeueMontreal';
+      font-weight: 400;
+      src: url('https://dala.craftedbygc.com/fonts/PPNeueMontreal-Regular.woff2') format('woff2');
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'PPNeueMontreal';
+      font-weight: 600;
+      src: url('https://dala.craftedbygc.com/fonts/PPNeueMontreal-SemiBold.woff2') format('woff2');
+      font-display: swap;
+    }
+
     :root {
-      /* Colors */
       --color-void: #000000;
       --color-bone-white: #ffffff;
       --color-ash-gray: #9a9a9a;
@@ -23,55 +39,17 @@
       --color-saffron-spark: #ffb829;
       --color-deep-verdant: #15846e;
 
-      /* Typography — Font Families */
-      --font-ppneuemontreal: 'PPNeueMontreal', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      --font-family: var(--font-ppneuemontreal);
-      --font-mono: 'JetBrains Mono', monospace;
+      --font-ppneuemontreal: 'PPNeueMontreal', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
-      /* Type Scale */
-      --text-caption: 12px;
-      --leading-caption: 1.5;
-      --text-nav-label: 14px;
-      --leading-nav-label: 1.2;
-      --tracking-nav-label: 0.35px;
-      --text-body: 18px;
-      --leading-body: 1.5;
-      --text-heading-2xs: 24px;
-      --leading-heading-2xs: 1.25;
-      --tracking-heading-2xs: -0.48px;
-      --text-heading-xs: 27px;
-      --leading-heading-xs: 1;
-      --text-subheading: 36px;
-      --leading-subheading: 1.2;
-      --text-heading-sm: 42px;
-      --leading-heading-sm: 1.2;
-      --tracking-heading-sm: -1.68px;
-      --text-heading: 48px;
-      --leading-heading: 1.1;
-      --tracking-heading: -1.68px;
-      --text-heading-lg: 78px;
-      --leading-heading-lg: 1.1;
-      --tracking-heading-lg: -3.12px;
-      --text-display: 113px;
-      --leading-display: 1.1;
-      --tracking-display: -4.52px;
-
-      /* Spacing (Base unit: 6px) */
-      --spacing-6: 6px;
+      --spacing-unit: 6px;
       --spacing-12: 12px;
       --spacing-18: 18px;
       --spacing-24: 24px;
-      --spacing-30: 30px;
       --spacing-36: 36px;
       --spacing-60: 60px;
       --spacing-96: 96px;
       --spacing-120: 120px;
-
-      /* Layout */
-      --page-max-width: 1280px;
-      --radius-pill: 22.5px;
-      --radius-element: 24px;
-      --radius-tags: 9999px;
     }
 
     * {
@@ -83,1137 +61,1233 @@
     html, body {
       background-color: var(--color-void);
       color: var(--color-bone-white);
-      font-family: var(--font-family);
-      font-weight: 200;
-      line-height: var(--leading-body);
-      min-height: 100vh;
-      overflow-x: hidden;
+      font-family: var(--font-ppneuemontreal);
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      min-height: 100vh;
     }
 
-    /* Full Black Velvet Void — No card containers, no borders, no shadows */
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .container {
-      max-width: var(--page-max-width);
-      margin: 0 auto;
-      padding: 0 var(--spacing-24);
-      width: 100%;
-    }
-
-    /* Top Navigation: Transparent on pure black, NO border, NO backdrop blur */
-    header {
-      background: transparent;
-      padding: var(--spacing-30) 0;
-      width: 100%;
-    }
-
-    .nav-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .brand-mark-group {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    /* Stylized Triangular Logo with Electric Iris to Deep Verdant gradient */
-    .brand-logo-icon {
-      width: 26px;
-      height: 26px;
-    }
-
-    .brand-wordmark {
-      font-size: 20px;
-      font-weight: 400;
-      letter-spacing: -0.04em;
-      color: var(--color-bone-white);
-      display: flex;
-      align-items: baseline;
-      gap: 8px;
-    }
-
-    .brand-subtag {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--color-saffron-spark);
-    }
-
-    .nav-center-links {
-      display: flex;
-      align-items: center;
-      gap: var(--spacing-36);
-    }
-
-    .ghost-nav-link {
-      font-size: var(--text-nav-label);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: var(--tracking-nav-label);
-      color: var(--color-ash-gray);
-      transition: color 0.15s ease;
-    }
-
-    .ghost-nav-link:hover, .ghost-nav-link.active {
-      color: var(--color-bone-white);
-    }
-
-    /* Dala Primary Action Button: Filled Violet Pill (#8052ff), 22.5px radius */
-    .btn-dala-primary {
-      background-color: var(--color-electric-iris);
-      color: var(--color-bone-white);
-      border: none;
-      border-radius: var(--radius-pill);
-      padding: 14.4px 24px;
-      font-family: var(--font-family);
-      font-size: var(--text-nav-label);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.025em;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      transition: transform 0.15s ease, opacity 0.15s ease;
-    }
-
-    .btn-dala-primary:hover {
-      opacity: 0.92;
-      transform: translateY(-1px);
-    }
-
-    .btn-dala-primary:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    /* Asymmetric Two-Column Hero */
-    .hero-layout {
-      display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      gap: var(--spacing-60);
-      align-items: center;
-      padding: var(--spacing-60) 0 var(--spacing-96);
-      position: relative;
-    }
-
-    @media (max-width: 960px) {
-      .hero-layout {
-        grid-template-columns: 1fr;
-        padding-top: var(--spacing-30);
-      }
-    }
-
-    .hero-left {
-      position: relative;
-      z-index: 2;
-    }
-
-    .eyebrow-accent {
-      font-size: var(--text-nav-label);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: var(--tracking-nav-label);
-      color: var(--color-saffron-spark);
-      margin-bottom: var(--spacing-18);
-      display: block;
-    }
-
-    /* Sculptural Headline: Weight 400, Negative Tracking, Monolithic Scale */
-    .hero-title {
-      font-size: clamp(48px, 6vw, var(--text-heading-lg));
-      font-weight: 400;
-      line-height: var(--leading-heading-lg);
-      letter-spacing: var(--tracking-heading-lg);
-      color: var(--color-bone-white);
-      margin-bottom: var(--spacing-24);
-    }
-
-    .hero-body-text {
-      font-size: var(--text-body);
-      font-weight: 200;
-      line-height: var(--leading-body);
-      color: var(--color-silver-mist);
-      max-width: 520px;
-      margin-bottom: var(--spacing-36);
-    }
-
-    /* Input & Interaction Floating on Pure Black (No panels or card fills) */
-    .query-block {
-      margin-bottom: var(--spacing-30);
-      max-width: 540px;
-    }
-
-    .dala-query-input {
-      width: 100%;
-      background: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: var(--radius-element);
-      padding: 16px 20px;
-      color: var(--color-bone-white);
-      font-family: var(--font-family);
-      font-size: 16px;
-      font-weight: 200;
-      line-height: 1.5;
-      resize: vertical;
-      min-height: 84px;
-      outline: none;
-      transition: border-color 0.2s ease;
-      margin-bottom: var(--spacing-12);
-    }
-
-    .dala-query-input:focus {
-      border-color: var(--color-electric-iris);
-    }
-
-    .quick-chips-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: var(--spacing-24);
-    }
-
-    .quick-chip {
-      font-size: 13px;
-      font-weight: 400;
-      color: var(--color-ash-gray);
-      background: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: var(--radius-tags);
-      padding: 6px 14px;
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-
-    .quick-chip:hover {
-      color: var(--color-saffron-spark);
-      border-color: var(--color-saffron-spark);
-    }
-
-    .controls-split {
-      display: flex;
-      gap: var(--spacing-18);
-      margin-bottom: var(--spacing-24);
-      flex-wrap: wrap;
-    }
-
-    .dala-select {
-      background: var(--color-void);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: var(--radius-element);
-      color: var(--color-bone-white);
-      font-family: var(--font-family);
-      font-size: var(--text-nav-label);
-      font-weight: 400;
-      padding: 12px 18px;
-      outline: none;
-      cursor: pointer;
-    }
-
-    .dala-select:focus {
-      border-color: var(--color-electric-iris);
-    }
-
-    /* Right Column: Signature Hero Constellation Visualization (Brain Shape) */
-    .hero-right-constellation {
-      position: relative;
-      width: 100%;
-      height: 520px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    #brain-canvas {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    /* Ambient Scattered Particle Canvas */
-    #ambient-particles {
+    /* Fixed 3D Particle Constellation & Ambient Field Canvas */
+    .fixed-canvas-wrap {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
+      z-index: 0;
       pointer-events: none;
+      user-select: none;
+    }
+
+    /* Page Container */
+    .site-wrap {
+      position: relative;
       z-index: 1;
+      width: 100%;
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 0 2rem;
     }
 
-    /* Main Content Sections: Floating on Void with Whitespace Alone */
-    .section-headline-block {
-      padding: var(--spacing-60) 0 var(--spacing-36);
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .section-title {
-      font-size: var(--text-heading-sm);
-      font-weight: 400;
-      line-height: var(--leading-heading-sm);
-      letter-spacing: var(--tracking-heading-sm);
-      color: var(--color-bone-white);
-      margin-bottom: var(--spacing-18);
-    }
-
-    /* Stepper & Telemetry Terminal Floating on Void */
-    .telemetry-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--spacing-60);
-      margin-bottom: var(--spacing-60);
-    }
-
-    @media (max-width: 900px) {
-      .telemetry-row {
-        grid-template-columns: 1fr;
+    @media (min-width: 1024px) {
+      .site-wrap {
+        padding: 0 4rem;
       }
     }
 
-    .stepper-list {
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      pointer-events: auto;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0) 100%);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .header__inner {
+      max-width: 1360px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 2rem;
+    }
+
+    @media (min-width: 1024px) {
+      .header__inner {
+        padding: 1.5rem 4rem;
+      }
+    }
+
+    .header__logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+    }
+
+    .logo-text {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .logo-sub {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-saffron-spark);
+      margin-left: 4px;
+    }
+
+    .nav__list {
+      display: none;
+      align-items: center;
+      list-style: none;
+      gap: 2.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .nav__list {
+        display: flex;
+      }
+    }
+
+    .nav__link {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.025em;
+      text-transform: uppercase;
+      color: var(--color-ash-gray);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav__link:hover, .nav__link.active {
+      color: var(--color-bone-white);
+    }
+
+    /* Dala Signature Violet Pill Button with Deep Verdant sweep */
+    .btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--color-electric-iris);
+      color: #ffffff;
+      border-radius: 1.875rem;
+      padding: 14px 22px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.025em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn__text {
+      position: relative;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .btn__hover {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--color-deep-verdant);
+      clip-path: ellipse(120% 180% at 50% 310%);
+      transition: clip-path 0.8s cubic-bezier(0.215, 0.61, 0.355, 1);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .btn:hover .btn__hover {
+      clip-path: ellipse(120% 180% at 50% 60%);
+    }
+
+    /* Sections */
+    .section {
+      position: relative;
+      padding: 6rem 0;
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .section--tall {
+      min-height: 100vh;
+    }
+
+    /* Hero / Landing */
+    .landing {
+      padding-top: 14rem;
+      min-height: 100vh;
+    }
+
+    .landing__title {
+      font-size: clamp(56px, 9vw, 130px);
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      margin-bottom: 2.5rem;
+      color: var(--color-bone-white);
+    }
+
+    .landing__title span {
+      display: block;
+    }
+
+    .landing__eyebrow {
+      font-size: 16px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-saffron-spark);
+      margin-bottom: 1.25rem;
+    }
+
+    .landing__body {
+      font-size: clamp(18px, 2.2vw, 24px);
+      font-weight: 200;
+      line-height: 1.5;
+      letter-spacing: -0.02em;
+      color: var(--color-bone-white);
+      max-width: 580px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* Live Autonomous Research Console floating on void */
+    .console-dock {
+      max-width: 720px;
+      margin-top: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .search-input-wrap {
+      position: relative;
       display: flex;
       flex-direction: column;
       gap: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 18px 22px;
+      transition: border-color 0.3s ease, background 0.3s ease;
     }
 
-    .step-unit {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      font-size: 14px;
+    .search-input-wrap:focus-within {
+      border-color: var(--color-electric-iris);
+      background: rgba(128, 82, 255, 0.04);
+    }
+
+    .dala-input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--color-bone-white);
+      font-family: var(--font-ppneuemontreal);
+      font-size: 18px;
       font-weight: 400;
-      color: var(--color-ash-gray);
-      transition: color 0.2s ease;
+      resize: none;
+      min-height: 48px;
     }
 
-    .step-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--color-ash-gray);
-      flex-shrink: 0;
+    .dala-input::placeholder {
+      color: var(--color-ash-gray);
+      font-weight: 200;
+    }
+
+    .chips-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .chip-item {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--color-silver-mist);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 9999px;
+      padding: 4px 12px;
+      cursor: pointer;
       transition: all 0.2s ease;
     }
 
-    .step-unit.active {
+    .chip-item:hover {
+      background: rgba(128, 82, 255, 0.2);
+      border-color: var(--color-electric-iris);
       color: var(--color-bone-white);
     }
-    .step-unit.active .step-dot {
-      background: var(--color-electric-iris);
-      box-shadow: 0 0 12px var(--color-electric-iris);
-      transform: scale(1.4);
+
+    .console-actions-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
     }
 
-    .step-unit.done {
-      color: var(--color-deep-verdant);
+    .select-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    .step-unit.done .step-dot {
+
+    .styled-select {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--color-bone-white);
+      border-radius: 9999px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-family: var(--font-ppneuemontreal);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .styled-select option {
+      background: #0d0d12;
+      color: #fff;
+    }
+
+    /* Live Output Drawer (appears when research starts) */
+    .research-live-drawer {
+      display: none;
+      margin-top: 2.5rem;
+      background: rgba(12, 12, 16, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      padding: 2rem;
+    }
+
+    .research-live-drawer.active {
+      display: block;
+    }
+
+    .stepper-pipeline {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-bottom: 1.5rem;
+    }
+
+    .step-box {
+      font-size: 12px;
+      color: var(--color-ash-gray);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .step-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .step-box.active .step-indicator {
+      background: var(--color-saffron-spark);
+      box-shadow: 0 0 10px var(--color-saffron-spark);
+    }
+
+    .step-box.active {
+      color: var(--color-bone-white);
+      font-weight: 600;
+    }
+
+    .step-box.done .step-indicator {
       background: #34d399;
     }
 
-    .terminal-stream {
+    .step-box.done {
+      color: #34d399;
+    }
+
+    .terminal-output {
       font-family: var(--font-mono);
       font-size: 12px;
-      height: 190px;
+      line-height: 1.6;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 14px;
+      height: 140px;
       overflow-y: auto;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: var(--radius-element);
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      background: transparent;
+      margin-bottom: 1.5rem;
     }
 
-    .terminal-log {
-      display: flex;
-      gap: 10px;
-      line-height: 1.4;
+    .term-msg {
+      margin-bottom: 4px;
     }
-    .log-time { color: #555555; }
-    .log-msg.info { color: var(--color-silver-mist); }
-    .log-msg.stage { color: var(--color-electric-iris); }
-    .log-msg.warn { color: var(--color-saffron-spark); }
-    .log-msg.error { color: #f87171; }
+    .term-msg.stage { color: var(--color-saffron-spark); }
+    .term-msg.info { color: var(--color-silver-mist); }
+    .term-msg.warn { color: #f59e0b; }
+    .term-msg.error { color: #ef4444; }
 
-    /* Review Gate Banner */
-    .hitl-banner {
-      display: none;
-      border: 1px solid var(--color-saffron-spark);
-      border-radius: var(--radius-element);
-      padding: 18px 24px;
-      margin-bottom: var(--spacing-36);
+    /* Tabs */
+    .tab-triggers {
+      display: flex;
+      gap: 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 12px;
+      margin-bottom: 1.5rem;
     }
-    .hitl-banner.visible {
-      display: block;
-    }
-    .hitl-title {
-      font-size: 13px;
+
+    .tab-btn {
+      background: none;
+      border: none;
+      color: var(--color-ash-gray);
+      font-family: var(--font-ppneuemontreal);
+      font-size: 14px;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.025em;
-      color: var(--color-saffron-spark);
-      margin-bottom: 6px;
-    }
-    .hitl-actions {
-      display: flex;
-      gap: 12px;
-      margin-top: 12px;
-    }
-
-    /* Output Results Section */
-    .tab-nav-row {
-      display: flex;
-      gap: var(--spacing-30);
-      margin-bottom: var(--spacing-36);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      padding-bottom: 12px;
-    }
-
-    .tab-ghost-trigger {
-      background: transparent;
-      border: none;
-      color: var(--color-ash-gray);
-      font-family: var(--font-family);
-      font-size: var(--text-nav-label);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: var(--tracking-nav-label);
       cursor: pointer;
-      transition: color 0.15s ease;
-      padding-bottom: 8px;
-      position: relative;
-    }
-
-    .tab-ghost-trigger:hover {
-      color: var(--color-bone-white);
-    }
-
-    .tab-ghost-trigger.active {
-      color: var(--color-bone-white);
-    }
-    .tab-ghost-trigger.active::after {
-      content: '';
-      position: absolute;
-      bottom: -13px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: var(--color-electric-iris);
-    }
-
-    .tab-pane {
-      display: none;
-    }
-    .tab-pane.active {
-      display: block;
-    }
-
-    /* Markdown Report Typography (No cards, floating on void) */
-    .markdown-canvas {
-      color: var(--color-silver-mist);
-      font-size: var(--text-body);
-      font-weight: 200;
-      line-height: 1.7;
-      max-width: 900px;
-    }
-
-    .markdown-canvas h1, .markdown-canvas h2, .markdown-canvas h3 {
-      color: var(--color-bone-white);
-      font-weight: 400;
-      letter-spacing: -0.04em;
-      margin-top: var(--spacing-36);
-      margin-bottom: var(--spacing-18);
-    }
-
-    .markdown-canvas h1 {
-      font-size: var(--text-heading-sm);
-      line-height: var(--leading-heading-sm);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      padding-bottom: 12px;
-    }
-
-    .markdown-canvas h2 {
-      font-size: var(--text-heading-2xs);
-      color: #e2e8f0;
-    }
-
-    .markdown-canvas p {
-      margin-bottom: var(--spacing-18);
-    }
-
-    .markdown-canvas ul, .markdown-canvas ol {
-      margin-left: var(--spacing-24);
-      margin-bottom: var(--spacing-24);
-    }
-
-    .markdown-canvas table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: var(--spacing-30) 0;
-      font-size: 13px;
-    }
-
-    .markdown-canvas th, .markdown-canvas td {
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 12px 16px;
-      text-align: left;
-    }
-
-    .markdown-canvas th {
-      background: rgba(255, 255, 255, 0.03);
-      color: var(--color-bone-white);
-      font-weight: 600;
-    }
-
-    .markdown-canvas code {
-      font-family: var(--font-mono);
-      background: rgba(255, 255, 255, 0.06);
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 13px;
-      color: #c084fc;
-    }
-
-    /* Provenance Ledger Hash Badges */
-    .sha-hash {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--color-electric-iris);
-    }
-    .live-flag {
-      color: #34d399;
-      font-weight: 600;
-      font-size: 11px;
-      text-transform: uppercase;
-    }
-
-    /* Archive Items Floating on Void */
-    .archive-stream {
-      display: flex;
-      flex-direction: column;
-      gap: var(--spacing-18);
-    }
-
-    .archive-entry {
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      padding-bottom: var(--spacing-18);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-      transition: transform 0.15s ease;
-    }
-
-    .archive-entry:hover {
-      transform: translateX(4px);
-    }
-
-    .archive-title {
-      font-size: 18px;
-      font-weight: 400;
-      color: var(--color-bone-white);
-      letter-spacing: -0.02em;
-    }
-
-    .archive-meta {
-      font-size: 13px;
-      color: var(--color-ash-gray);
-      margin-top: 4px;
-      display: flex;
-      gap: 16px;
-    }
-
-    /* Two-Column Asymmetric Section & Manifesto */
-    .two-col-asymmetric {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: var(--spacing-60);
-      align-items: start;
-    }
-
-    @media (max-width: 900px) {
-      .two-col-asymmetric {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-36);
-      }
-    }
-
-    .section-hero-title {
-      font-size: var(--text-heading-lg);
-      font-weight: 400;
-      line-height: 1.1;
-      letter-spacing: -3.12px;
-      color: var(--color-bone-white);
-      margin-top: var(--spacing-12);
-      margin-bottom: var(--spacing-24);
-    }
-
-    @media (max-width: 900px) {
-      .section-hero-title {
-        font-size: var(--text-heading-sm);
-        letter-spacing: -1.68px;
-      }
-    }
-
-    .section-body-copy {
-      font-size: var(--text-body);
-      font-weight: var(--font-weight-extralight);
-      line-height: var(--leading-body);
-      color: var(--color-bone-white);
-      margin-bottom: var(--spacing-18);
-    }
-
-    /* Team Member Cards (Floating on black void with whitespace only) */
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 340px));
-      gap: var(--spacing-60);
-      margin-top: var(--spacing-36);
-    }
-
-    .team-card {
-      display: flex;
-      flex-direction: column;
-      background: transparent;
-      border: none;
-      box-shadow: none;
-    }
-
-    .team-avatar-frame {
-      width: 100%;
-      aspect-ratio: 1;
-      border-radius: var(--radius-cards);
-      overflow: hidden;
-      margin-bottom: var(--spacing-18);
-      background: #09090e;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .team-avatar-svg {
-      width: 100%;
-      height: 100%;
-    }
-
-    .team-role-label {
-      font-size: 12px;
-      font-weight: 400;
-      text-transform: uppercase;
-      color: var(--color-electric-iris);
-      letter-spacing: 0.05em;
-      margin-bottom: 6px;
-    }
-
-    .team-name {
-      font-size: var(--text-heading-xs);
-      font-weight: 400;
-      color: var(--color-bone-white);
-      margin-bottom: 8px;
-      letter-spacing: -0.02em;
-    }
-
-    .team-bio {
-      font-size: 14px;
-      font-weight: 200;
-      color: var(--color-silver-mist);
-      line-height: 1.5;
-      margin-bottom: 12px;
-    }
-
-    .team-socials {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 13px;
-    }
-
-    .team-social-link {
-      color: var(--color-ash-gray);
-      text-decoration: none;
       transition: color 0.2s ease;
     }
 
-    .team-social-link:hover {
+    .tab-btn.active, .tab-btn:hover {
       color: var(--color-bone-white);
     }
 
-    /* Carousel Navigation Dots */
-    .carousel-dots-row {
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .report-prose {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #e2e8f0;
+    }
+
+    .report-prose h1, .report-prose h2, .report-prose h3 {
+      color: #fff;
+      font-weight: 400;
+      margin: 1.5rem 0 0.8rem;
+    }
+
+    .report-prose table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 13px;
+    }
+
+    .report-prose th, .report-prose td {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 10px 14px;
+      text-align: left;
+    }
+
+    .report-prose th {
+      background: rgba(255, 255, 255, 0.04);
+      color: #fff;
+    }
+
+    /* Section: Introduction */
+    .introduction__title {
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      max-width: 640px;
+      margin-bottom: 2rem;
+    }
+
+    .introduction__body {
+      font-size: clamp(20px, 2.5vw, 28px);
+      font-weight: 200;
+      line-height: 1.5;
+      letter-spacing: -0.02em;
+      color: var(--color-bone-white);
+      max-width: 680px;
+    }
+
+    /* Section: Manifesto */
+    .manifesto-intro-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 3.5rem;
+      margin-bottom: 8rem;
+    }
+
+    .manifesto-dilemma-item {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .manifesto-dilemma-p {
+      font-size: clamp(18px, 1.8vw, 24px);
+      font-weight: 400;
+      line-height: 1.35;
+      letter-spacing: -0.02em;
+      color: var(--color-bone-white);
+    }
+
+    .manifesto-dilemma-p.highlight {
+      color: var(--color-ash-gray);
+      font-weight: 200;
+    }
+
+    .manifesto-spotlight {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      margin-bottom: 8rem;
+    }
+
+    @media (min-width: 1024px) {
+      .manifesto-spotlight {
+        grid-template-columns: 1.1fr 1fr;
+        align-items: start;
+      }
+    }
+
+    .manifesto-spotlight-title {
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--color-bone-white);
+    }
+
+    .manifesto-spotlight-body {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .manifesto-spotlight-p {
+      font-size: clamp(18px, 2vw, 24px);
+      font-weight: 200;
+      line-height: 1.5;
+      letter-spacing: -0.02em;
+      color: var(--color-bone-white);
+    }
+
+    .manifesto-spotlight-p a {
+      color: var(--color-saffron-spark);
+      text-decoration: none;
+      position: relative;
+    }
+
+    .manifesto-spotlight-p a:hover {
+      text-decoration: underline;
+    }
+
+    /* Section: Team */
+    .team__title {
+      font-size: clamp(48px, 7vw, 104px);
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 3.5rem;
+    }
+
+    .team-cards-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 5rem;
+    }
+
+    .team-person-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .team-avatar-box {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 2rem;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+      background: #0c0c14;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .team-avatar-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(1) brightness(0.85);
+      transition: filter 0.3s ease;
+    }
+
+    .team-person-card:hover .team-avatar-box img {
+      filter: grayscale(0) brightness(1);
+    }
+
+    .team-role {
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-electric-iris);
+      margin-bottom: 0.5rem;
+    }
+
+    .team-name {
+      font-size: 32px;
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+
+    .team-links {
+      display: flex;
+      gap: 12px;
+      font-size: 13px;
+    }
+
+    .team-links a {
+      color: var(--color-ash-gray);
+      text-decoration: none;
+    }
+
+    .team-links a:hover {
+      color: #fff;
+    }
+
+    .team-hire-block {
+      max-width: 600px;
+      margin-top: 4rem;
+    }
+
+    .team-hire-title {
+      font-size: 36px;
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+
+    .team-hire-text {
+      font-size: 20px;
+      font-weight: 200;
+      line-height: 1.5;
+      color: var(--color-silver-mist);
+    }
+
+    .team-hire-text a {
+      color: var(--color-saffron-spark);
+      text-decoration: none;
+    }
+
+    /* Section: Investors */
+    .investors-wrap {
+      margin: 8rem 0;
+    }
+
+    .investors-head-title {
+      font-size: clamp(48px, 7vw, 104px);
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 1.5rem;
+    }
+
+    .investors-sub {
+      font-size: 20px;
+      font-weight: 200;
+      line-height: 1.5;
+      color: var(--color-silver-mist);
+      max-width: 520px;
+      margin-bottom: 4rem;
+    }
+
+    .investors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 3rem;
+    }
+
+    .investor-item {
+      display: flex;
       align-items: center;
-      gap: 8px;
-      margin-top: 30px;
+      gap: 1.25rem;
     }
 
-    .carousel-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.15);
-      transition: all 0.2s ease;
-      cursor: pointer;
+    .investor-glyph {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .carousel-dot.active {
-      background: var(--color-electric-iris);
+    .investor-name {
+      font-size: 24px;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      color: #fff;
     }
 
-    /* Footer: Minimal, floating on black void */
-    footer {
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      padding: var(--spacing-60) 0;
-      margin-top: var(--spacing-120);
+    .investor-title {
+      font-size: 14px;
+      color: var(--color-silver-mist);
+      font-weight: 200;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 10rem 0 4rem;
+      text-align: center;
+    }
+
+    .footer__head-title {
+      font-size: clamp(36px, 5.5vw, 68px);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      max-width: 820px;
+      margin: 0 auto 3rem;
+    }
+
+    .footer__bar {
+      margin-top: 8rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
       font-size: 13px;
       color: var(--color-ash-gray);
     }
 
-    .footer-row {
+    @media (min-width: 768px) {
+      .footer__bar {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+
+    .footer__nav {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: var(--spacing-18);
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .footer__nav a {
+      color: var(--color-ash-gray);
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.025em;
+    }
+
+    .footer__nav a:hover {
+      color: #fff;
+    }
+
+    .hitl-modal {
+      display: none;
+      margin-top: 14px;
+      padding: 14px 18px;
+      border-radius: 14px;
+      background: rgba(255, 184, 41, 0.08);
+      border: 1px solid var(--color-saffron-spark);
+    }
+
+    .hitl-modal.visible {
+      display: block;
     }
   </style>
 </head>
 <body>
 
-  <!-- Background Ambient Scattered Triangle Glyphs -->
-  <canvas id="ambient-particles"></canvas>
+  <!-- Full Viewport Fixed 3D Constellation Brain & Point-Lights Canvas -->
+  <div class="fixed-canvas-wrap">
+    <canvas id="canvas"></canvas>
+  </div>
 
-  <div class="container" style="position: relative; z-index: 2;">
-    
-    <!-- Top Navigation -->
-    <header>
-      <div class="nav-row">
-        <!-- Logo Lockup: Triangle mark + 'Dala' wordmark -->
-        <div class="brand-mark-group">
-          <svg class="brand-logo-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <polygon points="14,2 26,24 2,24" stroke="#8052ff" stroke-width="2.5" fill="none" />
-            <polygon points="14,9 20,20 8,20" stroke="#15846e" stroke-width="1.8" fill="rgba(128, 82, 255, 0.2)" />
-          </svg>
-          <div class="brand-wordmark">
-            <span>Dala</span>
-            <span class="brand-subtag">Proof of Search AI</span>
-          </div>
+  <!-- Header -->
+  <header class="header">
+    <div class="header__inner">
+      <a href="#landing" class="header__logo">
+        <svg class="logo-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="14,2 26,24 2,24" stroke="#8052ff" stroke-width="2.5" fill="none" />
+          <polygon points="14,9 20,20 8,20" stroke="#15846e" stroke-width="1.8" fill="rgba(128, 82, 255, 0.2)" />
+        </svg>
+        <div style="display: flex; align-items: baseline;">
+          <span class="logo-text">Dala</span>
+          <span class="logo-sub">Proof of Search AI</span>
         </div>
+      </a>
 
-        <!-- Ghost Nav Links -->
-        <nav class="nav-center-links">
-          <a class="ghost-nav-link" href="#ask">Ask</a>
-          <a class="ghost-nav-link" href="#manifesto">Manifesto</a>
-          <a class="ghost-nav-link" href="#team">Team</a>
-          <a class="ghost-nav-link" href="https://app.neatlogs.com/projects/72082073-0485-4b6b-abb0-2a1ce5116f2b" target="_blank" rel="noopener">Neatlogs</a>
-          <a class="ghost-nav-link" href="https://entire.io/gh/ibochivincent-lang/proof-of-search-ai" target="_blank" rel="noopener">Entire</a>
-          <a class="ghost-nav-link" href="https://github.com/ibochivincent-lang/proof-of-search-ai" target="_blank" rel="noopener">GitHub</a>
-        </nav>
+      <nav>
+        <ul class="nav__list">
+          <li><a href="#manifesto" class="nav__link">Manifesto</a></li>
+          <li><a href="#team" class="nav__link">Team</a></li>
+          <li><a href="#investors" class="nav__link">Investors</a></li>
+          <li><a href="https://app.neatlogs.com/projects/72082073-0485-4b6b-abb0-2a1ce5116f2b" target="_blank" rel="noopener" class="nav__link">Neatlogs</a></li>
+          <li><a href="https://entire.io/gh/ibochivincent-lang/proof-of-search-ai" target="_blank" rel="noopener" class="nav__link">Entire</a></li>
+          <li><a href="https://github.com/ibochivincent-lang/proof-of-search-ai" target="_blank" rel="noopener" class="nav__link">GitHub</a></li>
+        </ul>
+      </nav>
 
-        <!-- Primary Action Button: Filled Violet Pill -->
-        <a class="btn-dala-primary" href="#ask">Ask Dala</a>
-      </div>
-    </header>
+      <a href="#search" class="btn">
+        <span class="btn__text">Ask Dala</span>
+        <div class="btn__hover"></div>
+      </a>
+    </div>
+  </header>
 
-    <!-- Asymmetric Two-Column Hero: Headline Left, Constellation Brain Right -->
-    <section class="hero-layout" id="ask">
-      <div class="hero-left">
-        <span class="eyebrow-accent">STOP MANAGING KNOWLEDGE. START USING IT.</span>
-        <h1 class="hero-title">Unlock collective wisdom.</h1>
-        <p style="font-size: 20px; font-weight: 400; color: var(--color-bone-white); margin-bottom: 12px; letter-spacing: -0.02em;">
-          Your workplace has the answer. Just ask Dala for it.
-        </p>
-        <p class="hero-body-text">
-          Plug into your team’s shared brainpower. Ask Dala to instantly find anything or anyone from any workplace system with zero hallucinations. Powered by live Crustdata B2B intelligence, audited by cryptographic SHA-256 source hashing, and observed on Neatlogs.
-        </p>
+  <div class="site-wrap">
 
-        <!-- Query Form Floating on Void -->
-        <div class="query-block">
-          <textarea id="topic-input" class="dala-query-input" placeholder="Ask Dala anything about companies, markets, or research topics..."></textarea>
+    <!-- 1. Landing Hero Section -->
+    <section class="section landing" id="landing">
+      <h1 class="landing__title">
+        <span>Unlock</span>
+        <span>collective</span>
+        <span>wisdom.</span>
+      </h1>
+
+      <div class="landing__eyebrow">Stop managing knowledge. Start using it.</div>
+
+      <p class="landing__body">
+        Plug into your team’s shared brainpower. Ask Dala to instantly find anything or anyone from any workplace system. Focus on doing your best work with context, conviction and clarity.
+      </p>
+
+      <!-- Integrated Autonomous Research Console -->
+      <div class="console-dock" id="search">
+        <div class="search-input-wrap">
+          <textarea id="topic-input" class="dala-input" placeholder="Ask Dala anything about companies, markets, or research topics..."></textarea>
           
-          <div class="quick-chips-row">
-            <span class="quick-chip" onclick="setTopic('Stripe and OpenAI collaboration in financial AI')">Stripe & OpenAI AI Expansion</span>
-            <span class="quick-chip" onclick="setTopic('Anthropic Claude 3.5 Sonnet benchmark and agent architecture')">Claude 3.5 Sonnet Architecture</span>
-            <span class="quick-chip" onclick="setTopic('Databricks and Snowflake Apache Iceberg lakehouse federation')">Databricks & Snowflake Iceberg</span>
+          <div class="chips-row">
+            <span class="chip-item" onclick="setTopic('Stripe and OpenAI collaboration in financial AI')">Stripe & OpenAI AI Expansion</span>
+            <span class="chip-item" onclick="setTopic('Anthropic Claude 3.5 Sonnet benchmark and agent architecture')">Claude 3.5 Sonnet Benchmark</span>
+            <span class="chip-item" onclick="setTopic('Databricks and Snowflake Apache Iceberg lakehouse federation')">Databricks & Snowflake Iceberg</span>
           </div>
 
-          <div class="controls-split">
-            <select id="model-select" class="dala-select">
-              <option value="claude-haiku">Claude 3 Haiku (Sponsored)</option>
-              <option value="claude-sonnet-4.6">Claude 3.5 Sonnet (Sponsored)</option>
-              <option value="nova-pro">AWS Nova Pro (Sponsored)</option>
-            </select>
-            <select id="mode-select" class="dala-select">
-              <option value="auto">Autonomous (--auto)</option>
-              <option value="interactive">Human Review Gate</option>
-            </select>
-          </div>
+          <div class="console-actions-row">
+            <div class="select-group">
+              <select id="model-select" class="styled-select">
+                <option value="claude-haiku">Claude 3 Haiku (Sponsored)</option>
+                <option value="claude-sonnet-4.6">Claude 3.5 Sonnet (Sponsored)</option>
+                <option value="nova-pro">AWS Nova Pro (Sponsored)</option>
+              </select>
+              <select id="mode-select" class="styled-select">
+                <option value="auto">Autonomous Mode</option>
+                <option value="interactive">Human Review Gate</option>
+              </select>
+            </div>
 
-          <!-- The Sole Filled Violet Pill Action Button -->
-          <button id="btn-submit" class="btn-dala-primary" style="width: 100%;" onclick="launchResearch()">
-            <span id="btn-text">Ask Dala</span>
-          </button>
-        </div>
-
-        <!-- Human Review Banner -->
-        <div id="approval-banner" class="hitl-banner">
-          <div class="hitl-title">Review Strategy Before Execution</div>
-          <div id="approval-plan-text" style="font-size: 13px; color: var(--color-bone-white); margin-bottom: 10px;"></div>
-          <div class="hitl-actions">
-            <button class="btn-dala-primary" style="padding: 8px 16px; font-size: 12px;" onclick="submitApproval('approve')">Approve</button>
-            <button class="ghost-nav-link" style="background: transparent; border: 1px solid rgba(255,255,255,0.2); padding: 8px 16px; border-radius: var(--radius-pill);" onclick="submitApproval('revise')">Revise</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right Column: Signature Hero Constellation Visualization (Brain Shape) -->
-      <div class="hero-right-constellation">
-        <canvas id="brain-canvas"></canvas>
-      </div>
-    </section>
-
-    <!-- Execution Telemetry Section -->
-    <section class="section-headline-block">
-      <div class="telemetry-row">
-        <!-- Stepper -->
-        <div>
-          <span class="eyebrow-accent">EXECUTION PIPELINE</span>
-          <div class="stepper-list">
-            <div class="step-unit" id="step-planner">
-              <span class="step-dot"></span>
-              <span>1. Strategic Decomposition & Formulation</span>
-            </div>
-            <div class="step-unit" id="step-search">
-              <span class="step-dot"></span>
-              <span>2. Multi-Query Retrieval (DuckDuckGo Search)</span>
-            </div>
-            <div class="step-unit" id="step-select">
-              <span class="step-dot"></span>
-              <span>3. Relevance Filtering & Quality Scoring</span>
-            </div>
-            <div class="step-unit" id="step-fetch">
-              <span class="step-dot"></span>
-              <span>4. Crustdata Live B2B & Executive Entity Enrichment</span>
-            </div>
-            <div class="step-unit" id="step-synthesize">
-              <span class="step-dot"></span>
-              <span>5. SHA-256 Provenance Hashing & Synthesized Report</span>
-            </div>
-            <div class="step-unit" id="step-neatlogs">
-              <span class="step-dot"></span>
-              <span>6. Neatlogs Distributed Span Telemetry Finalization</span>
-            </div>
+            <button id="btn-submit" class="btn" onclick="launchResearch()">
+              <span id="btn-text" class="btn__text">Ask Dala</span>
+              <div class="btn__hover"></div>
+            </button>
           </div>
         </div>
 
-        <!-- Terminal Stream -->
-        <div>
-          <span class="eyebrow-accent">LIVE TELEMETRY STREAM</span>
-          <div id="terminal-box" class="terminal-stream">
-            <div class="terminal-log">
-              <span class="log-time">[SYS]</span>
-              <span class="log-msg info">Dala Distributed Intelligence ready. Enter objective above.</span>
-            </div>
+        <!-- Human In The Loop Modal -->
+        <div id="approval-banner" class="hitl-modal">
+          <div style="font-weight: 600; color: var(--color-saffron-spark); margin-bottom: 6px;">Strategy Review Gate</div>
+          <div id="approval-plan-text" style="font-size: 13px; color: #fff; margin-bottom: 12px;"></div>
+          <div style="display: flex; gap: 10px;">
+            <button class="btn" style="padding: 6px 16px; font-size: 12px;" onclick="submitApproval('approve')">
+              <span class="btn__text">Approve</span>
+            </button>
+            <button class="btn" style="background: transparent; border: 1px solid rgba(255,255,255,0.2); padding: 6px 16px; font-size: 12px;" onclick="submitApproval('revise')">
+              <span class="btn__text">Revise</span>
+            </button>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- Output & Provenance Section -->
-    <section class="section-headline-block">
-      <div class="tab-nav-row">
-        <button class="tab-ghost-trigger active" onclick="switchTab('report')">Verified Report</button>
-        <button class="tab-ghost-trigger" onclick="switchTab('crustdata')">Crustdata Intelligence</button>
-        <button class="tab-ghost-trigger" onclick="switchTab('provenance')">SHA-256 Provenance Audit</button>
-        <button class="tab-ghost-trigger" onclick="switchTab('history')">Archives (<span id="history-count">0</span>)</button>
-      </div>
+        <!-- Live Research Output Drawer -->
+        <div id="research-drawer" class="research-live-drawer">
+          <!-- Stepper -->
+          <div class="stepper-pipeline">
+            <div class="step-box" id="step-planner"><span class="step-indicator"></span><span>1. Planner</span></div>
+            <div class="step-box" id="step-search"><span class="step-indicator"></span><span>2. Multi-Search</span></div>
+            <div class="step-box" id="step-select"><span class="step-indicator"></span><span>3. Scoring</span></div>
+            <div class="step-box" id="step-fetch"><span class="step-indicator"></span><span>4. Crustdata B2B</span></div>
+            <div class="step-box" id="step-synthesize"><span class="step-indicator"></span><span>5. SHA-256 Digest</span></div>
+            <div class="step-box" id="step-neatlogs"><span class="step-indicator"></span><span>6. Neatlogs Spans</span></div>
+          </div>
 
-      <!-- Tab 1: Rendered Markdown -->
-      <div id="tab-report" class="tab-pane active">
-        <div id="report-view" class="markdown-canvas">
-          <p style="color: var(--color-ash-gray); font-style: italic;">
-            Ask Dala a question above to generate an auditable research report with live Crustdata B2B intelligence, SHA-256 source hashing, and Neatlogs span tracing.
-          </p>
-        </div>
-      </div>
+          <!-- Live Terminal -->
+          <div class="terminal-output" id="terminal-box">
+            <div class="term-msg info">[SYS] Dala Distributed Intelligence ready. Enter objective above.</div>
+          </div>
 
-      <!-- Tab 2: Crustdata Entity Profile -->
-      <div id="tab-crustdata" class="tab-pane">
-        <div style="margin-bottom: var(--spacing-24);">
-          <h3 style="font-size: 24px; font-weight: 400; color: #34d399; margin-bottom: 6px;">
-            Crustdata Live B2B & Executive Intelligence
-          </h3>
-          <p style="font-size: 14px; color: var(--color-silver-mist);">
-            Zero mock records. Extracted entities are cross-referenced with live Crustdata endpoints.
-          </p>
-        </div>
-        <div id="crustdata-details" style="font-family: var(--font-mono); font-size: 13px; line-height: 1.6; color: var(--color-silver-mist);">
-          <p style="color: var(--color-ash-gray);">No live company entities matched yet. Run a research query referencing an enterprise (e.g. Stripe, OpenAI).</p>
-        </div>
-      </div>
+          <!-- Output Tabs -->
+          <div class="tab-triggers">
+            <button class="tab-btn active" onclick="switchTab('report')">Verified Report</button>
+            <button class="tab-btn" onclick="switchTab('crustdata')">Crustdata B2B Profile</button>
+            <button class="tab-btn" onclick="switchTab('provenance')">SHA-256 Ledger</button>
+            <button class="tab-btn" onclick="switchTab('history')">Archives (<span id="history-count">0</span>)</button>
+          </div>
 
-      <!-- Tab 3: Cryptographic Provenance Ledger -->
-      <div id="tab-provenance" class="tab-pane">
-        <div style="margin-bottom: var(--spacing-24);">
-          <h3 style="font-size: 24px; font-weight: 400; color: var(--color-electric-iris); margin-bottom: 6px;">
-            Cryptographic SHA-256 Provenance Ledger
-          </h3>
-          <p style="font-size: 14px; color: var(--color-silver-mist);">
-            Every webpage inspected by Dala is cryptographically hashed at retrieval time to prevent ungrounded model invention.
-          </p>
-        </div>
-        <div id="provenance-table-container">
-          <p style="color: var(--color-ash-gray); font-size: 13px;">Execute a query to inspect cryptographic source checksums.</p>
-        </div>
-      </div>
+          <div id="tab-report" class="tab-content active">
+            <div id="report-view" class="report-prose">
+              <p style="color: var(--color-ash-gray); font-style: italic;">Research reports will stream and render here.</p>
+            </div>
+          </div>
 
-      <!-- Tab 4: Past Reports Archive -->
-      <div id="tab-history" class="tab-pane">
-        <div id="reports-archive" class="archive-stream">
-          <p style="color: var(--color-ash-gray); font-size: 13px;">Loading archives...</p>
+          <div id="tab-crustdata" class="tab-content">
+            <div id="crustdata-details" class="report-prose">
+              <p style="color: var(--color-ash-gray);">No company entities extracted yet.</p>
+            </div>
+          </div>
+
+          <div id="tab-provenance" class="tab-content">
+            <div id="provenance-table-container" class="report-prose">
+              <p style="color: var(--color-ash-gray);">Cryptographic SHA-256 source checksums will populate upon search.</p>
+            </div>
+          </div>
+
+          <div id="tab-history" class="tab-content">
+            <div id="reports-archive" style="display: flex; flex-direction: column; gap: 14px;">
+              <p style="color: var(--color-ash-gray);">Loading past archives...</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Manifesto Section: Two-Column Asymmetric Layout -->
-    <section class="section-headline-block" id="manifesto" style="margin-top: var(--spacing-120);">
-      <div class="two-col-asymmetric">
-        <div>
-          <span class="eyebrow-accent">MANIFESTO</span>
-          <h2 class="section-hero-title">Knowledge is not static storage.<br>It is distributed energy.</h2>
+    <!-- 2. Introduction Section -->
+    <section class="section section--tall introduction">
+      <h2 class="introduction__title">Make decisions with confidence</h2>
+      <p class="introduction__body">
+        Dala’s bleeding-edge AI search tool automates extracting knowledge from across your organisation so that you can take the guesswork out of your work.
+      </p>
+    </section>
+
+    <!-- 3. Manifesto Section -->
+    <section class="section" id="manifesto">
+      <div class="manifesto-intro-grid">
+        <div class="manifesto-dilemma-item">
+          <p class="manifesto-dilemma-p">This is your workplace today. Countless fragments of critical knowledge scattered across hundreds of disparate systems.</p>
+          <p class="manifesto-dilemma-p highlight">30% of your time is spent trying to organise and find the information and expertise you need to do your job.</p>
         </div>
-        <div>
-          <span class="eyebrow-accent" style="color: var(--color-saffron-spark);">THE DALA PARADIGM</span>
-          <p class="section-body-copy">
-            Traditional workplace knowledge bases become digital graveyards the moment they are written. Dala reimagines institutional wisdom not as filed documentation, but as a living, decentralized neural network. Every query traverses live endpoints, verifies provenance with SHA-256 cryptographic hashes, and validates ground truth before a single conclusion is synthesized.
-          </p>
-          <p class="section-body-copy" style="color: var(--color-silver-mist);">
-            Zero hallucinations. Zero stale indexes. Just direct, auditable answers pulled from the collective intelligence of your organization.
-          </p>
+        <div class="manifesto-dilemma-item">
+          <p class="manifesto-dilemma-p">The impossible battle to make sense of this chaos leaves your team feeling overwhelmed and unproductive.</p>
+          <p class="manifesto-dilemma-p highlight">They’re confronted with the anxiety of bothering a busy coworker again, or aimlessly trying to connect the dots with incomplete context.</p>
+        </div>
+        <div class="manifesto-dilemma-item">
+          <p class="manifesto-dilemma-p">Existing solutions are cumbersome and quickly become outdated. Yet another decaying system that requires continuous maintenance.</p>
+          <p class="manifesto-dilemma-p highlight">They fail to understand what you need from the vast amounts of information that your team creates every day.</p>
+        </div>
+      </div>
+
+      <div class="manifesto-spotlight">
+        <h2 class="manifesto-spotlight-title">Spark lightbulb moments</h2>
+        <div class="manifesto-spotlight-body">
+          <p class="manifesto-spotlight-p">Dala is your intelligent, real-time source of truth that eliminates the cultural, financial and operational struggles of splintered tools.</p>
+          <p class="manifesto-spotlight-p">We connect your systems behind the scenes and pull together exactly the knowledge you require into an elegant contextual view.</p>
+          <p class="manifesto-spotlight-p">Just ask Dala for the answer that advances your work, and helps you make better decisions with more confidence.</p>
+        </div>
+      </div>
+
+      <div class="manifesto-spotlight" style="margin-top: 6rem;">
+        <h2 class="manifesto-spotlight-title">Build a better world of work</h2>
+        <div class="manifesto-spotlight-body">
+          <p class="manifesto-spotlight-p">Our mission is to make work more coherent and delightful—reframing productivity from <em>doing more</em> to <a href="https://medium.com/dala-ai/why-we-started-dala-a36fc6cbbdb9" target="_blank" rel="noopener"><em>being better.</em></a></p>
+          <p class="manifesto-spotlight-p">Your happiest and most purposeful moments at work are when you’re in flow, intellectually stimulated, and creating value for customers.</p>
+          <p class="manifesto-spotlight-p">We want to recreate that every time you experience Dala. A tool that is completely integrated with how you think, feel and work.</p>
         </div>
       </div>
     </section>
 
-    <!-- Team Section: Team Vincci001 (neatHack 2026) -->
-    <section class="section-headline-block" id="team" style="margin-top: var(--spacing-120);">
-      <span class="eyebrow-accent">NEATHACK 2026 CREW</span>
-      <h2 class="section-hero-title" style="margin-bottom: var(--spacing-60);">Built by Vincci001.</h2>
+    <!-- 4. Our Team Section -->
+    <section class="section" id="team">
+      <h2 class="team__title">Our team</h2>
 
-      <div class="team-grid">
-        <div class="team-card">
-          <div class="team-avatar-frame">
-            <svg viewBox="0 0 100 100" fill="none" class="team-avatar-svg">
-              <rect width="100" height="100" rx="24" fill="#0c0c14"/>
-              <circle cx="50" cy="38" r="17" fill="#8052ff" fill-opacity="0.25" stroke="#8052ff" stroke-width="2"/>
+      <div class="team-cards-row">
+        <!-- Haroun Hickman -->
+        <div class="team-person-card">
+          <div class="team-avatar-box">
+            <img src="https://dala.craftedbygc.com/images/team/haroun.jpg" alt="Haroun Hickman" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=80'">
+          </div>
+          <div class="team-role">Co Founder &amp; CEO</div>
+          <div class="team-name">Haroun Hickman</div>
+          <div class="team-links">
+            <a href="https://twitter.com/HarounHickman" target="_blank" rel="noopener">Twitter</a>
+            <span>·</span>
+            <a href="https://www.linkedin.com/in/harounhickman" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </div>
+
+        <!-- Poppy Reid -->
+        <div class="team-person-card">
+          <div class="team-avatar-box">
+            <img src="https://dala.craftedbygc.com/images/team/poppy.jpg" alt="Poppy Reid" onerror="this.src='https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500&auto=format&fit=crop&q=80'">
+          </div>
+          <div class="team-role">Product Design Lead</div>
+          <div class="team-name">Poppy Reid</div>
+          <div class="team-links">
+            <a href="https://twitter.com/ReidPoppy" target="_blank" rel="noopener">Twitter</a>
+            <span>·</span>
+            <a href="https://www.linkedin.com/in/poppy-reid-484087121" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </div>
+
+        <!-- Joel Kang -->
+        <div class="team-person-card">
+          <div class="team-avatar-box">
+            <img src="https://dala.craftedbygc.com/images/team/joel.jpg" alt="Joel Kang" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&auto=format&fit=crop&q=80'">
+          </div>
+          <div class="team-role">Co Founder &amp; CTO</div>
+          <div class="team-name">Joel Kang</div>
+          <div class="team-links">
+            <a href="https://twitter.com/_joel_kang_" target="_blank" rel="noopener">Twitter</a>
+            <span>·</span>
+            <a href="https://www.linkedin.com/in/joelkang" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </div>
+
+        <!-- Ibochi Vincent -->
+        <div class="team-person-card">
+          <div class="team-avatar-box">
+            <svg viewBox="0 0 100 100" fill="none" style="width:100%;height:100%;">
+              <rect width="100" height="100" fill="#0f0f18"/>
+              <circle cx="50" cy="38" r="16" fill="#8052ff" fill-opacity="0.3" stroke="#8052ff" stroke-width="2"/>
               <path d="M22 84 C22 66, 34 58, 50 58 C66 58, 78 66, 78 84" fill="#15846e" fill-opacity="0.3" stroke="#15846e" stroke-width="2"/>
             </svg>
           </div>
-          <div class="team-role-label">FOUNDER & TEAM LEAD</div>
+          <div class="team-role">Lead · Vincci001 (neatHack)</div>
           <div class="team-name">Ibochi Vincent</div>
-          <div class="team-bio">Architecture, Graph Agents, Live Crustdata & Neatlogs Observability</div>
-          <div class="team-socials">
-            <a href="https://github.com/ibochivincent-lang" target="_blank" rel="noopener" class="team-social-link">GitHub</a>
-            <span style="color: var(--color-ash-gray);">·</span>
-            <a href="https://entire.io/gh/ibochivincent-lang/proof-of-search-ai" target="_blank" rel="noopener" class="team-social-link">Entire Memory</a>
-            <span style="color: var(--color-ash-gray);">·</span>
-            <a href="https://app.neatlogs.com/projects/72082073-0485-4b6b-abb0-2a1ce5116f2b" target="_blank" rel="noopener" class="team-social-link">Neatlogs Spans</a>
-          </div>
-        </div>
-
-        <div class="team-card">
-          <div class="team-avatar-frame">
-            <svg viewBox="0 0 100 100" fill="none" class="team-avatar-svg">
-              <rect width="100" height="100" rx="24" fill="#0c0c14"/>
-              <polygon points="50,22 80,75 20,75" stroke="#ffb829" stroke-width="2" fill="rgba(255,184,41,0.15)"/>
-              <circle cx="50" cy="56" r="7" fill="#8052ff"/>
-            </svg>
-          </div>
-          <div class="team-role-label">AI REASONING CORE</div>
-          <div class="team-name">Dala Autonomous Engine</div>
-          <div class="team-bio">LangGraph State Machine, Multi-hop Planning & SHA-256 Provenance Ledger</div>
-          <div class="team-socials">
-            <span class="team-social-link" style="color: var(--color-saffron-spark);">Claude 3.5 Sonnet / AWS Nova</span>
+          <div class="team-links">
+            <a href="https://github.com/ibochivincent-lang" target="_blank" rel="noopener">GitHub</a>
+            <span>·</span>
+            <a href="https://entire.io/gh/ibochivincent-lang/proof-of-search-ai" target="_blank" rel="noopener">Entire</a>
           </div>
         </div>
       </div>
 
-      <!-- Carousel Navigation Dots -->
-      <div class="carousel-dots-row">
-        <span class="carousel-dot active"></span>
-        <span class="carousel-dot"></span>
-        <span class="carousel-dot"></span>
+      <!-- Build with us -->
+      <div class="team-hire-block">
+        <h3 class="team-hire-title">Build with us.</h3>
+        <p class="team-hire-text">
+          We are actively hiring intentional, empathetic and curious people who thrive on creating delightful experiences. If you'd like to be a part of the journey, email <a href="mailto:careers@dala.ai">careers@dala.ai</a> with your CV or portfolio, and a thoughtful note.
+        </p>
       </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-      <div class="footer-row">
-        <div>
-          <strong>Dala</strong> · Distributed Intelligence & Proof of Search · Team <strong>Vincci001</strong> (Lead: Ibochi Vincent)
+    <!-- 5. Our Investors Section -->
+    <section class="section investors-wrap" id="investors">
+      <h2 class="investors-head-title">Our investors</h2>
+      <p class="investors-sub">
+        We are supported by some of the world's most pioneering operators and progressive funds to fuel our growth.
+      </p>
+
+      <div class="investors-grid">
+        <div class="investor-item">
+          <div class="investor-glyph">
+            <svg viewBox="0 0 40 40" width="36" height="36" fill="none"><polygon points="20,4 36,34 4,34" stroke="#ffb829" stroke-width="2" fill="rgba(255,184,41,0.2)"/></svg>
+          </div>
+          <div>
+            <div class="investor-name">Seedcamp</div>
+          </div>
         </div>
-        <div>
-          Observability by <a href="https://neatlogs.com" target="_blank" style="color: var(--color-electric-iris);">Neatlogs</a> · Memory by <a href="https://entire.io" target="_blank" style="color: var(--color-saffron-spark);">Entire</a> · B2B Data by <a href="https://crustdata.com" target="_blank" style="color: #34d399;">Crustdata</a>
+
+        <div class="investor-item">
+          <div class="investor-glyph">
+            <svg viewBox="0 0 40 40" width="36" height="36" fill="none"><polygon points="20,4 36,34 4,34" stroke="#15846e" stroke-width="2" fill="rgba(21,132,110,0.2)"/></svg>
+          </div>
+          <div>
+            <div class="investor-name">James Meekings</div>
+            <div class="investor-title">Co-founder of Funding Circle</div>
+          </div>
         </div>
+
+        <div class="investor-item">
+          <div class="investor-glyph">
+            <svg viewBox="0 0 40 40" width="36" height="36" fill="none"><polygon points="20,4 36,34 4,34" stroke="#ffb829" stroke-width="2" fill="rgba(255,184,41,0.2)"/></svg>
+          </div>
+          <div>
+            <div class="investor-name">Evening Fund</div>
+          </div>
+        </div>
+
+        <div class="investor-item">
+          <div class="investor-glyph">
+            <svg viewBox="0 0 40 40" width="36" height="36" fill="none"><polygon points="20,4 36,34 4,34" stroke="#8052ff" stroke-width="2" fill="rgba(128,82,255,0.2)"/></svg>
+          </div>
+          <div>
+            <div class="investor-name">Valia Ventures</div>
+          </div>
+        </div>
+
+        <div class="investor-item">
+          <div class="investor-glyph">
+            <svg viewBox="0 0 40 40" width="36" height="36" fill="none"><polygon points="20,4 36,34 4,34" stroke="#8052ff" stroke-width="2" fill="rgba(128,82,255,0.2)"/></svg>
+          </div>
+          <div>
+            <div class="investor-name">Roman Schumacher</div>
+            <div class="investor-title">Co-founder &amp; CPO at Personio</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Footer Section -->
+    <footer class="footer">
+      <h2 class="footer__head-title">Your workplace has the answer. Ask Dala to find it.</h2>
+      
+      <div>
+        <a href="#search" class="btn">
+          <span class="btn__text">Request Access</span>
+          <div class="btn__hover"></div>
+        </a>
+      </div>
+
+      <div class="footer__bar">
+        <div>&copy; 2026 Dala Technologies Limited. All rights reserved.</div>
+
+        <ul class="footer__nav">
+          <li><a href="#manifesto">Manifesto</a></li>
+          <li><a href="#team">Team</a></li>
+          <li><a href="https://medium.com/dala-ai" target="_blank" rel="noopener">Blog</a></li>
+          <li><a href="https://app.neatlogs.com/projects/72082073-0485-4b6b-abb0-2a1ce5116f2b" target="_blank" rel="noopener">Neatlogs</a></li>
+          <li><a href="https://github.com/ibochivincent-lang/proof-of-search-ai" target="_blank" rel="noopener">GitHub</a></li>
+        </ul>
       </div>
     </footer>
 
   </div>
 
-  <!-- Brain Constellation Visualization (Signature Gesture: Thousands of Multicolored Tiny Triangles) -->
+  <!-- Full-Page 3D Constellation Brain Canvas Script -->
   <script>
-    (function initBrainConstellation() {
-      const canvas = document.getElementById('brain-canvas');
+    (function initFullPageCanvas() {
+      const canvas = document.getElementById('canvas');
       const ctx = canvas.getContext('2d');
       let width, height;
 
       function resize() {
-        width = canvas.width = canvas.parentElement.clientWidth;
-        height = canvas.height = canvas.parentElement.clientHeight;
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
       }
       window.addEventListener('resize', resize);
       resize();
 
-      // Dala Palette
+      // Dala Color Palette
       const PALETTE = ['#8052ff', '#ffb829', '#15846e', '#c084fc', '#38bdf8', '#ffffff'];
-      const PARTICLES = [];
-      const COUNT = 320;
+      const BRAIN_PARTICLES = [];
+      const BRAIN_COUNT = 380;
+      const AMBIENT_PARTICLES = [];
+      const AMBIENT_COUNT = 60;
 
-      // Brain parametric coordinates
-      class BrainParticle {
+      // Brain particles class
+      class BrainNode {
         constructor() {
-          this.init();
-        }
-
-        init() {
-          // Brain parametric shape: two hemispheres
-          const hemisphere = Math.random() > 0.5 ? 1 : -1;
+          const hemi = Math.random() > 0.5 ? 1 : -1;
           const u = Math.random() * Math.PI;
           const v = Math.random() * Math.PI * 2;
           
-          // Ellipsoidal hemisphere with indent
-          const rBase = 120 + Math.random() * 50;
-          const xOffset = hemisphere * (40 + Math.random() * 50);
-          const yOffset = (Math.cos(u) * 90) + (Math.random() - 0.5) * 40;
-          const z = Math.sin(u) * Math.sin(v) * rBase;
+          const rBase = 150 + Math.random() * 60;
+          const xOffset = hemi * (55 + Math.random() * 50);
+          const yOffset = (Math.cos(u) * 110) + (Math.random() - 0.5) * 50;
 
-          this.baseX = xOffset + Math.sin(u) * Math.cos(v) * (rBase * 0.7);
-          this.baseY = yOffset;
-          this.x = this.baseX;
-          this.y = this.baseY;
-          this.vx = (Math.random() - 0.5) * 0.3;
-          this.vy = (Math.random() - 0.5) * 0.3;
-          this.size = Math.random() * 2.5 + 1.5;
-          this.rotation = Math.random() * Math.PI * 2;
-          this.rotSpeed = (Math.random() - 0.5) * 0.02;
+          this.origX = xOffset + Math.sin(u) * Math.cos(v) * (rBase * 0.75);
+          this.origY = yOffset;
+          this.origZ = Math.sin(u) * Math.sin(v) * (rBase * 0.7);
+
+          this.size = Math.random() * 2.8 + 1.6;
           this.color = PALETTE[Math.floor(Math.random() * PALETTE.length)];
-          this.opacity = Math.random() * 0.65 + 0.3;
+          this.opacity = Math.random() * 0.7 + 0.3;
+          this.rotSpeed = (Math.random() - 0.5) * 0.008;
+          this.angle = Math.random() * Math.PI * 2;
         }
 
-        update(time) {
-          // Gentle breathing pulsation
-          const pulse = Math.sin(time * 0.002 + this.baseX * 0.01) * 6;
-          this.x = this.baseX + this.vx * 10 + pulse;
-          this.y = this.baseY + this.vy * 10 + pulse * 0.5;
-          this.rotation += this.rotSpeed;
-        }
+        project(yaw, pitch, cx, cy) {
+          // 3D rotation
+          const cosY = Math.cos(yaw), sinY = Math.sin(yaw);
+          const cosP = Math.cos(pitch), sinP = Math.sin(pitch);
 
-        draw(cx, cy) {
-          ctx.save();
-          ctx.translate(cx + this.x, cy + this.y);
-          ctx.rotate(this.rotation);
-          ctx.globalAlpha = this.opacity;
-          ctx.strokeStyle = this.color;
-          ctx.lineWidth = 1;
+          // Rotate around Y
+          let x1 = this.origX * cosY - this.origZ * sinY;
+          let z1 = this.origX * sinY + this.origZ * cosY;
 
-          // Tiny outlined triangular glyph (1-2px)
-          const s = this.size;
-          ctx.beginPath();
-          ctx.moveTo(0, -s);
-          ctx.lineTo(s * 0.866, s * 0.5);
-          ctx.lineTo(-s * 0.866, s * 0.5);
-          ctx.closePath();
-          ctx.stroke();
+          // Rotate around X
+          let y1 = this.origY * cosP - z1 * sinP;
+          let z2 = this.origY * sinP + z1 * cosP;
 
-          ctx.restore();
+          // Perspective projection
+          const fov = 400;
+          const scale = fov / (fov + z2 + 200);
+
+          return {
+            x: cx + x1 * scale,
+            y: cy + y1 * scale,
+            scale: scale,
+            alpha: this.opacity * Math.max(0.2, (scale - 0.4) * 1.5)
+          };
         }
       }
 
-      for (let i = 0; i < COUNT; i++) {
-        PARTICLES.push(new BrainParticle());
+      for (let i = 0; i < BRAIN_COUNT; i++) {
+        BRAIN_PARTICLES.push(new BrainNode());
       }
 
-      function animate(time) {
-        ctx.clearRect(0, 0, width, height);
-        const cx = width / 2;
-        const cy = height / 2;
-
-        // Faint neural connection lines between nearby points
-        for (let i = 0; i < PARTICLES.length; i++) {
-          for (let j = i + 1; j < PARTICLES.length; j++) {
-            const dx = PARTICLES[i].x - PARTICLES[j].x;
-            const dy = PARTICLES[i].y - PARTICLES[j].y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 45) {
-              ctx.beginPath();
-              ctx.moveTo(cx + PARTICLES[i].x, cy + PARTICLES[i].y);
-              ctx.lineTo(cx + PARTICLES[j].x, cy + PARTICLES[j].y);
-              ctx.strokeStyle = '#8052ff';
-              ctx.globalAlpha = (1 - dist / 45) * 0.15;
-              ctx.stroke();
-            }
-          }
-        }
-
-        for (let p of PARTICLES) {
-          p.update(time);
-          p.draw(cx, cy);
-        }
-
-        requestAnimationFrame(animate);
-      }
-      requestAnimationFrame(animate);
-    })();
-
-    /* Ambient Scattered Triangles across page background */
-    (function initAmbient() {
-      const canvas = document.getElementById('ambient-particles');
-      const ctx = canvas.getContext('2d');
-      let w, h;
-      function resize() {
-        w = canvas.width = window.innerWidth;
-        h = canvas.height = window.innerHeight;
-      }
-      window.addEventListener('resize', resize);
-      resize();
-
-      const AMBIENT = [];
-      const PALETTE = ['#8052ff', '#ffb829', '#15846e', '#c084fc', '#38bdf8'];
-      for (let i = 0; i < 40; i++) {
-        AMBIENT.push({
-          x: Math.random() * w,
-          y: Math.random() * h,
-          size: Math.random() * 2 + 1,
+      // Ambient background triangles
+      for (let i = 0; i < AMBIENT_COUNT; i++) {
+        AMBIENT_PARTICLES.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.2,
+          vy: (Math.random() - 0.5) * 0.2,
+          size: Math.random() * 2.5 + 1.2,
           rot: Math.random() * Math.PI * 2,
+          rotSpeed: (Math.random() - 0.5) * 0.01,
           color: PALETTE[Math.floor(Math.random() * PALETTE.length)],
           alpha: Math.random() * 0.25 + 0.08
         });
       }
 
-      function render() {
-        ctx.clearRect(0, 0, w, h);
-        for (let a of AMBIENT) {
+      let yaw = 0;
+      let pitch = 0.2;
+
+      function render(time) {
+        ctx.clearRect(0, 0, width, height);
+
+        // Ambient particles drift
+        for (let a of AMBIENT_PARTICLES) {
+          a.x += a.vx;
+          a.y += a.vy;
+          a.rot += a.rotSpeed;
+          if (a.x < 0) a.x = width;
+          if (a.x > width) a.x = 0;
+          if (a.y < 0) a.y = height;
+          if (a.y > height) a.y = 0;
+
           ctx.save();
           ctx.translate(a.x, a.y);
           ctx.rotate(a.rot);
@@ -1229,32 +1303,86 @@
           ctx.stroke();
           ctx.restore();
         }
+
+        // Brain center position (floating towards the center/right on desktop)
+        const cx = width > 1024 ? width * 0.65 : width * 0.5;
+        const cy = height * 0.48;
+
+        yaw = time * 0.0003;
+        pitch = 0.2 + Math.sin(time * 0.0008) * 0.08;
+
+        // Project all brain nodes
+        const projected = BRAIN_PARTICLES.map(p => ({
+          proj: p.project(yaw, pitch, cx, cy),
+          node: p
+        }));
+
+        // Draw neural synaptic connections
+        for (let i = 0; i < projected.length; i++) {
+          for (let j = i + 1; j < projected.length; j++) {
+            const p1 = projected[i].proj;
+            const p2 = projected[j].proj;
+            const dx = p1.x - p2.x;
+            const dy = p1.y - p2.y;
+            const d = Math.sqrt(dx * dx + dy * dy);
+            if (d < 50) {
+              ctx.beginPath();
+              ctx.moveTo(p1.x, p1.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.strokeStyle = '#8052ff';
+              ctx.globalAlpha = (1 - d / 50) * 0.12 * Math.min(p1.alpha, p2.alpha);
+              ctx.lineWidth = 1;
+              ctx.stroke();
+            }
+          }
+        }
+
+        // Draw brain nodes as tiny outlined triangles
+        for (let item of projected) {
+          const { x, y, scale, alpha } = item.proj;
+          const s = item.node.size * scale;
+          
+          ctx.save();
+          ctx.translate(x, y);
+          ctx.rotate(time * 0.001);
+          ctx.globalAlpha = Math.max(0.1, alpha);
+          ctx.strokeStyle = item.node.color;
+          ctx.lineWidth = 1.2;
+
+          ctx.beginPath();
+          ctx.moveTo(0, -s);
+          ctx.lineTo(s * 0.866, s * 0.5);
+          ctx.lineTo(-s * 0.866, s * 0.5);
+          ctx.closePath();
+          ctx.stroke();
+          ctx.restore();
+        }
+
+        requestAnimationFrame(render);
       }
-      render();
+
+      requestAnimationFrame(render);
     })();
   </script>
 
-  <!-- Application Logic & SSE Streaming Controller -->
+  <!-- Autonomous Research Engine Execution Script -->
   <script>
     let currentRunId = null;
     let eventSource = null;
 
     function setTopic(text) {
       document.getElementById('topic-input').value = text;
+      document.getElementById('topic-input').focus();
     }
 
     function logTerminal(message, type = 'info') {
       const box = document.getElementById('terminal-box');
       const entry = document.createElement('div');
-      entry.className = 'terminal-log';
+      entry.className = `term-msg ${type}`;
       const now = new Date().toTimeString().split(' ')[0];
-      entry.innerHTML = `<span class="log-time">[${now}]</span><span class="log-msg ${type}">${escapeHtml(message)}</span>`;
+      entry.textContent = `[${now}] ${message}`;
       box.appendChild(entry);
       box.scrollTop = box.scrollHeight;
-    }
-
-    function escapeHtml(str) {
-      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
 
     function setStepState(stepId, state) {
@@ -1269,10 +1397,10 @@
     }
 
     function switchTab(tabName) {
-      document.querySelectorAll('.tab-ghost-trigger').forEach(btn => btn.classList.remove('active'));
-      document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(p => p.classList.remove('active'));
 
-      const activeBtn = Array.from(document.querySelectorAll('.tab-ghost-trigger')).find(b => b.textContent.toLowerCase().includes(tabName.toLowerCase()));
+      const activeBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.textContent.toLowerCase().includes(tabName.toLowerCase()));
       if (activeBtn) activeBtn.classList.add('active');
 
       const targetPane = document.getElementById('tab-' + tabName);
@@ -1292,21 +1420,16 @@
         }
 
         container.innerHTML = reports.map(r => `
-          <div class="archive-entry" onclick="viewPastReport('${r.filename}')">
+          <div style="border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 10px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="viewPastReport('${r.filename}')">
             <div>
-              <div class="archive-title">${escapeHtml(r.title)}</div>
-              <div class="archive-meta">
-                <span>📅 ${r.modified.split('T')[0]}</span>
-                <span>📝 ${r.word_count} words</span>
-                ${r.has_crustdata ? '<span style="color: #34d399;">✓ Crustdata</span>' : ''}
-                ${r.has_sha256 ? '<span style="color: var(--color-electric-iris);">✓ SHA-256</span>' : ''}
-              </div>
+              <div style="font-size: 16px; color: #fff;">${r.title}</div>
+              <div style="font-size: 12px; color: var(--color-ash-gray); margin-top: 4px;">📅 ${r.modified.split('T')[0]} · 📝 ${r.word_count} words</div>
             </div>
-            <span style="font-size: 13px; color: var(--color-electric-iris);">Read →</span>
+            <span style="font-size: 12px; color: var(--color-electric-iris);">Read &rarr;</span>
           </div>
         `).join('');
 
-        if (reports.length > 0 && document.getElementById('report-view').innerHTML.includes('Ask Dala a question above')) {
+        if (reports.length > 0 && document.getElementById('report-view').innerHTML.includes('will stream and render here')) {
           viewPastReport(reports[0].filename);
         }
       } catch (e) {
@@ -1319,6 +1442,7 @@
         const res = await fetch(`/api/reports/${filename}`);
         const data = await res.json();
         renderReport(data.content, data.provenance_table);
+        document.getElementById('research-drawer').classList.add('active');
         switchTab('report');
       } catch (e) {
         console.error('Failed to load report', e);
@@ -1329,7 +1453,7 @@
       const view = document.getElementById('report-view');
       view.innerHTML = marked.parse(markdown);
 
-      // Render Crustdata Intelligence
+      // Crustdata
       const crustdataMatch = markdown.match(/### Crustdata Verified B2B Intelligence\s+([\s\S]*?)(?=###|\n\n\n|$)/);
       const crustContainer = document.getElementById('crustdata-details');
       if (crustdataMatch) {
@@ -1338,7 +1462,7 @@
         crustContainer.innerHTML = '<p style="color: var(--color-ash-gray);">No verified company entities matched in this query.</p>';
       }
 
-      // Render Cryptographic Provenance Ledger
+      // Provenance
       const provContainer = document.getElementById('provenance-table-container');
       const tableMatch = markdown.match(/\| Source #[\s\S]*?(?=\n\n|$)/);
       if (tableMatch) {
@@ -1346,17 +1470,15 @@
       } else if (provenanceTable && provenanceTable.length) {
         provContainer.innerHTML = `
           <table>
-            <thead>
-              <tr><th>#</th><th>Source Title</th><th>Status</th><th>Engine</th><th>SHA-256 Digest</th></tr>
-            </thead>
+            <thead><tr><th>#</th><th>Source Title</th><th>Status</th><th>Engine</th><th>SHA-256 Digest</th></tr></thead>
             <tbody>
               ${provenanceTable.map(p => `
                 <tr>
                   <td>${p.index}</td>
-                  <td>${escapeHtml(p.title)}</td>
-                  <td><span class="live-flag">${p.verified ? 'LIVE' : 'VERIFIED'}</span></td>
-                  <td>${escapeHtml(p.engine)}</td>
-                  <td><code class="sha-hash">${p.sha256}</code></td>
+                  <td>${p.title}</td>
+                  <td><span style="color:#34d399;font-weight:600;">${p.verified ? 'LIVE' : 'VERIFIED'}</span></td>
+                  <td>${p.engine}</td>
+                  <td><code style="font-size:11px;color:var(--color-electric-iris);">${p.sha256}</code></td>
                 </tr>
               `).join('')}
             </tbody>
@@ -1379,6 +1501,9 @@
       const btn = document.getElementById('btn-submit');
       btn.disabled = true;
       document.getElementById('btn-text').textContent = 'Synthesizing with Dala...';
+      
+      // Open output drawer
+      document.getElementById('research-drawer').classList.add('active');
       resetStepper();
 
       logTerminal(`Query received: "${topic}" (Engine: ${model}, Auto: ${isAuto})`, 'stage');
