@@ -31,14 +31,17 @@ class SourceSelection(BaseModel):
 
 
 class Source(BaseModel):
-    """A fetched and text-extracted web page or live intelligence record."""
+    """A fetched and text-extracted web page, B2B intelligence record, or GitHub issue."""
 
     title: str
     url: str
     text: str
     sha256: str = ""
     verified: bool = True
-    source_type: str = "web"
+    source_type: str = "web"  # "web" | "crustdata_live" | "github_issue"
+    evidence_quote: str = ""  # Direct extracted quote proving the citation
+    status_code: int = 200
+    domain: str = ""
 
 
 class ResearchState(TypedDict, total=False):
@@ -49,3 +52,6 @@ class ResearchState(TypedDict, total=False):
     sources: list[Source]
     search_round: int
     report: str
+    recoveries: list[dict]  # Tool recovery events for hackathon failure handling
+    disagreements: list[dict]  # Detected and resolved source contradictions
+

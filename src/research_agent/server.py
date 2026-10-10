@@ -73,27 +73,97 @@ def _slugify(text: str) -> str:
 
 
 def _extract_provenance_from_report(report_md: str) -> List[Dict[str, str]]:
-    """Parse the cryptographic SHA-256 provenance table from report markdown."""
+    """Parse the verifiable Proof of Search audit table from report markdown."""
     items = []
     lines = report_md.splitlines()
     in_table = False
     for line in lines:
-        if "| Source #" in line or "| #" in line:
+        if "| Citation" in line or "| Source #" in line or "| #" in line:
             in_table = True
             continue
         if in_table and line.startswith("|") and "---" not in line:
             parts = [p.strip() for p in line.split("|")[1:-1]]
             if len(parts) >= 5:
-                items.append({
-                    "index": parts[0],
-                    "title": parts[1],
-                    "verified": "LIVE" in parts[2] or "YES" in parts[2] or "OK" in parts[2] or "✓" in parts[2],
-                    "engine": parts[3],
-                    "sha256": parts[4],
-                })
+                # 6-column format: [Citation, Origin, Engine, Checksum, Status, Quote]
+                if len(parts) >= 6:
+                    items.append({
+                        "index": parts[0],
+                        "title": parts[0],
+                        "origin": parts[1],
+                        "engine": parts[2],
+                        "sha256": parts[3],
+                        "verified": "Verified" in parts[4] or "LIVE" in parts[4] or "OK" in parts[4],
+                        "quote": parts[5],
+                    })
+                else:
+                    items.append({
+                        "index": parts[0],
+                        "title": parts[1] if len(parts) > 1 else parts[0],
+                        "origin": parts[1] if len(parts) > 1 else "",
+                        "engine": parts[2] if len(parts) > 2 else "Web",
+                        "sha256": parts[3] if len(parts) > 3 else "",
+                        "verified": "LIVE" in parts[2] or "Verified" in parts[-1] or "OK" in parts[-1],
+                        "quote": "",
+                    })
         elif in_table and not line.startswith("|"):
             in_table = False
     return items
+
+
+
+@app.get("/api/stems")
+def get_hackathon_stems() -> List[Dict[str, Any]]:
+    """Return the official neatHack benchmark tasks and stems."""
+    return [
+        {
+            "id": "research_sources",
+            "category": "Answer a research question with sources",
+            "title": "Stripe vs Adyen Enterprise Market Share",
+            "prompt": "Compare Stripe vs Adyen enterprise market share, processing fees, and resolve conflicting reports on growth metrics",
+            "focus_areas": ["Planning", "Tool Use", "Verification", "Disagreement Resolution"],
+            "expected_tools": ["DuckDuckGo Web Search", "Crustdata Live B2B API", "Page Extraction"],
+        },
+        {
+            "id": "github_issue",
+            "category": "Investigate a GitHub issue & codebase",
+            "title": "LangGraph Memory Leak Investigation",
+            "prompt": "Investigate GitHub issue for memory leaks in LangGraph checkpointing, analyze open discussions, and identify commits",
+            "focus_areas": ["Planning", "Tool Use (GitHub Search)", "Context Extraction", "Execution"],
+            "expected_tools": ["GitHub Issues API", "DuckDuckGo Web Search", "Page Extraction"],
+        },
+        {
+            "id": "multi_agent_consensus",
+            "category": "Several agents working together",
+            "title": "OpenAI vs Anthropic Valuation & Revenue",
+            "prompt": "Synthesize conflicting valuation, annualized revenue, and compute commitments for OpenAI and Anthropic across primary sources",
+            "focus_areas": ["Multi-Agent Coordination", "Contradiction Resolution", "Deterministic Grounding"],
+            "expected_tools": ["DuckDuckGo Web Search", "Crustdata Live B2B API", "Citation Verification"],
+        },
+        {
+            "id": "tool_recovery",
+            "category": "Autonomous tool failure handling & recovery",
+            "title": "Dead Link Fault Tolerance & Query Broadening",
+            "prompt": "Execute deep research with simulated 404 links to demonstrate autonomous tool recovery, query expansion, and fallback search",
+            "focus_areas": ["Tool Recovery", "Retries & Fault Tolerance", "State Retention"],
+            "expected_tools": ["DuckDuckGo Web Search", "Page Extraction (Fallback)", "Query Broadening"],
+        },
+    ]
+
+
+@app.get("/api/cfo")
+def get_cfo_model() -> Dict[str, Any]:
+    """Return unit economics and financial sustainability metrics modeled in cfo.ai."""
+    return {
+        "cogs_per_query": 0.056,
+        "pricing_tiers": {
+            "pay_as_you_go": {"price": 2.50, "margin": 97.7},
+            "pro_analyst": {"price": 49.00, "queries": 100, "margin": 88.5},
+            "enterprise": {"price": 499.00, "queries": 2000, "margin": 77.5},
+        },
+        "break_even_days": 7,
+        "month_12_mrr": "$98,720",
+        "gross_margin": "97.7%",
+    }
 
 
 @app.get("/api/status")
@@ -267,12 +337,15 @@ def _run_research_sync(run_id: str, topic: str, auto: bool, model: Optional[str]
         report = result.get("report", "")
         sources = result.get("sources", [])
         
+        recoveries = result.get("recoveries", [])
         emit({
             "type": "stage",
             "step": "complete",
             "message": f"Research complete. Analyzed {len(sources)} verified sources.",
             "report": report,
             "sources_count": len(sources),
+            "recoveries": recoveries,
+            "neatlogs_url": "https://app.neatlogs.com/projects/72082073-0485-4b6b-abb0-2a1ce5116f2b",
         })
 
         # Save to disk
