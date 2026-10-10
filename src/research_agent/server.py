@@ -497,6 +497,14 @@ if WEB_DIR.exists():
         app.mount("/models", StaticFiles(directory=str(WEB_DIR / "models")), name="models")
 
 
+@app.get("/terminal")
+def serve_terminal():
+    terminal_file = WEB_DIR / "terminal.html"
+    if terminal_file.exists():
+        return FileResponse(terminal_file)
+    return FileResponse(WEB_DIR / "index.html")
+
+
 @app.get("/{full_path:path}")
 def catch_all(full_path: str):
     """Serve physical static files if they exist, else SPA fallback."""
@@ -513,16 +521,17 @@ def main():
     import argparse
     import uvicorn
 
-    parser = argparse.ArgumentParser(description="Proof of Search AI Web Console")
+    parser = argparse.ArgumentParser(description="Jnana Agent Web Console")
     parser.add_argument("--port", type=int, default=8000, help="Port to listen on")
     parser.add_argument("--host", default="0.0.0.0", help="Host to bind to")
     args = parser.parse_args()
 
     print(f"\n=======================================================")
-    print(f"  Dala (Proof of Search AI) — Web Console")
-    print(f"  'Your workplace has the answer. Just ask Dala for it.'")
+    print(f"  Jnana Agent — Autonomous Software Engineering Intelligence")
+    print(f"  'Your codebase has the answer. Ask Jnana Agent to solve it.'")
     print(f"  neatHack 2026 Team: Vincci001 (Lead: Ibochi Vincent)")
     print(f"  Local URL: http://localhost:{args.port}")
+    print(f"  Terminal:  http://localhost:{args.port}/terminal")
     print(f"=======================================================\n")
     uvicorn.run("research_agent.server:app", host=args.host, port=args.port, reload=False)
 

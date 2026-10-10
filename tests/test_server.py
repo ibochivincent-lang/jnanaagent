@@ -34,3 +34,11 @@ def test_spa_catch_all():
     assert response.status_code == 200
     assert "Jnana Agent" in response.text
     assert "Access Terminal" in response.text
+
+
+def test_terminal_serving():
+    response = client.get("/terminal")
+    assert response.status_code == 200
+    assert "Jnana Agent" in response.text
+    assert "Autonomous Codebase Reasoning" in response.text
+    assert "Code Fix &" in response.text
