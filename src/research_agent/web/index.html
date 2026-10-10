@@ -635,6 +635,143 @@
       gap: 16px;
     }
 
+    /* Two-Column Asymmetric Section & Manifesto */
+    .two-col-asymmetric {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: var(--spacing-60);
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .two-col-asymmetric {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-36);
+      }
+    }
+
+    .section-hero-title {
+      font-size: var(--text-heading-lg);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -3.12px;
+      color: var(--color-bone-white);
+      margin-top: var(--spacing-12);
+      margin-bottom: var(--spacing-24);
+    }
+
+    @media (max-width: 900px) {
+      .section-hero-title {
+        font-size: var(--text-heading-sm);
+        letter-spacing: -1.68px;
+      }
+    }
+
+    .section-body-copy {
+      font-size: var(--text-body);
+      font-weight: var(--font-weight-extralight);
+      line-height: var(--leading-body);
+      color: var(--color-bone-white);
+      margin-bottom: var(--spacing-18);
+    }
+
+    /* Team Member Cards (Floating on black void with whitespace only) */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 340px));
+      gap: var(--spacing-60);
+      margin-top: var(--spacing-36);
+    }
+
+    .team-card {
+      display: flex;
+      flex-direction: column;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+    }
+
+    .team-avatar-frame {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: var(--radius-cards);
+      overflow: hidden;
+      margin-bottom: var(--spacing-18);
+      background: #09090e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .team-avatar-svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .team-role-label {
+      font-size: 12px;
+      font-weight: 400;
+      text-transform: uppercase;
+      color: var(--color-electric-iris);
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+
+    .team-name {
+      font-size: var(--text-heading-xs);
+      font-weight: 400;
+      color: var(--color-bone-white);
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .team-bio {
+      font-size: 14px;
+      font-weight: 200;
+      color: var(--color-silver-mist);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .team-socials {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    .team-social-link {
+      color: var(--color-ash-gray);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .team-social-link:hover {
+      color: var(--color-bone-white);
+    }
+
+    /* Carousel Navigation Dots */
+    .carousel-dots-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-top: 30px;
+    }
+
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .carousel-dot.active {
+      background: var(--color-electric-iris);
+    }
+
     /* Footer: Minimal, floating on black void */
     footer {
       border-top: 1px solid rgba(255, 255, 255, 0.06);
@@ -678,6 +815,8 @@
         <!-- Ghost Nav Links -->
         <nav class="nav-center-links">
           <a class="ghost-nav-link" href="#ask">Ask</a>
+          <a class="ghost-nav-link" href="#manifesto">Manifesto</a>
+          <a class="ghost-nav-link" href="#team">Team</a>
           <a class="ghost-nav-link" href="https://app.neatlogs.com/projects/72082073-0485-4b6b-abb0-2a1ce5116f2b" target="_blank" rel="noopener">Neatlogs</a>
           <a class="ghost-nav-link" href="https://entire.io/gh/ibochivincent-lang/proof-of-search-ai" target="_blank" rel="noopener">Entire</a>
           <a class="ghost-nav-link" href="https://github.com/ibochivincent-lang/proof-of-search-ai" target="_blank" rel="noopener">GitHub</a>
@@ -845,6 +984,76 @@
         <div id="reports-archive" class="archive-stream">
           <p style="color: var(--color-ash-gray); font-size: 13px;">Loading archives...</p>
         </div>
+      </div>
+    </section>
+
+    <!-- Manifesto Section: Two-Column Asymmetric Layout -->
+    <section class="section-headline-block" id="manifesto" style="margin-top: var(--spacing-120);">
+      <div class="two-col-asymmetric">
+        <div>
+          <span class="eyebrow-accent">MANIFESTO</span>
+          <h2 class="section-hero-title">Knowledge is not static storage.<br>It is distributed energy.</h2>
+        </div>
+        <div>
+          <span class="eyebrow-accent" style="color: var(--color-saffron-spark);">THE DALA PARADIGM</span>
+          <p class="section-body-copy">
+            Traditional workplace knowledge bases become digital graveyards the moment they are written. Dala reimagines institutional wisdom not as filed documentation, but as a living, decentralized neural network. Every query traverses live endpoints, verifies provenance with SHA-256 cryptographic hashes, and validates ground truth before a single conclusion is synthesized.
+          </p>
+          <p class="section-body-copy" style="color: var(--color-silver-mist);">
+            Zero hallucinations. Zero stale indexes. Just direct, auditable answers pulled from the collective intelligence of your organization.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team Section: Team Vincci001 (neatHack 2026) -->
+    <section class="section-headline-block" id="team" style="margin-top: var(--spacing-120);">
+      <span class="eyebrow-accent">NEATHACK 2026 CREW</span>
+      <h2 class="section-hero-title" style="margin-bottom: var(--spacing-60);">Built by Vincci001.</h2>
+
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar-frame">
+            <svg viewBox="0 0 100 100" fill="none" class="team-avatar-svg">
+              <rect width="100" height="100" rx="24" fill="#0c0c14"/>
+              <circle cx="50" cy="38" r="17" fill="#8052ff" fill-opacity="0.25" stroke="#8052ff" stroke-width="2"/>
+              <path d="M22 84 C22 66, 34 58, 50 58 C66 58, 78 66, 78 84" fill="#15846e" fill-opacity="0.3" stroke="#15846e" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="team-role-label">FOUNDER & TEAM LEAD</div>
+          <div class="team-name">Ibochi Vincent</div>
+          <div class="team-bio">Architecture, Graph Agents, Live Crustdata & Neatlogs Observability</div>
+          <div class="team-socials">
+            <a href="https://github.com/ibochivincent-lang" target="_blank" rel="noopener" class="team-social-link">GitHub</a>
+            <span style="color: var(--color-ash-gray);">·</span>
+            <a href="https://entire.io/gh/ibochivincent-lang/proof-of-search-ai" target="_blank" rel="noopener" class="team-social-link">Entire Memory</a>
+            <span style="color: var(--color-ash-gray);">·</span>
+            <a href="https://app.neatlogs.com/projects/72082073-0485-4b6b-abb0-2a1ce5116f2b" target="_blank" rel="noopener" class="team-social-link">Neatlogs Spans</a>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-avatar-frame">
+            <svg viewBox="0 0 100 100" fill="none" class="team-avatar-svg">
+              <rect width="100" height="100" rx="24" fill="#0c0c14"/>
+              <polygon points="50,22 80,75 20,75" stroke="#ffb829" stroke-width="2" fill="rgba(255,184,41,0.15)"/>
+              <circle cx="50" cy="56" r="7" fill="#8052ff"/>
+            </svg>
+          </div>
+          <div class="team-role-label">AI REASONING CORE</div>
+          <div class="team-name">Dala Autonomous Engine</div>
+          <div class="team-bio">LangGraph State Machine, Multi-hop Planning & SHA-256 Provenance Ledger</div>
+          <div class="team-socials">
+            <span class="team-social-link" style="color: var(--color-saffron-spark);">Claude 3.5 Sonnet / AWS Nova</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Carousel Navigation Dots -->
+      <div class="carousel-dots-row">
+        <span class="carousel-dot active"></span>
+        <span class="carousel-dot"></span>
+        <span class="carousel-dot"></span>
       </div>
     </section>
 

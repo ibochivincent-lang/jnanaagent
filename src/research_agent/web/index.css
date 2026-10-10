@@ -80,3 +80,141 @@
   --surface-deep-verdant-tint: #15846e;
   --surface-electric-iris: #8052ff;
 }
+
+/* Two-Column Asymmetric Section & Manifesto */
+.two-col-asymmetric {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--spacing-60);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .two-col-asymmetric {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-36);
+  }
+}
+
+.section-hero-title {
+  font-size: var(--text-heading-lg);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -3.12px;
+  color: var(--color-bone-white);
+  margin-top: var(--spacing-12);
+  margin-bottom: var(--spacing-24);
+}
+
+@media (max-width: 900px) {
+  .section-hero-title {
+    font-size: var(--text-heading-sm);
+    letter-spacing: -1.68px;
+  }
+}
+
+.section-body-copy {
+  font-size: var(--text-body);
+  font-weight: var(--font-weight-extralight);
+  line-height: var(--leading-body);
+  color: var(--color-bone-white);
+  margin-bottom: var(--spacing-18);
+}
+
+/* Team Member Cards (Floating on black void with whitespace only) */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 340px));
+  gap: var(--spacing-60);
+  margin-top: var(--spacing-36);
+}
+
+.team-card {
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.team-avatar-frame {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--radius-cards);
+  overflow: hidden;
+  margin-bottom: var(--spacing-18);
+  background: #09090e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.team-avatar-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.team-role-label {
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: var(--color-electric-iris);
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+
+.team-name {
+  font-size: var(--text-heading-xs);
+  font-weight: 400;
+  color: var(--color-bone-white);
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+
+.team-bio {
+  font-size: 14px;
+  font-weight: 200;
+  color: var(--color-silver-mist);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.team-socials {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+}
+
+.team-social-link {
+  color: var(--color-ash-gray);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.team-social-link:hover {
+  color: var(--color-bone-white);
+}
+
+/* Carousel Navigation Dots */
+.carousel-dots-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 30px;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.carousel-dot.active {
+  background: var(--color-electric-iris);
+}
+
