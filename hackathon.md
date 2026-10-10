@@ -84,7 +84,7 @@
   - Implemented centralized DNS resolver in `src/research_agent/dns_patch.py` to seamlessly route AWS ALBs (`litellm`, `crustdata`, `neatlogs`) without local ISP drops.
 - **Status:** Complete & verified live.
 
-### [2026-10-10] Continuous Memory & Code Intelligence with Entire CLI & Entire Graph
+### [2026-10-10] Continuous Memory & Code Intelligence with Entire CLI, Entire Graph & Entire Brain
 - **Actions:**
   - Installed official Entire CLI v0.11.4 on Windows via `https://entire.io/install.ps1`.
   - Authorized GitHub App and connected repository to Entire platform: [https://entire.io/gh/ibochivincent-lang/proof-of-search-ai](https://entire.io/gh/ibochivincent-lang/proof-of-search-ai).
@@ -92,9 +92,15 @@
   - Verified active status (`entire status` -> `● Enabled · branch master, Agents · Antigravity, Checkpoints sync to: origin`).
   - Executed `entire doctor` diagnostic check -> All hooks and metadata branches verified OK.
   - Installed `entire-graph` plugin v0.4.0 (`entire plugin install graph`).
-  - Initialized agent graph intelligence (`entire graph init-agents --repo .`), generating `.entire/graph-agent.md`, `AGENTS.md`, and `CLAUDE.md`.
-  - Verified codebase indexing with `entire graph search` (successfully mapped live Crustdata enrichment and LangGraph nodes).
-- **Status:** Complete & verified (`entire doctor` + `entire-graph` active).
+  - Installed `entire-brain` plugin v0.1.0 (`entire plugin install C:\Users\User\.local\bin\entire-brain.exe --force`).
+  - Initialized agent graph and brain intelligence (`entire brain init-agents`), generating `.entire/agent-guide.md`, `AGENTS.md`, and `CLAUDE.md`.
+  - Initialized repository brain memory with `entire brain setup --no-backfill --no-daemon` -> Indexed 134 symbols, 390 relations, 22 files across sessions, seed, docs, semantic, and pattern layers.
+  - Recorded core repository invariants and architectural decisions via `entire brain remember`:
+    - `constraints.data.rules`: Zero Mock Data invariant with live Crustdata enrichment and cryptographic SHA-256 source hashing.
+    - `architecture.llm.provider`: neatHack sponsored LiteLLM proxy configuration (`https://litellm.vision.aivar.app/v1`).
+    - `architecture.observability.tracing`: Neatlogs project tracing (`72082073-0485-4b6b-abb0-2a1ce5116f2b`).
+  - Tested retrieval queries (`entire brain recall "mock data"`, `entire brain brief "add interactive web dashboard"`), agent blame (`entire blame src/research_agent/nodes.py`), and verified healthy brain state (`entire brain status` -> `+ healthy`).
+- **Status:** Complete & verified (`entire doctor` + `entire-graph` + `entire-brain` active & healthy).
 
 ### [2026-10-10] cfo.ai Unit Economics & Business Model Finalization
 - **Actions:**

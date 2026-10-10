@@ -62,12 +62,25 @@ NEATLOGS_API_KEY=g0mx_xH8a6btCYnVOH0wGk4mkzaqz1jS
 CRUSTDATA_API_KEY=cd_a6070a6b539f8eb3f46c1e9acdf19ab78ef6
 ```
 
-### 4. Running the Agent
+### 4. Running the Agent (Web Console or CLI)
+
+#### Option A: Interactive Web Console (Recommended for Demos)
+Launch the modern glassmorphic web dashboard:
+```bash
+python -m research_agent.server --port 8000
+```
+Then open [http://localhost:8000](http://localhost:8000) in your browser to experience:
+- Real-time Server-Sent Events (SSE) streaming pipeline progress.
+- Live Crustdata B2B intelligence cards and company profiling.
+- Proof of Search cryptographic SHA-256 provenance ledger table.
+- Direct links to Neatlogs trace visualizations and Entire continuous memory.
+
+#### Option B: Terminal CLI Execution
 Run an interactive cited research session with Human-In-The-Loop (HITL) approval:
 ```bash
 python -m research_agent "Stripe and OpenAI collaboration in financial AI"
 ```
-Or skip the terminal HITL gate with `--auto`:
+Or run autonomously with `--auto`:
 ```bash
 python -m research_agent "Stripe and OpenAI collaboration in financial AI" --auto
 ```
@@ -77,6 +90,16 @@ Every execution produces:
 - Live Crustdata B2B entity enrichment (Zero Mock Data)
 - An immutable **Proof of Search: Cryptographic Provenance Audit** with SHA-256 source checksums
 - Live token and span telemetry streaming to your Neatlogs dashboard at [app.neatlogs.com](https://app.neatlogs.com)
+
+---
+
+## 🧠 Continuous Memory & Code Intelligence with Entire (Graph & Brain)
+Proof of Search AI is instrumented with the **Entire CLI v0.11.4**, **entire-graph**, and **entire-brain**:
+- **Entire Repository Index**: [https://entire.io/gh/ibochivincent-lang/proof-of-search-ai](https://entire.io/gh/ibochivincent-lang/proof-of-search-ai)
+- **Check Agent Health**: `entire doctor` and `entire status`
+- **Agent Blame**: `entire blame src/research_agent/nodes.py` (tracks AI vs human line provenance)
+- **Repo Memory Retrieval**: `entire brain recall "mock data"` and `entire brain brief "add web dashboard"`
+- **Durable Invariants**: Core project invariants recorded to Entire Brain memory layer (`constraints.data.rules`, `architecture.llm.provider`, `architecture.observability.tracing`).
 
 ---
 

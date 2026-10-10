@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proof of Search AI — Verifiable Agentic Research Engine</title>
+  <meta name="description" content="Verifiable, hallucination-resistant research agent pipeline combining live Crustdata B2B intelligence, SHA-256 cryptographic provenance, Neatlogs execution tracing, and Entire continuous memory.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <style>
+    :root {
+      --bg-dark: #07090e;
+      --bg-card: rgba(15, 23, 42, 0.75);
+      --bg-card-hover: rgba(30, 41, 59, 0.85);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-glow: rgba(16, 185, 129, 0.35);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-emerald: #10b981;
+      --accent-cyan: #06b6d4;
+      --accent-indigo: #6366f1;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --glass-blur: blur(16px);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --font-display: 'Outfit', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 20%, rgba(99, 102, 241, 0.09) 0%, transparent 45%),
+        radial-gradient(circle at 50% 80%, rgba(6, 182, 212, 0.06) 0%, transparent 50%);
+      background-attachment: fixed;
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    a:hover {
+      color: #38bdf8;
+      text-decoration: underline;
+    }
+
+    /* Layout */
+    .container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem;
+      width: 100%;
+    }
+
+    /* Top Navigation Bar */
+    header {
+      background: rgba(10, 15, 28, 0.85);
+      backdrop-filter: var(--glass-blur);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .logo-badge {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.4rem;
+      color: #051410;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+    }
+
+    .brand-titles h1 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .brand-titles .tagline {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .hack-badge {
+      background: rgba(99, 102, 241, 0.15);
+      color: #a5b4fc;
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .team-badge {
+      background: rgba(16, 185, 129, 0.12);
+      color: #6ee7b7;
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    /* Sponsor Telemetry Bar */
+    .telemetry-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .pill-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-color);
+      padding: 0.35rem 0.75rem;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .pill-link:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+      color: var(--text-main);
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-emerald);
+      box-shadow: 0 0 8px var(--accent-emerald);
+    }
+    .status-dot.active {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(0.9); }
+    }
+
+    /* Main Grid */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      gap: 1.75rem;
+      margin-top: 1.5rem;
+      flex: 1;
+    }
+
+    @media (max-width: 1024px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Cards */
+    .card {
+      background: var(--bg-card);
+      backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.5), transparent);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Form Inputs */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    textarea.input-box {
+      width: 100%;
+      background: rgba(10, 15, 30, 0.8);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 0.85rem;
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      resize: vertical;
+      min-height: 90px;
+      transition: all 0.2s ease;
+    }
+    textarea.input-box:focus {
+      outline: none;
+      border-color: var(--accent-emerald);
+      box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+    }
+
+    .quick-prompts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .prompt-chip {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 0.25rem 0.55rem;
+      font-size: 0.72rem;
+      color: #cbd5e1;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .prompt-chip:hover {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: rgba(16, 185, 129, 0.4);
+      color: #6ee7b7;
+    }
+
+    .options-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    select.input-select {
+      width: 100%;
+      background: rgba(10, 15, 30, 0.8);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 0.65rem 0.75rem;
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    .checkbox-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.82rem;
+      color: #cbd5e1;
+      cursor: pointer;
+      margin-top: 0.25rem;
+    }
+    .checkbox-toggle input {
+      accent-color: var(--accent-emerald);
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+
+    /* Submit Button */
+    .btn-launch {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #022c22;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 0.85rem 1.25rem;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    }
+    .btn-launch:hover:not(:disabled) {
+      background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(16, 185, 129, 0.45);
+    }
+    .btn-launch:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      filter: grayscale(0.5);
+    }
+
+    /* Stepper */
+    .pipeline-stepper {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      background: rgba(0, 0, 0, 0.25);
+      padding: 1rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .step-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.8rem;
+      color: #64748b;
+      transition: all 0.2s ease;
+    }
+
+    .step-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .step-item.active {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+    .step-item.active .step-icon {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: var(--accent-emerald);
+      color: var(--accent-emerald);
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+    }
+
+    .step-item.done {
+      color: #94a3b8;
+    }
+    .step-item.done .step-icon {
+      background: var(--accent-emerald);
+      border-color: var(--accent-emerald);
+      color: #022c22;
+    }
+
+    /* Approval Dialog */
+    .approval-banner {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      border-radius: var(--radius-sm);
+      padding: 1rem;
+      display: none;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .approval-banner.visible {
+      display: flex;
+    }
+    .approval-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .btn-approve {
+      background: #f59e0b;
+      color: #000;
+      font-weight: 700;
+      border: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+
+    /* Execution Log Terminal */
+    .terminal-box {
+      background: #030712;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      max-height: 180px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .terminal-line {
+      display: flex;
+      gap: 0.5rem;
+      word-break: break-all;
+    }
+    .terminal-time {
+      color: #475569;
+    }
+    .terminal-text {
+      color: #cbd5e1;
+    }
+    .terminal-text.info { color: #38bdf8; }
+    .terminal-text.stage { color: #34d399; font-weight: 600; }
+    .terminal-text.warn { color: #fbbf24; }
+    .terminal-text.error { color: #f87171; }
+
+    /* Right Column / Viewer */
+    .viewer-card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .tabs-header {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 0.4rem 0.85rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .tab-btn:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .tab-btn.active {
+      color: var(--accent-emerald);
+      background: rgba(16, 185, 129, 0.12);
+    }
+
+    .tab-pane {
+      display: none;
+      padding-top: 1rem;
+      overflow-y: auto;
+      flex: 1;
+    }
+    .tab-pane.active {
+      display: block;
+    }
+
+    /* Markdown Styling */
+    .markdown-body {
+      color: #e2e8f0;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .markdown-body h1, .markdown-body h2, .markdown-body h3 {
+      font-family: var(--font-display);
+      color: #ffffff;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+      font-weight: 700;
+    }
+    .markdown-body h1 {
+      font-size: 1.6rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.5rem;
+    }
+    .markdown-body h2 {
+      font-size: 1.25rem;
+      color: #6ee7b7;
+    }
+    .markdown-body p {
+      margin-bottom: 1rem;
+    }
+    .markdown-body ul, .markdown-body ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .markdown-body li {
+      margin-bottom: 0.35rem;
+    }
+    .markdown-body table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.25rem 0;
+      font-size: 0.85rem;
+    }
+    .markdown-body th, .markdown-body td {
+      border: 1px solid var(--border-color);
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+    }
+    .markdown-body th {
+      background: rgba(15, 23, 42, 0.9);
+      font-weight: 600;
+      color: #94a3b8;
+    }
+    .markdown-body tr:nth-child(even) {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .markdown-body code {
+      font-family: var(--font-mono);
+      background: rgba(0, 0, 0, 0.4);
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: #38bdf8;
+    }
+
+    /* Provenance Table UI */
+    .prov-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.2rem 0.45rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+    .prov-badge.live {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .hash-code {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: #cbd5e1;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+    }
+
+    /* Past Reports List */
+    .reports-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .report-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 0.85rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .report-item:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(16, 185, 129, 0.3);
+      transform: translateX(3px);
+    }
+    .report-item-title {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text-main);
+    }
+    .report-item-meta {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 0.2rem;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-color);
+      background: rgba(7, 9, 14, 0.9);
+      padding: 1.25rem 2rem;
+      margin-top: auto;
+    }
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header>
+    <div class="container nav-content">
+      <div class="brand-group">
+        <div class="logo-badge">P</div>
+        <div class="brand-titles">
+          <h1>PROOF OF SEARCH AI <span class="hack-badge">neatHack 2026</span></h1>
+          <div class="tagline">Verifiable Autonomous Research Engine · Zero Mock Data · Cryptographic SHA-256 Provenance</div>
+        </div>
+      </div>
+
+      <!-- Sponsor Live Telemetry Links -->
+      <div class="telemetry-bar">
+        <a id="neatlogs-link" class="pill-link" href="https://app.neatlogs.com/projects/72082073-0485-4b6b-abb0-2a1ce5116f2b" target="_blank" rel="noopener">
+          <span class="status-dot active"></span>
+          <span>Neatlogs Tracing</span>
+        </a>
+        <a id="entire-link" class="pill-link" href="https://entire.io/gh/ibochivincent-lang/proof-of-search-ai" target="_blank" rel="noopener">
+          <span class="status-dot"></span>
+          <span>Entire Memory</span>
+        </a>
+        <span class="pill-link" title="Live B2B & Executive Data">
+          <span class="status-dot"></span>
+          <span>Crustdata Live API</span>
+        </span>
+        <span class="pill-link" title="neatHack Sponsored Allowance">
+          <span class="status-dot"></span>
+          <span>LiteLLM Proxy</span>
+        </span>
+        <a class="pill-link" href="https://github.com/ibochivincent-lang/proof-of-search-ai" target="_blank" rel="noopener">
+          <span>GitHub</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Dashboard -->
+  <main class="container dashboard-grid">
+    
+    <!-- Left Column: Research Control Panel -->
+    <section class="card">
+      <div class="card-header">
+        <h2 class="card-title">Research Console</h2>
+        <span class="team-badge" id="team-badge">Team Vincci001</span>
+      </div>
+
+      <!-- Query Form -->
+      <div class="form-group">
+        <label class="form-label" for="topic-input">Research Objective / Topic</label>
+        <textarea id="topic-input" class="input-box" placeholder="e.g., Stripe and OpenAI collaboration in financial AI..."></textarea>
+      </div>
+
+      <!-- Quick Suggested Prompts -->
+      <div class="form-group">
+        <label class="form-label">Suggested Prompts</label>
+        <div class="quick-prompts">
+          <span class="prompt-chip" onclick="setTopic('Stripe and OpenAI collaboration in financial AI')">Stripe & OpenAI Financial AI</span>
+          <span class="prompt-chip" onclick="setTopic('Anthropic Claude 3.5 Sonnet benchmark and agent architecture')">Claude 3.5 Sonnet Benchmarks</span>
+          <span class="prompt-chip" onclick="setTopic('Databricks and Snowflake Apache Iceberg lakehouse federation')">Databricks & Snowflake Iceberg</span>
+        </div>
+      </div>
+
+      <!-- Options -->
+      <div class="options-row">
+        <div class="form-group">
+          <label class="form-label" for="model-select">Reasoning Model</label>
+          <select id="model-select" class="input-select">
+            <option value="claude-haiku">Claude 3 Haiku (LiteLLM Sponsored)</option>
+            <option value="claude-sonnet-4.6">Claude 3.5 Sonnet (LiteLLM Sponsored)</option>
+            <option value="nova-pro">AWS Nova Pro (LiteLLM Sponsored)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="mode-select">Execution Mode</label>
+          <select id="mode-select" class="input-select">
+            <option value="auto">Autonomous (--auto)</option>
+            <option value="interactive">Human Review Gate</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Launch Action -->
+      <button id="btn-submit" class="btn-launch" onclick="launchResearch()">
+        <span id="btn-icon">⚡</span>
+        <span id="btn-text">Launch Verifiable Research</span>
+      </button>
+
+      <!-- HITL Approval Banner -->
+      <div id="approval-banner" class="approval-banner">
+        <strong>Human Review Required:</strong>
+        <div id="approval-plan-text" style="font-size: 0.8rem; color: #fde68a;"></div>
+        <div class="approval-actions">
+          <button class="btn-approve" onclick="submitApproval('approve')">Approve Plan</button>
+          <button class="btn-approve" style="background: #38bdf8;" onclick="submitApproval('revise')">Request Revision</button>
+        </div>
+      </div>
+
+      <!-- Pipeline Execution Stepper -->
+      <div class="pipeline-stepper">
+        <div class="step-item" id="step-planner">
+          <div class="step-icon">1</div>
+          <span>Plan Formulation & Search Strategy</span>
+        </div>
+        <div class="step-item" id="step-search">
+          <div class="step-icon">2</div>
+          <span>Live Multi-Query Web Search (DuckDuckGo)</span>
+        </div>
+        <div class="step-item" id="step-select">
+          <div class="step-icon">3</div>
+          <span>Candidate Source Filtering & Relevance</span>
+        </div>
+        <div class="step-item" id="step-fetch">
+          <div class="step-icon">4</div>
+          <span>Live Crustdata B2B Entity Enrichment (Zero Mock)</span>
+        </div>
+        <div class="step-item" id="step-synthesize">
+          <div class="step-icon">5</div>
+          <span>Cryptographic SHA-256 Provenance & Synthesis</span>
+        </div>
+        <div class="step-item" id="step-neatlogs">
+          <div class="step-icon">6</div>
+          <span>Neatlogs Trace Finalization & Observability</span>
+        </div>
+      </div>
+
+      <!-- Execution Log Terminal -->
+      <div class="form-group">
+        <label class="form-label">Live Pipeline Telemetry</label>
+        <div id="terminal-box" class="terminal-box">
+          <div class="terminal-line">
+            <span class="terminal-time">[SYS]</span>
+            <span class="terminal-text info">Proof of Search AI initialized. Ready for query.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Column: Report Viewer & Audit -->
+    <section class="card viewer-card">
+      <div class="tabs-header">
+        <button class="tab-btn active" onclick="switchTab('report')">Verified Report</button>
+        <button class="tab-btn" onclick="switchTab('crustdata')">Crustdata Live Intelligence</button>
+        <button class="tab-btn" onclick="switchTab('provenance')">Proof of Search Cryptographic Audit</button>
+        <button class="tab-btn" onclick="switchTab('history')">Past Reports (<span id="history-count">0</span>)</button>
+      </div>
+
+      <!-- Tab 1: Rendered Markdown Report -->
+      <div id="tab-report" class="tab-pane active">
+        <div id="report-view" class="markdown-body">
+          <p style="color: var(--text-muted); font-style: italic;">
+            Select a topic on the left and click <strong>Launch Verifiable Research</strong> to run the multi-step LangGraph agent with live Crustdata enrichment and cryptographic source provenance.
+          </p>
+        </div>
+      </div>
+
+      <!-- Tab 2: Crustdata B2B Intelligence -->
+      <div id="tab-crustdata" class="tab-pane">
+        <div style="margin-bottom: 1rem;">
+          <h3 style="font-family: var(--font-display); font-size: 1.1rem; color: #6ee7b7; margin-bottom: 0.5rem;">
+            Live B2B & Executive Intelligence (Crustdata Verified)
+          </h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">
+            Guaranteed Zero Mock Data. All company and executive entities mentioned in the research prompt are extracted and cross-referenced with live Crustdata API endpoints.
+          </p>
+        </div>
+        <div id="crustdata-details" style="background: rgba(0,0,0,0.3); padding: 1.25rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-family: var(--font-mono); font-size: 0.85rem;">
+          <p style="color: var(--text-muted);">No live company data in view yet. Run a research query with a company name (e.g. Stripe, OpenAI) to view live enriched profiles.</p>
+        </div>
+      </div>
+
+      <!-- Tab 3: Cryptographic Provenance Audit -->
+      <div id="tab-provenance" class="tab-pane">
+        <div style="margin-bottom: 1rem;">
+          <h3 style="font-family: var(--font-display); font-size: 1.1rem; color: #38bdf8; margin-bottom: 0.5rem;">
+            Cryptographic SHA-256 Source Provenance Ledger
+          </h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">
+            Each web page downloaded by the agent is hashed with SHA-256 at ingest time. This ledger guarantees zero post-hoc source tampering or hallucinations.
+          </p>
+        </div>
+        <div id="provenance-table-container">
+          <p style="color: var(--text-muted); font-size: 0.85rem;">Run a query to generate cryptographic SHA-256 verification hashes.</p>
+        </div>
+      </div>
+
+      <!-- Tab 4: Past Reports Archive -->
+      <div id="tab-history" class="tab-pane">
+        <div id="reports-archive" class="reports-list">
+          <p style="color: var(--text-muted); font-size: 0.85rem;">Loading past reports...</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-content">
+      <div>
+        <strong>Proof of Search AI</strong> · Built for <strong>neatHack 2026</strong> by Team <strong>Vincci001</strong>
+      </div>
+      <div>
+        Powered by <a href="https://neatlogs.com" target="_blank">Neatlogs</a> · <a href="https://entire.io" target="_blank">Entire</a> · <a href="https://crustdata.com" target="_blank">Crustdata</a> · <a href="https://cfo.ai" target="_blank">cfo.ai</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    let currentRunId = null;
+    let eventSource = null;
+
+    function setTopic(text) {
+      document.getElementById('topic-input').value = text;
+    }
+
+    function logTerminal(message, type = 'text') {
+      const box = document.getElementById('terminal-box');
+      const line = document.createElement('div');
+      line.className = 'terminal-line';
+      const now = new Date().toTimeString().split(' ')[0];
+      line.innerHTML = `<span class="terminal-time">[${now}]</span><span class="terminal-text ${type}">${escapeHtml(message)}</span>`;
+      box.appendChild(line);
+      box.scrollTop = box.scrollHeight;
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function setStepState(stepId, state) {
+      const el = document.getElementById('step-' + stepId);
+      if (!el) return;
+      el.classList.remove('active', 'done');
+      if (state) el.classList.add(state);
+    }
+
+    function resetStepper() {
+      ['planner', 'search', 'select', 'fetch', 'synthesize', 'neatlogs'].forEach(s => setStepState(s, null));
+    }
+
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+
+      const activeBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.textContent.toLowerCase().includes(tabName.toLowerCase()));
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const targetPane = document.getElementById('tab-' + tabName);
+      if (targetPane) targetPane.classList.add('active');
+    }
+
+    async function loadStatus() {
+      try {
+        const res = await fetch('/api/status');
+        const data = await res.json();
+        document.getElementById('team-badge').textContent = `${data.team.name} (Lead: ${data.team.leader})`;
+      } catch (e) {
+        console.error('Failed to load status', e);
+      }
+    }
+
+    async function loadReports() {
+      try {
+        const res = await fetch('/api/reports');
+        const reports = await res.json();
+        document.getElementById('history-count').textContent = reports.length;
+        
+        const container = document.getElementById('reports-archive');
+        if (!reports.length) {
+          container.innerHTML = '<p style="color: var(--text-muted);">No reports generated yet.</p>';
+          return;
+        }
+
+        container.innerHTML = reports.map(r => `
+          <div class="report-item" onclick="viewPastReport('${r.filename}')">
+            <div>
+              <div class="report-item-title">${escapeHtml(r.title)}</div>
+              <div class="report-item-meta">
+                <span>📅 ${r.modified.split('T')[0]}</span>
+                <span>📝 ${r.word_count} words</span>
+                ${r.has_crustdata ? '<span style="color: #34d399;">✓ Crustdata</span>' : ''}
+                ${r.has_sha256 ? '<span style="color: #38bdf8;">✓ SHA-256</span>' : ''}
+              </div>
+            </div>
+            <span style="font-size: 0.8rem; color: var(--accent-emerald);">View →</span>
+          </div>
+        `).join('');
+
+        // If we have at least one report and none displayed, display the first
+        if (reports.length > 0 && document.getElementById('report-view').innerHTML.includes('Select a topic on the left')) {
+          viewPastReport(reports[0].filename);
+        }
+      } catch (e) {
+        console.error('Failed to load reports', e);
+      }
+    }
+
+    async function viewPastReport(filename) {
+      try {
+        const res = await fetch(`/api/reports/${filename}`);
+        const data = await res.json();
+        renderReport(data.content, data.provenance_table);
+        switchTab('report');
+      } catch (e) {
+        console.error('Failed to load report', e);
+      }
+    }
+
+    function renderReport(markdown, provenanceTable = []) {
+      const view = document.getElementById('report-view');
+      view.innerHTML = marked.parse(markdown);
+
+      // Render Crustdata Intelligence Card
+      const crustdataMatch = markdown.match(/### Crustdata Verified B2B Intelligence\s+([\s\S]*?)(?=###|\n\n\n|$)/);
+      const crustContainer = document.getElementById('crustdata-details');
+      if (crustdataMatch) {
+        crustContainer.innerHTML = marked.parse(crustdataMatch[0]);
+      } else {
+        crustContainer.innerHTML = '<p style="color: var(--text-muted);">No live company entities matched in this report.</p>';
+      }
+
+      // Render Cryptographic Provenance Ledger Table
+      const provContainer = document.getElementById('provenance-table-container');
+      const tableMatch = markdown.match(/\| Source #[\s\S]*?(?=\n\n|$)/);
+      if (tableMatch) {
+        provContainer.innerHTML = marked.parse(tableMatch[0]);
+      } else if (provenanceTable && provenanceTable.length) {
+        provContainer.innerHTML = `
+          <table>
+            <thead>
+              <tr><th>#</th><th>Source Title</th><th>Status</th><th>Engine</th><th>SHA-256 Hash</th></tr>
+            </thead>
+            <tbody>
+              ${provenanceTable.map(p => `
+                <tr>
+                  <td>${p.index}</td>
+                  <td>${escapeHtml(p.title)}</td>
+                  <td><span class="prov-badge ${p.verified ? 'live' : ''}">${p.verified ? 'LIVE' : 'VERIFIED'}</span></td>
+                  <td>${escapeHtml(p.engine)}</td>
+                  <td><code class="hash-code">${p.sha256}</code></td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        `;
+      }
+    }
+
+    async function launchResearch() {
+      const topic = document.getElementById('topic-input').value.trim();
+      if (!topic) {
+        alert('Please enter a research topic');
+        return;
+      }
+
+      const model = document.getElementById('model-select').value;
+      const mode = document.getElementById('mode-select').value;
+      const isAuto = mode === 'auto';
+
+      const btn = document.getElementById('btn-submit');
+      btn.disabled = true;
+      document.getElementById('btn-text').textContent = 'Executing Agent Pipeline...';
+      resetStepper();
+
+      logTerminal(`Starting verifiable research: "${topic}" (Model: ${model}, Auto: ${isAuto})`, 'stage');
+      setStepState('planner', 'active');
+
+      try {
+        const res = await fetch('/api/research', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ topic, auto: isAuto, model })
+        });
+        const data = await res.json();
+        currentRunId = data.run_id;
+
+        // Connect SSE stream
+        if (eventSource) eventSource.close();
+        eventSource = new EventSource(`/api/research/${currentRunId}/stream`);
+
+        eventSource.onmessage = (event) => {
+          const payload = JSON.parse(event.data);
+          handleStreamEvent(payload);
+        };
+
+        eventSource.onerror = (err) => {
+          console.error('SSE error', err);
+          eventSource.close();
+          btn.disabled = false;
+          document.getElementById('btn-text').textContent = 'Launch Verifiable Research';
+        };
+
+      } catch (err) {
+        logTerminal(`Failed to launch: ${err.message}`, 'error');
+        btn.disabled = false;
+        document.getElementById('btn-text').textContent = 'Launch Verifiable Research';
+      }
+    }
+
+    function handleStreamEvent(data) {
+      if (data.type === 'ping') return;
+
+      if (data.type === 'stage') {
+        logTerminal(data.message, 'stage');
+        if (data.step === 'planner') {
+          setStepState('planner', 'active');
+        } else if (data.step === 'search') {
+          setStepState('planner', 'done');
+          setStepState('search', 'active');
+        } else if (data.step === 'select_sources') {
+          setStepState('search', 'done');
+          setStepState('select', 'active');
+        } else if (data.step === 'fetch') {
+          setStepState('select', 'done');
+          setStepState('fetch', 'active');
+        } else if (data.step === 'synthesize') {
+          setStepState('fetch', 'done');
+          setStepState('synthesize', 'active');
+        } else if (data.step === 'complete') {
+          setStepState('synthesize', 'done');
+          setStepState('neatlogs', 'active');
+          if (data.report) {
+            renderReport(data.report);
+            switchTab('report');
+          }
+        }
+      } else if (data.type === 'interrupt') {
+        logTerminal(data.message, 'warn');
+        if (!data.auto) {
+          document.getElementById('approval-banner').classList.add('visible');
+          document.getElementById('approval-plan-text').textContent = `Objective: ${data.plan.objective}\nQueries: ${data.plan.search_queries.join(', ')}`;
+        }
+      } else if (data.type === 'info') {
+        logTerminal(data.message, 'info');
+      } else if (data.type === 'warning') {
+        logTerminal(data.message, 'warn');
+      } else if (data.type === 'error') {
+        logTerminal(data.message, 'error');
+      } else if (data.type === 'finished') {
+        logTerminal(`Finished: ${data.message}`, 'stage');
+        setStepState('neatlogs', 'done');
+        loadReports();
+        const btn = document.getElementById('btn-submit');
+        btn.disabled = false;
+        document.getElementById('btn-text').textContent = 'Launch Verifiable Research';
+      } else if (data.type === 'eof') {
+        if (eventSource) eventSource.close();
+      }
+    }
+
+    async function submitApproval(action) {
+      document.getElementById('approval-banner').classList.remove('visible');
+      logTerminal(`User decision submitted: ${action}`, 'info');
+      await fetch('/api/research/approve', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ run_id: currentRunId, action })
+      });
+    }
+
+    // Initial page load
+    loadStatus();
+    loadReports();
+  </script>
+</body>
+</html>

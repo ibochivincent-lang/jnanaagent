@@ -21,6 +21,8 @@ dependencies = [
     "trafilatura>=1.12",
     "python-dotenv>=1.0",
     "neatlogs",
+    "fastapi>=0.110",
+    "uvicorn>=0.28",
 ]
 
 [project.optional-dependencies]
@@ -28,6 +30,7 @@ dev = ["pytest>=8"]
 
 [project.scripts]
 research-agent = "research_agent.cli:main"
+proofsearch-ui = "research_agent.server:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
