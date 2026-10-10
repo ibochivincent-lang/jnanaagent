@@ -50,6 +50,21 @@
   - Configured git remotes and pushed all tracking commits and documentation.
 - **Status:** Synchronized with GitHub.
 
+### [2026-10-10] Neatlogs Live Doctor Probe Verification
+- **Actions:**
+  - Configured active project API key `NEATLOGS_API_KEY` for Project ID `72082073-0485-4b6b-abb0-2a1ce5116f2b`.
+  - Executed end-to-end telemetry probe check against `https://ingest.neatlogs.com`:
+    - `[PASS] LOCAL_ENVELOPE_VALID`: The final normalized local envelope is valid
+    - `[PASS] TRACE_VISIBLE`: The exact Doctor trace is visible through the authenticated trace API
+    - `[PASS] TRACE_FINALIZED`: The exact Doctor trace reached a terminal materialized state
+    - `[PASS] HIERARCHY_VALID`: The persisted Doctor hierarchy has one root and valid parents
+    - `[PASS] ATTRIBUTES_VALID`: The persisted Doctor span names and types are complete
+    - `[PASS] INPUT_OUTPUT_VALID`: The persisted Doctor spans retain input and output
+    - `[PASS] METADATA_VALID`: The versioned Doctor SDK metadata survived finalization
+    - `[PASS] TYPED_TOKENS_VALID`: Persisted token totals remain numeric
+  - Verified ingestion finalized in Neatlogs backend.
+- **Status:** Complete & verified end-to-end.
+
 ---
 
 ## Demo
@@ -68,14 +83,13 @@
 
 ## Known Limitations & Next Steps
 1. **Prerequisite Inputs Needed:**
-   - Neatlogs Project API Key inserted into `.env` (from `app.neatlogs.com` -> Settings -> API Keys).
    - Entire CLI installation and repo authorization.
    - cfo.ai business plan generation.
    - Crustdata API key using promo code `NEATLOGS-OCT2026`.
 2. **Next Steps:**
-   - Run synthetic probe check (`python -m neatlogs doctor --probe`) once key is inserted.
-   - Structure live agent graph combining web and Crustdata entity intelligence.
+   - Structure live agent graph combining web and Crustdata entity intelligence (zero mock data).
    - Capture initial Entire checkpoint (`entire checkpoint explain HEAD`).
+   - Finalize cfo.ai financial plan.
 
 ---
 
@@ -83,9 +97,10 @@
 - [x] Project name & problem description
 - [x] GitHub repository created and synchronized
 - [x] neatlogs SDK integrated with native LangGraph callbacks & flush lifecycle
-- [ ] neatlogs verified trace links in dashboard
+- [x] neatlogs verified trace links in dashboard (Doctor probe PASSED, finalized)
 - [ ] Entire connected with accessible checkpoint link & ID
 - [ ] cfo.ai business plan & unit economics report attached
 - [ ] Crustdata live intelligence integration functioning (zero mock data)
 - [ ] Demo video & working reproduction commands
+
 
