@@ -20,18 +20,6 @@ from .state import SearchResult, Source
 
 log = logging.getLogger("research_agent.tools")
 
-# Ensure robust DNS resolution for AWS ALB endpoints across domestic ISP networks
-_ORIG_GETADDRINFO = socket.getaddrinfo
-
-
-def _patched_getaddrinfo(host, port, *args, **kwargs):
-    if host == "api.crustdata.com":
-        host = "16.59.190.106"
-    return _ORIG_GETADDRINFO(host, port, *args, **kwargs)
-
-
-socket.getaddrinfo = _patched_getaddrinfo
-
 
 def calculate_sha256(text: str) -> str:
     """Compute SHA-256 hex digest for proof of search provenance."""

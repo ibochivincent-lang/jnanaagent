@@ -50,27 +50,33 @@ cp .env.example .env
 
 Ensure your `.env` contains:
 ```ini
-# Required: Anthropic API key
-ANTHROPIC_API_KEY=your_anthropic_api_key
+# LLM Provider Configuration (Option A: neatHack sponsored LiteLLM, Option B: Anthropic)
+LITELLM_API_KEY=sk-G2C...
+LITELLM_BASE_URL=https://litellm.vision.aivar.app/v1
+# ANTHROPIC_API_KEY=sk-ant-...
 
 # Required for tracing: Neatlogs Project API key (Project ID: 72082073-0485-4b6b-abb0-2a1ce5116f2b)
-NEATLOGS_API_KEY=<your-project-api-key>
+NEATLOGS_API_KEY=g0mx_xH8a6btCYnVOH0wGk4mkzaqz1jS
 
-# Crustdata Live API Key
-CRUSTDATA_API_KEY=your_crustdata_key
+# Crustdata Live B2B & Entity Intelligence (neatHack Sponsor Credits)
+CRUSTDATA_API_KEY=cd_a6070a6b539f8eb3f46c1e9acdf19ab78ef6
 ```
 
 ### 4. Running the Agent
-Run an interactive cited research session:
+Run an interactive cited research session with Human-In-The-Loop (HITL) approval:
 ```bash
-python -m research_agent "Emerging cross-border payment corridors using stablecoins"
+python -m research_agent "Stripe and OpenAI collaboration in financial AI"
 ```
 Or skip the terminal HITL gate with `--auto`:
 ```bash
-python -m research_agent "Liquid staking derivatives on Ethereum layer 2s" --auto
+python -m research_agent "Stripe and OpenAI collaboration in financial AI" --auto
 ```
 
-Traces will automatically be streamed to your Neatlogs dashboard at [app.neatlogs.com](https://app.neatlogs.com).
+Every execution produces:
+- A cited markdown report with verified inline brackets (`reports/`)
+- Live Crustdata B2B entity enrichment (Zero Mock Data)
+- An immutable **Proof of Search: Cryptographic Provenance Audit** with SHA-256 source checksums
+- Live token and span telemetry streaming to your Neatlogs dashboard at [app.neatlogs.com](https://app.neatlogs.com)
 
 ---
 

@@ -24,3 +24,6 @@ dist/
 Thumbs.db
 .vscode/
 .idea/
+
+# Local traces
+traces/

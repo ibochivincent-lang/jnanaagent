@@ -13,6 +13,7 @@ authors = [{ name = "Foundry AI" }]
 dependencies = [
     "langgraph>=0.4",
     "langchain-anthropic>=0.3",
+    "langchain-openai>=0.3",
     "langchain-core>=0.3",
     "pydantic>=2",
     "ddgs>=9",
