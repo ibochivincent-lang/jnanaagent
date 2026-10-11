@@ -916,10 +916,14 @@ async def github_webhook(request: Request) -> Dict[str, Any]:
         try:
             repo_root = Path(__file__).resolve().parent.parent.parent
             log.info("Continuous Deployment webhook triggered: pulling origin master...")
-            subprocess.run(["git", "pull", "origin", "master"], cwd=str(repo_root), check=False, timeout=45)
-            # If running on Linux with systemd, restart the proofsearch service smoothly
+            # Ensure git safe.directory avoids dubious ownership errors on cloud instances
+            subprocess.run(["git", "config", "--global", "--add", "safe.directory", str(repo_root)], cwd=str(repo_root), check=False)
+            subprocess.run(["git", "fetch", "origin", "master"], cwd=str(repo_root), check=False, timeout=45)
+            subprocess.run(["git", "reset", "--hard", "origin/master"], cwd=str(repo_root), check=False, timeout=45)
+            # If running on Linux with systemd, restart the proofsearch service smoothly via detached subshell
             if sys.platform.startswith("linux"):
-                subprocess.run(["sudo", "systemctl", "restart", "proofsearch"], check=False, timeout=15)
+                restart_cmd = "sleep 1 && (systemctl restart proofsearch || sudo systemctl restart proofsearch || true)"
+                subprocess.Popen(["sh", "-c", restart_cmd])
         except Exception as err:
             log.warning(f"Continuous Deployment sync error: {err}")
 

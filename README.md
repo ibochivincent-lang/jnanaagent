@@ -30,6 +30,11 @@ Traditional AI coding assistants suffer from three fatal structural limitations:
 3. **Transient In-Memory Context (Brain Amnesia)**: Every new session starts from scratch without persistent architectural graph memory, repeating past investigation failures and losing line-level provenance.
 
 **Jnana Agent solves this permanently**:
+- **Visual Code Explainer & Debugger for "Vibe Coders"**: A 4-step interactive debugging studio:
+  - **Step 1 — Submit Problem**: Paste tracebacks, upload UI/terminal screenshots, provide broken code, or pull live telemetry from Neatlogs.
+  - **Step 2 — Explain What Went Wrong**: Plain-English root-cause breakdown pointing to exact files and lines, explicitly identifying missing dependencies (Database, Auth, Route, Type coercion) without compiler jargon.
+  - **Step 3 — Interactive Mermaid Flowchart**: Live visual architecture diagram showing the system data flow with color-coded nodes (🟢 Healthy, 🟡 Missing/Lacking, 🔴 Exact Failure Point) plus modular system component cards.
+  - **Step 4 — Show The Fix & Test**: Corrected code with side-by-side diff, plain-English "Why It Works" rationale, 1-click test reproduction runner, and 1-click GitHub PR creation.
 - **6-Class Bug Assessment Radar**: Directly assesses and maps bugs across Functional, Performance, Security, UI/UX, Compatibility, and Logic dimensions without vertical scrollbar clutter.
 - **Deterministic Pytest Sandbox**: Spawns isolated Python subprocesses executing live test suites (`tests/test_reproduce.py`) with zero mock data.
 - **Synthesized Unified Diff Generator**: Produces standard git patches (`diff --git a/... b/...`) with one-click clipboard copy, direct `.patch` download, and side-by-side AST verification.
@@ -42,6 +47,7 @@ Traditional AI coding assistants suffer from three fatal structural limitations:
 
 | Track | Implementation & Verified Production Deliverables |
 |---|---|
+| **Visual Code Explainer & Debugger for Vibe Coders** | 4-Step visual debugging workflow powered by Mermaid.js, LiteLLM Claude-3.5, and Neatlogs error ingestion. Transforms cryptic tracebacks and screenshots into plain-English explanations, visual data flow graphs, and verified fixes with 1-click testing. |
 | **Autonomous SWE Reasoning & Bug Localization** | 6-Stage LangGraph state machine (`planner` → `search` → `fetch` → `synthesize` → `audit` → `code_patch`), AST-guided bug localization, and automated unified diff generation verified on SWE-bench targets (`sweagent/run.py#482`). |
 | **Ground-Truth Observability & Tracing (Neatlogs)** | Real-time OpenTelemetry tracing via `neatlogs.langchain_handler()`, capturing cyclic state transitions, LLM token consumption, latency metrics, and error spans streamed directly to Neatlogs Project `72082073-0485-4b6b-abb0-2a1ce5116f2b`. |
 | **Persistent Agent Memory & Line Provenance (Entire Brain)** | Bounded continuous memory via Entire CLI v0.11 (`entire brain recall`, `entire blame`), enforcing repository invariants across model configs, AST parsing routines, and test harnesses. |
