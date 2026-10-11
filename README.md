@@ -1,16 +1,21 @@
-# Jnana Agent
+# Jnana Agent: Autonomous SWE Engineering Agent & Ground-Truth Knowledge Intelligence
 
-> *Autonomous Software Engineering & Deep Knowledge Intelligence.*  
-> **Sanskrit *Jnana* (ज्ञान) — direct cognitive insight through autonomous inquiry and deterministic code synthesis.**
+[![AWS EC2 Live](https://img.shields.io/badge/AWS_EC2-Live_Production-FF9900?style=for-the-badge&logo=amazonec2&logoColor=white)](http://34.227.107.171:8000/terminal)
+[![Live Workstation](https://img.shields.io/badge/Live_Terminal-34.227.107.171%3A8000-10B981?style=for-the-badge&logo=googlechrome&logoColor=white)](http://34.227.107.171:8000/terminal)
+[![Neatlogs Verified](https://img.shields.io/badge/Neatlogs-Live_OTel_Tracing-6366F1?style=for-the-badge&logo=opentelemetry&logoColor=white)](https://app.neatlogs.com/projects/72082073-0485-4b6b-abb0-2a1ce5116f2b)
+[![LangGraph StateGraph](https://img.shields.io/badge/LangGraph-v0.4_Cyclic_Graph-000000?style=for-the-badge&logo=python&logoColor=white)](https://github.com/langchain-ai/langgraph)
+[![LiteLLM Gateway](https://img.shields.io/badge/LiteLLM-Claude_Haiku_Proxy-8052FF?style=for-the-badge)](https://litellm.vision.aivar.app)
+[![Crustdata Enriched](https://img.shields.io/badge/Crustdata-Live_B2B_Graph-059669?style=for-the-badge)](https://crustdata.com)
+[![Entire Memory](https://img.shields.io/badge/Entire_Memory-v0.11_Continuous_Brain-D97706?style=for-the-badge)](https://entire.io/gh/ibochivincent-lang/proof-of-search-ai)
+[![Automated Tests](https://img.shields.io/badge/Automated_Tests-24%2F24_Passing-10B981?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/ibochivincent-lang/proof-of-search-ai)
+[![Zero Mock Data](https://img.shields.io/badge/Zero_Mock_Data-100%25_Deterministic-3B82F6?style=for-the-badge)](http://34.227.107.171:8000/terminal)
 
-[![Hackathon](https://img.shields.io/badge/neatHack-2026-blue.svg)](https://neatlogs.com)
-[![Brand](https://img.shields.io/badge/Identity-Jnana%20Agent-8052ff.svg)](https://github.com/ibochivincent-lang/proof-of-search-ai)
-[![Tracing](https://img.shields.io/badge/Telemetry-Neatlogs%20v1.4.26-6366f1.svg)](https://app.neatlogs.com)
-[![Orchestration](https://img.shields.io/badge/Agent-LangGraph-brightgreen.svg)](https://github.com/langchain-ai/langgraph)
-[![Continuous Memory](https://img.shields.io/badge/Provenance-Entire%20Brain-orange.svg)](https://entire.io)
-[![Live Data](https://img.shields.io/badge/Data-Crustdata%20Live%20API-emerald.svg)](https://crustdata.com)
-
-**Jnana Agent** is an autonomous software engineering and verifiable knowledge intelligence engine engineered for **neatHack 2026**. Designed on a monolithic, weightless dark-stage design system—where black voids meet Electric Iris (`#8052ff`), Saffron Spark (`#ffb829`), and an interactive WebGL particle brain constellation—Jnana Agent tackles complex codebase regressions, missing context, and unverified citations. It combines autonomous GitHub issue ingestion (`owner/repo#123`), cross-repository prior art discovery, Entire vector memory recall, production-ready unified diff code patch synthesis, end-to-end execution observability via **Neatlogs**, and sustainable per-query unit economics modeled on **cfo.ai**.
+**Author:** IboTV (`ibochivincent-lang`) — Team Vincci001 Lead & Maintainer.  
+**Hackathon:** neatHack 2026.  
+**Production URL:** [http://34.227.107.171:8000/terminal](http://34.227.107.171:8000/terminal)  
+**API Health Status:** [http://34.227.107.171:8000/api/status](http://34.227.107.171:8000/api/status) (HTTP 200 OK — AWS EC2 `us-east-1`)  
+**Repository:** [https://github.com/ibochivincent-lang/proof-of-search-ai](https://github.com/ibochivincent-lang/proof-of-search-ai)  
+**Core Stack:** Python 3.11+, FastAPI, LangGraph, LiteLLM (Claude-3-5-Haiku), Neatlogs OTel, Entire CLI Brain, Crustdata API, AWS EC2 Ubuntu 24.04 LTS (systemd), Three.js WebGL Particle HUD.
 
 ---
 

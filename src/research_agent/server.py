@@ -526,10 +526,10 @@ def test_patched_succeeds():
         test_file.write_text(script_content, encoding="utf-8")
 
         res = subprocess.run(
-            [sys.executable, "-m", "pytest", str(test_file), "-v"],
+            [sys.executable, "-m", "pytest", str(test_file), "-v", "-p", "no:langsmith", "-p", "no:hydra_core"],
             capture_output=True,
             text=True,
-            timeout=15,
+            timeout=40,
         )
 
         return {

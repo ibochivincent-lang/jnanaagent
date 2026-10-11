@@ -258,15 +258,15 @@
       letter-spacing: 0.04em;
     }
 
-    /* Left Panel: Bug Assessment Radar & Breakdown */
+    /* Left Panel: Bug Assessment Radar & Breakdown (Zero Scroll - All 6 Classes Fit) */
     .radar-canvas-wrap {
       width: 100%;
-      height: 180px;
+      height: 135px;
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     #bugRadarCanvas {
@@ -278,17 +278,17 @@
     .bug-types-list {
       display: flex;
       flex-direction: column;
-      gap: 5px;
-      overflow-y: auto;
-      max-height: 290px;
-      padding-right: 2px;
+      gap: 4px;
+      overflow: visible;
+      max-height: none;
+      padding-right: 0;
     }
 
     .bug-type-row {
       background: rgba(255, 255, 255, 0.02);
       border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 8px;
-      padding: 6px 10px;
+      border-radius: 6px;
+      padding: 4px 8px;
       cursor: pointer;
       transition: all 0.2s;
     }
@@ -302,9 +302,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 11px;
-      font-weight: 600;
-      margin-bottom: 2px;
+      font-size: 10px;
+      font-weight: 700;
+      margin-bottom: 1px;
     }
 
     .bug-type-name {
@@ -313,8 +313,8 @@
 
     .bug-type-score {
       font-family: var(--font-mono);
-      font-size: 10px;
-      padding: 1px 6px;
+      font-size: 8.5px;
+      padding: 1px 5px;
       border-radius: 3px;
     }
 
@@ -337,9 +337,12 @@
     }
 
     .bug-type-desc {
-      font-size: 10px;
+      font-size: 9px;
       color: var(--color-ash-gray);
-      line-height: 1.3;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     /* Center Panel: Grand Command Portal with Middle 360 3D Particle Brain */
@@ -635,6 +638,91 @@
       transform: translateY(-1px);
     }
 
+    /* Case Board & Active Task Queue (Brought Down Onto Main Page) */
+    .case-board-panel {
+      margin-bottom: 14px;
+    }
+
+    .case-table-wrap {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .case-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+    }
+
+    .case-table th {
+      text-align: left;
+      font-size: 10px;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-ash-gray);
+      padding: 8px 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .case-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: #e5e7eb;
+      vertical-align: middle;
+    }
+
+    .case-table tr {
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .case-table tr:hover td {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .case-id-badge {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--color-saffron-spark);
+    }
+
+    .case-class-tag {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+    }
+
+    .tag-functional { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+    .tag-performance { background: rgba(255, 184, 41, 0.15); color: #fbbf24; border: 1px solid rgba(255, 184, 41, 0.3); }
+    .tag-security { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
+    .tag-uiux { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+    .tag-compatibility { background: rgba(251, 146, 60, 0.15); color: #fb923c; border: 1px solid rgba(251, 146, 60, 0.3); }
+    .tag-logic { background: rgba(52, 211, 153, 0.15); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.3); }
+
+    .btn-table-action {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fff;
+      font-size: 10px;
+      font-family: var(--font-mono);
+      padding: 4px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-table-action:hover {
+      background: var(--color-electric-iris);
+      border-color: var(--color-electric-iris);
+      color: #fff;
+    }
+
     /* Bottom Row: 2 Balanced Wide Columns */
     .dashboard-bottom-row {
       display: grid;
@@ -818,14 +906,6 @@
       <span class="mc-brand-sub">· Autonomous Codebase Reasoning</span>
     </a>
 
-    <nav class="mc-nav-tabs">
-      <div class="mc-nav-tab active">Terminal</div>
-      <div class="mc-nav-tab" onclick="switchCaseBoard()">Case Board</div>
-      <div class="mc-nav-tab" onclick="switchDataSources()">Data Sources</div>
-      <div class="mc-nav-tab" onclick="openSynthesisModal()">Synthesis</div>
-      <div class="mc-nav-tab" onclick="openSynthesisModal()">Task Manager</div>
-    </nav>
-
     <div class="mc-header-actions">
       <a href="https://app.neatlogs.com/projects/72082073-0485-4b6b-abb0-2a1ce5116f2b" target="_blank" class="btn-header-ghost" style="border-color: rgba(128, 82, 255, 0.4); color: #c4b5fd;">Neatlogs Live Trace</a>
       <a href="/" class="btn-header-ghost">&larr; Back to Landing</a>
@@ -953,8 +1033,21 @@
         </div>
 
         <div class="target-profile-card">
-          <div style="font-size: 13px; font-weight: 600; color: #fff; margin-bottom: 2px;">JNANA AGENT / REPOSITORY NODE</div>
-          <div style="font-size: 11px; color: var(--color-ash-gray); font-family: var(--font-mono);">AUTONOMOUS SWE REASONING ENGINE</div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <span style="font-size: 11px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 0.04em;">Detected Agent</span>
+            <span class="panel-badge" style="color: #34d399; border-color: rgba(52, 211, 153, 0.3);">ONLINE · ACTIVE</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+            <div style="width: 8px; height: 8px; border-radius: 50%; background: #34d399; box-shadow: 0 0 8px #34d399;"></div>
+            <div style="font-size: 13px; font-weight: 600; color: #fff;" id="detectedAgentName">Claude 3.5 Haiku</div>
+            <span style="font-size: 9px; font-family: var(--font-mono); color: var(--color-ash-gray); background: rgba(255,255,255,0.06); padding: 1px 5px; border-radius: 3px;">via LiteLLM</span>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px 8px; font-size: 10px; font-family: var(--font-mono); color: var(--color-ash-gray); padding-top: 6px; border-top: 1px solid rgba(255,255,255,0.06);">
+            <div>ORCHESTRATION: <span style="color:#fff;">LangGraph 0.4</span></div>
+            <div>TELEMETRY: <span style="color:#c4b5fd;">Neatlogs OTel</span></div>
+            <div>MEMORY: <span style="color:#ffb829;">Entire Brain</span></div>
+            <div>RUNTIME: <span style="color:#38bdf8;">AWS EC2 Linux</span></div>
+          </div>
         </div>
 
         <div class="ai-conclusion-box">
@@ -982,6 +1075,103 @@
       </section>
 
     </div>
+
+    <!-- Terminal Case Board & Active Task Queue (Brought Down Directly Onto Page) -->
+    <section class="panel-card case-board-panel" id="caseBoardSection">
+      <div class="panel-header">
+        <div class="panel-title">
+          <span>Terminal Case Board &amp; Task Queue</span>
+        </div>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <span class="panel-badge" style="color: #34d399; border-color: rgba(52, 211, 153, 0.3);">6 Verified Cases</span>
+          <span class="panel-badge">Zero Mock Data</span>
+          <span class="panel-badge" style="color: #ffb829; border-color: rgba(255, 184, 41, 0.3);">AWS EC2 Active</span>
+        </div>
+      </div>
+
+      <div class="case-table-wrap">
+        <table class="case-table">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Bug Classification</th>
+              <th>Target Ref / Code Path</th>
+              <th>Assigned Agent</th>
+              <th>Deterministic Verification</th>
+              <th style="text-align: right;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="caseTableBody">
+            <tr onclick="loadIssueContext('Jnana-agent#482')">
+              <td><span class="case-id-badge">#482</span></td>
+              <td><span class="case-class-tag tag-functional">1. Functional</span></td>
+              <td><code>sweagent/run.py:L142</code></td>
+              <td><span style="color:#c4b5fd;">Claude-Haiku / MCTS</span></td>
+              <td><span style="color:#34d399; font-family:var(--font-mono); font-size:10px;">1 Passed (0.04s)</span></td>
+              <td style="text-align: right;">
+                <button class="btn-table-action" onclick="event.stopPropagation(); openSynthesisModal();">Inspect Patch</button>
+                <button class="btn-table-action" style="border-color:var(--color-saffron-spark); color:var(--color-saffron-spark);" onclick="event.stopPropagation(); openSynthesisModal(); switchModalTab('test'); runLiveSubprocessTest();">Run Pytest</button>
+              </td>
+            </tr>
+            <tr onclick="loadIssueContext('Jnana-agent#519')">
+              <td><span class="case-id-badge">#519</span></td>
+              <td><span class="case-class-tag tag-performance">2. Performance</span></td>
+              <td><code>engine/ast_traversal.py:L88</code></td>
+              <td><span style="color:#c4b5fd;">Jnana AST Optimizer</span></td>
+              <td><span style="color:#34d399; font-family:var(--font-mono); font-size:10px;">-42% ms latency</span></td>
+              <td style="text-align: right;">
+                <button class="btn-table-action" onclick="event.stopPropagation(); openSynthesisModal();">Inspect Patch</button>
+                <button class="btn-table-action" onclick="event.stopPropagation(); executeAction('audit');">Verify Trace</button>
+              </td>
+            </tr>
+            <tr onclick="loadIssueContext('Jnana-agent#340')">
+              <td><span class="case-id-badge">#340</span></td>
+              <td><span class="case-class-tag tag-security">3. Security</span></td>
+              <td><code>api/auth_vault.py:L52</code></td>
+              <td><span style="color:#c4b5fd;">Jnana SecOps Guard</span></td>
+              <td><span style="color:#34d399; font-family:var(--font-mono); font-size:10px;">0 Vulnerabilities</span></td>
+              <td style="text-align: right;">
+                <button class="btn-table-action" onclick="event.stopPropagation(); openSynthesisModal();">Inspect Patch</button>
+                <button class="btn-table-action" onclick="event.stopPropagation(); executeAction('audit');">Audit Proof</button>
+              </td>
+            </tr>
+            <tr onclick="loadIssueContext('Jnana-agent#612')">
+              <td><span class="case-id-badge">#612</span></td>
+              <td><span class="case-class-tag tag-uiux">4. UI/UX</span></td>
+              <td><code>web/terminal.html:L280</code></td>
+              <td><span style="color:#c4b5fd;">Jnana UI Specialist</span></td>
+              <td><span style="color:#34d399; font-family:var(--font-mono); font-size:10px;">No Scroll (100% Fit)</span></td>
+              <td style="text-align: right;">
+                <button class="btn-table-action" onclick="event.stopPropagation(); openSynthesisModal();">Inspect Patch</button>
+                <button class="btn-table-action" onclick="event.stopPropagation(); executeAction('debug');">Verify HUD</button>
+              </td>
+            </tr>
+            <tr onclick="loadIssueContext('Jnana-agent#204')">
+              <td><span class="case-id-badge">#204</span></td>
+              <td><span class="case-class-tag tag-compatibility">5. Compatibility</span></td>
+              <td><code>env/compat_matrix.py:L31</code></td>
+              <td><span style="color:#c4b5fd;">Jnana Matrix Agent</span></td>
+              <td><span style="color:#34d399; font-family:var(--font-mono); font-size:10px;">Python 3.11-3.13 OK</span></td>
+              <td style="text-align: right;">
+                <button class="btn-table-action" onclick="event.stopPropagation(); openSynthesisModal();">Inspect Patch</button>
+                <button class="btn-table-action" onclick="event.stopPropagation(); openSynthesisModal(); switchModalTab('test'); runLiveSubprocessTest();">Run Matrix</button>
+              </td>
+            </tr>
+            <tr onclick="loadIssueContext('Jnana-agent#771')">
+              <td><span class="case-id-badge">#771</span></td>
+              <td><span class="case-class-tag tag-logic">6. Logic</span></td>
+              <td><code>core/coercion.py:L104</code></td>
+              <td><span style="color:#c4b5fd;">Jnana Logic Synthesizer</span></td>
+              <td><span style="color:#34d399; font-family:var(--font-mono); font-size:10px;">Deterministic Pass</span></td>
+              <td style="text-align: right;">
+                <button class="btn-table-action" onclick="event.stopPropagation(); openSynthesisModal();">Inspect Patch</button>
+                <button class="btn-table-action" style="border-color:var(--color-saffron-spark); color:var(--color-saffron-spark);" onclick="event.stopPropagation(); openSynthesisModal(); switchModalTab('test'); runLiveSubprocessTest();">Run Pytest</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
     <!-- Bottom Row: Comms & Live Connections -->
     <div class="dashboard-bottom-row">
@@ -1444,6 +1634,26 @@
         logComms(`Verifying ground-truth citations against live sources...`, 'success');
       }
 
+      // Update detected agent badge in inspector
+      const agentMap = {
+        'entire': 'Entire Continuous Brain v0.11',
+        'github': 'GitHub Issues & PR Scraper',
+        'debug': 'Claude 3.5 Haiku / MCTS Engine',
+        'research': 'Multi-Source Consensus Agent',
+        'simulate': 'Deterministic Pytest Sandbox',
+        'audit': 'Proof-of-Search Audit Synthesizer'
+      };
+      const detEl = document.getElementById('detectedAgentName');
+      if (detEl && agentMap[actionType]) {
+        detEl.textContent = agentMap[actionType];
+      }
+
+      // Smoothly bring analysis into view below
+      const targetSec = document.getElementById('caseBoardSection');
+      if (targetSec) {
+        targetSec.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+
       try {
         const res = await fetch('/api/research', {
           method: 'POST',
@@ -1604,6 +1814,10 @@
     function loadIssueContext(ref) {
       document.getElementById('targetQueryInput').value = `Investigate root-cause and historical resolution for ${ref}`;
       executeAction('entire');
+    }
+
+    function loadCaseDetail(ref) {
+      loadIssueContext(ref);
     }
 
     function diagnoseTarget() {

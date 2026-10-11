@@ -145,7 +145,7 @@ graph TD
 - [x] Dedicated `/terminal` Mission Control workstation launched.
 - [x] 6-Axis Bug Assessment Radar integrated.
 - [x] All emojis removed for sleek, monolithic aesthetic.
-- [x] All 22 automated unit & integration tests passing.
-- [ ] Deploy live to public AWS EC2 / Fly.io instance.
+- [x] All 24 automated unit & integration tests passing.
+- [x] Deploy live to public AWS EC2 production instance (http://34.227.107.171:8000/terminal, systemd `proofsearch.service` active in `us-east-1`).
 - [ ] Record 2-3 minute demo video demonstrating live issue resolution.
 - [ ] Submit PRD, GitHub repository, and live URL on Devpost / neatHack portal.
