@@ -1222,12 +1222,925 @@
     .diff-line.add { color: #34d399; background: rgba(52, 211, 153, 0.1); }
     .diff-line.del { color: #f87171; background: rgba(248, 113, 113, 0.1); }
     .diff-line.hdr { color: #c4b5fd; font-weight: 700; }
+
+    /* ========================================================
+       NEATLOGS HIGH-FIDELITY APP LAYOUT & THEME
+       ======================================================== */
+    #ambientBgCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .neat-app-layout {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: radial-gradient(circle at 65% 30%, rgba(20, 24, 38, 0.45) 0%, rgba(5, 6, 10, 0.95) 70%, #030407 100%);
+    }
+
+    /* Left Fixed Sidebar */
+    .neat-sidebar {
+      width: 250px;
+      min-width: 250px;
+      height: 100vh;
+      background: #08090f;
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      user-select: none;
+      z-index: 10;
+      transition: width 0.2s ease;
+    }
+
+    .neat-sidebar-header {
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .neat-project-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .neat-project-avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: #1e2029;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .neat-project-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: #f1f2f6;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 130px;
+    }
+
+    /* Switcher Pills (console / chats) */
+    .neat-sidebar-pills {
+      margin: 12px 14px 8px 14px;
+      padding: 3px;
+      background: #11131c;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+      display: flex;
+      gap: 2px;
+    }
+
+    .neat-pill-btn {
+      flex: 1;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 500;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+      color: #8b92a4;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .neat-pill-btn:hover {
+      color: #fff;
+    }
+
+    .neat-pill-btn.active {
+      background: #1e2130;
+      color: #ffffff;
+      font-weight: 600;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+    }
+
+    /* Sidebar Navigation Links */
+    .neat-nav-list {
+      padding: 6px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .neat-nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      color: #9299a9;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .neat-nav-item:hover {
+      background: rgba(255, 255, 255, 0.04);
+      color: #ffffff;
+    }
+
+    .neat-nav-item.active {
+      background: rgba(255, 255, 255, 0.07);
+      color: #ffffff;
+      font-weight: 500;
+    }
+
+    .neat-nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .neat-nav-badge {
+      font-size: 10px;
+      font-family: var(--font-mono);
+      background: rgba(255, 255, 255, 0.08);
+      padding: 1px 6px;
+      border-radius: 4px;
+      color: #a0a6b5;
+    }
+
+    /* Sidebar Chat History Section */
+    .neat-chats-subnav {
+      padding: 8px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .neat-new-chat-btn {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #fff;
+      padding: 7px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.15s ease;
+    }
+
+    .neat-new-chat-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.16);
+    }
+
+    .neat-chats-group-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: #5d6373;
+      text-transform: lowercase;
+      margin-top: 10px;
+      padding-left: 6px;
+    }
+
+    .neat-chat-history-item {
+      font-size: 12px;
+      color: #8b92a4;
+      padding: 6px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: background 0.15s;
+    }
+
+    .neat-chat-history-item:hover {
+      background: rgba(255, 255, 255, 0.04);
+      color: #fff;
+    }
+
+    /* Sidebar Footer / User Row */
+    .neat-sidebar-footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .neat-activity-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #8b92a4;
+      padding: 4px 6px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .neat-activity-row:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .neat-user-profile-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4px 6px;
+    }
+
+    .neat-user-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .neat-user-avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #8052ff;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .neat-user-name {
+      font-size: 12.5px;
+      color: #f1f2f6;
+      font-weight: 500;
+      max-width: 100px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Main Container (Views) */
+    .neat-main-container {
+      flex: 1;
+      height: 100vh;
+      overflow-y: auto;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* CHATS VIEW: Hero & Grand Search Pill */
+    #neatViewChats {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 70px 24px 60px 24px;
+      position: relative;
+    }
+
+    .neat-hero-greet {
+      font-size: 38px;
+      font-weight: 600;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+      text-align: center;
+    }
+
+    .neat-hero-sub {
+      font-size: 15px;
+      color: #868c9c;
+      margin-bottom: 32px;
+      text-align: center;
+    }
+
+    /* Grand Search Pill Box */
+    .neat-pill-box {
+      width: 100%;
+      max-width: 740px;
+      background: rgba(16, 17, 24, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 24px;
+      padding: 16px 20px 12px 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.65), 0 0 1px 1px rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(24px);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .neat-pill-box:focus-within {
+      border-color: rgba(128, 82, 255, 0.5);
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.75), 0 0 24px rgba(128, 82, 255, 0.2);
+    }
+
+    .neat-pill-textarea {
+      width: 100%;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #f1f2f6;
+      font-family: var(--font-main);
+      font-size: 15px;
+      line-height: 1.5;
+      resize: none;
+      min-height: 48px;
+      max-height: 160px;
+    }
+
+    .neat-pill-textarea::placeholder {
+      color: #5c6273;
+    }
+
+    .neat-pill-bottom-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .neat-pill-toolbar-left,
+    .neat-pill-toolbar-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .neat-chip-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      color: #a4abbd;
+      font-size: 11.5px;
+      padding: 4px 10px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.15s;
+    }
+
+    .neat-chip-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+    }
+
+    .neat-chip-btn.active {
+      background: rgba(128, 82, 255, 0.15);
+      border-color: rgba(128, 82, 255, 0.4);
+      color: #c4b5fd;
+    }
+
+    .neat-send-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #2b2e3d;
+      border: none;
+      color: #a4abbd;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+    }
+
+    .neat-send-btn:hover {
+      background: #8052ff;
+      color: #fff;
+      transform: scale(1.05);
+    }
+
+    /* Suggestion Prompts below Pill */
+    .neat-suggestions-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 40px;
+    }
+
+    .neat-suggest-link {
+      font-size: 13px;
+      color: #7b8294;
+      cursor: pointer;
+      transition: color 0.15s;
+      background: none;
+      border: none;
+      text-decoration: none;
+    }
+
+    .neat-suggest-link strong {
+      color: #e5e7eb;
+      font-weight: 600;
+    }
+
+    .neat-suggest-link:hover {
+      color: #c4b5fd;
+    }
+
+    /* Model Dropdown Menu */
+    .neat-model-menu {
+      display: none;
+      position: absolute;
+      right: 20px;
+      bottom: 55px;
+      width: 250px;
+      background: #11131c;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      padding: 6px;
+      z-index: 100;
+    }
+
+    .neat-model-menu.active {
+      display: block;
+    }
+
+    .neat-model-opt {
+      padding: 8px 10px;
+      font-size: 12px;
+      color: #9ca3af;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .neat-model-opt:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+    }
+
+    .neat-model-opt.selected {
+      color: #fff;
+      font-weight: 600;
+    }
   </style>
 </head>
 <body>
-  <div class="bg-grid"></div>
+  <canvas id="ambientBgCanvas"></canvas>
 
-  <!-- Top Main Navigation Bar -->
+  <div class="neat-app-layout">
+    <!-- Left Fixed Sidebar (Neatlogs Aesthetic) -->
+    <aside class="neat-sidebar" id="neatSidebar">
+      <div>
+        <!-- Top Project Header -->
+        <div class="neat-sidebar-header">
+          <div class="neat-project-badge" onclick="switchNeatView('chats')" title="Jnana Agent · Vincci001 (neatHack 2026)">
+            <div class="neat-project-avatar">S</div>
+            <div class="neat-project-name">Ibochi's project</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; color: #6b7280; font-size: 13px;">
+            <span style="cursor: pointer;" title="Switch Project">⇅</span>
+            <span style="cursor: pointer;" onclick="toggleNeatSidebar()" title="Toggle Sidebar Width">◫</span>
+          </div>
+        </div>
+
+        <!-- Switcher Pills: console | chats -->
+        <div class="neat-sidebar-pills">
+          <button id="pillBtnConsole" class="neat-pill-btn" onclick="switchNeatView('console')">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            console
+          </button>
+          <button id="pillBtnChats" class="neat-pill-btn active" onclick="switchNeatView('chats')">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            chats
+          </button>
+        </div>
+
+        <!-- Links when CONSOLE is active -->
+        <nav class="neat-nav-list" id="neatConsoleNav" style="display: none;">
+          <div class="neat-nav-item active" onclick="switchNeatView('console')">
+            <div class="neat-nav-left">
+              <span>🚀</span>
+              <span>setup</span>
+            </div>
+            <span class="neat-nav-badge">1/2</span>
+          </div>
+          <div class="neat-nav-item" onclick="switchNeatView('console')">
+            <div class="neat-nav-left">
+              <span>🏠</span>
+              <span>home</span>
+            </div>
+          </div>
+          <div class="neat-nav-item" onclick="switchNeatView('console'); filterBugCategory('Functional Bugs');">
+            <div class="neat-nav-left">
+              <span>🔧</span>
+              <span>incidents</span>
+            </div>
+          </div>
+          <a class="neat-nav-item" href="https://app.neatlogs.com/projects/72082073-0485-4b6b-abb0-2a1ce5116f2b" target="_blank">
+            <div class="neat-nav-left">
+              <span>≡</span>
+              <span>traces</span>
+            </div>
+            <span class="neat-nav-badge" style="color: #34d399;">LIVE</span>
+          </a>
+          <div class="neat-nav-item" onclick="switchNeatView('console'); openSynthesisModal();">
+            <div class="neat-nav-left">
+              <span>🎯</span>
+              <span>detections</span>
+            </div>
+          </div>
+          <div class="neat-nav-item" onclick="switchNeatView('console'); executeAction('audit');">
+            <div class="neat-nav-left">
+              <span>🔔</span>
+              <span>alerts</span>
+            </div>
+          </div>
+          <div class="neat-nav-item" onclick="switchNeatView('console')">
+            <div class="neat-nav-left">
+              <span>📊</span>
+              <span>analytics</span>
+            </div>
+          </div>
+          <div class="neat-nav-item" onclick="switchNeatView('console'); openSynthesisModal(); switchModalTab('test'); runLiveSubprocessTest();">
+            <div class="neat-nav-left">
+              <span>📋</span>
+              <span>evals</span>
+            </div>
+          </div>
+          <div class="neat-nav-item" onclick="switchNeatView('console')">
+            <div class="neat-nav-left">
+              <span>🧪</span>
+              <span>experiments</span>
+            </div>
+            <span class="neat-nav-badge" style="color: #8052ff;">beta &rsaquo;</span>
+          </div>
+        </nav>
+
+        <!-- Links when CHATS is active -->
+        <div class="neat-chats-subnav" id="neatChatsNav">
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 2px 4px;">
+            <span style="font-size: 11px; font-weight: 600; color: #5d6373;">chats</span>
+            <span style="cursor: pointer; color: #8b92a4; font-size: 12px;" title="Search sessions">🔍</span>
+          </div>
+          <button class="neat-new-chat-btn" onclick="startNewNeatChat()">
+            <span style="font-size: 14px;">+</span>
+            <span>New chat</span>
+          </button>
+          <div class="neat-chats-group-title">today</div>
+          <div class="neat-chat-history-item" onclick="loadSampleVibeAndSubmit('type_arg')">Troubleshooting high error rate</div>
+          <div class="neat-chat-history-item" onclick="loadLiveNeatlogsAndSubmit()">Jnana-agent#482: TypeError in run.py</div>
+          <div class="neat-chat-history-item" onclick="loadSampleVibeAndSubmit('db_missing')">Missing DB connection pool</div>
+          <div class="neat-chat-history-item" onclick="loadSampleVibeAndSubmit('route_404')">Missing backend route handler</div>
+        </div>
+      </div>
+
+      <!-- Bottom Sidebar Footer: activity & user row -->
+      <div class="neat-sidebar-footer">
+        <div class="neat-activity-row" onclick="switchNeatView('console')">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span>🔔</span>
+            <span>activity</span>
+          </div>
+          <span class="neat-nav-badge" style="background: rgba(128, 82, 255, 0.25); color: #c4b5fd;">1</span>
+        </div>
+
+        <div class="neat-user-profile-row">
+          <div class="neat-user-pill" title="Lead: Ibochi Vincent (Vincci001)">
+            <div class="neat-user-avatar">I</div>
+            <div class="neat-user-name">Ibochi Vin...</div>
+            <span style="font-size: 10px; color: #6b7280;">^</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; color: #8b92a4;">
+            <span style="cursor: pointer;" title="System Settings" onclick="openSynthesisModal()">⚙️</span>
+            <span style="cursor: pointer;" title="Toggle Dark/Light Mode" onclick="toggleNeatTheme()">🌙</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Dynamic Container -->
+    <main class="neat-main-container" id="neatMainContainer">
+      
+      <!-- 1. CHATS VIEW (Default Landing) -->
+      <div id="neatViewChats">
+        <h1 class="neat-hero-greet">hello, Ibochi</h1>
+        <p class="neat-hero-sub">find anything about your agent runs, debug code &amp; visualize issues</p>
+
+        <!-- Grand Search Pill Box -->
+        <div class="neat-pill-box">
+          <textarea id="neatSearchInput" class="neat-pill-textarea" placeholder="Ask anything...." rows="2" onkeydown="handleNeatSearchKeydown(event)"></textarea>
+
+          <div class="neat-pill-bottom-toolbar">
+            <div class="neat-pill-toolbar-left">
+              <button class="neat-chip-btn" onclick="toggleNeatScreenshotDropzone()" title="Attach screenshot or error log">
+                <span>+</span>
+              </button>
+              <button class="neat-chip-btn" id="neatWorkflowBtn">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><path d="M13 6h3a2 2 0 0 1 2 2v7"></path><line x1="6" y1="9" x2="6" y2="21"></line></svg>
+                All workflows ▾
+              </button>
+              <button class="neat-chip-btn">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                Last 14 days ▾
+              </button>
+              <button class="neat-chip-btn" id="neatDeepChip" onclick="this.classList.toggle('active')" title="Deep Multi-Source Grounding">
+                <span>⚡ Deep</span>
+              </button>
+            </div>
+
+            <div class="neat-pill-toolbar-right">
+              <div style="position: relative;">
+                <button class="neat-chip-btn" id="neatModelSelectorBtn" onclick="toggleNeatModelMenu()">
+                  <span style="font-weight: 700; color: #c4b5fd;">nl</span>
+                  <span id="selectedNeatModelText">Neatlogs Fast</span>
+                  <span>▾</span>
+                </button>
+
+                <div class="neat-model-menu" id="neatModelMenu">
+                  <div style="font-size: 10px; color: #6b7280; padding: 4px 10px; font-weight: 600;">ACTIVE INFERENCE MODELS</div>
+                  <div class="neat-model-opt selected" onclick="selectNeatModel('Neatlogs Fast', 'fast')">
+                    <span>nl Neatlogs Fast</span>
+                    <span style="color: #34d399;">✓</span>
+                  </div>
+                  <div class="neat-model-opt" onclick="selectNeatModel('Neatlogs Pro', 'pro')">
+                    <span>nl Neatlogs Pro</span>
+                  </div>
+                  <div class="neat-model-opt" onclick="selectNeatModel('Claude 3.5 Sonnet', 'claude-sonnet')">
+                    <span>⚡ Claude 3.5 Sonnet</span>
+                  </div>
+                  <div class="neat-model-opt" onclick="selectNeatModel('Claude 3.5 Haiku', 'claude-haiku')">
+                    <span>⚡ Claude 3.5 Haiku</span>
+                  </div>
+                  <div class="neat-model-opt" onclick="selectNeatModel('Gemini 1.5 Pro', 'gemini-pro')">
+                    <span>✨ Gemini 1.5 Pro</span>
+                  </div>
+                </div>
+              </div>
+
+              <button class="neat-send-btn" id="neatSearchSubmitBtn" onclick="executeNeatSearchSubmit()" title="Submit Query / Diagnose Issue">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Suggestion links below pill -->
+        <div class="neat-suggestions-wrap">
+          <button class="neat-suggest-link" onclick="loadSampleVibeAndSubmit('type_arg')">
+            <strong>Analyze</strong> API parameter coercion &amp; type limits
+          </button>
+          <button class="neat-suggest-link" onclick="loadLiveNeatlogsAndSubmit()">
+            <strong>What</strong> is the failure point in Jnana-agent#482?
+          </button>
+          <button class="neat-suggest-link" onclick="loadSampleVibeAndSubmit('db_missing')">
+            <strong>Visualize</strong> missing database connection pool &amp; routes
+          </button>
+        </div>
+
+        <!-- Integrated 4-Step Visual Code Explainer & Debugger Studio -->
+            <!-- Vibe Coder Visualizer Studio (4-Step Flowchart & Explainer) -->
+    <section class="panel-card vibe-panel" id="vibeVisualizerSection" style="display: block; width: 100%; max-width: 900px; margin-bottom: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.6);">
+      <div class="panel-header">
+        <div class="panel-title">
+          <span>Visual Code Explainer &amp; Debugger for Vibe Coders</span>
+        </div>
+        <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+          <span class="panel-badge" style="color: var(--color-electric-iris); border-color: rgba(128, 82, 255, 0.4);">4-STEP PIPELINE</span>
+          <span class="panel-badge" style="color: #34d399; border-color: rgba(52, 211, 153, 0.3);">ZERO MOCK DATA</span>
+          <span class="panel-badge" style="color: #ffb829; border-color: rgba(255, 184, 41, 0.3);">NEATLOGS DETECT</span>
+          <span class="panel-badge" style="color: #38bdf8; border-color: rgba(56, 189, 248, 0.3);">MERMAID.JS 10</span>
+        </div>
+      </div>
+
+      <!-- 4-Step Stepper Header -->
+      <div class="vibe-stepper">
+        <div class="vibe-step-tab active" id="vibeStepTab1" onclick="switchVibeStepView(1)">
+          <div class="vibe-step-num"><span>STEP 01</span><span class="step-status-icon">●</span></div>
+          <div class="vibe-step-title">Submit Problem</div>
+          <div class="vibe-step-desc">Paste error, code, image, or telemetry</div>
+        </div>
+        <div class="vibe-step-tab" id="vibeStepTab2" onclick="switchVibeStepView(2)">
+          <div class="vibe-step-num"><span>STEP 02</span><span class="step-status-icon">○</span></div>
+          <div class="vibe-step-title">Explain What Broke</div>
+          <div class="vibe-step-desc">Plain English diagnosis &amp; what is lacking</div>
+        </div>
+        <div class="vibe-step-tab" id="vibeStepTab3" onclick="switchVibeStepView(3)">
+          <div class="vibe-step-num"><span>STEP 03</span><span class="step-status-icon">○</span></div>
+          <div class="vibe-step-title">Visual Explanation</div>
+          <div class="vibe-step-desc">Flowchart &amp; architecture blueprint</div>
+        </div>
+        <div class="vibe-step-tab" id="vibeStepTab4" onclick="switchVibeStepView(4)">
+          <div class="vibe-step-num"><span>STEP 04</span><span class="step-status-icon">○</span></div>
+          <div class="vibe-step-title">Show The Fix &amp; Test</div>
+          <div class="vibe-step-desc">Corrected code, pytest &amp; 1-click PR</div>
+        </div>
+      </div>
+
+      <!-- STEP 1 VIEW: Submit Problem -->
+      <div id="vibeStepView1" class="vibe-step-content">
+        <!-- Input Format Tabs -->
+        <div class="vibe-input-tabs">
+          <button class="vibe-input-btn active" id="vibeTabBtnError" onclick="switchVibeInputMode('error')">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+            Error Message / Traceback
+          </button>
+          <button class="vibe-input-btn" id="vibeTabBtnCode" onclick="switchVibeInputMode('code')">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+            Broken Code
+          </button>
+          <button class="vibe-input-btn" id="vibeTabBtnImage" onclick="switchVibeInputMode('image')">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+            Upload Screenshot
+          </button>
+          <button class="vibe-input-btn" id="vibeTabBtnGithub" onclick="switchVibeInputMode('github')">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            GitHub Issue
+          </button>
+          <button class="vibe-input-btn" id="vibeTabBtnNeatlogs" onclick="switchVibeInputMode('neatlogs'); loadLiveNeatlogsIssue();">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+            Live Neatlogs Telemetry
+          </button>
+        </div>
+
+        <!-- Presets Row -->
+        <div class="vibe-presets-row">
+          <span style="font-size: 10px; font-weight: 700; color: var(--color-silver-mist); text-transform: uppercase;">Quick Presets:</span>
+          <button class="vibe-preset-chip" onclick="loadSampleVibeError('db_missing')">Missing DB Pool</button>
+          <button class="vibe-preset-chip" onclick="loadSampleVibeError('type_arg')">TypeError: Coercion Bug</button>
+          <button class="vibe-preset-chip" onclick="loadSampleVibeError('route_404')">Missing Backend Route</button>
+          <button class="vibe-preset-chip" onclick="loadLiveNeatlogsIssue()" style="border-color: #34d399; color: #34d399;">Load Neatlogs Issue</button>
+        </div>
+
+        <!-- Dropzone for Screenshot Upload -->
+        <div id="vibeScreenshotDropzone" class="vibe-dropzone" style="display: none;" onclick="document.getElementById('vibeImageFileInput').click()">
+          <input type="file" id="vibeImageFileInput" accept="image/*" style="display: none;" onchange="handleVibeScreenshotFile(this.files[0])">
+          <div style="font-size: 24px; margin-bottom: 6px;">📸</div>
+          <div style="font-size: 13px; font-weight: 600; color: #fff; margin-bottom: 4px;">Click to upload or drag &amp; drop an error screenshot</div>
+          <div style="font-size: 11px; color: var(--color-ash-gray);">PNG, JPG, or WebP screenshot from terminal, browser console, or IDE</div>
+          <div id="vibeImagePreviewContainer" style="display: none; margin-top: 12px;">
+            <img id="vibeImagePreview" style="max-height: 180px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2);">
+            <div id="vibeImageFilename" style="font-size: 10px; font-family: var(--font-mono); color: #34d399; margin-top: 4px;"></div>
+          </div>
+        </div>
+
+        <!-- Text Input Area -->
+        <div style="margin-bottom: 12px;">
+          <textarea id="vibeInputContent" style="width: 100%; min-height: 140px; background: #030408; border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 12px; font-family: var(--font-mono); font-size: 11.5px; color: #fff; line-height: 1.5; outline: none; resize: vertical;" placeholder="Paste your compiler error message, broken code snippet, or stack trace here..."></textarea>
+        </div>
+
+        <!-- Context & File Path Input -->
+        <div style="display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap;">
+          <div style="flex: 1; min-width: 240px;">
+            <input type="text" id="vibeInputContext" style="width: 100%; background: #030408; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 8px 12px; font-family: var(--font-mono); font-size: 11px; color: #fff; outline: none;" placeholder="Target file or component path (e.g. sweagent/run.py or src/database.py)..." value="sweagent/run.py">
+          </div>
+          <button class="portal-btn primary" id="btnSubmitVibeProblem" onclick="submitVibeProblem()" style="padding: 9px 24px;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            <span id="btnSubmitVibeText">Diagnose &amp; Visualize</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 2 VIEW: Explain What Broke -->
+      <div id="vibeStepView2" class="vibe-step-content" style="display: none;">
+        <div class="vibe-explanation-card">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; gap: 14px; flex-wrap: wrap;">
+            <div>
+              <div style="font-size: 10px; font-family: var(--font-mono); font-weight: 700; color: #c4b5fd; text-transform: uppercase; margin-bottom: 4px;">Step 2 · Plain-English Diagnosis</div>
+              <h3 id="vibeDiagTitle" style="font-size: 18px; font-weight: 600; color: #fff; margin-bottom: 4px;">TypeError in run.py parsing model args</h3>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span id="vibeAffectedCode" style="font-family: var(--font-mono); font-size: 11px; color: #38bdf8; background: rgba(56, 189, 248, 0.1); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(56, 189, 248, 0.3);">sweagent/run.py:L142</span>
+                <span id="vibeLackingBadge" class="vibe-lacking-badge lacking-type">TYPE COERCION</span>
+              </div>
+            </div>
+            <button class="btn-table-action" onclick="switchVibeStepView(3)" style="border-color: var(--color-electric-iris); color: #fff; background: rgba(128, 82, 255, 0.2);">Next: View Flowchart ➔</button>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <div style="font-size: 11px; font-weight: 700; color: var(--color-saffron-spark); text-transform: uppercase; margin-bottom: 6px;">Simple Explanation (No Compiler Jargon)</div>
+            <p id="vibeSimpleExplanation" style="font-size: 13px; line-height: 1.6; color: #e5e7eb; background: rgba(255,255,255,0.02); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06);">
+              The command-line runner expects model configuration parameters as a key-value dictionary, but received raw string formatting from the CLI parser. When the agent tries to index into it, Python crashes.
+            </p>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px;">
+            <div style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 12px;">
+              <div style="font-size: 10px; font-weight: 800; color: #f87171; text-transform: uppercase; margin-bottom: 4px;">What Is Missing / Lacking:</div>
+              <div id="vibeWhatIsLacking" style="font-size: 12px; color: #fca5a5; line-height: 1.5;">
+                Dictionary parsing and type coercion step before passing CLI parameters to ModelConfig.
+              </div>
+            </div>
+            <div style="background: rgba(255, 184, 41, 0.05); border: 1px solid rgba(255, 184, 41, 0.2); border-radius: 8px; padding: 12px;">
+              <div style="font-size: 10px; font-weight: 800; color: var(--color-saffron-spark); text-transform: uppercase; margin-bottom: 4px;">What It Causes (Impact):</div>
+              <div id="vibeWhatItCauses" style="font-size: 12px; color: #fde68a; line-height: 1.5;">
+                Batch runner crashes immediately upon startup before executing any agent tasks.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3 VIEW: Visual Explanation & Flowchart -->
+      <div id="vibeStepView3" class="vibe-step-content" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
+          <div>
+            <div style="font-size: 10px; font-family: var(--font-mono); font-weight: 700; color: #34d399; text-transform: uppercase;">Step 3 · System Architecture &amp; Failure Point</div>
+            <div style="font-size: 13px; font-weight: 600; color: #fff;">Interactive Mermaid Flowchart</div>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn-table-action" onclick="copyVibeMermaidCode()">Copy Diagram DSL</button>
+            <button class="btn-table-action" onclick="switchVibeStepView(4)" style="border-color: var(--color-electric-iris); color: #fff; background: rgba(128, 82, 255, 0.2);">Next: See The Fix ➔</button>
+          </div>
+        </div>
+
+        <!-- Mermaid Flowchart Container -->
+        <div class="vibe-mermaid-container" id="vibeMermaidContainer">
+          <div id="vibeMermaidOutput" style="width: 100%; display: flex; justify-content: center;"></div>
+        </div>
+
+        <!-- Legend for Flowchart -->
+        <div style="display: flex; gap: 16px; justify-content: center; margin-bottom: 16px; font-size: 10.5px; font-family: var(--font-mono);">
+          <div style="display: flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #15846e; display: inline-block;"></span> Healthy Component</div>
+          <div style="display: flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #ffb829; display: inline-block;"></span> Missing / Lacking Service</div>
+          <div style="display: flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #ef4444; display: inline-block;"></span> Exact Failure Point</div>
+        </div>
+
+        <!-- System Architecture Blueprint Grid -->
+        <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--color-silver-mist); margin-bottom: 8px;">
+          System Component Health &amp; Telemetry Cards
+        </div>
+        <div class="vibe-blueprint-grid" id="vibeBlueprintGrid">
+          <!-- Dynamically populated component cards -->
+        </div>
+      </div>
+
+      <!-- STEP 4 VIEW: Show The Fix & Test -->
+      <div id="vibeStepView4" class="vibe-step-content" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <div style="font-size: 10px; font-family: var(--font-mono); font-weight: 700; color: #38bdf8; text-transform: uppercase;">Step 4 · Verified AST Code Fix</div>
+            <div style="font-size: 14px; font-weight: 600; color: #fff;">Corrected Code with 1-Click Pytest &amp; PR</div>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn-table-action" onclick="copyVibeFixedCode()">Copy Corrected Code</button>
+            <button class="btn-table-action" style="border-color: var(--color-saffron-spark); color: var(--color-saffron-spark);" onclick="runVibeTestReproduction()">Run Test Reproduction</button>
+            <button class="btn-table-action" style="border-color: var(--color-electric-iris); color: #fff; background: rgba(128, 82, 255, 0.2);" onclick="createVibePR()">1-Click GitHub PR</button>
+          </div>
+        </div>
+
+        <!-- Code Block -->
+        <div style="margin-bottom: 14px;">
+          <pre class="vibe-code-box" id="vibeFixedCodeBox"></pre>
+        </div>
+
+        <!-- Why It Works Card -->
+        <div style="background: rgba(16, 185, 129, 0.05); border: 1px solid var(--color-deep-verdant); border-radius: 8px; padding: 12px; margin-bottom: 14px;">
+          <div style="font-size: 10.5px; font-weight: 700; color: #34d399; text-transform: uppercase; margin-bottom: 4px;">Why It Works</div>
+          <div id="vibeWhyItWorks" style="font-size: 12px; color: #d1fae5; line-height: 1.5;"></div>
+        </div>
+
+        <!-- Test Verification Output Box -->
+        <div id="vibeTestResultPanel" style="display: none; background: #030408; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 12px; margin-bottom: 14px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <span style="font-size: 11px; font-weight: 700; color: #fff;">Subprocess Test Output</span>
+            <span id="vibeTestBadge" class="panel-badge" style="color: #34d399; border-color: rgba(52,211,153,0.3);">PASSED</span>
+          </div>
+          <pre id="vibeTestOutputText" style="font-family: var(--font-mono); font-size: 10.5px; color: #9ca3af; max-height: 140px; overflow-y: auto; white-space: pre-wrap;"></pre>
+        </div>
+      </div>
+    </section>
+      </div>
+
+      <!-- 2. CONSOLE VIEW (Mission Control Workstation) -->
+      <div id="neatViewConsole" style="display: none; width: 100%; height: 100%; overflow-y: auto;">
+          <!-- Top Main Navigation Bar -->
   <header class="mc-header">
     <a href="/" class="mc-brand">
       <img src="/images/jnana-glyph.png" alt="Jnana Glyph">
@@ -1633,218 +2546,7 @@
       </div>
     </section>
 
-    <!-- Vibe Coder Visualizer Studio (4-Step Flowchart & Explainer) -->
-    <section class="panel-card vibe-panel" id="vibeVisualizerSection" style="display: none; margin-bottom: 14px;">
-      <div class="panel-header">
-        <div class="panel-title">
-          <span>Visual Code Explainer &amp; Debugger for Vibe Coders</span>
-        </div>
-        <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
-          <span class="panel-badge" style="color: var(--color-electric-iris); border-color: rgba(128, 82, 255, 0.4);">4-STEP PIPELINE</span>
-          <span class="panel-badge" style="color: #34d399; border-color: rgba(52, 211, 153, 0.3);">ZERO MOCK DATA</span>
-          <span class="panel-badge" style="color: #ffb829; border-color: rgba(255, 184, 41, 0.3);">NEATLOGS DETECT</span>
-          <span class="panel-badge" style="color: #38bdf8; border-color: rgba(56, 189, 248, 0.3);">MERMAID.JS 10</span>
-        </div>
-      </div>
-
-      <!-- 4-Step Stepper Header -->
-      <div class="vibe-stepper">
-        <div class="vibe-step-tab active" id="vibeStepTab1" onclick="switchVibeStepView(1)">
-          <div class="vibe-step-num"><span>STEP 01</span><span class="step-status-icon">●</span></div>
-          <div class="vibe-step-title">Submit Problem</div>
-          <div class="vibe-step-desc">Paste error, code, image, or telemetry</div>
-        </div>
-        <div class="vibe-step-tab" id="vibeStepTab2" onclick="switchVibeStepView(2)">
-          <div class="vibe-step-num"><span>STEP 02</span><span class="step-status-icon">○</span></div>
-          <div class="vibe-step-title">Explain What Broke</div>
-          <div class="vibe-step-desc">Plain English diagnosis &amp; what is lacking</div>
-        </div>
-        <div class="vibe-step-tab" id="vibeStepTab3" onclick="switchVibeStepView(3)">
-          <div class="vibe-step-num"><span>STEP 03</span><span class="step-status-icon">○</span></div>
-          <div class="vibe-step-title">Visual Explanation</div>
-          <div class="vibe-step-desc">Flowchart &amp; architecture blueprint</div>
-        </div>
-        <div class="vibe-step-tab" id="vibeStepTab4" onclick="switchVibeStepView(4)">
-          <div class="vibe-step-num"><span>STEP 04</span><span class="step-status-icon">○</span></div>
-          <div class="vibe-step-title">Show The Fix &amp; Test</div>
-          <div class="vibe-step-desc">Corrected code, pytest &amp; 1-click PR</div>
-        </div>
-      </div>
-
-      <!-- STEP 1 VIEW: Submit Problem -->
-      <div id="vibeStepView1" class="vibe-step-content">
-        <!-- Input Format Tabs -->
-        <div class="vibe-input-tabs">
-          <button class="vibe-input-btn active" id="vibeTabBtnError" onclick="switchVibeInputMode('error')">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-            Error Message / Traceback
-          </button>
-          <button class="vibe-input-btn" id="vibeTabBtnCode" onclick="switchVibeInputMode('code')">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-            Broken Code
-          </button>
-          <button class="vibe-input-btn" id="vibeTabBtnImage" onclick="switchVibeInputMode('image')">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-            Upload Screenshot
-          </button>
-          <button class="vibe-input-btn" id="vibeTabBtnGithub" onclick="switchVibeInputMode('github')">
-            <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-            GitHub Issue
-          </button>
-          <button class="vibe-input-btn" id="vibeTabBtnNeatlogs" onclick="switchVibeInputMode('neatlogs'); loadLiveNeatlogsIssue();">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
-            Live Neatlogs Telemetry
-          </button>
-        </div>
-
-        <!-- Presets Row -->
-        <div class="vibe-presets-row">
-          <span style="font-size: 10px; font-weight: 700; color: var(--color-silver-mist); text-transform: uppercase;">Quick Presets:</span>
-          <button class="vibe-preset-chip" onclick="loadSampleVibeError('db_missing')">Missing DB Pool</button>
-          <button class="vibe-preset-chip" onclick="loadSampleVibeError('type_arg')">TypeError: Coercion Bug</button>
-          <button class="vibe-preset-chip" onclick="loadSampleVibeError('route_404')">Missing Backend Route</button>
-          <button class="vibe-preset-chip" onclick="loadLiveNeatlogsIssue()" style="border-color: #34d399; color: #34d399;">Load Neatlogs Issue</button>
-        </div>
-
-        <!-- Dropzone for Screenshot Upload -->
-        <div id="vibeScreenshotDropzone" class="vibe-dropzone" style="display: none;" onclick="document.getElementById('vibeImageFileInput').click()">
-          <input type="file" id="vibeImageFileInput" accept="image/*" style="display: none;" onchange="handleVibeScreenshotFile(this.files[0])">
-          <div style="font-size: 24px; margin-bottom: 6px;">📸</div>
-          <div style="font-size: 13px; font-weight: 600; color: #fff; margin-bottom: 4px;">Click to upload or drag &amp; drop an error screenshot</div>
-          <div style="font-size: 11px; color: var(--color-ash-gray);">PNG, JPG, or WebP screenshot from terminal, browser console, or IDE</div>
-          <div id="vibeImagePreviewContainer" style="display: none; margin-top: 12px;">
-            <img id="vibeImagePreview" style="max-height: 180px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2);">
-            <div id="vibeImageFilename" style="font-size: 10px; font-family: var(--font-mono); color: #34d399; margin-top: 4px;"></div>
-          </div>
-        </div>
-
-        <!-- Text Input Area -->
-        <div style="margin-bottom: 12px;">
-          <textarea id="vibeInputContent" style="width: 100%; min-height: 140px; background: #030408; border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 12px; font-family: var(--font-mono); font-size: 11.5px; color: #fff; line-height: 1.5; outline: none; resize: vertical;" placeholder="Paste your compiler error message, broken code snippet, or stack trace here..."></textarea>
-        </div>
-
-        <!-- Context & File Path Input -->
-        <div style="display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap;">
-          <div style="flex: 1; min-width: 240px;">
-            <input type="text" id="vibeInputContext" style="width: 100%; background: #030408; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 8px 12px; font-family: var(--font-mono); font-size: 11px; color: #fff; outline: none;" placeholder="Target file or component path (e.g. sweagent/run.py or src/database.py)..." value="sweagent/run.py">
-          </div>
-          <button class="portal-btn primary" id="btnSubmitVibeProblem" onclick="submitVibeProblem()" style="padding: 9px 24px;">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-            <span id="btnSubmitVibeText">Diagnose &amp; Visualize</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- STEP 2 VIEW: Explain What Broke -->
-      <div id="vibeStepView2" class="vibe-step-content" style="display: none;">
-        <div class="vibe-explanation-card">
-          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; gap: 14px; flex-wrap: wrap;">
-            <div>
-              <div style="font-size: 10px; font-family: var(--font-mono); font-weight: 700; color: #c4b5fd; text-transform: uppercase; margin-bottom: 4px;">Step 2 · Plain-English Diagnosis</div>
-              <h3 id="vibeDiagTitle" style="font-size: 18px; font-weight: 600; color: #fff; margin-bottom: 4px;">TypeError in run.py parsing model args</h3>
-              <div style="display: flex; align-items: center; gap: 8px;">
-                <span id="vibeAffectedCode" style="font-family: var(--font-mono); font-size: 11px; color: #38bdf8; background: rgba(56, 189, 248, 0.1); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(56, 189, 248, 0.3);">sweagent/run.py:L142</span>
-                <span id="vibeLackingBadge" class="vibe-lacking-badge lacking-type">TYPE COERCION</span>
-              </div>
-            </div>
-            <button class="btn-table-action" onclick="switchVibeStepView(3)" style="border-color: var(--color-electric-iris); color: #fff; background: rgba(128, 82, 255, 0.2);">Next: View Flowchart ➔</button>
-          </div>
-
-          <div style="margin-bottom: 16px;">
-            <div style="font-size: 11px; font-weight: 700; color: var(--color-saffron-spark); text-transform: uppercase; margin-bottom: 6px;">Simple Explanation (No Compiler Jargon)</div>
-            <p id="vibeSimpleExplanation" style="font-size: 13px; line-height: 1.6; color: #e5e7eb; background: rgba(255,255,255,0.02); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06);">
-              The command-line runner expects model configuration parameters as a key-value dictionary, but received raw string formatting from the CLI parser. When the agent tries to index into it, Python crashes.
-            </p>
-          </div>
-
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px;">
-            <div style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 12px;">
-              <div style="font-size: 10px; font-weight: 800; color: #f87171; text-transform: uppercase; margin-bottom: 4px;">What Is Missing / Lacking:</div>
-              <div id="vibeWhatIsLacking" style="font-size: 12px; color: #fca5a5; line-height: 1.5;">
-                Dictionary parsing and type coercion step before passing CLI parameters to ModelConfig.
-              </div>
-            </div>
-            <div style="background: rgba(255, 184, 41, 0.05); border: 1px solid rgba(255, 184, 41, 0.2); border-radius: 8px; padding: 12px;">
-              <div style="font-size: 10px; font-weight: 800; color: var(--color-saffron-spark); text-transform: uppercase; margin-bottom: 4px;">What It Causes (Impact):</div>
-              <div id="vibeWhatItCauses" style="font-size: 12px; color: #fde68a; line-height: 1.5;">
-                Batch runner crashes immediately upon startup before executing any agent tasks.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- STEP 3 VIEW: Visual Explanation & Flowchart -->
-      <div id="vibeStepView3" class="vibe-step-content" style="display: none;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
-          <div>
-            <div style="font-size: 10px; font-family: var(--font-mono); font-weight: 700; color: #34d399; text-transform: uppercase;">Step 3 · System Architecture &amp; Failure Point</div>
-            <div style="font-size: 13px; font-weight: 600; color: #fff;">Interactive Mermaid Flowchart</div>
-          </div>
-          <div style="display: flex; gap: 8px;">
-            <button class="btn-table-action" onclick="copyVibeMermaidCode()">Copy Diagram DSL</button>
-            <button class="btn-table-action" onclick="switchVibeStepView(4)" style="border-color: var(--color-electric-iris); color: #fff; background: rgba(128, 82, 255, 0.2);">Next: See The Fix ➔</button>
-          </div>
-        </div>
-
-        <!-- Mermaid Flowchart Container -->
-        <div class="vibe-mermaid-container" id="vibeMermaidContainer">
-          <div id="vibeMermaidOutput" style="width: 100%; display: flex; justify-content: center;"></div>
-        </div>
-
-        <!-- Legend for Flowchart -->
-        <div style="display: flex; gap: 16px; justify-content: center; margin-bottom: 16px; font-size: 10.5px; font-family: var(--font-mono);">
-          <div style="display: flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #15846e; display: inline-block;"></span> Healthy Component</div>
-          <div style="display: flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #ffb829; display: inline-block;"></span> Missing / Lacking Service</div>
-          <div style="display: flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #ef4444; display: inline-block;"></span> Exact Failure Point</div>
-        </div>
-
-        <!-- System Architecture Blueprint Grid -->
-        <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--color-silver-mist); margin-bottom: 8px;">
-          System Component Health &amp; Telemetry Cards
-        </div>
-        <div class="vibe-blueprint-grid" id="vibeBlueprintGrid">
-          <!-- Dynamically populated component cards -->
-        </div>
-      </div>
-
-      <!-- STEP 4 VIEW: Show The Fix & Test -->
-      <div id="vibeStepView4" class="vibe-step-content" style="display: none;">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
-          <div>
-            <div style="font-size: 10px; font-family: var(--font-mono); font-weight: 700; color: #38bdf8; text-transform: uppercase;">Step 4 · Verified AST Code Fix</div>
-            <div style="font-size: 14px; font-weight: 600; color: #fff;">Corrected Code with 1-Click Pytest &amp; PR</div>
-          </div>
-          <div style="display: flex; gap: 8px;">
-            <button class="btn-table-action" onclick="copyVibeFixedCode()">Copy Corrected Code</button>
-            <button class="btn-table-action" style="border-color: var(--color-saffron-spark); color: var(--color-saffron-spark);" onclick="runVibeTestReproduction()">Run Test Reproduction</button>
-            <button class="btn-table-action" style="border-color: var(--color-electric-iris); color: #fff; background: rgba(128, 82, 255, 0.2);" onclick="createVibePR()">1-Click GitHub PR</button>
-          </div>
-        </div>
-
-        <!-- Code Block -->
-        <div style="margin-bottom: 14px;">
-          <pre class="vibe-code-box" id="vibeFixedCodeBox"></pre>
-        </div>
-
-        <!-- Why It Works Card -->
-        <div style="background: rgba(16, 185, 129, 0.05); border: 1px solid var(--color-deep-verdant); border-radius: 8px; padding: 12px; margin-bottom: 14px;">
-          <div style="font-size: 10.5px; font-weight: 700; color: #34d399; text-transform: uppercase; margin-bottom: 4px;">Why It Works</div>
-          <div id="vibeWhyItWorks" style="font-size: 12px; color: #d1fae5; line-height: 1.5;"></div>
-        </div>
-
-        <!-- Test Verification Output Box -->
-        <div id="vibeTestResultPanel" style="display: none; background: #030408; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 12px; margin-bottom: 14px;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-            <span style="font-size: 11px; font-weight: 700; color: #fff;">Subprocess Test Output</span>
-            <span id="vibeTestBadge" class="panel-badge" style="color: #34d399; border-color: rgba(52,211,153,0.3);">PASSED</span>
-          </div>
-          <pre id="vibeTestOutputText" style="font-family: var(--font-mono); font-size: 10.5px; color: #9ca3af; max-height: 140px; overflow-y: auto; white-space: pre-wrap;"></pre>
-        </div>
-      </div>
-    </section>
-
-    <!-- Dynamic Live Execution Stream (Only appears when a task, test, or repo inspection runs) -->
+<!-- Dynamic Live Execution Stream (Only appears when a task, test, or repo inspection runs) -->
     <section class="panel-card live-stream-panel" id="liveExecutionStream" style="display: none;">
       <div class="panel-header">
         <div class="panel-title">
@@ -1859,6 +2561,12 @@
       <div class="stream-log-terminal" id="liveStreamTerminal"></div>
     </section>
   </main>
+      </div>
+
+    </main>
+  </div>
+
+
 
   <!-- Full Synthesis Modal for Code Fix & Verification -->
   <div class="synthesis-modal" id="synthesisModal" onclick="if(event.target===this) closeSynthesisModal()">
@@ -3091,7 +3799,290 @@
     }
 
     // Initialize on load
+    // -------------------------------------------------------------
+    // NEATLOGS UI INTERACTION & AMBIENT CANVAS CONTROLLERS
+    // -------------------------------------------------------------
+    let currentNeatModel = 'Neatlogs Fast';
+
+    function switchNeatView(view) {
+      const chatsView = document.getElementById('neatViewChats');
+      const consoleView = document.getElementById('neatViewConsole');
+      const pillChats = document.getElementById('pillBtnChats');
+      const pillConsole = document.getElementById('pillBtnConsole');
+      const consoleNav = document.getElementById('neatConsoleNav');
+      const chatsNav = document.getElementById('neatChatsNav');
+
+      if (view === 'chats') {
+        if (chatsView) chatsView.style.display = 'flex';
+        if (consoleView) consoleView.style.display = 'none';
+        if (pillChats) pillChats.classList.add('active');
+        if (pillConsole) pillConsole.classList.remove('active');
+        if (consoleNav) consoleNav.style.display = 'none';
+        if (chatsNav) chatsNav.style.display = 'flex';
+      } else {
+        if (chatsView) chatsView.style.display = 'none';
+        if (consoleView) {
+          consoleView.style.display = 'block';
+          setTimeout(() => {
+            drawBugRadar();
+          }, 60);
+        }
+        if (pillChats) pillChats.classList.remove('active');
+        if (pillConsole) pillConsole.classList.add('active');
+        if (consoleNav) consoleNav.style.display = 'flex';
+        if (chatsNav) chatsNav.style.display = 'none';
+      }
+    }
+
+    function toggleNeatSidebar() {
+      const sb = document.getElementById('neatSidebar');
+      if (!sb) return;
+      if (sb.style.width === '64px') {
+        sb.style.width = '250px';
+      } else {
+        sb.style.width = '64px';
+      }
+    }
+
+    function toggleNeatModelMenu() {
+      const m = document.getElementById('neatModelMenu');
+      if (m) m.classList.toggle('active');
+    }
+
+    function selectNeatModel(name, code) {
+      currentNeatModel = name;
+      const label = document.getElementById('selectedNeatModelText');
+      if (label) label.textContent = name;
+      const menu = document.getElementById('neatModelMenu');
+      if (menu) menu.classList.remove('active');
+      logStream(`[INFERENCE ENGINE] Active model set to: ${name}`, 'system');
+    }
+
+    function toggleNeatScreenshotDropzone() {
+      const dropzone = document.getElementById('vibeScreenshotDropzone');
+      if (dropzone) {
+        dropzone.style.display = dropzone.style.display === 'none' ? 'block' : 'none';
+        switchVibeStepView(1);
+        switchVibeInputMode('image');
+        dropzone.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function executeNeatSearchSubmit() {
+      const input = document.getElementById('neatSearchInput');
+      if (!input) return;
+      const query = input.value.trim();
+      if (!query) return;
+
+      logStream(`[NEAT SEARCH] Querying agent runs and codebase: "${query}"`, 'agent');
+
+      // Populate Step 1 input and trigger diagnosis
+      const vibeContent = document.getElementById('vibeInputContent');
+      if (vibeContent) vibeContent.value = query;
+
+      submitVibeProblem();
+
+      const vizSec = document.getElementById('vibeVisualizerSection');
+      if (vizSec) vizSec.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function handleNeatSearchKeydown(event) {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        executeNeatSearchSubmit();
+      }
+    }
+
+    function loadSampleVibeAndSubmit(type) {
+      loadSampleVibeError(type);
+      switchNeatView('chats');
+      const input = document.getElementById('neatSearchInput');
+      const vibeContent = document.getElementById('vibeInputContent');
+      if (input && vibeContent) {
+        input.value = vibeContent.value.split('\n')[0];
+      }
+      submitVibeProblem();
+      const vizSec = document.getElementById('vibeVisualizerSection');
+      if (vizSec) vizSec.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function loadLiveNeatlogsAndSubmit() {
+      loadLiveNeatlogsIssue();
+      switchNeatView('chats');
+      const input = document.getElementById('neatSearchInput');
+      if (input) input.value = "Jnana-agent#482: TypeError in run.py parsing model args";
+      submitVibeProblem();
+      const vizSec = document.getElementById('vibeVisualizerSection');
+      if (vizSec) vizSec.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function startNewNeatChat() {
+      const input = document.getElementById('neatSearchInput');
+      if (input) {
+        input.value = '';
+        input.focus();
+      }
+      const vibeContent = document.getElementById('vibeInputContent');
+      if (vibeContent) vibeContent.value = '';
+      switchVibeStepView(1);
+      switchNeatView('chats');
+      logStream('[CHAT] Initialized new reasoning session.', 'system');
+    }
+
+    function toggleNeatTheme() {
+      logStream('[THEME] OLED Dark Mode is locked for competitive hackathon visual clarity.', 'system');
+    }
+
+    // -------------------------------------------------------------
+    // AMBIENT 3D PARTICLE GLOBE & NIGHT SKY STARS CANVAS
+    // -------------------------------------------------------------
+    function initAmbientStars() {
+      const canvas = document.getElementById('ambientBgCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let w = canvas.width = window.innerWidth;
+      let h = canvas.height = window.innerHeight;
+
+      window.addEventListener('resize', () => {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+        initParticles();
+      });
+
+      // 1. Celestial background stars
+      const numStars = 120;
+      let stars = [];
+
+      // 2. 3D Rotating Particle Globe vertices
+      const numGlobeVertices = 160;
+      let globeVertices = [];
+      const globeRadius = Math.min(w, h) * 0.28;
+
+      function initParticles() {
+        stars = [];
+        for (let i = 0; i < numStars; i++) {
+          stars.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            r: Math.random() * 1.6 + 0.6,
+            alpha: Math.random() * 0.8 + 0.2,
+            deltaAlpha: (Math.random() - 0.5) * 0.015,
+            vx: (Math.random() - 0.5) * 0.1,
+            vy: (Math.random() - 0.5) * 0.1
+          });
+        }
+
+        // Generate Fibonacci sphere points
+        globeVertices = [];
+        const phi = Math.PI * (3 - Math.sqrt(5)); // Golden angle
+        for (let i = 0; i < numGlobeVertices; i++) {
+          const y = 1 - (i / (numGlobeVertices - 1)) * 2; // y goes from 1 to -1
+          const radiusAtY = Math.sqrt(1 - y * y);
+          const theta = phi * i;
+          const x = Math.cos(theta) * radiusAtY;
+          const z = Math.sin(theta) * radiusAtY;
+          globeVertices.push({ x: x * globeRadius, y: y * globeRadius, z: z * globeRadius });
+        }
+      }
+
+      initParticles();
+
+      let angleY = 0;
+      let angleX = 0.2;
+
+      function animate() {
+        ctx.clearRect(0, 0, w, h);
+
+        // Draw Celestial Stars
+        for (let s of stars) {
+          s.alpha += s.deltaAlpha;
+          if (s.alpha > 0.95 || s.alpha < 0.2) s.deltaAlpha = -s.deltaAlpha;
+          s.x += s.vx;
+          s.y += s.vy;
+          if (s.x < 0) s.x = w;
+          if (s.x > w) s.x = 0;
+          if (s.y < 0) s.y = h;
+          if (s.y > h) s.y = 0;
+
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 230, 160, ${s.alpha * 0.8})`;
+          ctx.shadowBlur = 8;
+          ctx.shadowColor = 'rgba(255, 184, 41, 0.4)';
+          ctx.fill();
+        }
+        ctx.shadowBlur = 0;
+
+        // Draw 3D Rotating Wireframe Particle Globe
+        angleY += 0.0035;
+        const cosY = Math.cos(angleY);
+        const sinY = Math.sin(angleY);
+        const cosX = Math.cos(angleX);
+        const sinX = Math.sin(angleX);
+
+        // Center globe behind hero pill
+        const centerX = w * 0.55;
+        const centerY = h * 0.38;
+
+        const projected = [];
+        for (let v of globeVertices) {
+          // Rotate around Y
+          let x1 = v.x * cosY - v.z * sinY;
+          let z1 = v.z * cosY + v.x * sinY;
+
+          // Rotate around X
+          let y1 = v.y * cosX - z1 * sinX;
+          let z2 = z1 * cosX + v.y * sinX;
+
+          // Perspective projection
+          const fov = 650;
+          const scale = fov / (fov + z2);
+          const px = centerX + x1 * scale;
+          const py = centerY + y1 * scale;
+          const alpha = (z2 + globeRadius) / (2 * globeRadius); // 0 (far) to 1 (near)
+
+          projected.push({ px, py, z: z2, alpha: Math.max(0.08, alpha) });
+        }
+
+        // Draw constellation lines between nearby vertices
+        ctx.lineWidth = 0.6;
+        for (let i = 0; i < projected.length; i += 2) {
+          for (let j = i + 1; j < projected.length; j += 3) {
+            const p1 = projected[i];
+            const p2 = projected[j];
+            const dx = p1.px - p2.px;
+            const dy = p1.py - p2.py;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 48) {
+              const lineAlpha = (1 - dist / 48) * 0.15 * Math.min(p1.alpha, p2.alpha);
+              ctx.strokeStyle = `rgba(128, 82, 255, ${lineAlpha})`;
+              ctx.beginPath();
+              ctx.moveTo(p1.px, p1.py);
+              ctx.lineTo(p2.px, p2.py);
+              ctx.stroke();
+            }
+          }
+        }
+
+        // Draw vertex dots
+        for (let p of projected) {
+          ctx.beginPath();
+          ctx.arc(p.px, p.py, p.alpha * 1.8 + 0.4, 0, Math.PI * 2);
+          const isHighlight = p.z > globeRadius * 0.5;
+          ctx.fillStyle = isHighlight
+            ? `rgba(255, 184, 41, ${p.alpha * 0.9})`
+            : `rgba(128, 82, 255, ${p.alpha * 0.7})`;
+          ctx.fill();
+        }
+
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+    }
+
     window.addEventListener('load', () => {
+      initAmbientStars();
       initMiniBrain();
       drawBugRadar();
       if (window.mermaid) {
