@@ -41,6 +41,80 @@ def extract_grounding_quote(text: str, max_chars: int = 240) -> str:
     return f'"{candidate}"'
 
 
+def github_inspect_repo(repo_or_url: str) -> dict | None:
+    """Inspect a GitHub repository, fetching metadata, default branch, and top open issues.
+    
+    Zero mock data — queries live GitHub REST API.
+    """
+    import re
+    # Clean repo string: https://github.com/owner/repo or owner/repo
+    clean = repo_or_url.strip()
+    m = re.search(r"(?:https?://github\.com/)?([a-zA-Z0-9_.-]+)/([a-zA-Z0-9_.-]+)", clean)
+    if not m:
+        return None
+    owner, repo = m.group(1), m.group(2)
+    # Strip any trailing subpaths like /issues
+    repo = repo.split("/")[0]
+
+    log.info("github_inspect_repo: querying GitHub API for %s/%s", owner, repo)
+    try:
+        headers = {
+            "User-Agent": "neatHack-research-agent/1.0",
+            "Accept": "application/vnd.github.v3+json",
+        }
+        token = os.getenv("GITHUB_TOKEN")
+        if token:
+            headers["Authorization"] = f"Bearer {token}"
+
+        # 1. Fetch repo metadata
+        repo_resp = httpx.get(f"https://api.github.com/repos/{owner}/{repo}", headers=headers, timeout=12)
+        if repo_resp.status_code != 200:
+            log.warning("github_inspect_repo: HTTP %d for repo %s/%s", repo_resp.status_code, owner, repo)
+            return None
+        repo_data = repo_resp.json()
+
+        # 2. Fetch top open issues
+        issues_resp = httpx.get(
+            f"https://api.github.com/repos/{owner}/{repo}/issues?state=open&per_page=10&sort=updated",
+            headers=headers,
+            timeout=12,
+        )
+        issues_list = []
+        if issues_resp.status_code == 200:
+            for item in issues_resp.json():
+                # Filter out pure pull requests from issue list if needed, or flag them
+                is_pr = "pull_request" in item
+                issues_list.append({
+                    "number": item.get("number"),
+                    "title": item.get("title", ""),
+                    "state": item.get("state", "open"),
+                    "author": item.get("user", {}).get("login", "unknown"),
+                    "html_url": item.get("html_url", ""),
+                    "is_pr": is_pr,
+                    "labels": [l.get("name") for l in item.get("labels", []) if isinstance(l, dict)],
+                    "body_snippet": (item.get("body") or "")[:280].replace("\n", " ").strip(),
+                    "comments_count": item.get("comments", 0),
+                    "created_at": item.get("created_at", ""),
+                })
+
+        return {
+            "owner": owner,
+            "repo": repo,
+            "full_name": repo_data.get("full_name", f"{owner}/{repo}"),
+            "description": repo_data.get("description") or "No repository description provided.",
+            "stars": repo_data.get("stargazers_count", 0),
+            "forks": repo_data.get("forks_count", 0),
+            "open_issues_count": repo_data.get("open_issues_count", 0),
+            "default_branch": repo_data.get("default_branch", "master"),
+            "language": repo_data.get("language") or "Python",
+            "html_url": repo_data.get("html_url", f"https://github.com/{owner}/{repo}"),
+            "issues": issues_list,
+        }
+    except Exception as exc:
+        log.warning("github_inspect_repo error for %s/%s: %s", owner, repo, exc)
+        return None
+
+
 def parse_github_issue_ref(text: str) -> tuple[str, str, int] | None:
     """Extract (owner, repo, issue_number) from a URL or shorthand reference."""
     import re

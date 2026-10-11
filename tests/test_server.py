@@ -86,3 +86,31 @@ def test_github_webhook_post():
     assert data["status"] == "triggered"
     assert "Continuous deployment" in data["message"]
 
+
+def test_github_inspect_endpoint():
+    response = client.post(
+        "/api/github/inspect",
+        json={"repo": "ibochivincent-lang/proof-of-search-ai"}
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert data["status"] == "success"
+    assert "repo" in data
+    assert "diagnosis" in data
+
+
+def test_export_report_audit():
+    # Fetch reports list first to get existing file
+    rep_res = client.get("/api/reports")
+    assert rep_res.status_code == 200
+    reports = rep_res.json()
+    if reports:
+        fname = reports[0]["filename"]
+        aud_res = client.get(f"/api/reports/{fname}/export-audit")
+        assert aud_res.status_code == 200
+        pkg = aud_res.json()
+        assert pkg["standard"] == "Proof of Search / neatHack 2026"
+        assert "cryptographic_proof" in pkg
+        assert "consensus_matrix" in pkg
+
+

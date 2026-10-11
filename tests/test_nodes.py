@@ -175,3 +175,40 @@ def test_extract_similar_issues():
     assert "entire_memory" in types
 
 
+def test_extract_multi_file_patches():
+    from research_agent.nodes import extract_multi_file_patches
+    multi_diff = """```diff
+diff --git a/src/sweagent/run.py b/src/sweagent/run.py
+--- a/src/sweagent/run.py
++++ b/src/sweagent/run.py
+@@ -10,1 +10,1 @@
+- old_line
++ new_line
+
+diff --git a/tests/test_run.py b/tests/test_run.py
+--- a/tests/test_run.py
++++ b/tests/test_run.py
+@@ -20,1 +20,1 @@
+- assert False
++ assert True
+```"""
+    parsed = extract_multi_file_patches(multi_diff)
+    assert parsed["total_files"] == 2
+    assert len(parsed["files"]) == 2
+    assert "sweagent/run.py" in parsed["files"][0]["filename"]
+    assert "test_run.py" in parsed["files"][1]["filename"]
+
+
+def test_extract_consensus_matrix():
+    from research_agent.nodes import extract_consensus_matrix
+    from research_agent.state import Source
+    sources = [
+        Source(title="Source 1", url="https://example.com/1", text="Data", sha256="111", verified=True, source_type="web"),
+        Source(title="Crustdata B2B", url="https://crustdata.com", text="Company", sha256="222", verified=True, source_type="crustdata_live"),
+    ]
+    matrix = extract_consensus_matrix("", sources)
+    assert len(matrix) >= 2
+    assert any("Crustdata" in m["claim"] or "Company" in m["claim"] for m in matrix)
+
+
+
