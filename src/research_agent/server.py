@@ -709,10 +709,12 @@ def inspect_github_repo(req: GithubInspectRequest) -> Dict[str, Any]:
     diagnosis = "Verified target repository analyzed. Ready for autonomous fault localization and patch synthesis."
     try:
         context_prompt = (
-            f"Analyze this GitHub repository or issue: {target}\n"
-            f"Repo: {json.dumps(repo_data.get('full_name') if repo_data else target)}\n"
-            f"Provide a 2-sentence executive summary identifying where the primary bugs are located, "
-            f"probable error type (Functional, Performance, Security, Logic, or Compatibility), and fault localization."
+            f"You are Jnana Agent's autonomous SWE fault localization engine.\n"
+            f"Target query / repository issue: {target}\n"
+            f"Repository context: {json.dumps(repo_data.get('full_name') if repo_data else target)}\n"
+            f"If an issue title or description is present: {json.dumps(issue_data.get('title') if issue_data else target)}\n"
+            f"Diagnose the probable root cause, identify the bug class (Functional, Logic, Performance, Security, or Compatibility), "
+            f"and localize the fault to specific files/functions. Respond with exactly a 2-sentence executive technical conclusion."
         )
         ai_resp = llm.get_llm().invoke(context_prompt)
         raw_text = getattr(ai_resp, "text", None) or getattr(ai_resp, "content", "")
