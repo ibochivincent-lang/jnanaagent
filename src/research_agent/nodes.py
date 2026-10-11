@@ -315,11 +315,26 @@ def approve_plan(state: ResearchState) -> Command:
 
     interrupt() checkpoints the run and surfaces the payload to the caller;
     the graph resumes only when the caller sends Command(resume=<decision>).
+    GraphInterrupt is intentionally NOT caught here so it bubbles up to the execution loop.
     """
+    # 1. Grab active OpenTelemetry span created by Neatlogs
+    try:
+        from opentelemetry import trace
+        from opentelemetry.trace import StatusCode
+
+        current_span = trace.get_current_span()
+        # 2. Force span to be marked as successful before the interrupt is thrown
+        if current_span and current_span.is_recording():
+            current_span.set_status(StatusCode.OK)
+    except Exception as exc:
+        log.debug("Neatlogs span status mark: %s", exc)
+
+    # 3. Trigger the pause (raises GraphInterrupt internally)
+    plan_data = state.get("plan", {}) if isinstance(state, dict) else getattr(state, "plan", {})
     decision = interrupt(
         {
             "question": "Approve this research plan?",
-            "plan": state["plan"],
+            "plan": plan_data,
         }
     )
     if isinstance(decision, dict) and decision.get("action") == "revise":

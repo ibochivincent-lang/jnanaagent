@@ -211,4 +211,36 @@ def test_extract_consensus_matrix():
     assert any("Crustdata" in m["claim"] or "Company" in m["claim"] for m in matrix)
 
 
+def test_approve_plan_interrupt_and_otel_span(monkeypatch):
+    from langgraph.checkpoint.memory import MemorySaver
+    from langgraph.graph import END, START, StateGraph
+    from opentelemetry import trace
+    from opentelemetry.trace import StatusCode
+    from research_agent.state import ResearchState
 
+    class MockSpan:
+        def __init__(self):
+            self.status = None
+
+        def is_recording(self):
+            return True
+
+        def set_status(self, status):
+            self.status = status
+
+    mock_span = MockSpan()
+    monkeypatch.setattr(trace, "get_current_span", lambda: mock_span)
+
+    # Test approve_plan in compiled graph runnable context
+    g = StateGraph(ResearchState)
+    g.add_node("approve_plan", nodes.approve_plan)
+    g.add_edge(START, "approve_plan")
+    g.add_edge("approve_plan", END)
+    app = g.compile(checkpointer=MemorySaver())
+
+    state = {"topic": "test", "plan": {"objective": "Test", "search_queries": []}}
+    res = app.invoke(state, {"configurable": {"thread_id": "test-otel-span"}})
+
+    # Verify interrupt triggered cleanly and span was marked as OK to prevent Neatlogs error
+    assert "__interrupt__" in res
+    assert mock_span.status == StatusCode.OK

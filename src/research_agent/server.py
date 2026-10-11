@@ -319,25 +319,40 @@ def _run_research_sync(run_id: str, topic: str, auto: bool, model: Optional[str]
         run_config["callbacks"] = [neatlogs_handler]
 
     try:
+        from langgraph.errors import GraphInterrupt
+        from langgraph.types import Command
+
         emit({"type": "stage", "step": "planner", "message": "Synthesizing strategic search queries and outline..."})
-        result = app_graph.invoke({"topic": topic}, run_config)
+        try:
+            result = app_graph.invoke({"topic": topic}, run_config)
+        except GraphInterrupt:
+            # 1. The graph successfully paused for human-in-the-loop!
+            state = app_graph.get_state(run_config)
+            interrupts = [i for t in getattr(state, "tasks", []) for i in getattr(t, "interrupts", [])]
+            payload = interrupts[0].value if interrupts else {}
+            result = {"__interrupt__": interrupts, "plan": payload.get("plan", {})}
 
         # Handle human-approval gate if present
-        while "__interrupt__" in result:
-            payload = result["__interrupt__"][0].value
-            plan = payload.get("plan", {})
+        while "__interrupt__" in result and result["__interrupt__"]:
+            payload = result["__interrupt__"][0].value if hasattr(result["__interrupt__"][0], "value") else result.get("plan", {})
+            plan = payload.get("plan", {}) if isinstance(payload, dict) else {}
             emit({
                 "type": "interrupt",
+                "status": "paused",
                 "step": "human_approval",
-                "message": "Research plan formulated. Ready for approval.",
+                "message": "Waiting for human approval",
                 "plan": plan,
                 "auto": auto,
             })
 
             if auto:
                 emit({"type": "info", "message": "Autonomous mode active: plan auto-approved."})
-                from langgraph.types import Command
-                result = app_graph.invoke(Command(resume={"action": "approve"}), run_config)
+                try:
+                    result = app_graph.invoke(Command(resume={"action": "approve"}), run_config)
+                except GraphInterrupt:
+                    state = app_graph.get_state(run_config)
+                    interrupts = [i for t in getattr(state, "tasks", []) for i in getattr(t, "interrupts", [])]
+                    result = {"__interrupt__": interrupts}
             else:
                 # Wait for user approval from frontend
                 run_state["status"] = "waiting_approval"
@@ -347,8 +362,12 @@ def _run_research_sync(run_id: str, topic: str, auto: bool, model: Optional[str]
                 decision = run_state.get("approval_decision", {"action": "approve"})
                 run_state["status"] = "running"
                 emit({"type": "info", "message": f"Human approval received: {decision.get('action')}"})
-                from langgraph.types import Command
-                result = app_graph.invoke(Command(resume=decision), run_config)
+                try:
+                    result = app_graph.invoke(Command(resume=decision), run_config)
+                except GraphInterrupt:
+                    state = app_graph.get_state(run_config)
+                    interrupts = [i for t in getattr(state, "tasks", []) for i in getattr(t, "interrupts", [])]
+                    result = {"__interrupt__": interrupts}
 
         # Extraction and synthesis completion
         report = result.get("report", "")

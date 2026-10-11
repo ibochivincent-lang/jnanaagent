@@ -90,12 +90,29 @@ def main() -> None:
         run_config["callbacks"] = [neatlogs_handler]
 
     try:
-        result = app.invoke({"topic": args.topic}, run_config)
+        from langgraph.errors import GraphInterrupt
+        from langgraph.types import Command
+
+        try:
+            result = app.invoke({"topic": args.topic}, run_config)
+        except GraphInterrupt:
+            # Graph paused for human-in-the-loop approval
+            state = app.get_state(run_config)
+            interrupts = [i for t in getattr(state, "tasks", []) for i in getattr(t, "interrupts", [])]
+            payload = interrupts[0].value if interrupts else {}
+            result = {"__interrupt__": interrupts, "plan": payload.get("plan", {})}
+
         # interrupt() pauses here — loop until the human approves and the run completes
-        while "__interrupt__" in result:
-            payload = result["__interrupt__"][0].value
-            decision = _ask_approval(payload["plan"], args.auto)
-            result = app.invoke(Command(resume=decision), run_config)
+        while "__interrupt__" in result and result["__interrupt__"]:
+            payload = result["__interrupt__"][0].value if hasattr(result["__interrupt__"][0], "value") else result.get("plan", {})
+            plan = payload.get("plan", {}) if isinstance(payload, dict) else {}
+            decision = _ask_approval(plan, args.auto)
+            try:
+                result = app.invoke(Command(resume=decision), run_config)
+            except GraphInterrupt:
+                state = app.get_state(run_config)
+                interrupts = [i for t in getattr(state, "tasks", []) for i in getattr(t, "interrupts", [])]
+                result = {"__interrupt__": interrupts}
 
         report = result.get("report", "")
         if not report:
