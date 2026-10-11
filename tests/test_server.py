@@ -142,3 +142,83 @@ def test_neatlogs_detected_issues():
     assert len(data["recent_issues"]) >= 1
 
 
+def test_vibe_explain_triple_visualizers():
+    """Verify that all 3 debugging visualizers (Diagram-Copilot, Mise-en-scène, Vibe-to-Code) are returned."""
+    response = client.post(
+        "/api/vibe/explain",
+        json={
+            "problem_type": "error",
+            "content": "TypeError: string indices must be integers in parse_model_arguments",
+        }
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert data["status"] == "success"
+    
+    vis = data.get("step3", {}).get("visualizers") or data.get("step3_visualization", {}).get("visualizers")
+    assert vis is not None
+    assert "diagram_copilot" in vis
+    assert "mise_en_scene" in vis
+    assert "vibe_to_code" in vis
+
+    # 1. Diagram-copilot checks
+    assert "mermaid_code" in vis["diagram_copilot"]
+    assert "graph TD" in vis["diagram_copilot"]["mermaid_code"]
+
+    # 2. Mise-en-scène checks
+    assert "svg_markup" in vis["mise_en_scene"]
+    assert "<svg" in vis["mise_en_scene"]["svg_markup"]
+    assert "MISE-EN-SCÈNE" in vis["mise_en_scene"]["svg_markup"]
+
+    # 3. Vibe-to-code checks
+    assert "data" in vis["vibe_to_code"]
+    assert "blocks" in vis["vibe_to_code"]["data"]
+    assert len(vis["vibe_to_code"]["data"]["blocks"]) >= 3
+
+
+def test_observability_providers():
+    """Verify that /api/observability/providers returns Neatlogs, Langfuse, and Braintrust."""
+    response = client.get("/api/observability/providers")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["status"] == "active"
+    provider_ids = [p["id"] for p in data["providers"]]
+    assert "neatlogs" in provider_ids
+    assert "langfuse" in provider_ids
+    assert "braintrust" in provider_ids
+
+
+def test_langfuse_traces():
+    """Verify that /api/langfuse/traces returns trace analytics and spans."""
+    response = client.get("/api/langfuse/traces")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["status"] == "online"
+    assert "summary" in data
+    assert "p95_latency_ms" in data["summary"]
+    assert len(data["recent_traces"]) >= 1
+
+
+def test_braintrust_evals():
+    """Verify that /api/braintrust/evals returns automated benchmark evaluation matrix."""
+    response = client.get("/api/braintrust/evals")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["status"] == "online"
+    assert "eval_scores" in data
+    assert "ast_accuracy" in data["eval_scores"]
+    assert data["eval_scores"]["zero_mock_adherence"] == 1.0
+
+
+def test_status_includes_langfuse_and_braintrust():
+    """Verify that /api/status telemetry integration block contains Langfuse and Braintrust."""
+    response = client.get("/api/status")
+    assert response.status_code == 200
+    integrations = response.json().get("integrations", {})
+    assert "langfuse" in integrations
+    assert integrations["langfuse"]["active"] is True
+    assert "braintrust" in integrations
+    assert integrations["braintrust"]["active"] is True
+
+
+
