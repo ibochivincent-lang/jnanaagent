@@ -42,3 +42,28 @@ def test_terminal_serving():
     assert "Jnana Agent" in response.text
     assert "Autonomous Codebase Reasoning" in response.text
     assert "Code Fix &" in response.text
+
+
+def test_reproduce_test_endpoint():
+    response = client.post("/api/reproduce-test", json={"issue_ref": "Jnana-agent#482"})
+    assert response.status_code == 200
+    data = response.json()
+    assert data["status"] == "success"
+    assert data["verified"] is True
+    assert "1 unpatched failure caught" in data["summary"]
+
+
+def test_create_pr_endpoint():
+    response = client.post(
+        "/api/create-pr",
+        json={
+            "repo": "ibochivincent-lang/proof-of-search-ai",
+            "issue_ref": "Jnana-agent#482",
+            "title": "fix(cli): test pr creation"
+        }
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert data["status"] in ["ready", "created"]
+    assert "pr_url" in data
+

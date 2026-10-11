@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: jnana-agent
+    env: python
+    plan: free
+    region: oregon
+    buildCommand: "pip install uv && uv sync"
+    startCommand: "uv run python -m research_agent.server --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: LITELLM_BASE_URL
+        value: "https://litellm.vision.aivar.app/v1"
+      - key: RESEARCH_AGENT_MODEL
+        value: "claude-haiku"
+      - key: NEATLOGS_API_KEY
+        sync: false
+      - key: LITELLM_API_KEY
+        sync: false
+      - key: CRUSTDATA_API_KEY
+        sync: false
