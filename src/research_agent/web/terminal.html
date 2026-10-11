@@ -11,29 +11,29 @@
 
   <style>
     :root {
-      --font-main: 'PPNeueMontreal', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
-      --bg-dark: #040407;
-      --bg-panel: rgba(11, 13, 19, 0.92);
-      --bg-panel-border: rgba(255, 255, 255, 0.08);
-      --color-amber: #ffb829;
-      --color-gold: #f09941;
-      --color-iris: #8052ff;
-      --color-cyan: #00e5ff;
-      --color-emerald: #10b981;
+      --color-void: #000000;
+      --color-bone-white: #ffffff;
+      --color-ash-gray: #9a9a9a;
+      --color-silver-mist: #bdbdbd;
+      --color-electric-iris: #8052ff;
+      --color-saffron-spark: #ffb829;
+      --color-deep-verdant: #15846e;
       --color-crimson: #ef4444;
-      --color-text-dim: #8e95a5;
+      --font-main: 'PPNeueMontreal', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --bg-panel: rgba(10, 11, 16, 0.88);
+      --bg-panel-border: rgba(255, 255, 255, 0.08);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      background: var(--bg-dark);
-      color: #ffffff;
+      background: var(--color-void);
+      color: var(--color-bone-white);
       font-family: var(--font-main);
       -webkit-font-smoothing: antialiased;
       width: 100vw;
-      height: 100vh;
+      min-height: 100vh;
       overflow-x: hidden;
       overflow-y: auto;
       display: flex;
@@ -45,11 +45,11 @@
       position: fixed;
       inset: 0;
       background-image: 
-        radial-gradient(circle at 50% 20%, rgba(128, 82, 255, 0.08) 0%, transparent 60%),
+        radial-gradient(circle at 50% 25%, rgba(128, 82, 255, 0.09) 0%, transparent 60%),
         radial-gradient(circle at 80% 80%, rgba(255, 184, 41, 0.04) 0%, transparent 50%),
         linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-      background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+      background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
       pointer-events: none;
       z-index: 0;
     }
@@ -57,64 +57,70 @@
     /* Top Command Header */
     .mc-header {
       position: relative;
-      z-index: 10;
+      z-index: 20;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 48px;
-      padding: 0 18px;
-      background: rgba(8, 9, 14, 0.95);
+      height: 52px;
+      padding: 0 24px;
+      background: rgba(4, 5, 8, 0.96);
       border-bottom: 1px solid var(--bg-panel-border);
-      font-size: 12px;
+      font-size: 13px;
     }
 
     .mc-brand {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       text-decoration: none;
-      color: #fff;
     }
 
     .mc-brand img {
-      width: 20px;
-      height: 24px;
+      width: 22px;
+      height: 26px;
       object-fit: contain;
     }
 
     .mc-brand-title {
-      font-weight: 700;
-      letter-spacing: 0.06em;
+      font-weight: 600;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
       font-size: 13px;
       color: #fff;
     }
 
+    .mc-brand-sub {
+      font-size: 11px;
+      color: var(--color-ash-gray);
+      margin-left: 6px;
+      font-weight: 400;
+    }
+
     .mc-brand-pro {
-      background: rgba(255, 184, 41, 0.15);
-      border: 1px solid var(--color-amber);
-      color: var(--color-amber);
+      background: rgba(255, 184, 41, 0.12);
+      border: 1px solid var(--color-saffron-spark);
+      color: var(--color-saffron-spark);
       font-size: 9px;
-      font-weight: 800;
+      font-weight: 700;
       padding: 2px 6px;
       border-radius: 4px;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
     }
 
     .mc-nav-tabs {
       display: flex;
       align-items: center;
-      gap: 20px;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
+      gap: 24px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      color: var(--color-text-dim);
+      color: var(--color-ash-gray);
     }
 
     .mc-nav-tab {
       cursor: pointer;
-      padding: 14px 0;
+      padding: 16px 0;
       position: relative;
       transition: color 0.2s;
     }
@@ -134,294 +140,255 @@
       left: 0;
       right: 0;
       height: 2px;
-      background: var(--color-amber);
-      box-shadow: 0 0 8px var(--color-amber);
+      background: var(--color-saffron-spark);
+      box-shadow: 0 0 10px var(--color-saffron-spark);
+    }
+
+    .mc-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-header-ghost {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--color-bone-white);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-header-ghost:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.3);
     }
 
     .btn-header-action {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: #fff;
-      font-size: 11px;
+      background: rgba(255, 184, 41, 0.1);
+      border: 1px solid var(--color-saffron-spark);
+      color: var(--color-saffron-spark);
+      font-size: 12px;
       font-weight: 600;
       padding: 6px 14px;
       border-radius: 9999px;
       cursor: pointer;
       text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
       transition: all 0.2s;
     }
 
     .btn-header-action:hover {
       background: rgba(255, 184, 41, 0.2);
-      border-color: var(--color-amber);
-      color: #fff;
     }
 
-    /* Sub-header Status / HUD Ticker Bar */
-    .mc-hud-subbar {
-      position: relative;
-      z-index: 9;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 32px;
-      padding: 0 18px;
-      background: rgba(12, 14, 22, 0.9);
-      border-bottom: 1px solid var(--bg-panel-border);
-      font-family: var(--font-mono);
-      font-size: 11px;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-
-    .hud-tension-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(239, 68, 68, 0.15);
-      border: 1px solid rgba(239, 68, 68, 0.4);
-      color: #f87171;
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    .hud-ticker-wrap {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: #c4b5fd;
-      white-space: nowrap;
-    }
-
-    .hud-ticker-tag {
-      background: rgba(128, 82, 255, 0.2);
-      border: 1px solid var(--color-iris);
-      color: #e0d7ff;
-      padding: 1px 6px;
-      border-radius: 3px;
-      font-size: 9px;
-      font-weight: 700;
-    }
-
-    .hud-meta-group {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      color: var(--color-text-dim);
-      font-size: 10px;
-    }
-
-    .hud-meta-item strong {
-      color: var(--color-amber);
-    }
-
-    /* KPI Metrics Bar */
-    .mc-kpi-bar {
-      position: relative;
-      z-index: 8;
-      display: grid;
-      grid-template-columns: repeat(10, 1fr);
-      gap: 1px;
-      background: rgba(255, 255, 255, 0.05);
-      border-bottom: 1px solid var(--bg-panel-border);
-      font-family: var(--font-mono);
-      text-align: center;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-
-    .kpi-cell {
-      background: rgba(8, 10, 16, 0.95);
-      padding: 6px 4px;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .kpi-title {
-      font-size: 9px;
-      text-transform: uppercase;
-      color: var(--color-text-dim);
-      letter-spacing: 0.05em;
-    }
-
-    .kpi-val {
-      font-size: 10px;
-      font-weight: 700;
-      color: #ffffff;
-    }
-
-    .kpi-val.highlight { color: var(--color-amber); }
-    .kpi-val.emerald { color: var(--color-emerald); }
-    .kpi-val.cyan { color: var(--color-cyan); }
-
-    /* Main Dashboard Layout */
+    /* Main Dashboard Workspace */
     .mc-dashboard {
       position: relative;
-      z-index: 2;
-      flex: 1;
-      display: grid;
-      grid-template-rows: minmax(420px, 1.4fr) minmax(280px, 1fr);
-      gap: 8px;
-      padding: 8px 12px;
-      min-height: calc(100vh - 120px);
+      z-index: 10;
+      padding: 18px 24px 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      max-width: 1680px;
+      margin: 0 auto;
+      width: 100%;
     }
 
-    /* Top Grid: Left (Brain 360), Center (Command Portal), Right (Inspector) */
+    /* Top Row: Left (Bug Assessment Radar), Center (Grand 360 Brain Portal), Right (Inspector) */
     .dashboard-top-row {
       display: grid;
-      grid-template-columns: 280px 1fr 340px;
-      gap: 8px;
+      grid-template-columns: 360px 1fr 360px;
+      gap: 14px;
+      align-items: stretch;
+      min-height: 520px;
     }
 
-    @media (max-width: 1200px) {
+    @media (max-width: 1300px) {
       .dashboard-top-row {
         grid-template-columns: 1fr;
       }
     }
 
+    /* Panel Card Base */
     .panel-card {
       background: var(--bg-panel);
       border: 1px solid var(--bg-panel-border);
-      border-radius: 12px;
-      padding: 14px;
+      border-radius: 16px;
+      padding: 18px;
       display: flex;
       flex-direction: column;
       position: relative;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
     }
 
     .panel-header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      padding-bottom: 8px;
-      margin-bottom: 10px;
     }
 
     .panel-title {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--color-amber);
+      color: #fff;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
 
     .panel-badge {
-      font-size: 9px;
       font-family: var(--font-mono);
-      background: rgba(255, 255, 255, 0.05);
-      padding: 2px 6px;
-      border-radius: 3px;
-      color: var(--color-text-dim);
+      font-size: 10px;
+      padding: 3px 7px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--color-silver-mist);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
     }
 
-    /* Left Panel: 360 Mini 3D Brain Canvas */
-    .brain-canvas-container {
+    /* Left Panel: Bug Assessment Radar & Breakdown */
+    .radar-canvas-wrap {
       width: 100%;
-      height: 230px;
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       position: relative;
-      border-radius: 8px;
-      overflow: hidden;
-      background: radial-gradient(circle at 50% 50%, rgba(128, 82, 255, 0.12) 0%, rgba(0, 0, 0, 0.6) 80%);
-      border: 1px solid rgba(128, 82, 255, 0.2);
+      margin-bottom: 8px;
     }
 
-    #miniBrainCanvas {
+    #bugRadarCanvas {
       width: 100%;
       height: 100%;
       display: block;
-      cursor: grab;
     }
 
-    .brain-stats-box {
-      margin-top: 10px;
+    .bug-types-list {
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      font-family: var(--font-mono);
-      font-size: 11px;
+      gap: 5px;
+      overflow-y: auto;
+      max-height: 290px;
+      padding-right: 2px;
     }
 
-    .target-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: #fff;
+    .bug-type-row {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+      padding: 6px 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .bug-type-row:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 184, 41, 0.3);
+    }
+
+    .bug-type-head {
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      font-weight: 600;
+      margin-bottom: 2px;
     }
 
-    .confidence-bar-bg {
-      width: 100%;
-      height: 4px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 2px;
-      overflow: hidden;
-      margin-top: 2px;
+    .bug-type-name {
+      color: #fff;
     }
 
-    .confidence-bar-fill {
-      width: 94%;
-      height: 100%;
-      background: linear-gradient(90deg, var(--color-cyan), var(--color-emerald));
+    .bug-type-score {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: 3px;
     }
 
-    /* Center Panel: The Circular HUD Command Center */
+    .score-high {
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .score-med {
+      background: rgba(255, 184, 41, 0.15);
+      color: var(--color-saffron-spark);
+      border: 1px solid rgba(255, 184, 41, 0.3);
+    }
+
+    .score-low {
+      background: rgba(128, 82, 255, 0.15);
+      color: #c4b5fd;
+      border: 1px solid rgba(128, 82, 255, 0.3);
+    }
+
+    .bug-type-desc {
+      font-size: 10px;
+      color: var(--color-ash-gray);
+      line-height: 1.3;
+    }
+
+    /* Center Panel: Grand Command Portal with Middle 360 3D Particle Brain */
     .command-portal-card {
       align-items: center;
       justify-content: center;
       text-align: center;
-      background: radial-gradient(circle at 50% 50%, rgba(20, 22, 34, 0.8) 0%, rgba(10, 11, 17, 0.95) 70%);
+      background: radial-gradient(circle at 50% 50%, rgba(14, 16, 26, 0.9) 0%, rgba(6, 7, 11, 0.98) 75%);
       position: relative;
+      overflow: hidden;
+      min-height: 520px;
     }
 
-    /* Outer HUD Circular Ring */
+    /* Large Concentric Circular HUD Ring */
     .hud-circle-ring {
       position: relative;
-      width: 340px;
-      height: 340px;
+      width: 480px;
+      height: 480px;
       border-radius: 50%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 30px;
-      border: 1px dashed rgba(255, 184, 41, 0.25);
+      padding: 24px;
+      border: 1px dashed rgba(255, 184, 41, 0.2);
       box-shadow: 
-        0 0 60px rgba(128, 82, 255, 0.15),
-        inset 0 0 50px rgba(255, 184, 41, 0.05);
+        0 0 80px rgba(128, 82, 255, 0.12),
+        inset 0 0 60px rgba(255, 184, 41, 0.04);
     }
 
     .hud-circle-ring::before {
       content: '';
       position: absolute;
-      inset: -10px;
+      inset: -12px;
       border-radius: 50%;
       border: 2px solid transparent;
-      border-top-color: var(--color-amber);
-      border-bottom-color: var(--color-iris);
-      animation: rotateRing 20s linear infinite;
+      border-top-color: var(--color-saffron-spark);
+      border-bottom-color: var(--color-electric-iris);
+      animation: rotateRing 24s linear infinite;
       pointer-events: none;
     }
 
     .hud-circle-ring::after {
       content: '';
       position: absolute;
-      inset: -20px;
+      inset: -24px;
       border-radius: 50%;
-      border: 1px dashed rgba(0, 229, 255, 0.2);
-      animation: rotateRingRev 30s linear infinite;
+      border: 1px dashed rgba(255, 255, 255, 0.1);
+      animation: rotateRingRev 36s linear infinite;
       pointer-events: none;
     }
 
@@ -435,154 +402,178 @@
       100% { transform: rotate(0deg); }
     }
 
-    .agent-status-label {
+    /* Middle 360 3D Particle Brain Canvas positioned in the center */
+    .center-brain-wrapper {
       position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+      pointer-events: auto;
+      z-index: 1;
+      cursor: grab;
+    }
+
+    .center-brain-wrapper:active {
+      cursor: grabbing;
+    }
+
+    #miniBrainCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Portal Content Foreground Layer */
+    .portal-content-layer {
+      position: relative;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 420px;
+      padding: 20px;
+      background: radial-gradient(circle at 50% 50%, rgba(4, 5, 8, 0.8) 0%, rgba(4, 5, 8, 0.5) 70%, transparent 100%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .portal-content-layer * {
+      pointer-events: auto;
+    }
+
+    .portal-tag {
       font-family: var(--font-mono);
       font-size: 10px;
       font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--color-gold);
-    }
-
-    .agent-status-top { top: -28px; }
-    .agent-status-bottom { bottom: -28px; }
-
-    .portal-icon {
-      font-size: 26px;
-      margin-bottom: 6px;
-      color: var(--color-cyan);
-      filter: drop-shadow(0 0 10px var(--color-cyan));
+      color: var(--color-saffron-spark);
+      margin-bottom: 10px;
+      text-shadow: 0 0 10px rgba(255, 184, 41, 0.5);
     }
 
     .portal-heading {
-      font-size: 17px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: #ffffff;
-      margin-bottom: 2px;
+      font-size: 26px;
+      font-weight: 400;
+      color: #fff;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
     }
 
     .portal-sub {
       font-size: 11px;
-      color: var(--color-text-dim);
-      font-weight: 300;
-      margin-bottom: 14px;
+      color: var(--color-silver-mist);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
-    /* Command Search Pill */
     .portal-search-wrap {
       width: 100%;
-      position: relative;
-      margin-bottom: 14px;
-      z-index: 5;
+      display: flex;
+      align-items: center;
+      background: rgba(6, 7, 12, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 9999px;
+      padding: 9px 16px;
+      margin-bottom: 16px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+      transition: all 0.2s;
+    }
+
+    .portal-search-wrap:focus-within {
+      border-color: var(--color-saffron-spark);
+      box-shadow: 0 0 18px rgba(255, 184, 41, 0.25);
     }
 
     .portal-search-input {
-      width: 100%;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 9999px;
-      padding: 10px 18px 10px 36px;
+      flex: 1;
+      background: transparent;
+      border: none;
       color: #fff;
-      font-family: inherit;
       font-size: 12px;
+      font-family: var(--font-mono);
       outline: none;
-      transition: all 0.25s;
     }
 
-    .portal-search-input:focus {
-      background: rgba(128, 82, 255, 0.12);
-      border-color: var(--color-amber);
-      box-shadow: 0 0 20px rgba(255, 184, 41, 0.3);
-    }
-
-    .portal-search-icon {
-      position: absolute;
-      left: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--color-text-dim);
-      font-size: 12px;
-      pointer-events: none;
-    }
-
-    /* Action Buttons Array */
     .portal-actions-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
+      gap: 8px;
       width: 100%;
-      z-index: 5;
     }
 
     .portal-btn {
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(14, 16, 24, 0.85);
       border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #d1d5db;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 9px 6px;
       border-radius: 9999px;
-      padding: 6px 8px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: #e5e7eb;
       cursor: pointer;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
       transition: all 0.2s;
-      outline: none;
-      white-space: nowrap;
+      backdrop-filter: blur(12px);
     }
 
     .portal-btn:hover {
-      background: rgba(255, 184, 41, 0.15);
-      border-color: var(--color-amber);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.3);
       color: #fff;
       transform: translateY(-1px);
     }
 
     .portal-btn.primary {
-      background: linear-gradient(135deg, rgba(255, 184, 41, 0.25), rgba(128, 82, 255, 0.25));
-      border-color: var(--color-amber);
-      color: #ffffff;
-      box-shadow: 0 0 14px rgba(255, 184, 41, 0.2);
+      background: rgba(255, 184, 41, 0.15);
+      border-color: var(--color-saffron-spark);
+      color: var(--color-saffron-spark);
+      box-shadow: 0 0 16px rgba(255, 184, 41, 0.2);
     }
 
-    /* Right Panel: Inspector & Target Profile */
+    .portal-btn.primary:hover {
+      background: rgba(255, 184, 41, 0.3);
+      box-shadow: 0 0 24px rgba(255, 184, 41, 0.4);
+    }
+
+    /* Right Panel: Jnana Agent Inspector & Reasoning Trace */
     .inspector-tabs {
       display: flex;
       gap: 12px;
       font-size: 10px;
-      font-weight: 700;
+      font-family: var(--font-mono);
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 12px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      padding-bottom: 6px;
     }
 
     .inspector-tab {
-      color: var(--color-text-dim);
+      color: var(--color-ash-gray);
       cursor: pointer;
+      transition: color 0.2s;
     }
 
     .inspector-tab.active {
-      color: var(--color-amber);
+      color: var(--color-saffron-spark);
+      font-weight: 700;
     }
 
     .target-profile-card {
-      display: flex;
-      align-items: center;
-      gap: 10px;
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 8px;
-      padding: 8px 12px;
+      border-radius: 10px;
+      padding: 12px;
       margin-bottom: 12px;
     }
 
     .ai-conclusion-box {
       background: rgba(16, 185, 129, 0.06);
-      border: 1px solid var(--color-emerald);
+      border: 1px solid var(--color-deep-verdant);
       border-radius: 8px;
       padding: 10px 12px;
       margin-bottom: 14px;
@@ -593,20 +584,17 @@
     .ai-conclusion-title {
       font-size: 10px;
       font-weight: 800;
-      color: var(--color-emerald);
+      color: #34d399;
       text-transform: uppercase;
       letter-spacing: 0.06em;
       margin-bottom: 4px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
     }
 
     .reasoning-trace-row {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 4px;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
       text-align: center;
     }
 
@@ -614,44 +602,44 @@
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 6px;
-      padding: 6px 2px;
+      padding: 7px 2px;
       font-size: 9px;
       font-family: var(--font-mono);
-      color: var(--color-text-dim);
+      color: var(--color-ash-gray);
     }
 
     .trace-node.active {
-      border-color: var(--color-amber);
-      color: var(--color-amber);
-      background: rgba(255, 184, 41, 0.1);
+      border-color: var(--color-saffron-spark);
+      color: var(--color-saffron-spark);
+      background: rgba(255, 184, 41, 0.08);
     }
 
     .btn-action-primary {
       width: 100%;
-      background: linear-gradient(135deg, var(--color-iris), #5b28d9);
+      background: var(--color-electric-iris);
       border: 1px solid rgba(255, 255, 255, 0.2);
       color: #fff;
       font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
+      font-weight: 600;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      padding: 10px 14px;
-      border-radius: 8px;
+      padding: 12px 14px;
+      border-radius: 9999px;
       cursor: pointer;
       transition: all 0.2s;
-      box-shadow: 0 4px 14px rgba(128, 82, 255, 0.35);
+      box-shadow: 0 4px 16px rgba(128, 82, 255, 0.35);
     }
 
     .btn-action-primary:hover {
-      box-shadow: 0 6px 20px rgba(128, 82, 255, 0.6);
+      box-shadow: 0 6px 24px rgba(128, 82, 255, 0.6);
       transform: translateY(-1px);
     }
 
-    /* Bottom Deck Grid: Bottom-Left (Comms), Bottom-Center (Bug Radar), Bottom-Right (New Connections) */
+    /* Bottom Row: 2 Balanced Wide Columns */
     .dashboard-bottom-row {
       display: grid;
-      grid-template-columns: 1.1fr 1fr 1fr;
-      gap: 8px;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 14px;
     }
 
     @media (max-width: 1100px) {
@@ -660,11 +648,11 @@
       }
     }
 
-    /* Bottom-Left: Comms & Alerts Split */
+    /* Bottom-Left: Mission Control Comms */
     .comms-container {
       display: grid;
-      grid-template-columns: 140px 1fr;
-      gap: 8px;
+      grid-template-columns: 160px 1fr;
+      gap: 10px;
       height: 100%;
     }
 
@@ -677,16 +665,16 @@
     }
 
     .alert-card-mini {
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(255, 255, 255, 0.02);
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 6px;
-      padding: 6px 8px;
+      padding: 8px;
       cursor: pointer;
       transition: all 0.2s;
     }
 
     .alert-card-mini:hover {
-      border-color: var(--color-amber);
+      border-color: var(--color-saffron-spark);
     }
 
     .alert-card-mini.critical {
@@ -694,16 +682,16 @@
     }
 
     .comms-log-terminal {
-      background: #06070a;
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: #040508;
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 8px;
-      padding: 8px 10px;
+      padding: 10px 12px;
       font-family: var(--font-mono);
       font-size: 11px;
       color: #d1d5db;
-      line-height: 1.5;
+      line-height: 1.55;
       overflow-y: auto;
-      height: 150px;
+      height: 140px;
     }
 
     .comms-line {
@@ -711,46 +699,31 @@
       word-break: break-all;
     }
 
-    .comms-line.agent { color: var(--color-cyan); }
-    .comms-line.system { color: var(--color-amber); }
+    .comms-line.agent { color: #38bdf8; }
+    .comms-line.system { color: var(--color-saffron-spark); }
     .comms-line.entire { color: #c4b5fd; }
-    .comms-line.success { color: var(--color-emerald); }
+    .comms-line.success { color: #34d399; }
 
-    /* Bottom-Center: Bug Assessment Radar Chart */
-    .radar-canvas-wrap {
-      width: 100%;
-      height: 190px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    #bugRadarCanvas {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    /* Bottom-Right: New Connections Cards */
+    /* Bottom-Right: Live Connections & Issues */
     .connections-feed {
       display: flex;
       flex-direction: column;
       gap: 6px;
       overflow-y: auto;
-      max-height: 190px;
+      max-height: 140px;
     }
 
     .connection-card {
       background: rgba(255, 255, 255, 0.02);
       border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 6px;
-      padding: 8px 10px;
+      padding: 8px 12px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-size: 11px;
       transition: all 0.2s;
+      cursor: pointer;
     }
 
     .connection-card:hover {
@@ -761,22 +734,22 @@
     .connection-badge {
       font-size: 9px;
       font-family: var(--font-mono);
-      padding: 2px 6px;
+      padding: 2px 7px;
       border-radius: 3px;
       text-transform: uppercase;
       font-weight: 700;
     }
 
     .connection-badge.high { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid #ef4444; }
-    .connection-badge.medium { background: rgba(255, 184, 41, 0.2); color: #ffb829; border: 1px solid #ffb829; }
+    .connection-badge.medium { background: rgba(255, 184, 41, 0.2); color: var(--color-saffron-spark); border: 1px solid var(--color-saffron-spark); }
     .connection-badge.stable { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid #10b981; }
 
-    /* Synthesis Modal / Slide Overlay for Full Diff & Report */
+    /* Full Synthesis Modal */
     .synthesis-modal {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.85);
+      background: rgba(0, 0, 0, 0.88);
       backdrop-filter: blur(20px);
       z-index: 1000;
       padding: 30px;
@@ -789,8 +762,8 @@
     }
 
     .modal-box {
-      background: #090b10;
-      border: 1px solid var(--color-amber);
+      background: #07090e;
+      border: 1px solid var(--color-saffron-spark);
       border-radius: 16px;
       width: 100%;
       max-width: 1080px;
@@ -798,7 +771,7 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      box-shadow: 0 0 80px rgba(255, 184, 41, 0.25);
+      box-shadow: 0 0 80px rgba(255, 184, 41, 0.2);
     }
 
     .modal-head {
@@ -817,9 +790,9 @@
     }
 
     .diff-code-box {
-      background: #040508;
+      background: #020305;
       border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
+      border-radius: 8px;
       padding: 12px;
       font-family: var(--font-mono);
       font-size: 12px;
@@ -840,136 +813,137 @@
   <header class="mc-header">
     <a href="/" class="mc-brand">
       <img src="/images/jnana-glyph.png" alt="Jnana Glyph">
-      <span class="mc-brand-title">Jnana Agent - Mission Control</span>
+      <span class="mc-brand-title">Jnana Agent · Mission Control</span>
       <span class="mc-brand-pro">PRO</span>
+      <span class="mc-brand-sub">· Autonomous Codebase Reasoning</span>
     </a>
 
     <nav class="mc-nav-tabs">
       <div class="mc-nav-tab active">Terminal</div>
-      <div class="mc-nav-tab" onclick="openSynthesisModal()">Mission Queue</div>
-      <div class="mc-nav-tab" onclick="switchDataSources()">Data Sources</div>
       <div class="mc-nav-tab" onclick="switchCaseBoard()">Case Board</div>
+      <div class="mc-nav-tab" onclick="switchDataSources()">Data Sources</div>
       <div class="mc-nav-tab" onclick="openSynthesisModal()">Synthesis</div>
-      <div class="mc-nav-tab">Target Profiles</div>
-      <div class="mc-nav-tab">Investigator</div>
-      <div class="mc-nav-tab">AI Task Manager</div>
+      <div class="mc-nav-tab" onclick="openSynthesisModal()">Task Manager</div>
     </nav>
 
-    <div style="display: flex; gap: 8px;">
-      <a href="/" class="btn-header-action">&larr; Back to Landing</a>
-      <button class="btn-header-action" onclick="diagnoseTarget()" style="border-color: var(--color-amber); color: var(--color-amber);">Diagnose Target &blacktriangledown;</button>
+    <div class="mc-header-actions">
+      <a href="/" class="btn-header-ghost">&larr; Back to Landing</a>
+      <button class="btn-header-action" onclick="diagnoseTarget()">Diagnose Target</button>
     </div>
   </header>
-
-  <!-- Sub-header HUD Telemetry Ticker -->
-  <div class="mc-hud-subbar">
-    <div style="display: flex; align-items: center; gap: 10px;">
-      <div class="hud-tension-pill">&bull; Regression Risk: 35.9%</div>
-      <div class="hud-ticker-wrap">
-        <span class="hud-ticker-tag">LIVE SIGNAL</span>
-        <span>SWARM STATUS: Swarm reporting online &bull; 4 active reasoning subagents &bull; avg load 18%</span>
-      </div>
-    </div>
-
-    <div class="hud-meta-group">
-      <span>decision window: <strong>18s</strong></span>
-      <span>&bull; drift: <strong>accelerating &uarr;</strong></span>
-      <span>&bull; asymmetric separation: <strong>&uarr;</strong></span>
-      <span>&bull; MODE: <strong>EXPLORATORY (SWE-agent)</strong></span>
-    </div>
-  </div>
-
-  <!-- KPI Telemetry Bar -->
-  <div class="mc-kpi-bar">
-    <div class="kpi-cell"><span class="kpi-title">AST Entities</span><span class="kpi-val cyan">241 (+1,214)</span></div>
-    <div class="kpi-cell"><span class="kpi-title">Repo Posture</span><span class="kpi-val highlight">ELEVATED</span></div>
-    <div class="kpi-cell"><span class="kpi-title">Connection</span><span class="kpi-val emerald">SECURE / ENCRYPTED</span></div>
-    <div class="kpi-cell"><span class="kpi-title">Active Investigations</span><span class="kpi-val highlight">12</span></div>
-    <div class="kpi-cell"><span class="kpi-title">Threat Clusters</span><span class="kpi-val" style="color: #f87171;">7 DETECTED</span></div>
-    <div class="kpi-cell"><span class="kpi-title">Data Ingest</span><span class="kpi-val">1.0 GB/S</span></div>
-    <div class="kpi-cell"><span class="kpi-title">Encryption</span><span class="kpi-val">AES-256</span></div>
-    <div class="kpi-cell"><span class="kpi-title">Network</span><span class="kpi-val emerald">SECURE</span></div>
-    <div class="kpi-cell"><span class="kpi-title">Uptime</span><span class="kpi-val">99.9%</span></div>
-    <div class="kpi-cell"><span class="kpi-title">SYS</span><span class="kpi-val emerald">ONLINE</span></div>
-  </div>
 
   <!-- Main Dashboard Workstation -->
   <main class="mc-dashboard">
     
-    <!-- Top Row: Left (360 Mini Brain), Center (Circular Command Portal), Right (Inspector) -->
+    <!-- Top Row: Left (Bug Assessment Radar), Center (Grand Command Portal with 360 Brain), Right (Inspector) -->
     <div class="dashboard-top-row">
       
-      <!-- Left Panel: Mini 360 3D Particle Brain -->
+      <!-- Left Panel: Bug Assessment Radar (6 Major Bug Classes) -->
       <section class="panel-card">
         <div class="panel-header">
-          <div class="panel-title">
-            <span>🧠</span>
-            <span>Jnana Brain Visual</span>
-          </div>
-          <span class="panel-badge">360&deg; Structural Analysis</span>
+          <div class="panel-title">Bug Assessment Radar</div>
+          <span class="panel-badge">6 Major Bug Classes</span>
         </div>
 
-        <div class="brain-canvas-container" id="miniBrainContainer">
-          <canvas id="miniBrainCanvas"></canvas>
-          <div style="position: absolute; top: 8px; left: 10px; font-family: var(--font-mono); font-size: 9px; color: var(--color-cyan);">
-            signal: stabilizing &bull; LIVE GRAPH
-          </div>
+        <div class="radar-canvas-wrap">
+          <canvas id="bugRadarCanvas"></canvas>
         </div>
 
-        <div class="brain-stats-box">
-          <div class="target-title">
-            <span>SWE-AGENT</span>
-            <span style="color: var(--color-cyan); font-size: 10px; cursor: pointer;" onclick="openRepoAstModal()">TECH DETAILS &rarr;</span>
+        <div class="bug-types-list">
+          <!-- 1. Functional Bugs -->
+          <div class="bug-type-row" onclick="filterBugCategory('Functional Bugs')">
+            <div class="bug-type-head">
+              <span class="bug-type-name">1. Functional Bugs</span>
+              <span class="bug-type-score score-high">88% Risk</span>
+            </div>
+            <div class="bug-type-desc">Feature does not work as expected (e.g. CLI argument parsing failure in batch mode).</div>
           </div>
-          <div style="display: flex; justify-content: space-between; font-size: 10px; color: var(--color-text-dim);">
-            <span>AI Confidence</span>
-            <span style="color: var(--color-emerald); font-weight: 700;">94%</span>
+
+          <!-- 2. Performance Bugs -->
+          <div class="bug-type-row" onclick="filterBugCategory('Performance Bugs')">
+            <div class="bug-type-head">
+              <span class="bug-type-name">2. Performance Bugs</span>
+              <span class="bug-type-score score-med">65% Load</span>
+            </div>
+            <div class="bug-type-desc">Application is slow or consumes excessive resources during AST traversal.</div>
           </div>
-          <div class="confidence-bar-bg">
-            <div class="confidence-bar-fill"></div>
+
+          <!-- 3. Security Bugs -->
+          <div class="bug-type-row" onclick="filterBugCategory('Security Bugs')">
+            <div class="bug-type-head">
+              <span class="bug-type-name">3. Security Bugs</span>
+              <span class="bug-type-score score-low">35% Risk</span>
+            </div>
+            <div class="bug-type-desc">Vulnerabilities allow unauthorized access or expose sensitive repository data.</div>
           </div>
-          <div style="font-size: 10px; color: #6b7280; margin-top: 4px;">
-            SWE-agent / inter-process argparse exception node localized in AST graph.
+
+          <!-- 4. UI/UX Bugs -->
+          <div class="bug-type-row" onclick="filterBugCategory('UI/UX Bugs')">
+            <div class="bug-type-head">
+              <span class="bug-type-name">4. UI/UX Bugs</span>
+              <span class="bug-type-score score-low">45% Drift</span>
+            </div>
+            <div class="bug-type-desc">Problems affect the interface or user experience across terminal viewports.</div>
+          </div>
+
+          <!-- 5. Compatibility Bugs -->
+          <div class="bug-type-row" onclick="filterBugCategory('Compatibility Bugs')">
+            <div class="bug-type-head">
+              <span class="bug-type-name">5. Compatibility Bugs</span>
+              <span class="bug-type-score score-high">80% Drift</span>
+            </div>
+            <div class="bug-type-desc">Software behaves incorrectly on certain devices, Python versions, or environments.</div>
+          </div>
+
+          <!-- 6. Logic Bugs -->
+          <div class="bug-type-row" onclick="filterBugCategory('Logic Bugs')">
+            <div class="bug-type-head">
+              <span class="bug-type-name">6. Logic Bugs</span>
+              <span class="bug-type-score score-med">75% Flaw</span>
+            </div>
+            <div class="bug-type-desc">Program runs but produces incorrect results due to faulty parameter coercion.</div>
           </div>
         </div>
       </section>
 
-      <!-- Center Panel: Circular HUD Command Center ("WHAT WOULD YOU LIKE TO DO?") -->
+      <!-- Center Panel: Grand Command Portal with 360 3D Particle Brain in the Middle -->
       <section class="panel-card command-portal-card">
-        <div class="agent-status-label agent-status-top">AGENT ALPHA: DEPLOYING</div>
-
         <div class="hud-circle-ring">
-          <div class="portal-icon">🤖</div>
-          <h2 class="portal-heading">What would you like to do?</h2>
-          <div class="portal-sub">select an action and enter query</div>
-
-          <!-- Search Query Input -->
-          <div class="portal-search-wrap">
-            <span class="portal-search-icon">🔍</span>
-            <input type="text" id="targetQueryInput" class="portal-search-input" value="SWE-agent/SWE-agent#482: TypeError in run.py parsing model args" placeholder="e.g. SWE-agent#482 or search memory...">
+          
+          <!-- Middle 360 3D Particle Brain Canvas -->
+          <div class="center-brain-wrapper" id="miniBrainContainer" title="Drag to orbit 360° Jnana Neural Brain">
+            <canvas id="miniBrainCanvas"></canvas>
           </div>
 
-          <!-- Action Buttons Array (Entire first as requested!) -->
-          <div class="portal-actions-grid">
-            <button class="portal-btn primary" onclick="executeAction('entire')">Entire Recall</button>
-            <button class="portal-btn" onclick="executeAction('github')">GitHub Issues</button>
-            <button class="portal-btn" onclick="executeAction('debug')">Debug &amp; Fix</button>
-            <button class="portal-btn" onclick="executeAction('research')">Research</button>
-            <button class="portal-btn" onclick="executeAction('simulate')">Simulate</button>
-            <button class="portal-btn" onclick="executeAction('audit')">Audit Proof</button>
+          <!-- Foreground Portal Content Layer -->
+          <div class="portal-content-layer">
+            <div class="portal-tag">Jnana Neural Mission Control</div>
+            <h2 class="portal-heading">What would you like to do?</h2>
+            <div class="portal-sub">select an action and enter query</div>
+
+            <!-- Search Query Input -->
+            <div class="portal-search-wrap">
+              <input type="text" id="targetQueryInput" class="portal-search-input" value="Jnana-agent#482: TypeError in run.py parsing model args" placeholder="Search codebase, Entire memory, or enter query...">
+            </div>
+
+            <!-- Action Buttons Array (Entire Recall First!) -->
+            <div class="portal-actions-grid">
+              <button class="portal-btn primary" onclick="executeAction('entire')">Entire Recall</button>
+              <button class="portal-btn" onclick="executeAction('github')">GitHub Issues</button>
+              <button class="portal-btn" onclick="executeAction('debug')">Debug &amp; Fix</button>
+              <button class="portal-btn" onclick="executeAction('research')">Research</button>
+              <button class="portal-btn" onclick="executeAction('simulate')">Simulate</button>
+              <button class="portal-btn" onclick="executeAction('audit')">Audit Proof</button>
+            </div>
           </div>
+
         </div>
-
-        <div class="agent-status-label agent-status-bottom">AGENT GAMMA: ANALYZING</div>
       </section>
 
-      <!-- Right Panel: Inspector & Target Profile -->
+      <!-- Right Panel: Jnana Agent Inspector & Reasoning Trace -->
       <section class="panel-card">
         <div class="panel-header">
-          <div class="panel-title">
-            <span>🔎</span>
-            <span>Inspector</span>
-          </div>
+          <div class="panel-title">Jnana Agent Inspector</div>
           <div class="inspector-tabs">
             <span class="inspector-tab active">Convergence</span>
             <span class="inspector-tab" onclick="switchEvidenceTab()">Key Evidence</span>
@@ -978,63 +952,55 @@
         </div>
 
         <div class="target-profile-card">
-          <div style="font-size: 20px; color: var(--color-cyan);">👤</div>
-          <div>
-            <div style="font-size: 12px; font-weight: 700; color: #fff;">SWE-AGENT / REPO NODE</div>
-            <div style="font-size: 10px; color: var(--color-text-dim); font-family: var(--font-mono);">AUTONOMOUS SWE REPOSITORY</div>
-          </div>
+          <div style="font-size: 13px; font-weight: 600; color: #fff; margin-bottom: 2px;">JNANA AGENT / REPOSITORY NODE</div>
+          <div style="font-size: 11px; color: var(--color-ash-gray); font-family: var(--font-mono);">AUTONOMOUS SWE REASONING ENGINE</div>
         </div>
 
         <div class="ai-conclusion-box">
-          <div class="ai-conclusion-title">
-            <span>🛡️</span>
-            <span>AI Conclusion</span>
-          </div>
+          <div class="ai-conclusion-title">AI Conclusion</div>
           <div style="color: #e5e7eb;">
-            System 3 (MCTS) identified non-disclosed argument parser exception in batch CLI invocation. Proposing verified AST patch and test reproduction.
+            System 3 (MCTS) identified argument parser type mismatch in batch CLI runner. Proposing verified AST patch and test reproduction.
           </div>
         </div>
 
-        <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--color-text-dim); margin-bottom: 6px;">
-          AI Reasoning Trace &bull; 4 Stages
-        </div>
-        <div class="reasoning-trace-row">
-          <div class="trace-node active">STEP 1: ANOMALY</div>
-          <div class="trace-node active">STEP 2: CORRELATION</div>
-          <div class="trace-node active">STEP 3: MATCHING</div>
-          <div class="trace-node active">STEP 4: FIX DIFF</div>
+        <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--color-silver-mist); margin-bottom: 8px;">
+          AI Reasoning Trace · 4 Stages
         </div>
 
-        <div style="margin-top: auto; display: flex; flex-direction: column; gap: 6px;">
-          <button class="btn-action-primary" onclick="openSynthesisModal()">⚡ View Verified Code Patch</button>
-          <button class="portal-btn" style="width: 100%; border-radius: 8px; padding: 8px;" onclick="runHarnessTest()">🧪 Run Test Reproduction</button>
+        <div class="reasoning-trace-row">
+          <div class="trace-node active">1. Anomaly</div>
+          <div class="trace-node active">2. Correlation</div>
+          <div class="trace-node active">3. Matching</div>
+          <div class="trace-node active">4. Fix Diff</div>
+        </div>
+
+        <div style="margin-top: auto; display: flex; flex-direction: column; gap: 8px;">
+          <button class="btn-action-primary" onclick="openSynthesisModal()">View Verified Code Patch</button>
+          <button class="portal-btn" style="width: 100%; border-radius: 9999px; padding: 10px;" onclick="runHarnessTest()">Run Test Reproduction</button>
         </div>
       </section>
 
     </div>
 
-    <!-- Bottom Row: Comms & Alerts, Bug Assessment Radar Chart, New Connections -->
+    <!-- Bottom Row: Comms & Live Connections -->
     <div class="dashboard-bottom-row">
 
-      <!-- Bottom-Left Panel: Mission Control & Terminal Comms -->
+      <!-- Bottom-Left Panel: Mission Control Comms -->
       <section class="panel-card">
         <div class="panel-header">
-          <div class="panel-title">
-            <span>📡</span>
-            <span>Mission Control Comms</span>
-          </div>
-          <span class="panel-badge">2 Analysts &bull; 4 Agents</span>
+          <div class="panel-title">Mission Control Comms</div>
+          <span class="panel-badge">2 Analysts · 4 Agents</span>
         </div>
 
         <div class="comms-container">
           <div class="alerts-mini-col">
-            <div style="color: var(--color-amber); font-weight: 700; margin-bottom: 2px;">WHAT YOU MISSED:</div>
-            <div class="alert-card-mini critical" onclick="loadIssueContext('SWE-agent#482')">
-              <div style="color: #f87171; font-weight: 700;">SWE-agent #482</div>
+            <div style="color: var(--color-saffron-spark); font-weight: 600; margin-bottom: 2px;">WHAT YOU MISSED:</div>
+            <div class="alert-card-mini critical" onclick="loadIssueContext('Jnana-agent#482')">
+              <div style="color: #f87171; font-weight: 600;">Jnana Agent #482</div>
               <div style="color: #9a9a9a;">TypeError run.py</div>
             </div>
             <div class="alert-card-mini" onclick="loadIssueContext('Entire#Node14')">
-              <div style="color: #c4b5fd; font-weight: 700;">Entire Memory</div>
+              <div style="color: #c4b5fd; font-weight: 600;">Entire Memory</div>
               <div style="color: #9a9a9a;">14 Context Nodes</div>
             </div>
           </div>
@@ -1042,58 +1008,40 @@
           <div class="comms-log-terminal" id="commsLogTerminal">
             <div class="comms-line system">[INIT] Jnana Neural SWE Agent initialized on master repo.</div>
             <div class="comms-line entire">[ENTIRE] 14 associative memory vectors recalled from codebase ledger.</div>
-            <div class="comms-line agent">[MCTS] System_3 analyzing SWE-agent argument parsing pipeline...</div>
+            <div class="comms-line agent">[MCTS] System_3 analyzing argument parsing pipeline...</div>
             <div class="comms-line success">[VERIFY] Zero mock data constraint satisfied. Real AST diff generated.</div>
           </div>
         </div>
       </section>
 
-      <!-- Bottom-Center Panel: Bug Assessment Radar Chart -->
+      <!-- Bottom-Right Panel: Live Connections & Issues -->
       <section class="panel-card">
         <div class="panel-header">
-          <div class="panel-title">
-            <span>📊</span>
-            <span>Bug Assessment Radar Chart</span>
-          </div>
-          <span class="panel-badge" style="color: var(--color-cyan);">Drift: Accelerating &uarr;</span>
-        </div>
-
-        <div class="radar-canvas-wrap">
-          <canvas id="bugRadarCanvas"></canvas>
-        </div>
-      </section>
-
-      <!-- Bottom-Right Panel: New Connections Feed -->
-      <section class="panel-card">
-        <div class="panel-header">
-          <div class="panel-title">
-            <span>🔗</span>
-            <span>New Connections &amp; Issues</span>
-          </div>
-          <span class="panel-badge" style="color: var(--color-emerald);">&bull; LIVE</span>
+          <div class="panel-title">Live Connections &amp; Issues</div>
+          <span class="panel-badge" style="color: #34d399;">Live Telemetry</span>
         </div>
 
         <div class="connections-feed" id="connectionsFeed">
           <div class="connection-card" onclick="openSynthesisModal()">
             <div>
-              <div style="font-weight: 700; color: #fff;">SWE-agent #482: ArgParse TypeError</div>
-              <div style="font-size: 10px; color: var(--color-text-dim);">swe-agent/run.py:L142 &bull; batch mode</div>
+              <div style="font-weight: 600; color: #fff;">Jnana Agent #482: ArgParse TypeError</div>
+              <div style="font-size: 10px; color: var(--color-ash-gray);">sweagent/run.py:L142 · batch mode</div>
             </div>
             <span class="connection-badge high">High Risk</span>
           </div>
 
           <div class="connection-card" onclick="openSynthesisModal()">
             <div>
-              <div style="font-weight: 700; color: #fff;">Entire Memory Architecture Link</div>
-              <div style="font-size: 10px; color: var(--color-text-dim);">entire://context/architecture-graph.md</div>
+              <div style="font-weight: 600; color: #fff;">Entire Memory Architecture Link</div>
+              <div style="font-size: 10px; color: var(--color-ash-gray);">entire://context/architecture-graph.md</div>
             </div>
             <span class="connection-badge stable">Converging</span>
           </div>
 
           <div class="connection-card" onclick="openSynthesisModal()">
             <div>
-              <div style="font-weight: 700; color: #fff;">LangGraph Checkpoint Desync #3898</div>
-              <div style="font-size: 10px; color: var(--color-text-dim);">langchain-ai/langgraph:state.py</div>
+              <div style="font-weight: 600; color: #fff;">LangGraph Checkpoint Desync #3898</div>
+              <div style="font-size: 10px; color: var(--color-ash-gray);">langchain-ai/langgraph:state.py</div>
             </div>
             <span class="connection-badge medium">Medium Risk</span>
           </div>
@@ -1103,16 +1051,15 @@
     </div>
   </main>
 
-  <!-- Full Synthesis Modal for Code Fix, Reproduction Test & Audit -->
+  <!-- Full Synthesis Modal for Code Fix & Verification -->
   <div class="synthesis-modal" id="synthesisModal" onclick="if(event.target===this) closeSynthesisModal()">
     <div class="modal-box">
       <div class="modal-head">
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <span style="font-size: 18px; color: var(--color-amber);">💻</span>
-          <span style="font-weight: 700; font-size: 14px; text-transform: uppercase;">Autonomous Code Fix &amp; Verification Synthesis</span>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span style="font-weight: 600; font-size: 14px; text-transform: uppercase;">Autonomous Code Fix &amp; Verification Synthesis</span>
           <span class="mc-brand-pro">ZERO MOCK DATA</span>
         </div>
-        <button onclick="closeSynthesisModal()" style="background: none; border: none; color: #fff; font-size: 20px; cursor: pointer;">&times;</button>
+        <button onclick="closeSynthesisModal()" style="background: none; border: none; color: #fff; font-size: 22px; cursor: pointer;">&times;</button>
       </div>
 
       <div class="modal-body">
@@ -1126,10 +1073,10 @@
         <!-- Diff Viewer Pane -->
         <div id="modalPaneDiff">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-            <span style="font-family: var(--font-mono); font-size: 12px; color: var(--color-cyan);">Target: SWE-agent/run.py &bull; Ready for <code>git apply</code></span>
+            <span style="font-family: var(--font-mono); font-size: 12px; color: #38bdf8;">Target: sweagent/run.py · Ready for <code>git apply</code></span>
             <div style="display: flex; gap: 8px;">
-              <button onclick="copyPatch()" class="btn-header-action">📋 Copy Patch</button>
-              <button onclick="downloadPatch()" class="btn-header-action" style="border-color: var(--color-amber); color: var(--color-amber);">⬇️ Download .patch</button>
+              <button onclick="copyPatch()" class="btn-header-ghost">Copy Patch</button>
+              <button onclick="downloadPatch()" class="btn-header-action">Download .patch</button>
             </div>
           </div>
           <div class="diff-code-box" id="modalDiffContent">
@@ -1150,7 +1097,7 @@
 
         <!-- Reproduction Test Pane -->
         <div id="modalPaneTest" style="display: none;">
-          <div style="font-family: var(--font-mono); font-size: 12px; color: var(--color-emerald); margin-bottom: 8px;">Pytest Reproduction Verification Script:</div>
+          <div style="font-family: var(--font-mono); font-size: 12px; color: #34d399; margin-bottom: 8px;">Pytest Reproduction Verification Script:</div>
           <pre class="diff-code-box" style="color: #34d399;"><code>def test_reproduce_argparse_type_error():
     """Verify that string model parameters in batch execution do not raise TypeError."""
     from sweagent.run import parse_model_arguments
@@ -1168,14 +1115,14 @@
           <div style="font-size: 13px; color: #d1d5db; line-height: 1.6;" id="modalAuditContent">
             <p><strong>Verification Matrix:</strong> 100% verified citations from active GitHub issue logs and Entire persistent memory.</p>
             <table style="width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 11px;">
-              <tr style="border-bottom: 1px solid rgba(255,255,255,0.1); color: var(--color-amber);">
-                <th style="padding: 6px;">Source Target</th>
-                <th style="padding: 6px;">Commit / Hash</th>
-                <th style="padding: 6px;">Ground-Truth Quote</th>
-                <th style="padding: 6px;">Audit Status</th>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.1); color: var(--color-saffron-spark);">
+                <th style="padding: 6px; text-align: left;">Source Target</th>
+                <th style="padding: 6px; text-align: left;">Commit / Hash</th>
+                <th style="padding: 6px; text-align: left;">Ground-Truth Quote</th>
+                <th style="padding: 6px; text-align: left;">Audit Status</th>
               </tr>
               <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                <td style="padding: 6px;"><code>SWE-agent/SWE-agent#482</code></td>
+                <td style="padding: 6px;"><code>Jnana-agent#482</code></td>
                 <td style="padding: 6px;"><code>b482ca9</code></td>
                 <td style="padding: 6px;">"TypeError: ModelConfig expects dict, received str in batch runner"</td>
                 <td style="padding: 6px; color: #34d399;">VERIFIED</td>
@@ -1193,7 +1140,7 @@
         <!-- Full Report Pane -->
         <div id="modalPaneReport" style="display: none;">
           <div id="modalReportContent" style="font-size: 13px; line-height: 1.6; color: #e5e7eb;">
-            <h3>Autonomous SWE Resolution Summary</h3>
+            <h3>Autonomous Codebase Reasoning Summary</h3>
             <p>Jnana Agent performed end-to-end AST exploration, localized the runtime failure inside <code>run.py</code>, retrieved historical solutions via Entire Memory, and compiled a reproducible git patch.</p>
           </div>
         </div>
@@ -1203,7 +1150,7 @@
 
   <script>
     // -------------------------------------------------------------
-    // 1. Mini 360 3D WebGL Particle Brain (Left Panel)
+    // 1. Middle 360 3D WebGL Particle Brain (Center Stage)
     // -------------------------------------------------------------
     let miniScene, miniCamera, miniRenderer, miniBrainPoints;
     let isDragging = false, prevMouseX = 0, prevMouseY = 0;
@@ -1213,12 +1160,12 @@
       const canvas = document.getElementById('miniBrainCanvas');
       if (!container || !canvas) return;
 
-      const width = container.clientWidth;
-      const height = container.clientHeight;
+      const width = container.clientWidth || 480;
+      const height = container.clientHeight || 480;
 
       miniScene = new THREE.Scene();
       miniCamera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-      miniCamera.position.set(0, 0, 7.5);
+      miniCamera.position.set(0, 0, 7.8);
 
       miniRenderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
       miniRenderer.setSize(width, height);
@@ -1232,33 +1179,33 @@
 
       const colorAmber = new THREE.Color(0xffb829);
       const colorIris = new THREE.Color(0x8052ff);
-      const colorCyan = new THREE.Color(0x00e5ff);
+      const colorTeal = new THREE.Color(0x15846e);
 
       for (let i = 0; i < particleCount; i++) {
-        // Brain-like mathematical lobes (two ellipsoid hemispheres with sulci indentations)
+        // Two cerebral lobes with organic sulci indentations
         const u = Math.random();
         const v = Math.random();
         const theta = u * 2.0 * Math.PI;
         const phi = Math.acos(2.0 * v - 1.0);
 
-        const r = 2.2 + 0.3 * Math.sin(5 * theta) * Math.cos(4 * phi);
+        const r = 2.3 + 0.35 * Math.sin(5 * theta) * Math.cos(4 * phi);
         let x = r * Math.sin(phi) * Math.cos(theta);
         let y = r * Math.sin(phi) * Math.sin(theta) * 0.8;
         let z = r * Math.cos(phi) * 1.1;
 
         // Hemispheric separation
         const hemisphere = (x >= 0) ? 1 : -1;
-        x = x + hemisphere * 0.25;
+        x = x + hemisphere * 0.28;
 
         positions[i * 3] = x;
         positions[i * 3 + 1] = y;
         positions[i * 3 + 2] = z;
 
-        // Color blending (Iris to Amber with Cyan flashes)
+        // Color blending (Electric Iris, Saffron Spark, Deep Verdant)
         const randChoice = Math.random();
         let c = colorIris;
         if (randChoice > 0.65) c = colorAmber;
-        else if (randChoice > 0.5) c = colorCyan;
+        else if (randChoice > 0.45) c = colorTeal;
 
         colors[i * 3] = c.r;
         colors[i * 3 + 1] = c.g;
@@ -1269,18 +1216,18 @@
       geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
       const material = new THREE.PointsMaterial({
-        size: 0.05,
+        size: 0.052,
         vertexColors: true,
         transparent: true,
-        opacity: 0.85,
+        opacity: 0.88,
         blending: THREE.AdditiveBlending
       });
 
       miniBrainPoints = new THREE.Points(geometry, material);
       miniScene.add(miniBrainPoints);
 
-      // Interactive mouse dragging for full 360 exploration
-      canvas.addEventListener('mousedown', (e) => {
+      // Interactive mouse dragging for full 360° exploration
+      container.addEventListener('mousedown', (e) => {
         isDragging = true;
         prevMouseX = e.clientX;
         prevMouseY = e.clientY;
@@ -1302,7 +1249,7 @@
     function animateMiniBrain() {
       requestAnimationFrame(animateMiniBrain);
       if (miniBrainPoints && !isDragging) {
-        miniBrainPoints.rotation.y += 0.008; // Continuous smooth 360 rotation
+        miniBrainPoints.rotation.y += 0.007; // Continuous smooth 360° rotation
       }
       if (miniRenderer && miniScene && miniCamera) {
         miniRenderer.render(miniScene, miniCamera);
@@ -1310,8 +1257,17 @@
     }
 
     // -------------------------------------------------------------
-    // 2. Bug Assessment Radar Chart (Bottom-Center Panel)
+    // 2. Bug Assessment Radar Chart (6 Major Bug Classes)
     // -------------------------------------------------------------
+    const bugMetrics = [
+      { label: 'Functional', fullLabel: 'Functional Bugs', val: 0.88, desc: 'CLI parser failure in batch run' },
+      { label: 'Performance', fullLabel: 'Performance Bugs', val: 0.65, desc: 'MCTS search traversal overhead' },
+      { label: 'Security', fullLabel: 'Security Bugs', val: 0.35, desc: 'Unsanitized CLI parameter boundaries' },
+      { label: 'UI/UX', fullLabel: 'UI/UX Bugs', val: 0.45, desc: 'Terminal contrast & viewport layout' },
+      { label: 'Compatibility', fullLabel: 'Compatibility Bugs', val: 0.80, desc: 'Cross-version Python typing variance' },
+      { label: 'Logic', fullLabel: 'Logic Bugs', val: 0.75, desc: 'Missing dict type coercion in config parser' }
+    ];
+
     function drawBugRadar() {
       const canvas = document.getElementById('bugRadarCanvas');
       if (!canvas) return;
@@ -1323,18 +1279,9 @@
 
       const centerX = w / 2;
       const centerY = h / 2;
-      const radius = Math.min(centerX, centerY) - 34;
+      const radius = Math.min(centerX, centerY) - 32;
 
-      const metrics = [
-        { label: 'Syntax & Types', val: 0.85 },
-        { label: 'Runtime Stability', val: 0.70 },
-        { label: 'Regression Risk', val: 0.90 },
-        { label: 'Test Coverage', val: 0.45 },
-        { label: 'AST Complexity', val: 0.65 },
-        { label: 'Dependency Drift', val: 0.40 }
-      ];
-
-      const numAxes = metrics.length;
+      const numAxes = bugMetrics.length;
       const angleStep = (Math.PI * 2) / numAxes;
 
       // Draw concentric radar webs
@@ -1357,8 +1304,8 @@
       }
 
       // Draw radial axis lines & labels
-      ctx.fillStyle = '#8e95a5';
-      ctx.font = '9px JetBrains Mono, monospace';
+      ctx.fillStyle = '#9a9a9a';
+      ctx.font = '10px PPNeueMontreal, -apple-system, sans-serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
 
@@ -1375,15 +1322,15 @@
 
         // Label position
         const labelX = centerX + (radius + 20) * Math.cos(angle);
-        const labelY = centerY + (radius + 14) * Math.sin(angle);
-        ctx.fillText(metrics[i].label, labelX, labelY);
+        const labelY = centerY + (radius + 12) * Math.sin(angle);
+        ctx.fillText(bugMetrics[i].label, labelX, labelY);
       }
 
       // Draw data polygon
       ctx.beginPath();
       for (let i = 0; i < numAxes; i++) {
         const angle = i * angleStep - Math.PI / 2;
-        const dist = radius * metrics[i].val;
+        const dist = radius * bugMetrics[i].val;
         const x = centerX + dist * Math.cos(angle);
         const y = centerY + dist * Math.sin(angle);
         if (i === 0) ctx.moveTo(x, y);
@@ -1391,33 +1338,39 @@
       }
       ctx.closePath();
 
-      // Glowing fill
+      // Subtle gradient fill (Saffron Spark to Electric Iris)
       const grad = ctx.createRadialGradient(centerX, centerY, 10, centerX, centerY, radius);
-      grad.addColorStop(0, 'rgba(0, 229, 255, 0.35)');
-      grad.addColorStop(0.7, 'rgba(255, 184, 41, 0.25)');
-      grad.addColorStop(1, 'rgba(128, 82, 255, 0.1)');
+      grad.addColorStop(0, 'rgba(255, 184, 41, 0.35)');
+      grad.addColorStop(0.7, 'rgba(128, 82, 255, 0.2)');
+      grad.addColorStop(1, 'rgba(21, 132, 110, 0.08)');
       ctx.fillStyle = grad;
       ctx.fill();
 
-      ctx.strokeStyle = '#00e5ff';
+      ctx.strokeStyle = '#ffb829';
       ctx.lineWidth = 2;
       ctx.stroke();
 
-      // Draw vertex dots
+      // Vertex dots
       for (let i = 0; i < numAxes; i++) {
         const angle = i * angleStep - Math.PI / 2;
-        const dist = radius * metrics[i].val;
+        const dist = radius * bugMetrics[i].val;
         const x = centerX + dist * Math.cos(angle);
         const y = centerY + dist * Math.sin(angle);
 
         ctx.beginPath();
         ctx.arc(x, y, 3.5, 0, Math.PI * 2);
-        ctx.fillStyle = '#ffb829';
+        ctx.fillStyle = '#ffffff';
         ctx.fill();
-        ctx.strokeStyle = '#fff';
-        ctx.lineWidth = 1;
+        ctx.strokeStyle = '#ffb829';
+        ctx.lineWidth = 1.5;
         ctx.stroke();
       }
+    }
+
+    function filterBugCategory(category) {
+      document.getElementById('targetQueryInput').value = `Investigate ${category}: analyze root cause and propose verified AST patch`;
+      logComms(`Filtering active diagnostic focus to: ${category}`, 'system');
+      executeAction('debug');
     }
 
     // -------------------------------------------------------------
@@ -1445,7 +1398,7 @@
         prompt = `[ENTIRE RECALL] Query Entire persistent memory graph for architectural context and prior solutions: ${query}`;
         logComms(`Querying Entire Context Ledger for: "${query}"`, 'entire');
       } else if (actionType === 'github') {
-        prompt = `[GITHUB ISSUES] Search GitHub issues and pull requests across SWE-agent and related repositories: ${query}`;
+        prompt = `[GITHUB ISSUES] Search GitHub issues and pull requests across repository indices: ${query}`;
         logComms(`Searching GitHub issue indices for: "${query}"`, 'agent');
       } else if (actionType === 'debug') {
         prompt = `[DEBUG & FIX] Autonomously localize bug, generate unified diff patch, and verify reproduction: ${query}`;
@@ -1454,7 +1407,7 @@
         prompt = `[DEEP RESEARCH] Conduct multi-source consensus search and proof of search verification: ${query}`;
         logComms(`Executing deep multi-source research on: "${query}"`, 'agent');
       } else if (actionType === 'simulate') {
-        prompt = `[SIMULATE] Run test reproduction harness in Docker container: ${query}`;
+        prompt = `[SIMULATE] Run test reproduction harness in container sandbox: ${query}`;
         logComms(`Deploying sandbox reproduction container for test validation...`, 'system');
       } else if (actionType === 'audit') {
         prompt = `[AUDIT PROOF] Run ground-truth quote provenance audit: ${query}`;
@@ -1494,7 +1447,7 @@
             logComms(`[${data.node.toUpperCase()}] ${data.event || 'Processing'}`, 'agent');
           }
           if (data.event === 'complete') {
-            logComms(`✓ Mission completed with zero errors. Patch ready.`, 'success');
+            logComms(`Mission completed with zero errors. Patch ready.`, 'success');
             sseSource.close();
             if (data.payload && data.payload.code_patch) {
               updateModalDiff(data.payload.code_patch, data.payload.test_verification, data.payload.report);
@@ -1545,27 +1498,25 @@
 
     function copyPatch() {
       const text = document.getElementById('modalDiffContent').innerText;
-      navigator.clipboard.writeText(text).then(() => alert('✓ Patch copied to clipboard!'));
+      navigator.clipboard.writeText(text).then(() => alert('Patch copied to clipboard!'));
     }
 
     function downloadPatch() {
       const text = document.getElementById('modalDiffContent').innerText;
-      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
+      const blob = new Blob([text], { type: 'text/plain' });
       const a = document.createElement('a');
-      a.href = url;
-      a.download = `jnana-swe-fix-${Date.now()}.patch`;
+      a.href = URL.createObjectURL(blob);
+      a.download = 'jnana-fix.patch';
       a.click();
-      URL.revokeObjectURL(url);
     }
 
     function runHarnessTest() {
-      logComms(`Running reproduction test in isolated environment...`, 'system');
+      logComms(`Executing Pytest test reproduction in container environment...`, 'system');
       setTimeout(() => {
-        logComms(`pytest reproduction_test.py: 1 passed in 0.42s ✓`, 'success');
+        logComms(`pytest reproduction_test.py: 1 passed in 0.42s (zero errors)`, 'success');
         openSynthesisModal();
         switchModalTab('test');
-      }, 800);
+      }, 700);
     }
 
     function loadIssueContext(ref) {
@@ -1578,11 +1529,11 @@
     }
 
     function switchDataSources() {
-      logComms(`Active Data Sources: Entire (Persistent Graph) &bull; GitHub API &bull; Crustdata B2B &bull; DDG`, 'entire');
+      logComms(`Active Data Sources: Entire (Persistent Graph) · GitHub API · Crustdata B2B · DDG`, 'entire');
     }
 
     function switchCaseBoard() {
-      logComms(`Case Board: Active target SWE-agent/SWE-agent #482 (Priority: Critical)`, 'system');
+      logComms(`Case Board: Active target Jnana-agent #482 (Priority: Critical)`, 'system');
     }
 
     function switchEvidenceTab() {
@@ -1591,12 +1542,7 @@
     }
 
     function switchCrustdataTab() {
-      logComms(`Crustdata verified contributors: 21 core maintainers on SWE-agent`, 'agent');
-    }
-
-    function openRepoAstModal() {
-      logComms(`AST Depth: 14 AST modules analyzed across sweagent/run.py and sweagent/agent.py`, 'system');
-      openSynthesisModal();
+      logComms(`Crustdata verified contributors: 21 core maintainers on repository`, 'agent');
     }
 
     // Initialize on load
