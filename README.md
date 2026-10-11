@@ -1,20 +1,20 @@
 # Jnana Agent: Autonomous Codebase Reasoning, SWE-bench Bug Localization & Multi-Source Research Engine
 
 [![Built with Anthropic Claude](https://img.shields.io/badge/Built_with-Claude_3.5_Haiku-8052FF?style=for-the-badge&logo=anthropic&logoColor=white)](https://anthropic.com)
-[![Live Production AWS EC2](https://img.shields.io/badge/AWS_EC2-Live_Production-FF9900?style=for-the-badge&logo=amazonec2&logoColor=white)](http://34.227.107.171:8000/terminal)
-[![Live Workstation](https://img.shields.io/badge/Live_Terminal-34.227.107.171%3A8000-10B981?style=for-the-badge&logo=googlechrome&logoColor=white)](http://34.227.107.171:8000/terminal)
+[![Live Production AWS EC2](https://img.shields.io/badge/AWS_EC2-Live_Production-FF9900?style=for-the-badge&logo=amazonec2&logoColor=white)](http://23.22.195.38:8000/terminal)
+[![Live Workstation](https://img.shields.io/badge/Live_Terminal-23.22.195.38%3A8000-10B981?style=for-the-badge&logo=googlechrome&logoColor=white)](http://23.22.195.38:8000/terminal)
 [![Neatlogs Verified](https://img.shields.io/badge/Neatlogs-Live_OTel_Tracing-6366F1?style=for-the-badge&logo=opentelemetry&logoColor=white)](https://app.neatlogs.com/projects/72082073-0485-4b6b-abb0-2a1ce5116f2b)
 [![LangGraph StateGraph](https://img.shields.io/badge/LangGraph-v0.4_Cyclic_Graph-000000?style=for-the-badge&logo=python&logoColor=white)](https://github.com/langchain-ai/langgraph)
 [![LiteLLM Gateway](https://img.shields.io/badge/LiteLLM-Claude_Proxy_Online-8052FF?style=for-the-badge)](https://litellm.vision.aivar.app)
 [![Crustdata Enriched](https://img.shields.io/badge/Crustdata-Live_B2B_Graph-059669?style=for-the-badge)](https://crustdata.com)
 [![Entire Memory](https://img.shields.io/badge/Entire_Memory-v0.11_Continuous_Brain-D97706?style=for-the-badge)](https://entire.io/gh/ibochivincent-lang/proof-of-search-ai)
-[![Automated Tests](https://img.shields.io/badge/Automated_Tests-24%2F24_Passing-10B981?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/ibochivincent-lang/proof-of-search-ai)
-[![Zero Mock Data](https://img.shields.io/badge/Zero_Mock_Data-100%25_Deterministic-3B82F6?style=for-the-badge)](http://34.227.107.171:8000/terminal)
+[![Automated Tests](https://img.shields.io/badge/Automated_Tests-26%2F26_Passing-10B981?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/ibochivincent-lang/proof-of-search-ai)
+[![Zero Mock Data](https://img.shields.io/badge/Zero_Mock_Data-100%25_Deterministic-3B82F6?style=for-the-badge)](http://23.22.195.38:8000/terminal)
 
 **Author:** IboTV (`ibochivincent-lang`) — Sole Author, Team Vincci001 Lead & Maintainer.  
 **Hackathon:** neatHack 2026.  
-**Production URL:** [http://34.227.107.171:8000/terminal](http://34.227.107.171:8000/terminal)  
-**API Health Status:** [http://34.227.107.171:8000/api/status](http://34.227.107.171:8000/api/status) (HTTP 200 OK — AWS EC2 `us-east-1`, Instance `i-0442ddfa2604f5923`)  
+**Production URL:** [http://23.22.195.38:8000/terminal](http://23.22.195.38:8000/terminal)  
+**API Health Status:** [http://23.22.195.38:8000/api/status](http://23.22.195.38:8000/api/status) (HTTP 200 OK — AWS EC2 `us-east-1`, Instance `i-02ca2ab76b811bb1`)  
 **Repository:** [https://github.com/ibochivincent-lang/proof-of-search-ai](https://github.com/ibochivincent-lang/proof-of-search-ai)  
 **Core Stack:** Python 3.11, FastAPI, LangGraph v0.4, LiteLLM (Claude-3-5-Haiku), Neatlogs OTel, Entire CLI Brain v0.11, Crustdata API, AWS EC2 Ubuntu 24.04 LTS (`systemd`), Three.js WebGL Particle HUD.
 
@@ -46,7 +46,7 @@ Traditional AI coding assistants suffer from three fatal structural limitations:
 | **Ground-Truth Observability & Tracing (Neatlogs)** | Real-time OpenTelemetry tracing via `neatlogs.langchain_handler()`, capturing cyclic state transitions, LLM token consumption, latency metrics, and error spans streamed directly to Neatlogs Project `72082073-0485-4b6b-abb0-2a1ce5116f2b`. |
 | **Persistent Agent Memory & Line Provenance (Entire Brain)** | Bounded continuous memory via Entire CLI v0.11 (`entire brain recall`, `entire blame`), enforcing repository invariants across model configs, AST parsing routines, and test harnesses. |
 | **Live B2B & Entity Intelligence (Crustdata)** | Zero mock data executive enrichment via Crustdata API, extracting real-time founder profiles, headcounts, funding rounds, and technology stacks for analyzed repositories. |
-| **Production Cloud Deployment (AWS EC2 Linux)** | 24/7 dedicated production deployment on AWS EC2 (`us-east-1`, Ubuntu 24.04 LTS, instance `i-0442ddfa2604f5923`) managed by `systemd` (`proofsearch.service`), live on `http://34.227.107.171:8000`. |
+| **Production Cloud Deployment (AWS EC2 Linux)** | 24/7 dedicated production deployment on AWS EC2 (`us-east-1`, Ubuntu 24.04 LTS, instance `i-02ca2ab76b811bb1`) managed by `systemd` (`proofsearch.service`), live on `http://23.22.195.38:8000`. |
 
 ---
 
@@ -270,10 +270,10 @@ In accordance with strict production requirements, **Jnana Agent uses zero mock 
 
 Jnana Agent is deployed live to a dedicated **Amazon Web Services (AWS) EC2 Ubuntu 24.04 LTS** instance:
 
-- **Public Production IP**: **[http://34.227.107.171:8000/terminal](http://34.227.107.171:8000/terminal)**
+- **Public Production IP**: **[http://23.22.195.38:8000/terminal](http://23.22.195.38:8000/terminal)**
 - **Cloud Provider**: Amazon Web Services (AWS)
 - **Region**: `us-east-1` (US East, N. Virginia)
-- **Instance ID**: `i-0442ddfa2604f5923` (`t2.micro`, Ubuntu 24.04 LTS)
+- **Instance ID**: `i-02ca2ab76b811bb1` (`t2.micro`, Ubuntu 24.04 LTS)
 - **Security Group**: Custom TCP Port `8000` open to `0.0.0.0/0` (Inbound HTTP)
 - **Service Manager**: `systemd` unit file (`proofsearch.service`) running 24/7 with automatic restart and crash recovery.
 

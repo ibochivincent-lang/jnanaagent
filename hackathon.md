@@ -117,21 +117,21 @@
 
 ### [2026-10-10] Live AWS Cloud Deployment & Production Verification
 - **Actions:**
-  - Automated EC2 User Data script deployed on AWS instance `i-0442ddfa2604f5923` (`t2.micro`, Ubuntu 24.04 LTS) in `us-east-1` (N. Virginia).
+  - Automated EC2 User Data script deployed on AWS instance `i-02ca2ab76b811bb1` (`t2.micro`, Ubuntu 24.04 LTS) in `us-east-1` (N. Virginia).
   - Web console and API service deployed under `systemd` (`proofsearch.service`) running 24/7 on port `8000`.
   - Configured live environment variables for neatHack sponsored LiteLLM, Neatlogs telemetry, and Crustdata live API.
   - Resolved asynchronous SSE event loop dispatch in `server.py` to ensure real-time stream delivery over HTTP.
   - Verified live public HTTP endpoints:
-    - `http://34.227.107.171:8000/` &rarr; `HTTP 200 OK` (Web Console)
-    - `http://34.227.107.171:8000/api/status` &rarr; `HTTP 200 OK` (All sponsor integrations online)
+    - `http://23.22.195.38:8000/` &rarr; `HTTP 200 OK` (Web Console)
+    - `http://23.22.195.38:8000/api/status` &rarr; `HTTP 200 OK` (All sponsor integrations online)
 - **Status:** **LIVE in Production.**
 
 ---
 
 ## Demo & Artifacts
 - **Status:** Functional Web Console & CLI agent with live Crustdata, LiteLLM, Neatlogs telemetry, and Entire continuous memory
-- **Live AWS Public URL:** **[http://34.227.107.171:8000](http://34.227.107.171:8000)**
-- **AWS Instance ID:** `i-0442ddfa2604f5923` (`us-east-1`, `t2.micro`)
+- **Live AWS Public URL:** **[http://23.22.195.38:8000](http://23.22.195.38:8000)**
+- **AWS Instance ID:** `i-02ca2ab76b811bb1` (`us-east-1`, `t2.micro`)
 - **Repository URL:** [https://github.com/ibochivincent-lang/proof-of-search-ai](https://github.com/ibochivincent-lang/proof-of-search-ai)
 - **Entire Repository Index:** [https://entire.io/gh/ibochivincent-lang/proof-of-search-ai](https://entire.io/gh/ibochivincent-lang/proof-of-search-ai)
 - **Financial Model:** [`financial_plan.md`](./financial_plan.md)
@@ -197,7 +197,7 @@
 - [x] Entire connected with accessible repository index & synchronized commits
 - [x] cfo.ai business plan & unit economics report attached (`financial_plan.md`)
 - [x] neatHack sponsored LiteLLM proxy integrated and verified end-to-end
-- [x] Live AWS cloud deployment verified on public internet (`http://34.227.107.171:8000`)
+- [x] Live AWS cloud deployment verified on public internet (`http://23.22.195.38:8000`)
 - [x] 4 official neatHack benchmark stems implemented and verified (`/api/stems`)
 - [x] Autonomous tool recovery and failure handling implemented (`ToolRecovery` log)
 - [x] Ground-truth proof quote extraction and deterministic verification audit
