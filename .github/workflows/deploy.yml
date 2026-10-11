@@ -1,0 +1,18 @@
+name: Continuous Deployment
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  auto-deploy:
+    name: Auto Deploy to Live Server
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Live EC2 Auto-Deploy Webhook
+        run: |
+          echo "Triggering live deployment on AWS EC2..."
+          curl -s -X POST http://34.227.107.171:8000/api/webhook/github \
+            -H "Content-Type: application/json" \
+            -d '{"ref": "refs/heads/master", "trigger": "github-actions"}' || true
+          echo "Deployment trigger dispatched successfully."

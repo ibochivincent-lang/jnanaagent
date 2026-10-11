@@ -67,3 +67,22 @@ def test_create_pr_endpoint():
     assert data["status"] in ["ready", "created"]
     assert "pr_url" in data
 
+
+def test_github_webhook_get():
+    response = client.get("/api/webhook/github")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["status"] == "active"
+    assert "usage" in data
+
+
+def test_github_webhook_post():
+    response = client.post(
+        "/api/webhook/github",
+        json={"ref": "refs/heads/master", "after": "test_commit_sha"}
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert data["status"] == "triggered"
+    assert "Continuous deployment" in data["message"]
+

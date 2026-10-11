@@ -595,6 +595,54 @@ def create_github_pr(req: CreatePRRequest) -> Dict[str, Any]:
     }
 
 
+@app.get("/api/webhook/github")
+def github_webhook_info() -> Dict[str, Any]:
+    """Information and health check for GitHub Continuous Deployment webhook."""
+    return {
+        "status": "active",
+        "service": "Jnana Agent Continuous Deployment",
+        "usage": "Configure this endpoint in GitHub Repo -> Settings -> Webhooks to auto-deploy on every git push.",
+        "events": ["push"],
+        "content_type": "application/json",
+    }
+
+
+@app.post("/api/webhook/github")
+async def github_webhook(request: Request) -> Dict[str, Any]:
+    """Continuous Deployment webhook: auto-pulls master and reloads on every git push from GitHub."""
+    import subprocess
+    import sys
+
+    try:
+        payload = await request.json()
+    except Exception:
+        payload = {}
+
+    ref = payload.get("ref", "")
+    # Check if push is to master or main
+    if ref and not (ref.endswith("/master") or ref.endswith("/main")):
+        return {"status": "ignored", "reason": f"Push to non-production branch: {ref}"}
+
+    def _sync():
+        try:
+            repo_root = Path(__file__).resolve().parent.parent.parent
+            log.info("Continuous Deployment webhook triggered: pulling origin master...")
+            subprocess.run(["git", "pull", "origin", "master"], cwd=str(repo_root), check=False, timeout=45)
+            # If running on Linux with systemd, restart the proofsearch service smoothly
+            if sys.platform.startswith("linux"):
+                subprocess.run(["sudo", "systemctl", "restart", "proofsearch"], check=False, timeout=15)
+        except Exception as err:
+            log.warning(f"Continuous Deployment sync error: {err}")
+
+    threading.Thread(target=_sync, daemon=True).start()
+    return {
+        "status": "triggered",
+        "message": "Continuous deployment pipeline initiated. Pulling latest commits.",
+        "ref": ref,
+        "timestamp": datetime.now().isoformat(),
+    }
+
+
 
 @app.get("/")
 def serve_index():
