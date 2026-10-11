@@ -350,10 +350,13 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      background: radial-gradient(circle at 50% 50%, rgba(14, 16, 26, 0.9) 0%, rgba(6, 7, 11, 0.98) 75%);
+      background: rgba(3, 4, 8, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(28px);
       position: relative;
       overflow: hidden;
       min-height: 520px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.75);
     }
 
     /* Large Concentric Circular HUD Ring */
@@ -367,10 +370,10 @@
       align-items: center;
       justify-content: center;
       padding: 24px;
-      border: 1px dashed rgba(255, 184, 41, 0.2);
+      border: 1px dashed rgba(255, 255, 255, 0.08);
       box-shadow: 
-        0 0 80px rgba(128, 82, 255, 0.12),
-        inset 0 0 60px rgba(255, 184, 41, 0.04);
+        0 0 60px rgba(0, 0, 0, 0.85),
+        inset 0 0 40px rgba(0, 0, 0, 0.6);
     }
 
     .hud-circle-ring::before {
@@ -471,22 +474,24 @@
     .portal-sub {
       font-size: 11px;
       color: var(--color-silver-mist);
-      margin-bottom: 16px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      margin-bottom: 18px;
+      letter-spacing: 0.03em;
+      opacity: 0.88;
+      line-height: 1.4;
+      text-transform: none;
     }
 
     .portal-search-wrap {
       width: 100%;
       display: flex;
       align-items: center;
-      background: rgba(6, 7, 12, 0.9);
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(6, 7, 12, 0.78);
+      border: 1px solid rgba(255, 255, 255, 0.14);
       border-radius: 9999px;
-      padding: 9px 16px;
+      padding: 10px 18px;
       margin-bottom: 16px;
-      backdrop-filter: blur(20px);
-      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(24px);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.65);
       transition: all 0.2s;
     }
 
@@ -507,24 +512,30 @@
 
     .portal-actions-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
       width: 100%;
+      max-width: 330px;
+      margin: 0 auto;
     }
 
     .portal-btn {
-      background: rgba(14, 16, 24, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      color: #d1d5db;
+      background: rgba(12, 14, 22, 0.78);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #e5e7eb;
       font-size: 11px;
       font-weight: 600;
-      padding: 9px 6px;
+      padding: 10px 16px;
       border-radius: 9999px;
       cursor: pointer;
       letter-spacing: 0.04em;
       text-transform: uppercase;
       transition: all 0.2s;
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(14px);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
 
     .portal-btn:hover {
@@ -1000,21 +1011,23 @@
           <div class="portal-content-layer">
             <div class="portal-tag">Jnana Neural Mission Control</div>
             <h2 class="portal-heading">What would you like to do?</h2>
-            <div class="portal-sub">select an action and enter query</div>
+            <div class="portal-sub">search for repo relating to your issue · do research · audit proof</div>
 
             <!-- Search Query Input -->
             <div class="portal-search-wrap">
-              <input type="text" id="targetQueryInput" class="portal-search-input" value="Jnana-agent#482: TypeError in run.py parsing model args" placeholder="Search codebase, Entire memory, or enter query...">
+              <input type="text" id="targetQueryInput" class="portal-search-input" value="Jnana-agent#482: TypeError in run.py parsing model args" placeholder="Search repo, GitHub issues, or enter research topic...">
             </div>
 
-            <!-- Action Buttons Array (Entire Recall First!) -->
+            <!-- Action Buttons Array (Strictly GitHub Issues and Research) -->
             <div class="portal-actions-grid">
-              <button class="portal-btn primary" onclick="executeAction('entire')">Entire Recall</button>
-              <button class="portal-btn" onclick="executeAction('github')">GitHub Issues</button>
-              <button class="portal-btn" onclick="executeAction('debug')">Debug &amp; Fix</button>
-              <button class="portal-btn" onclick="executeAction('research')">Research</button>
-              <button class="portal-btn" onclick="executeAction('simulate')">Simulate</button>
-              <button class="portal-btn" onclick="executeAction('audit')">Audit Proof</button>
+              <button class="portal-btn primary" onclick="executeAction('github')">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                GitHub Issues
+              </button>
+              <button class="portal-btn" onclick="executeAction('research')">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                Research
+              </button>
             </div>
           </div>
 

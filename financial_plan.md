@@ -1,10 +1,10 @@
-# Proof of Search AI (ProofSearch AI) — Financial Model & Unit Economics
+# Jnana Agent (ProofSearch AI) — Financial Model & Unit Economics
 *Prepared for cfo.ai business planning and neatHack 2026 submission*
 
 ---
 
 ## 1. Executive Summary & Company Profile
-- **Company / Product:** Proof of Search AI (ProofSearch AI)
+- **Company / Product:** Jnana Agent (Proof of Search AI)
 - **Team:** Vincci001 (Lead: Ibochi Vincent)
 - **Website / Repository:** [https://github.com/ibochivincent-lang/proof-of-search-ai](https://github.com/ibochivincent-lang/proof-of-search-ai)
 - **Core Value Proposition:** Autonomous, verifiable research agent pipeline that guarantees zero hallucinations and zero mock data through cryptographic SHA-256 source hashing, real-time Crustdata B2B entity enrichment, and complete Neatlogs execution observability.
