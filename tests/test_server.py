@@ -114,3 +114,31 @@ def test_export_report_audit():
         assert "consensus_matrix" in pkg
 
 
+def test_vibe_explain_endpoint():
+    response = client.post(
+        "/api/vibe/explain",
+        json={
+            "problem_type": "error",
+            "content": "TypeError: string indices must be integers in parse_model_arguments",
+        }
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert data["status"] == "success"
+    assert "step1" in data
+    assert "step2" in data
+    assert "step3" in data
+    assert "step4" in data
+    assert "mermaid_syntax" in data["step3"]
+    assert "fixed_code" in data["step4"]
+
+
+def test_neatlogs_detected_issues():
+    response = client.get("/api/neatlogs/issues")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["status"] == "online"
+    assert "recent_issues" in data
+    assert len(data["recent_issues"]) >= 1
+
+
