@@ -126,6 +126,11 @@ def analyze_problem_for_vibe_coders(
         context=context or "Web App / Python / JavaScript Ecosystem",
     )
 
+    import os
+    has_api_key = bool(os.getenv("OPENAI_API_KEY") or os.getenv("ANTHROPIC_API_KEY") or os.getenv("GEMINI_API_KEY"))
+    if not has_api_key:
+        return _build_default_response(cleaned_content, problem_type)
+
     try:
         model = llm.get_llm(max_tokens=2500)
         ai_resp = model.invoke(prompt)

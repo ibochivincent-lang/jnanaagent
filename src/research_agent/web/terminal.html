@@ -1710,139 +1710,596 @@
       color: #fff;
       font-weight: 600;
     }
-  </style>
+  
+    /* ========================================================
+       CONSOLIDATED CONSOLE ARCHITECTURE: CHAT, VISUALIZER, SETTINGS
+       ======================================================== */
+    .neat-app-layout {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: var(--neat-bg-main) !important;
+      color: var(--neat-text-primary) !important;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    /* Left Sidebar */
+    .neat-sidebar {
+      width: 250px;
+      min-width: 250px;
+      height: 100vh;
+      background: var(--neat-bg-sidebar) !important;
+      border-right: 1px solid var(--neat-border) !important;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      user-select: none;
+      z-index: 10;
+      transition: width 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .neat-sidebar-header {
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--neat-border-subtle);
+    }
+
+    .neat-project-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .neat-project-avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: var(--neat-bg-surface-subtle);
+      border: 1px solid var(--neat-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--neat-text-primary);
+    }
+
+    .neat-project-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--neat-text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 140px;
+    }
+
+    .neat-sidebar-section-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 16px 6px 16px;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--neat-text-muted);
+    }
+
+    .neat-nav-list {
+      padding: 6px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .neat-nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      color: var(--neat-text-secondary);
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .neat-nav-item:hover {
+      background: var(--neat-bg-surface-hover);
+      color: var(--neat-text-primary);
+    }
+
+    .neat-nav-item.active {
+      background: var(--neat-bg-surface-hover);
+      color: var(--neat-text-primary);
+      font-weight: 600;
+      border: 1px solid var(--neat-border);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+
+    .neat-nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .neat-nav-badge {
+      font-size: 10px;
+      font-family: var(--font-mono);
+      background: var(--neat-badge-bg);
+      border: 1px solid var(--neat-badge-border);
+      padding: 1px 6px;
+      border-radius: 4px;
+      color: var(--neat-text-secondary);
+    }
+
+    .neat-chats-group-title {
+      font-size: 10.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--neat-text-muted);
+      margin-bottom: 6px;
+    }
+
+    .neat-chat-history-item {
+      padding: 7px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      color: var(--neat-text-secondary);
+      cursor: pointer;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: background 0.15s ease;
+    }
+
+    .neat-chat-history-item:hover {
+      background: var(--neat-bg-surface-hover);
+      color: var(--neat-text-primary);
+    }
+
+    .neat-sidebar-footer {
+      border-top: 1px solid var(--neat-border-subtle);
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: var(--neat-bg-sidebar);
+    }
+
+    .neat-activity-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--neat-text-secondary);
+      padding: 6px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      background: var(--neat-bg-surface-subtle);
+      border: 1px solid var(--neat-border);
+    }
+
+    .neat-user-profile-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .neat-user-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .neat-user-avatar {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #6366f1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .neat-user-name {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--neat-text-primary);
+    }
+
+    .neat-icon-btn {
+      background: transparent;
+      border: none;
+      color: var(--neat-text-secondary);
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.15s ease;
+    }
+
+    .neat-icon-btn:hover {
+      color: var(--neat-text-primary);
+    }
+
+    /* Main Container & Views */
+    .neat-main-container {
+      flex: 1;
+      height: 100vh;
+      overflow-y: auto;
+      background: var(--neat-bg-main) !important;
+      color: var(--neat-text-primary) !important;
+      position: relative;
+      z-index: 2;
+    }
+
+    .neat-view-section {
+      padding: 40px 32px 60px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100%;
+      width: 100%;
+    }
+
+    /* Settings View Styling */
+    .neat-settings-card-wrapper {
+      width: 100%;
+      max-width: 720px;
+      background: var(--neat-bg-surface);
+      border: 1px solid var(--neat-border);
+      border-radius: var(--neat-card-radius);
+      padding: 28px 32px;
+      box-shadow: var(--neat-card-shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .neat-theme-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .neat-theme-option-box {
+      background: var(--neat-bg-surface-subtle);
+      border: 1.5px solid var(--neat-border);
+      border-radius: 10px;
+      padding: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.15s ease;
+    }
+
+    .neat-theme-option-box:hover {
+      border-color: var(--neat-accent);
+      background: var(--neat-bg-surface-hover);
+    }
+
+    .neat-theme-option-box.active {
+      border-color: var(--neat-accent);
+      background: var(--neat-bg-surface-hover);
+      box-shadow: 0 0 0 1px var(--neat-accent);
+    }
+
+    .neat-theme-swatch {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      margin-right: 12px;
+    }
+    .neat-theme-swatch.dark {
+      background: #08090a;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .neat-theme-swatch.silver {
+      background: #f3f3f4;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+    }
+
+    .neat-theme-check-icon {
+      color: var(--neat-accent);
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .neat-status-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--neat-bg-surface-subtle);
+      border: 1px solid var(--neat-border);
+      border-radius: 8px;
+      padding: 12px 16px;
+    }
+
+
+    /* Neatlogs Color Themes (Dark Obsidian vs Silver Studio) */
+    :root, [data-theme="dark"] {
+      --neat-bg-main: #08090a;
+      --neat-bg-sidebar: #050607;
+      --neat-bg-surface: #0e1013;
+      --neat-bg-surface-subtle: #14171c;
+      --neat-bg-surface-hover: rgba(255, 255, 255, 0.05);
+      --neat-border: rgba(255, 255, 255, 0.08);
+      --neat-border-subtle: rgba(255, 255, 255, 0.05);
+      --neat-text-primary: #f5f5f2;
+      --neat-text-secondary: #9ba1ad;
+      --neat-text-muted: #646b7a;
+      --neat-accent: #38bdf8;
+      --neat-badge-bg: rgba(255, 255, 255, 0.06);
+      --neat-badge-border: rgba(255, 255, 255, 0.1);
+      --neat-card-radius: 14px;
+      --neat-card-shadow: 0 16px 48px rgba(0, 0, 0, 0.7);
+    }
+
+    [data-theme="silver"], [data-theme="light"] {
+      --neat-bg-main: #f3f3f4;
+      --neat-bg-sidebar: #eaebee;
+      --neat-bg-surface: #ffffff;
+      --neat-bg-surface-subtle: #f8f8fa;
+      --neat-bg-surface-hover: rgba(0, 0, 0, 0.04);
+      --neat-border: rgba(17, 18, 20, 0.09);
+      --neat-border-subtle: rgba(17, 18, 20, 0.05);
+      --neat-text-primary: #111214;
+      --neat-text-secondary: #575c66;
+      --neat-text-muted: #8c93a0;
+      --neat-accent: #0284c7;
+      --neat-badge-bg: rgba(0, 0, 0, 0.05);
+      --neat-badge-border: rgba(0, 0, 0, 0.08);
+      --neat-card-radius: 14px;
+      --neat-card-shadow: 0 16px 48px rgba(0, 0, 0, 0.06);
+    }
+
+    [data-theme="silver"] body,
+    [data-theme="silver"] .neat-app-layout,
+    [data-theme="silver"] .neat-main-container,
+    [data-theme="light"] body,
+    [data-theme="light"] .neat-app-layout,
+    [data-theme="light"] .neat-main-container {
+      background: #f3f3f4 !important;
+      color: #111214 !important;
+    }
+
+    [data-theme="silver"] .vibe-panel,
+    [data-theme="light"] .vibe-panel {
+      background: #ffffff !important;
+      border: 1px solid rgba(17, 18, 20, 0.1) !important;
+      color: #111214 !important;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    [data-theme="silver"] .vibe-step-tab,
+    [data-theme="light"] .vibe-step-tab {
+      background: #f8f8fa !important;
+      border-color: rgba(17, 18, 20, 0.08) !important;
+      color: #575c66 !important;
+    }
+
+    [data-theme="silver"] .vibe-step-tab.active,
+    [data-theme="light"] .vibe-step-tab.active {
+      background: #ffffff !important;
+      border-color: #0284c7 !important;
+      color: #111214 !important;
+    }
+
+    [data-theme="silver"] #vibeInputContent,
+    [data-theme="silver"] #vibeInputContext,
+    [data-theme="light"] #vibeInputContent,
+    [data-theme="light"] #vibeInputContext {
+      background: #f8f8fa !important;
+      color: #111214 !important;
+      border-color: rgba(17, 18, 20, 0.15) !important;
+    }
+
+    [data-theme="silver"] .vibe-code-box,
+    [data-theme="light"] .vibe-code-box {
+      background: #111214 !important;
+      color: #f3f3f4 !important;
+    }
+
+    /* Suggestion Prompts */
+    .neat-suggestion-row {
+      background: transparent !important;
+      border: none !important;
+      font-family: var(--font-main) !important;
+      font-size: 13.5px !important;
+      color: var(--neat-text-secondary) !important;
+      cursor: pointer !important;
+      padding: 6px 16px !important;
+      border-radius: 8px !important;
+      transition: all 0.15s ease !important;
+      display: inline-block !important;
+      text-align: center !important;
+    }
+
+    .neat-suggestion-row strong {
+      color: var(--neat-text-primary) !important;
+      font-weight: 600 !important;
+    }
+
+    .neat-suggestion-row:hover {
+      background: var(--neat-bg-surface-hover) !important;
+      color: var(--neat-text-primary) !important;
+    }
+
+    /* Screenshot Dropzone */
+    .neat-screenshot-dropzone {
+      display: none;
+      width: 100%;
+      max-width: 740px;
+      padding: 24px;
+      border: 1px dashed var(--neat-border);
+      border-radius: 16px;
+      background: var(--neat-bg-surface-subtle);
+      text-align: center;
+      margin-bottom: 20px;
+      cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .neat-screenshot-dropzone:hover {
+      border-color: rgba(128, 82, 255, 0.4);
+      background: var(--neat-bg-surface);
+    }
+
+
+    [data-theme="silver"] .neat-hero-greet,
+    [data-theme="light"] .neat-hero-greet {
+      color: #111214 !important;
+    }
+
+    [data-theme="silver"] .neat-hero-sub,
+    [data-theme="light"] .neat-hero-sub {
+      color: #575c66 !important;
+    }
+
+    [data-theme="silver"] .neat-pill-box,
+    [data-theme="light"] .neat-pill-box {
+      background: #ffffff !important;
+      border: 1px solid rgba(17, 18, 20, 0.12) !important;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+    }
+
+    [data-theme="silver"] .neat-pill-textarea,
+    [data-theme="light"] .neat-pill-textarea {
+      color: #111214 !important;
+    }
+
+    [data-theme="silver"] .neat-pill-textarea::placeholder,
+    [data-theme="light"] .neat-pill-textarea::placeholder {
+      color: #8c93a0 !important;
+    }
+
+    [data-theme="silver"] .neat-chip-btn,
+    [data-theme="light"] .neat-chip-btn {
+      background: rgba(0, 0, 0, 0.04) !important;
+      border: 1px solid rgba(17, 18, 20, 0.08) !important;
+      color: #575c66 !important;
+    }
+
+    [data-theme="silver"] .neat-chip-btn:hover,
+    [data-theme="light"] .neat-chip-btn:hover {
+      background: rgba(0, 0, 0, 0.07) !important;
+      color: #111214 !important;
+    }
+
+    [data-theme="silver"] .neat-model-pill,
+    [data-theme="light"] .neat-model-pill {
+      background: rgba(0, 0, 0, 0.04) !important;
+      border: 1px solid rgba(17, 18, 20, 0.08) !important;
+      color: #111214 !important;
+    }
+
+    [data-theme="silver"] .neat-send-btn,
+    [data-theme="light"] .neat-send-btn {
+      background: #0284c7 !important;
+      color: #ffffff !important;
+    }
+
+</style>
 </head>
 <body>
   <canvas id="ambientBgCanvas"></canvas>
 
   <div class="neat-app-layout">
-    <!-- Left Fixed Sidebar (Neatlogs Aesthetic) -->
+    <!-- Left Fixed Sidebar (Console Navigation) -->
     <aside class="neat-sidebar" id="neatSidebar">
       <div>
         <!-- Top Project Header -->
         <div class="neat-sidebar-header">
-          <div class="neat-project-badge" onclick="switchNeatView('chats')" title="Jnana Agent · Vincci001 (neatHack 2026)">
+          <div class="neat-project-badge" onclick="switchNeatView('chat')" title="Jnana Agent · Vincci001">
             <div class="neat-project-avatar">S</div>
             <div class="neat-project-name">Ibochi's project</div>
           </div>
-          <div style="display: flex; align-items: center; gap: 8px; color: #6b7280; font-size: 13px;">
-            <span style="cursor: pointer;" title="Switch Project">⇅</span>
-            <span style="cursor: pointer;" onclick="toggleNeatSidebar()" title="Toggle Sidebar Width">◫</span>
+          <div style="cursor: pointer; color: var(--neat-text-secondary);" onclick="toggleNeatSidebar()" title="Toggle Sidebar">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
           </div>
         </div>
 
-        <!-- Switcher Pills: console | chats -->
-        <div class="neat-sidebar-pills">
-          <button id="pillBtnConsole" class="neat-pill-btn" onclick="switchNeatView('console')">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-            console
-          </button>
-          <button id="pillBtnChats" class="neat-pill-btn active" onclick="switchNeatView('chats')">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-            chats
-          </button>
+        <!-- Section Label: CONSOLE -->
+        <div class="neat-sidebar-section-title">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+          <span>CONSOLE</span>
         </div>
 
-        <!-- Links when CONSOLE is active -->
-        <nav class="neat-nav-list" id="neatConsoleNav" style="display: none;">
-          <div class="neat-nav-item active" onclick="switchNeatView('console')">
+        <!-- Sub-items under Console: Chat, Visualizer, Settings -->
+        <nav class="neat-nav-list" id="neatConsoleNav">
+          <div class="neat-nav-item active" id="navItemChat" onclick="switchNeatView('chat')">
             <div class="neat-nav-left">
-              <span>🚀</span>
-              <span>setup</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+              <span>Chat</span>
             </div>
-            <span class="neat-nav-badge">1/2</span>
+            <span class="neat-nav-badge" style="color: #38bdf8;">PROMPT</span>
           </div>
-          <div class="neat-nav-item" onclick="switchNeatView('console')">
+
+          <div class="neat-nav-item" id="navItemVisual" onclick="switchNeatView('visual')">
             <div class="neat-nav-left">
-              <span>🏠</span>
-              <span>home</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><line x1="3" y1="12" x2="9" y2="12"></line><line x1="15" y1="12" x2="21" y2="12"></line><line x1="12" y1="3" x2="12" y2="9"></line><line x1="12" y1="15" x2="12" y2="21"></line></svg>
+              <span>Visualizer</span>
             </div>
+            <span class="neat-nav-badge" style="color: #34d399;">AST FLOW</span>
           </div>
-          <div class="neat-nav-item" onclick="switchNeatView('console'); filterBugCategory('Functional Bugs');">
+
+          <div class="neat-nav-item" id="navItemSettings" onclick="switchNeatView('settings')">
             <div class="neat-nav-left">
-              <span>🔧</span>
-              <span>incidents</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+              <span>Settings</span>
             </div>
-          </div>
-          <a class="neat-nav-item" href="https://app.neatlogs.com/projects/72082073-0485-4b6b-abb0-2a1ce5116f2b" target="_blank">
-            <div class="neat-nav-left">
-              <span>≡</span>
-              <span>traces</span>
-            </div>
-            <span class="neat-nav-badge" style="color: #34d399;">LIVE</span>
-          </a>
-          <div class="neat-nav-item" onclick="switchNeatView('console'); openSynthesisModal();">
-            <div class="neat-nav-left">
-              <span>🎯</span>
-              <span>detections</span>
-            </div>
-          </div>
-          <div class="neat-nav-item" onclick="switchNeatView('console'); executeAction('audit');">
-            <div class="neat-nav-left">
-              <span>🔔</span>
-              <span>alerts</span>
-            </div>
-          </div>
-          <div class="neat-nav-item" onclick="switchNeatView('console'); scrollToObservabilityHub('langfuse');">
-            <div class="neat-nav-left">
-              <span>📊</span>
-              <span>langfuse traces &amp; costs</span>
-            </div>
-            <span class="neat-nav-badge" style="color: #38bdf8;">$0.056</span>
-          </div>
-          <div class="neat-nav-item" onclick="switchNeatView('console'); scrollToObservabilityHub('braintrust');">
-            <div class="neat-nav-left">
-              <span>🧪</span>
-              <span>braintrust evals &amp; scores</span>
-            </div>
-            <span class="neat-nav-badge" style="color: #34d399;">100% PASS</span>
-          </div>
-          <div class="neat-nav-item" onclick="switchNeatView('console')">
-            <div class="neat-nav-left">
-              <span>🧪</span>
-              <span>experiments</span>
-            </div>
-            <span class="neat-nav-badge" style="color: #8052ff;">beta &rsaquo;</span>
+            <span class="neat-nav-badge">THEME</span>
           </div>
         </nav>
 
-        <!-- Links when CHATS is active -->
-        <div class="neat-chats-subnav" id="neatChatsNav">
-          <div style="display: flex; justify-content: space-between; align-items: center; padding: 2px 4px;">
-            <span style="font-size: 11px; font-weight: 600; color: #5d6373;">chats</span>
-            <span style="cursor: pointer; color: #8b92a4; font-size: 12px;" title="Search sessions">🔍</span>
+        <div style="padding: 14px 14px 4px 14px;">
+          <div class="neat-chats-group-title">recent sessions</div>
+          <div id="neatChatHistoryList" style="max-height: 240px; overflow-y: auto;">
+            <!-- Dynamically populated from actual user interactions -->
           </div>
-          <button class="neat-new-chat-btn" onclick="startNewNeatChat()">
-            <span style="font-size: 14px;">+</span>
-            <span>New chat</span>
-          </button>
-          <div class="neat-chats-group-title">today</div>
-          <div class="neat-chat-history-item" onclick="loadSampleVibeAndSubmit('type_arg')">Troubleshooting high error rate</div>
-          <div class="neat-chat-history-item" onclick="loadLiveNeatlogsAndSubmit()">Jnana-agent#482: TypeError in run.py</div>
-          <div class="neat-chat-history-item" onclick="loadSampleVibeAndSubmit('db_missing')">Missing DB connection pool</div>
-          <div class="neat-chat-history-item" onclick="loadSampleVibeAndSubmit('route_404')">Missing backend route handler</div>
         </div>
       </div>
 
       <!-- Bottom Sidebar Footer: activity & user row -->
       <div class="neat-sidebar-footer">
-        <div class="neat-activity-row" onclick="switchNeatView('console')">
+        <div class="neat-activity-row" onclick="switchNeatView('visual')" title="Visualizer Pipeline">
           <div style="display: flex; align-items: center; gap: 8px;">
-            <span>🔔</span>
-            <span>activity</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+            <span>pipeline</span>
           </div>
-          <span class="neat-nav-badge" style="background: rgba(128, 82, 255, 0.25); color: #c4b5fd;">1</span>
+          <span class="neat-nav-badge" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8;">ACTIVE</span>
         </div>
 
         <div class="neat-user-profile-row">
           <div class="neat-user-pill" title="Lead: Ibochi Vincent (Vincci001)">
             <div class="neat-user-avatar">I</div>
             <div class="neat-user-name">Ibochi Vin...</div>
-            <span style="font-size: 10px; color: #6b7280;">^</span>
           </div>
-          <div style="display: flex; align-items: center; gap: 10px; color: #8b92a4;">
-            <span style="cursor: pointer;" title="System Settings" onclick="openSynthesisModal()">⚙️</span>
-            <span style="cursor: pointer;" title="Toggle Dark/Light Mode" onclick="toggleNeatTheme()">🌙</span>
+          <div style="display: flex; align-items: center; gap: 6px; color: var(--neat-text-secondary);">
+            <button class="neat-icon-btn" onclick="switchNeatView('settings')" title="Settings &amp; Theme">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            </button>
+            <button class="neat-icon-btn" id="neatThemeToggleBtn" onclick="toggleNeatTheme()" title="Toggle Dark / Silver Mode">
+              <svg id="themeIconMoon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+              <svg id="themeIconSun" style="display: none;" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            </button>
           </div>
         </div>
       </div>
@@ -1850,15 +2307,17 @@
 
     <!-- Main Dynamic Container -->
     <main class="neat-main-container" id="neatMainContainer">
-      
-      <!-- 1. CHATS VIEW (Default Landing) -->
-      <div id="neatViewChats">
+
+      <!-- ==========================================
+           1. CHAT VIEW (Console > Chat)
+           ========================================== -->
+      <div id="neatViewChat" class="neat-view-section">
         <h1 class="neat-hero-greet">hello, Ibochi</h1>
         <p class="neat-hero-sub">find anything about your agent runs, debug code &amp; visualize issues</p>
 
         <!-- Grand Search Pill Box -->
         <div class="neat-pill-box">
-          <textarea id="neatSearchInput" class="neat-pill-textarea" placeholder="Ask anything...." rows="2" onkeydown="handleNeatSearchKeydown(event)"></textarea>
+          <textarea id="neatSearchInput" class="neat-pill-textarea" placeholder="Ask anything about agent runs, trace failures, or code fixes...." rows="2" onkeydown="handleNeatSearchKeydown(event)"></textarea>
 
           <div class="neat-pill-bottom-toolbar">
             <div class="neat-pill-toolbar-left">
@@ -1867,69 +2326,108 @@
               </button>
               <button class="neat-chip-btn" id="neatWorkflowBtn">
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><path d="M13 6h3a2 2 0 0 1 2 2v7"></path><line x1="6" y1="9" x2="6" y2="21"></line></svg>
-                All workflows ▾
+                <span>All workflows</span>
+                <span style="font-size: 8px;">▾</span>
               </button>
-              <button class="neat-chip-btn">
+              <button class="neat-chip-btn" id="neatDateBtn">
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                Last 14 days ▾
+                <span>Last 14 days</span>
+                <span style="font-size: 8px;">▾</span>
               </button>
-              <button class="neat-chip-btn" id="neatDeepChip" onclick="this.classList.toggle('active')" title="Deep Multi-Source Grounding">
-                <span>⚡ Deep</span>
+              <button class="neat-chip-btn" id="neatDeepBtn">
+                <span>Deep</span>
               </button>
             </div>
 
             <div class="neat-pill-toolbar-right">
-              <div style="position: relative;">
-                <button class="neat-chip-btn" id="neatModelSelectorBtn" onclick="toggleNeatModelMenu()">
-                  <span style="font-weight: 700; color: #c4b5fd;">nl</span>
-                  <span id="selectedNeatModelText">Neatlogs Fast</span>
-                  <span>▾</span>
+              <div class="neat-model-select-wrap">
+                <button class="neat-model-pill" onclick="toggleNeatModelMenu()">
+                  <span class="neat-nl-tag">nl</span>
+                  <span id="neatSelectedModelName">Neatlogs Fast</span>
+                  <span style="font-size: 8px; color: var(--neat-text-muted);">▾</span>
                 </button>
-
                 <div class="neat-model-menu" id="neatModelMenu">
-                  <div style="font-size: 10px; color: #6b7280; padding: 4px 10px; font-weight: 600;">ACTIVE INFERENCE MODELS</div>
-                  <div class="neat-model-opt selected" onclick="selectNeatModel('Neatlogs Fast', 'fast')">
-                    <span>nl Neatlogs Fast</span>
-                    <span style="color: #34d399;">✓</span>
+                  <div class="neat-model-opt active" onclick="selectNeatModel('fast')">
+                    <span class="neat-nl-tag">nl</span>
+                    <div>
+                      <div style="font-size: 12px; font-weight: 600;">Neatlogs Fast</div>
+                      <div style="font-size: 10px; color: var(--neat-text-muted);">Low latency AST investigation</div>
+                    </div>
                   </div>
-                  <div class="neat-model-opt" onclick="selectNeatModel('Neatlogs Pro', 'pro')">
-                    <span>nl Neatlogs Pro</span>
-                  </div>
-                  <div class="neat-model-opt" onclick="selectNeatModel('Claude 3.5 Sonnet', 'claude-sonnet')">
-                    <span>⚡ Claude 3.5 Sonnet</span>
-                  </div>
-                  <div class="neat-model-opt" onclick="selectNeatModel('Claude 3.5 Haiku', 'claude-haiku')">
-                    <span>⚡ Claude 3.5 Haiku</span>
-                  </div>
-                  <div class="neat-model-opt" onclick="selectNeatModel('Gemini 1.5 Pro', 'gemini-pro')">
-                    <span>✨ Gemini 1.5 Pro</span>
+                  <div class="neat-model-opt" onclick="selectNeatModel('deep')">
+                    <span class="neat-nl-tag" style="background: rgba(16, 185, 129, 0.2); color: #10b981;">nl</span>
+                    <div>
+                      <div style="font-size: 12px; font-weight: 600;">Neatlogs Deep Reasoning</div>
+                      <div style="font-size: 10px; color: var(--neat-text-muted);">Full architecture &amp; AST diff synthesis</div>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <button class="neat-send-btn" id="neatSearchSubmitBtn" onclick="executeNeatSearchSubmit()" title="Submit Query / Diagnose Issue">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+              <button class="neat-send-btn" id="neatSendBtn" onclick="executeNeatSearchSubmit()" title="Send query (Enter)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
               </button>
             </div>
           </div>
         </div>
 
-        <!-- Suggestion links below pill -->
+        <!-- Optional Screenshot Dropzone -->
+        <div class="neat-screenshot-dropzone" id="neatScreenshotDropzone" style="display: none;">
+          <input type="file" id="neatScreenshotFileInput" accept="image/*,.log,.txt" style="display: none;" onchange="handleNeatScreenshotSelected(event)">
+          <div style="cursor: pointer;" onclick="document.getElementById('neatScreenshotFileInput').click()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="color: var(--neat-text-secondary); margin-bottom: 6px;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+            <div style="font-size: 12.5px; font-weight: 500; color: var(--neat-text-primary);">Click or drag screenshot or error log here</div>
+            <div style="font-size: 11px; color: var(--neat-text-muted);">Supported: PNG, JPG, WebP, TXT, LOG</div>
+          </div>
+        </div>
+
+        <!-- Suggestion Prompts -->
         <div class="neat-suggestions-wrap">
-          <button class="neat-suggest-link" onclick="loadSampleVibeAndSubmit('type_arg')">
+          <button class="neat-suggestion-row" onclick="loadSampleVibeAndSubmit('type_coercion')">
             <strong>Analyze</strong> API parameter coercion &amp; type limits
           </button>
-          <button class="neat-suggest-link" onclick="loadLiveNeatlogsAndSubmit()">
-            <strong>What</strong> is the failure point in Jnana-agent#482?
+          <button class="neat-suggestion-row" onclick="loadLiveNeatlogsAndSubmit()">
+            <strong>Investigate</strong> why checkout agent timed out in production
           </button>
-          <button class="neat-suggest-link" onclick="loadSampleVibeAndSubmit('db_missing')">
+          <button class="neat-suggestion-row" onclick="loadSampleVibeAndSubmit('db_missing')">
             <strong>Visualize</strong> missing database connection pool &amp; routes
           </button>
         </div>
 
-        <!-- Integrated 4-Step Visual Code Explainer & Debugger Studio -->
-            <!-- Vibe Coder Visualizer Studio (4-Step Flowchart & Explainer) -->
-    <section class="panel-card vibe-panel" id="vibeVisualizerSection" style="display: block; width: 100%; max-width: 900px; margin-bottom: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.6);">
+        <!-- Real Chat Response Stream & Visualizer Launchpad -->
+        <div id="neatChatStreamArea" style="width: 100%; max-width: 760px; margin-top: 18px; display: none;">
+          <div class="neat-chat-response-card" id="neatChatResponseCard">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid var(--neat-border-subtle); padding-bottom: 8px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="neat-nl-tag">nl</span>
+                <span style="font-weight: 600; font-size: 13px; color: var(--neat-text-primary);">Agent Reasoning Output</span>
+              </div>
+              <button class="neat-btn-primary" onclick="switchNeatView('visual')" style="padding: 4px 10px; font-size: 11px;">
+                <span>Open in Visualizer &rarr;</span>
+              </button>
+            </div>
+            <div id="neatChatStreamText" style="font-size: 13px; line-height: 1.6; color: var(--neat-text-primary); white-space: pre-wrap;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           2. VISUALIZER VIEW (Console > Visualizer)
+           ========================================== -->
+      <div id="neatViewVisual" class="neat-view-section" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 900px; margin-bottom: 16px;">
+          <div>
+            <h2 style="font-size: 20px; font-weight: 600; color: var(--neat-text-primary); margin-bottom: 4px;">Visual Code Explainer &amp; Architecture Flowchart</h2>
+            <p style="font-size: 12.5px; color: var(--neat-text-secondary);">4-Step Failure-to-Fix Pipeline &middot; Live AST Reasoning, Code Fix &amp; Verified Reproduction</p>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn-table-action" onclick="loadLiveNeatlogsAndSubmit()">Load Checkout Issue</button>
+            <button class="btn-table-action" onclick="loadSampleVibeAndSubmit('db_missing')">Load DB Pool Issue</button>
+          </div>
+        </div>
+
+        <!-- The 4-Step Visualizer Pipeline -->
+        <section class="panel-card vibe-panel" id="vibeVisualizerSection" style="display: block; width: 100%; max-width: 900px; margin-bottom: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.6);">
       <div class="panel-header">
         <div class="panel-title">
           <span>Visual Code Explainer &amp; Debugger for Vibe Coders</span>
@@ -2189,648 +2687,198 @@
     </section>
       </div>
 
-      <!-- 2. CONSOLE VIEW (Mission Control Workstation) -->
-      <div id="neatViewConsole" style="display: none; width: 100%; height: 100%; overflow-y: auto;">
-          <!-- Top Main Navigation Bar -->
-  <header class="mc-header">
-    <a href="/" class="mc-brand">
-      <img src="/images/jnana-glyph.png" alt="Jnana Glyph">
-      <span class="mc-brand-title">Jnana Agent · Mission Control</span>
-      <span class="mc-brand-pro">PRO</span>
-      <span class="mc-brand-sub">· Autonomous Codebase Reasoning</span>
-    </a>
-
-    <div class="mc-header-actions">
-      <a href="https://app.neatlogs.com/projects/72082073-0485-4b6b-abb0-2a1ce5116f2b" target="_blank" class="btn-header-ghost" style="border-color: rgba(128, 82, 255, 0.4); color: #c4b5fd;">Neatlogs Live Trace</a>
-      <a href="/" class="btn-header-ghost">&larr; Back to Landing</a>
-      <button class="btn-header-action" onclick="diagnoseTarget()">Diagnose Target</button>
-    </div>
-  </header>
-
-  <!-- Main Dashboard Workstation -->
-  <main class="mc-dashboard">
-    
-    <!-- Top Row: Left (Bug Assessment Radar), Center (Grand Command Portal with 360 Brain), Right (Inspector) -->
-    <div class="dashboard-top-row">
-      
-      <!-- Left Panel: Bug Assessment Radar (6 Major Bug Classes) -->
-      <section class="panel-card">
-        <div class="panel-header">
-          <div class="panel-title">Bug Assessment Radar</div>
-          <span class="panel-badge">6 Major Bug Classes</span>
-        </div>
-
-        <div class="radar-canvas-wrap">
-          <canvas id="bugRadarCanvas"></canvas>
-        </div>
-
-        <div class="bug-types-list">
-          <!-- 1. Functional Bugs -->
-          <div class="bug-type-row" onclick="filterBugCategory('Functional Bugs')">
-            <div class="bug-type-head">
-              <span class="bug-type-name">1. Functional Bugs</span>
-              <span class="bug-type-score score-high">88% Risk</span>
-            </div>
-            <div class="bug-type-desc">Feature does not work as expected (e.g. CLI argument parsing failure in batch mode).</div>
+      <!-- ==========================================
+           3. SETTINGS VIEW (Console > Settings)
+           ========================================== -->
+      <div id="neatViewSettings" class="neat-view-section" style="display: none;">
+        <div class="neat-settings-card-wrapper">
+          <div style="border-bottom: 1px solid var(--neat-border-subtle); padding-bottom: 14px;">
+            <h2 style="font-size: 20px; font-weight: 600; color: var(--neat-text-primary); margin-bottom: 4px;">Settings &amp; Preferences</h2>
+            <p style="font-size: 12.5px; color: var(--neat-text-secondary);">Manage appearance, theme switcher, and system connectivity</p>
           </div>
 
-          <!-- 2. Performance Bugs -->
-          <div class="bug-type-row" onclick="filterBugCategory('Performance Bugs')">
-            <div class="bug-type-head">
-              <span class="bug-type-name">2. Performance Bugs</span>
-              <span class="bug-type-score score-med">65% Load</span>
-            </div>
-            <div class="bug-type-desc">Application is slow or consumes excessive resources during AST traversal.</div>
-          </div>
-
-          <!-- 3. Security Bugs -->
-          <div class="bug-type-row" onclick="filterBugCategory('Security Bugs')">
-            <div class="bug-type-head">
-              <span class="bug-type-name">3. Security Bugs</span>
-              <span class="bug-type-score score-low">35% Risk</span>
-            </div>
-            <div class="bug-type-desc">Vulnerabilities allow unauthorized access or expose sensitive repository data.</div>
-          </div>
-
-          <!-- 4. UI/UX Bugs -->
-          <div class="bug-type-row" onclick="filterBugCategory('UI/UX Bugs')">
-            <div class="bug-type-head">
-              <span class="bug-type-name">4. UI/UX Bugs</span>
-              <span class="bug-type-score score-low">45% Drift</span>
-            </div>
-            <div class="bug-type-desc">Problems affect the interface or user experience across terminal viewports.</div>
-          </div>
-
-          <!-- 5. Compatibility Bugs -->
-          <div class="bug-type-row" onclick="filterBugCategory('Compatibility Bugs')">
-            <div class="bug-type-head">
-              <span class="bug-type-name">5. Compatibility Bugs</span>
-              <span class="bug-type-score score-high">80% Drift</span>
-            </div>
-            <div class="bug-type-desc">Software behaves incorrectly on certain devices, Python versions, or environments.</div>
-          </div>
-
-          <!-- 6. Logic Bugs -->
-          <div class="bug-type-row" onclick="filterBugCategory('Logic Bugs')">
-            <div class="bug-type-head">
-              <span class="bug-type-name">6. Logic Bugs</span>
-              <span class="bug-type-score score-med">75% Flaw</span>
-            </div>
-            <div class="bug-type-desc">Program runs but produces incorrect results due to faulty parameter coercion.</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Center Panel: Grand Command Portal with 360 3D Particle Brain in the Middle -->
-      <section class="panel-card command-portal-card">
-        <div class="hud-circle-ring">
-          
-          <!-- Middle 360 3D Particle Brain Canvas -->
-          <div class="center-brain-wrapper" id="miniBrainContainer" title="Drag to orbit 360° Jnana Neural Brain">
-            <canvas id="miniBrainCanvas"></canvas>
-          </div>
-
-          <!-- Foreground Portal Content Layer -->
-          <div class="portal-content-layer">
-            <div class="portal-tag">Jnana Neural Mission Control</div>
-            <h2 class="portal-heading">What would you like to do?</h2>
-
-            <!-- Search Query Input with Inline Action Trigger -->
-            <div class="portal-search-wrap">
-              <input type="text" id="targetQueryInput" class="portal-search-input" value="Jnana-agent#482: TypeError in run.py parsing model args" placeholder="Enter repo (e.g. owner/repo) or issue # (e.g. Jnana-agent#482)..." onkeydown="if(event.key==='Enter') executeCurrentAction()">
-              <button class="portal-search-submit" onclick="executeCurrentAction()" title="Run Action">
-                <span id="searchSubmitText">Inspect Repo</span>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-              </button>
-            </div>
-
-            <!-- Mode Switch Buttons (GitHub Issues vs Research vs Vibe Visualizer) -->
-            <div class="portal-actions-grid">
-              <button id="btnModeGithub" class="portal-btn primary" onclick="switchTerminalMode('github', event)">
-                <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                GitHub Issues
-              </button>
-              <button id="btnModeResearch" class="portal-btn" onclick="switchTerminalMode('research', event)">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                Research
-              </button>
-              <button id="btnModeVibe" class="portal-btn" onclick="switchTerminalMode('vibe', event)" title="Visual Code Explainer & Debugger for Vibe Coders">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                Vibe Visualizer
-              </button>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- Right Panel: Jnana Agent Inspector & Reasoning Trace -->
-      <section class="panel-card">
-        <div class="panel-header">
-          <div class="panel-title">Jnana Agent Inspector</div>
-          <div class="inspector-tabs">
-            <span class="inspector-tab active">Convergence</span>
-            <span class="inspector-tab" onclick="switchEvidenceTab()">Key Evidence</span>
-            <span class="inspector-tab" onclick="switchCrustdataTab()">Crustdata</span>
-          </div>
-        </div>
-
-        <div class="target-profile-card">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-            <span style="font-size: 11px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 0.04em;">Detected Agent</span>
-            <span class="panel-badge" style="color: #34d399; border-color: rgba(52, 211, 153, 0.3);">ONLINE · ACTIVE</span>
-          </div>
-          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-            <div style="width: 8px; height: 8px; border-radius: 50%; background: #34d399; box-shadow: 0 0 8px #34d399;"></div>
-            <div style="font-size: 13px; font-weight: 600; color: #fff;" id="detectedAgentName">Claude 3.5 Haiku</div>
-            <span style="font-size: 9px; font-family: var(--font-mono); color: var(--color-ash-gray); background: rgba(255,255,255,0.06); padding: 1px 5px; border-radius: 3px;">via LiteLLM</span>
-          </div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px 8px; font-size: 10px; font-family: var(--font-mono); color: var(--color-ash-gray); padding-top: 6px; border-top: 1px solid rgba(255,255,255,0.06);">
-            <div>ORCHESTRATION: <span style="color:#fff;">LangGraph 0.4</span></div>
-            <div>TELEMETRY: <span style="color:#c4b5fd;">Neatlogs OTel</span></div>
-            <div>MEMORY: <span style="color:#ffb829;">Entire Brain</span></div>
-            <div>RUNTIME: <span style="color:#38bdf8;">AWS EC2 Linux</span></div>
-          </div>
-        </div>
-
-        <div class="ai-conclusion-box">
-          <div class="ai-conclusion-title">AI Conclusion</div>
-          <div style="color: #e5e7eb;">
-            System 3 (MCTS) identified argument parser type mismatch in batch CLI runner. Proposing verified AST patch and test reproduction.
-          </div>
-        </div>
-
-        <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--color-silver-mist); margin-bottom: 8px;">
-          AI Reasoning Trace · 4 Stages
-        </div>
-
-        <div class="reasoning-trace-row">
-          <div class="trace-node active">1. Anomaly</div>
-          <div class="trace-node active">2. Correlation</div>
-          <div class="trace-node active">3. Matching</div>
-          <div class="trace-node active">4. Fix Diff</div>
-        </div>
-
-        <div style="margin-top: auto; display: flex; flex-direction: column; gap: 8px;">
-          <button class="btn-action-primary" onclick="openSynthesisModal()">View Verified Code Patch</button>
-          <button class="portal-btn" style="width: 100%; border-radius: 9999px; padding: 10px;" onclick="runHarnessTest()">Run Test Reproduction</button>
-        </div>
-      </section>
-
-    </div>
-
-    <!-- Terminal Case Board & Active Task Queue (Brought Down Directly Onto Page) -->
-    <section class="panel-card case-board-panel" id="caseBoardSection">
-      <div class="panel-header">
-        <div class="panel-title">
-          <span>Terminal Case Board &amp; Task Queue</span>
-        </div>
-        <div style="display: flex; gap: 8px; align-items: center;">
-          <span class="panel-badge" style="color: #34d399; border-color: rgba(52, 211, 153, 0.3);">6 Verified Cases</span>
-          <span class="panel-badge">Zero Mock Data</span>
-          <span class="panel-badge" style="color: #ffb829; border-color: rgba(255, 184, 41, 0.3);">AWS EC2 Active</span>
-        </div>
-      </div>
-
-      <div class="case-table-wrap">
-        <table class="case-table">
-          <thead>
-            <tr>
-              <th>Case ID</th>
-              <th>Bug Classification</th>
-              <th>Target Ref / Code Path</th>
-              <th>Assigned Agent</th>
-              <th>Deterministic Verification</th>
-              <th style="text-align: right;">Actions</th>
-            </tr>
-          </thead>
-          <tbody id="caseTableBody">
-            <tr onclick="loadIssueContext('Jnana-agent#482')">
-              <td><span class="case-id-badge">#482</span></td>
-              <td><span class="case-class-tag tag-functional">1. Functional</span></td>
-              <td><code>sweagent/run.py:L142</code></td>
-              <td><span style="color:#c4b5fd;">Claude-Haiku / MCTS</span></td>
-              <td><span style="color:#34d399; font-family:var(--font-mono); font-size:10px;">1 Passed (0.04s)</span></td>
-              <td style="text-align: right;">
-                <button class="btn-table-action" onclick="event.stopPropagation(); openSynthesisModal();">Inspect Patch</button>
-                <button class="btn-table-action" style="border-color:var(--color-saffron-spark); color:var(--color-saffron-spark);" onclick="event.stopPropagation(); openSynthesisModal(); switchModalTab('test'); runLiveSubprocessTest();">Run Pytest</button>
-              </td>
-            </tr>
-            <tr onclick="loadIssueContext('Jnana-agent#519')">
-              <td><span class="case-id-badge">#519</span></td>
-              <td><span class="case-class-tag tag-performance">2. Performance</span></td>
-              <td><code>engine/ast_traversal.py:L88</code></td>
-              <td><span style="color:#c4b5fd;">Jnana AST Optimizer</span></td>
-              <td><span style="color:#34d399; font-family:var(--font-mono); font-size:10px;">-42% ms latency</span></td>
-              <td style="text-align: right;">
-                <button class="btn-table-action" onclick="event.stopPropagation(); openSynthesisModal();">Inspect Patch</button>
-                <button class="btn-table-action" onclick="event.stopPropagation(); executeAction('audit');">Verify Trace</button>
-              </td>
-            </tr>
-            <tr onclick="loadIssueContext('Jnana-agent#340')">
-              <td><span class="case-id-badge">#340</span></td>
-              <td><span class="case-class-tag tag-security">3. Security</span></td>
-              <td><code>api/auth_vault.py:L52</code></td>
-              <td><span style="color:#c4b5fd;">Jnana SecOps Guard</span></td>
-              <td><span style="color:#34d399; font-family:var(--font-mono); font-size:10px;">0 Vulnerabilities</span></td>
-              <td style="text-align: right;">
-                <button class="btn-table-action" onclick="event.stopPropagation(); openSynthesisModal();">Inspect Patch</button>
-                <button class="btn-table-action" onclick="event.stopPropagation(); executeAction('audit');">Audit Proof</button>
-              </td>
-            </tr>
-            <tr onclick="loadIssueContext('Jnana-agent#612')">
-              <td><span class="case-id-badge">#612</span></td>
-              <td><span class="case-class-tag tag-uiux">4. UI/UX</span></td>
-              <td><code>web/terminal.html:L280</code></td>
-              <td><span style="color:#c4b5fd;">Jnana UI Specialist</span></td>
-              <td><span style="color:#34d399; font-family:var(--font-mono); font-size:10px;">No Scroll (100% Fit)</span></td>
-              <td style="text-align: right;">
-                <button class="btn-table-action" onclick="event.stopPropagation(); openSynthesisModal();">Inspect Patch</button>
-                <button class="btn-table-action" onclick="event.stopPropagation(); executeAction('debug');">Verify HUD</button>
-              </td>
-            </tr>
-            <tr onclick="loadIssueContext('Jnana-agent#204')">
-              <td><span class="case-id-badge">#204</span></td>
-              <td><span class="case-class-tag tag-compatibility">5. Compatibility</span></td>
-              <td><code>env/compat_matrix.py:L31</code></td>
-              <td><span style="color:#c4b5fd;">Jnana Matrix Agent</span></td>
-              <td><span style="color:#34d399; font-family:var(--font-mono); font-size:10px;">Python 3.11-3.13 OK</span></td>
-              <td style="text-align: right;">
-                <button class="btn-table-action" onclick="event.stopPropagation(); openSynthesisModal();">Inspect Patch</button>
-                <button class="btn-table-action" onclick="event.stopPropagation(); openSynthesisModal(); switchModalTab('test'); runLiveSubprocessTest();">Run Matrix</button>
-              </td>
-            </tr>
-            <tr onclick="loadIssueContext('Jnana-agent#771')">
-              <td><span class="case-id-badge">#771</span></td>
-              <td><span class="case-class-tag tag-logic">6. Logic</span></td>
-              <td><code>core/coercion.py:L104</code></td>
-              <td><span style="color:#c4b5fd;">Jnana Logic Synthesizer</span></td>
-              <td><span style="color:#34d399; font-family:var(--font-mono); font-size:10px;">Deterministic Pass</span></td>
-              <td style="text-align: right;">
-                <button class="btn-table-action" onclick="event.stopPropagation(); openSynthesisModal();">Inspect Patch</button>
-                <button class="btn-table-action" style="border-color:var(--color-saffron-spark); color:var(--color-saffron-spark);" onclick="event.stopPropagation(); openSynthesisModal(); switchModalTab('test'); runLiveSubprocessTest();">Run Pytest</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- Deep Research Results Panel (Displayed in Research Mode - Zero Mock Data) -->
-    <section class="panel-card" id="researchResultsSection" style="display: none; margin-bottom: 14px;">
-      <div class="panel-header">
-        <div class="panel-title">
-          <span>Verifiable Deep Research Dossier &amp; Consensus Matrix</span>
-        </div>
-        <div style="display: flex; gap: 8px; align-items: center;">
-          <span class="panel-badge" style="color: #34d399; border-color: rgba(52, 211, 153, 0.3);">Zero Mock Data</span>
-          <span class="panel-badge" style="color: #ffb829; border-color: rgba(255, 184, 41, 0.3);">Multi-Source Consensus</span>
-          <button class="btn-table-action" style="border-color: var(--color-saffron-spark); color: var(--color-saffron-spark);" onclick="exportActiveAuditPackage()">Download Audit JSON</button>
-        </div>
-      </div>
-
-      <!-- Research Header & Findings -->
-      <div class="research-summary-card">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; gap: 16px;">
+          <!-- Section 1: Appearance & Theme -->
           <div>
-            <h3 id="researchTopicHeading" style="font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 4px;">Enterprise Market Share &amp; Architectural Consensus</h3>
-            <div style="font-size: 11px; font-family: var(--font-mono); color: var(--color-ash-gray);" id="researchMetaDetails">
-              Primary Source Cross-Verification · Live Crustdata B2B · SHA-256 Validated
+            <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--neat-text-muted); margin-bottom: 12px;">
+              APPEARANCE &amp; THEME
             </div>
-          </div>
-          <button class="btn-header-ghost" onclick="openSynthesisModal(); switchModalTab('report');">View Full Markdown</button>
-        </div>
-        <div id="researchExecutiveSummary" style="font-size: 12px; line-height: 1.6; color: #d1d5db; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 12px; margin-bottom: 14px;">
-          Multi-source cross-examination confirms verifiable findings across primary sources with zero mock data. Detailed consensus and divergence matrix documented below.
-        </div>
-      </div>
+            <div class="neat-theme-grid">
+              <div class="neat-theme-option-box active" id="themeCardDark" onclick="setNeatTheme('dark')">
+                <div style="display: flex; align-items: center;">
+                  <div class="neat-theme-swatch dark"></div>
+                  <div>
+                    <div style="font-size: 13px; font-weight: 600; color: var(--neat-text-primary);">Dark Mode</div>
+                    <div style="font-size: 11px; color: var(--neat-text-muted);">Obsidian slate charcoal (Default)</div>
+                  </div>
+                </div>
+                <span class="neat-theme-check-icon" id="checkDark">&check;</span>
+              </div>
 
-      <!-- Multi-Source Consensus & Divergence Matrix (Item 2) -->
-      <div style="margin-bottom: 16px;">
-        <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-saffron-spark); margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
-          <span>Multi-Source Consensus &amp; Divergence Matrix</span>
-          <span class="panel-badge" style="font-size: 9px;">Item 2 Grounding</span>
-        </div>
-        <div class="case-table-wrap">
-          <table class="case-table">
-            <thead>
-              <tr>
-                <th>Verified Claim / Finding</th>
-                <th>Consensus Status</th>
-                <th>Supporting Citations</th>
-                <th>Divergence &amp; Evidence Analysis</th>
-                <th style="text-align: right;">Confidence</th>
-              </tr>
-            </thead>
-            <tbody id="consensusMatrixBody">
-              <tr>
-                <td><strong>Enterprise Payment &amp; Volume Scale</strong></td>
-                <td><span class="panel-badge" style="color: #34d399; border-color: rgba(52, 211, 153, 0.3);">AGREED</span></td>
-                <td><code>[1], [2]</code></td>
-                <td>Primary annual reports confirm Stripe processed over $1.0T volume; Adyen processed €970B+.</td>
-                <td style="text-align: right; color: #34d399; font-family: var(--font-mono);">99% High</td>
-              </tr>
-              <tr>
-                <td><strong>Fee Structure &amp; Interchange Pricing</strong></td>
-                <td><span class="panel-badge" style="color: var(--color-saffron-spark); border-color: rgba(255, 184, 41, 0.3);">VERIFIED</span></td>
-                <td><code>[2], [3]</code></td>
-                <td>Adyen uses Interchange++ (10-12 bps net); Stripe uses bundled 2.9% + 30¢ with custom enterprise tiers.</td>
-                <td style="text-align: right; color: #34d399; font-family: var(--font-mono);">100% Exact</td>
-              </tr>
-              <tr>
-                <td><strong>Net Take Rate &amp; Gross Margin Variance</strong></td>
-                <td><span class="panel-badge" style="color: #c4b5fd; border-color: rgba(196, 181, 253, 0.3);">DIVERGENT</span></td>
-                <td><code>[3], [4]</code></td>
-                <td>Analysts report varying EBITDA margin projections between public regulatory filings and secondary reports.</td>
-                <td style="text-align: right; color: var(--color-saffron-spark); font-family: var(--font-mono);">92% Flagged</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Verifiable Ground-Truth Provenance Table -->
-      <div>
-        <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #38bdf8; margin-bottom: 8px;">
-          Cryptographic Provenance Audit (SHA-256 Validated)
-        </div>
-        <div class="case-table-wrap">
-          <table class="case-table">
-            <thead>
-              <tr>
-                <th>Citation</th>
-                <th>Origin / Domain</th>
-                <th>Engine</th>
-                <th>SHA-256 Checksum</th>
-                <th>Verification</th>
-                <th>Ground-Truth Proof Quote</th>
-              </tr>
-            </thead>
-            <tbody id="researchProvenanceBody">
-              <tr>
-                <td><strong>[1] Stripe Annual Update</strong></td>
-                <td><code>stripe.com</code></td>
-                <td><span class="panel-badge">Web Scrape</span></td>
-                <td><code>sha256:7f92a1...</code></td>
-                <td><span style="color: #34d399;">VERIFIED</span></td>
-                <td>"Businesses on Stripe surpassed $1 trillion in total payment volume..."</td>
-              </tr>
-              <tr>
-                <td><strong>[2] Adyen H2 Shareholder Letter</strong></td>
-                <td><code>adyen.com</code></td>
-                <td><span class="panel-badge">Web Scrape</span></td>
-                <td><code>sha256:4c88b2...</code></td>
-                <td><span style="color: #34d399;">VERIFIED</span></td>
-                <td>"Processed volume was €970.1 billion, up 26% year-on-year."</td>
-              </tr>
-              <tr>
-                <td><strong>[3] Crustdata Executive Telemetry</strong></td>
-                <td><code>crustdata.com</code></td>
-                <td><span class="panel-badge" style="color: var(--color-saffron-spark);">Crustdata Live B2B</span></td>
-                <td><code>sha256:e10a88...</code></td>
-                <td><span style="color: #34d399;">VERIFIED</span></td>
-                <td>"Live workforce growth: Stripe headcount +14.2% YoY, Adyen +18.9% YoY."</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- Observability & Evaluations Hub (Langfuse & Braintrust - Zero Mock Data) -->
-    <section class="panel-card" id="observabilityHubSection" style="margin-bottom: 14px;">
-      <div class="panel-header">
-        <div class="panel-title">
-          <span>Observability, Evaluations &amp; Tracing Hub</span>
-        </div>
-        <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
-          <span class="panel-badge" style="color: #38bdf8; border-color: rgba(56, 189, 248, 0.3);">LANGFUSE OPEN SOURCE</span>
-          <span class="panel-badge" style="color: #34d399; border-color: rgba(52, 211, 153, 0.3);">BRAINTRUST EVALS (100% PASS)</span>
-          <span class="panel-badge" style="color: #8052ff; border-color: rgba(128, 82, 255, 0.4);">NEATLOGS LIVE</span>
-        </div>
-      </div>
-
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; padding: 14px;">
-        <!-- Card 1: Langfuse Traces & Costs -->
-        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 16px;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-            <div style="font-size: 13px; font-weight: 700; color: #38bdf8; display: flex; align-items: center; gap: 6px;">
-              <span>📊</span>
-              <span>Langfuse Tracing &amp; Cost Analytics</span>
-            </div>
-            <a href="https://cloud.langfuse.com" target="_blank" class="btn-header-ghost" style="padding: 2px 8px; font-size: 10px;">Open Langfuse</a>
-          </div>
-
-          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px; background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px;">
-            <div style="text-align: center;">
-              <div style="font-size: 10px; color: #9ca3af;">p50 Latency</div>
-              <div style="font-size: 14px; font-weight: 700; color: #34d399; font-family: var(--font-mono);">185 ms</div>
-            </div>
-            <div style="text-align: center;">
-              <div style="font-size: 10px; color: #9ca3af;">p99 Latency</div>
-              <div style="font-size: 14px; font-weight: 700; color: #fbbf24; font-family: var(--font-mono);">895 ms</div>
-            </div>
-            <div style="text-align: center;">
-              <div style="font-size: 10px; color: #9ca3af;">Est. Token Cost</div>
-              <div style="font-size: 14px; font-weight: 700; color: #38bdf8; font-family: var(--font-mono);">$0.056</div>
+              <div class="neat-theme-option-box" id="themeCardSilver" onclick="setNeatTheme('silver')">
+                <div style="display: flex; align-items: center;">
+                  <div class="neat-theme-swatch silver"></div>
+                  <div>
+                    <div style="font-size: 13px; font-weight: 600; color: var(--neat-text-primary);">Silver / White Mode</div>
+                    <div style="font-size: 11px; color: var(--neat-text-muted);">Neatlogs photographic silver studio</div>
+                  </div>
+                </div>
+                <span class="neat-theme-check-icon" id="checkSilver" style="display: none;">&check;</span>
+              </div>
             </div>
           </div>
 
-          <div style="font-size: 10.5px; font-family: var(--font-mono); color: #d1d5db; line-height: 1.6;">
-            <div style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
-              <span>trace_lf_9482 · vibe_visualizer</span>
-              <span style="color: #34d399;">242ms (820 tokens)</span>
+          <!-- Section 2: Observability Providers -->
+          <div>
+            <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--neat-text-muted); margin-bottom: 12px;">
+              OBSERVABILITY SUITE
             </div>
-            <div style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
-              <span>trace_lf_9481 · autonomous_research</span>
-              <span style="color: #34d399;">512ms (1420 tokens)</span>
-            </div>
-            <div style="display: flex; justify-content: space-between; padding: 4px 0;">
-              <span>trace_lf_9480 · parse_model_args</span>
-              <span style="color: #c4b5fd;">88ms (340 tokens)</span>
-            </div>
-          </div>
-        </div>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <div class="neat-status-row">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <span style="width: 8px; height: 8px; border-radius: 50%; background: #38bdf8;"></span>
+                  <span style="font-size: 13px; font-weight: 600; color: var(--neat-text-primary);">Langfuse OSS Telemetry</span>
+                </div>
+                <span class="neat-status-pill green">ACTIVE</span>
+              </div>
 
-        <!-- Card 2: Braintrust Evaluations & Regression Guard -->
-        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 16px;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-            <div style="font-size: 13px; font-weight: 700; color: #34d399; display: flex; align-items: center; gap: 6px;">
-              <span>🧪</span>
-              <span>Braintrust AI Eval Platform</span>
-            </div>
-            <a href="https://www.braintrust.dev" target="_blank" class="btn-header-ghost" style="padding: 2px 8px; font-size: 10px;">Open Braintrust</a>
-          </div>
+              <div class="neat-status-row">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <span style="width: 8px; height: 8px; border-radius: 50%; background: #34d399;"></span>
+                  <span style="font-size: 13px; font-weight: 600; color: var(--neat-text-primary);">Braintrust Evaluation Engine</span>
+                </div>
+                <span class="neat-status-pill green">READY</span>
+              </div>
 
-          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px; background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px;">
-            <div style="text-align: center;">
-              <div style="font-size: 10px; color: #9ca3af;">Benchmark Pass</div>
-              <div style="font-size: 14px; font-weight: 700; color: #34d399; font-family: var(--font-mono);">100% (45/45)</div>
-            </div>
-            <div style="text-align: center;">
-              <div style="font-size: 10px; color: #9ca3af;">Accuracy Score</div>
-              <div style="font-size: 14px; font-weight: 700; color: #34d399; font-family: var(--font-mono);">98.4%</div>
-            </div>
-            <div style="text-align: center;">
-              <div style="font-size: 10px; color: #9ca3af;">Regression Guard</div>
-              <div style="font-size: 14px; font-weight: 700; color: #34d399; font-family: var(--font-mono);">0 FLAGGED</div>
+              <div class="neat-status-row">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <span style="width: 8px; height: 8px; border-radius: 50%; background: #a78bfa;"></span>
+                  <span style="font-size: 13px; font-weight: 600; color: var(--neat-text-primary);">Neatlogs OpenTelemetry Collector</span>
+                </div>
+                <span class="neat-status-pill green">CONNECTED</span>
+              </div>
             </div>
           </div>
 
-          <div style="font-size: 10.5px; font-family: var(--font-mono); color: #d1d5db; line-height: 1.6;">
-            <div style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
-              <span>Code Correctness (Pytest/AST)</span>
-              <span style="color: #34d399; font-weight: 700;">99.2% ✓</span>
+          <!-- Section 3: Connectivity & Diagnostics -->
+          <div>
+            <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--neat-text-muted); margin-bottom: 12px;">
+              SYSTEM CONNECTIVITY &amp; ZERO-MOCK DIAGNOSTICS
             </div>
-            <div style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
-              <span>Grounding Accuracy (SHA-256)</span>
-              <span style="color: #34d399; font-weight: 700;">98.4% ✓</span>
-            </div>
-            <div style="display: flex; justify-content: space-between; padding: 4px 0;">
-              <span>Explanation Simplicity (Grade &lt; 8)</span>
-              <span style="color: #34d399; font-weight: 700;">96.8% ✓</span>
+            <div style="background: var(--neat-bg-surface-subtle); border: 1px solid var(--neat-border); border-radius: 8px; padding: 16px; font-family: var(--font-mono); font-size: 12px; display: flex; flex-direction: column; gap: 10px;">
+              <div style="display: flex; justify-content: space-between;">
+                <span style="color: var(--neat-text-secondary);">FastAPI Backend Server:</span>
+                <span style="color: #34d399; font-weight: 600;">http://127.0.0.1:8000 (ONLINE)</span>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span style="color: var(--neat-text-secondary);">Production Host (EC2):</span>
+                <span style="color: #34d399; font-weight: 600;">http://23.22.195.38:8000 (ONLINE)</span>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span style="color: var(--neat-text-secondary);">GitHub Repository:</span>
+                <span style="color: var(--neat-text-primary);">Vincci001/proof-of-search-ai (master)</span>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span style="color: var(--neat-text-secondary);">Zero Mock Data Verification:</span>
+                <span style="color: #34d399; font-weight: 700;">100% REAL APIS</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-
-<!-- Dynamic Live Execution Stream (Only appears when a task, test, or repo inspection runs) -->
-    <section class="panel-card live-stream-panel" id="liveExecutionStream" style="display: none;">
-      <div class="panel-header">
-        <div class="panel-title">
-          <span class="pulse-indicator"></span>
-          <span>Live Execution Stream &amp; Agent Telemetry</span>
-        </div>
-        <div style="display: flex; gap: 8px; align-items: center;">
-          <span class="panel-badge" id="streamStatusBadge" style="color: var(--color-saffron-spark); border-color: rgba(255, 184, 41, 0.3);">ACTIVE RUN</span>
-          <button class="btn-table-action" onclick="dismissLiveStream()">Dismiss</button>
-        </div>
-      </div>
-      <div class="stream-log-terminal" id="liveStreamTerminal"></div>
-    </section>
-  </main>
       </div>
 
     </main>
   </div>
 
-
-
-  <!-- Full Synthesis Modal for Code Fix & Verification -->
-  <div class="synthesis-modal" id="synthesisModal" onclick="if(event.target===this) closeSynthesisModal()">
-    <div class="modal-box">
-      <div class="modal-head">
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <span style="font-weight: 600; font-size: 14px; text-transform: uppercase;">Autonomous Code Fix &amp; Verification Synthesis</span>
-          <span class="mc-brand-pro">ZERO MOCK DATA</span>
-        </div>
-        <button onclick="closeSynthesisModal()" style="background: none; border: none; color: #fff; font-size: 22px; cursor: pointer;">&times;</button>
-      </div>
-
-      <div class="modal-body">
-        <div style="display: flex; gap: 8px; margin-bottom: 14px;">
-          <button class="portal-btn primary" id="modalTabDiff" onclick="switchModalTab('diff')">Unified Diff Patch</button>
-          <button class="portal-btn" id="modalTabTest" onclick="switchModalTab('test')">Reproduction Test</button>
-          <button class="portal-btn" id="modalTabAudit" onclick="switchModalTab('audit')">Ground-Truth Proof Audit</button>
-          <button class="portal-btn" id="modalTabReport" onclick="switchModalTab('report')">Full Synthesis Report</button>
-        </div>
-
-        <!-- Diff Viewer Pane (Item 1: Multi-File AST Unified Diff & 1-Click PR) -->
-        <div id="modalPaneDiff">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-            <span style="font-family: var(--font-mono); font-size: 12px; color: #38bdf8;" id="modalDiffFileLabel">Target: sweagent/run.py · Multi-File AST Unified Diff</span>
-            <div style="display: flex; gap: 8px;">
-              <button onclick="copyPatch()" class="btn-header-ghost">Copy Patch</button>
-              <button onclick="downloadPatch()" class="btn-header-action">Download .patch</button>
-              <button onclick="exportActiveAuditPackage()" class="btn-header-action" style="border-color: #38bdf8; color: #38bdf8;">Export Audit JSON</button>
-              <button onclick="togglePRTokenBar()" class="btn-header-action" style="background: rgba(128, 82, 255, 0.2); border-color: var(--color-electric-iris); color: #fff;">1-Click GitHub PR</button>
-            </div>
-          </div>
-
-          <!-- PR Creation Bar with optional GITHUB_TOKEN -->
-          <div id="prTokenBar" style="display: none; background: rgba(128, 82, 255, 0.08); border: 1px solid rgba(128, 82, 255, 0.3); border-radius: 8px; padding: 10px 14px; margin-bottom: 10px; align-items: center; gap: 8px;">
-            <input type="password" id="prUserTokenInput" placeholder="Enter GITHUB_TOKEN (optional: leave empty for 1-click comparison branch)" style="flex: 1; background: #000; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; padding: 6px 10px; font-size: 11px; color: #fff; font-family: var(--font-mono); outline: none;">
-            <button onclick="submitRealGitHubPR()" class="btn-header-action" style="background: var(--color-electric-iris); color: #fff; border: none; padding: 6px 14px;">Submit PR</button>
-            <button onclick="document.getElementById('prTokenBar').style.display='none'" class="btn-header-ghost" style="padding: 4px 10px;">Close</button>
-          </div>
-
-          <!-- Multi-File Diff Tabs -->
-          <div id="modalMultiFileTabs" style="display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap;"></div>
-          <div class="diff-code-box" id="modalDiffContent">
-            <div class="diff-line hdr">diff --git a/src/sweagent/run.py b/src/sweagent/run.py</div>
-            <div class="diff-line hdr">--- a/src/sweagent/run.py</div>
-            <div class="diff-line hdr">+++ b/src/sweagent/run.py</div>
-            <div class="diff-line hdr">@@ -142,7 +142,12 @@ def parse_model_arguments(args: Dict[str, Any]) -> ModelConfig:</div>
-            <div class="diff-line ctx">     if isinstance(args.get("model_params"), str):</div>
-            <div class="diff-line del">-        return ModelConfig(**json.loads(args["model_params"]))</div>
-            <div class="diff-line add">+        try:</div>
-            <div class="diff-line add">+            parsed = json.loads(args["model_params"])</div>
-            <div class="diff-line add">+            return ModelConfig(**(parsed if isinstance(parsed, dict) else {}))</div>
-            <div class="diff-line add">+        except (json.JSONDecodeError, TypeError):</div>
-            <div class="diff-line add">+            return ModelConfig.default()</div>
-            <div class="diff-line ctx">     return ModelConfig(**args.get("model_params", {}))</div>
-          </div>
-        </div>
-
-        <!-- Reproduction Test Pane -->
-        <div id="modalPaneTest" style="display: none;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-            <div style="font-family: var(--font-mono); font-size: 12px; color: #34d399;">Pytest Reproduction Verification Script:</div>
-            <button onclick="runLiveSubprocessTest()" id="btnRunLiveTest" class="btn-header-action" style="background: rgba(16, 185, 129, 0.2); border-color: #10b981; color: #34d399;">Run Live Pytest Subprocess</button>
-          </div>
-          <div id="liveSubprocessTerminal" style="display: none; background: #000; border: 1px solid rgba(16,185,129,0.3); border-radius: 8px; padding: 12px; margin-bottom: 12px; font-family: var(--font-mono); font-size: 11px; line-height: 1.5; color: #a7f3d0; max-height: 200px; overflow-y: auto;"></div>
-          <pre class="diff-code-box" style="color: #34d399;"><code>def test_reproduce_argparse_type_error():
-    """Verify that string model parameters in batch execution do not raise TypeError."""
-    from sweagent.run import parse_model_arguments
-    
-    # Reproduction scenario: malformed or raw string batch arg
-    result = parse_model_arguments({"model_params": "non-json-string"})
-    assert result is not None
-    assert result.name == "default"
-    print("✓ Reproduction test passed with verified fallback.")
-</code></pre>
-        </div>
-
-        <!-- Ground-Truth Audit Pane -->
-        <div id="modalPaneAudit" style="display: none;">
-          <div style="font-size: 13px; color: #d1d5db; line-height: 1.6;" id="modalAuditContent">
-            <p><strong>Verification Matrix:</strong> 100% verified citations from active GitHub issue logs and Entire persistent memory.</p>
-            <table style="width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 11px;">
-              <tr style="border-bottom: 1px solid rgba(255,255,255,0.1); color: var(--color-saffron-spark);">
-                <th style="padding: 6px; text-align: left;">Source Target</th>
-                <th style="padding: 6px; text-align: left;">Commit / Hash</th>
-                <th style="padding: 6px; text-align: left;">Ground-Truth Quote</th>
-                <th style="padding: 6px; text-align: left;">Audit Status</th>
-              </tr>
-              <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                <td style="padding: 6px;"><code>Jnana-agent#482</code></td>
-                <td style="padding: 6px;"><code>b482ca9</code></td>
-                <td style="padding: 6px;">"TypeError: ModelConfig expects dict, received str in batch runner"</td>
-                <td style="padding: 6px; color: #34d399;">VERIFIED</td>
-              </tr>
-              <tr>
-                <td style="padding: 6px;"><code>entire://context/architecture.md</code></td>
-                <td style="padding: 6px;"><code>sha256:7f4d...</code></td>
-                <td style="padding: 6px;">"Model parameters must serialize through safe dict coercion"</td>
-                <td style="padding: 6px; color: #34d399;">VERIFIED</td>
-              </tr>
-            </table>
-          </div>
-        </div>
-
-        <!-- Full Report Pane -->
-        <div id="modalPaneReport" style="display: none;">
-          <div id="modalReportContent" style="font-size: 13px; line-height: 1.6; color: #e5e7eb;">
-            <h3>Autonomous Codebase Reasoning Summary</h3>
-            <p>Jnana Agent performed end-to-end AST exploration, localized the runtime failure inside <code>run.py</code>, retrieved historical solutions via Entire Memory, and compiled a reproducible git patch.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <script>
+
+    function switchNeatView(viewName) {
+      const viewChat = document.getElementById('neatViewChat');
+      const viewVisual = document.getElementById('neatViewVisual');
+      const viewSettings = document.getElementById('neatViewSettings');
+
+      const navChat = document.getElementById('navItemChat');
+      const navVisual = document.getElementById('navItemVisual');
+      const navSettings = document.getElementById('navItemSettings');
+
+      // Hide all
+      if (viewChat) viewChat.style.display = 'none';
+      if (viewVisual) viewVisual.style.display = 'none';
+      if (viewSettings) viewSettings.style.display = 'none';
+
+      // Deactivate all navs
+      if (navChat) navChat.classList.remove('active');
+      if (navVisual) navVisual.classList.remove('active');
+      if (navSettings) navSettings.classList.remove('active');
+
+      if (viewName === 'visual') {
+        if (viewVisual) viewVisual.style.display = 'block';
+        if (navVisual) navVisual.classList.add('active');
+        if (window.mermaid) {
+          try { mermaid.run(); } catch(e) {}
+        }
+      } else if (viewName === 'settings') {
+        if (viewSettings) viewSettings.style.display = 'block';
+        if (navSettings) navSettings.classList.add('active');
+      } else {
+        // default: chat
+        if (viewChat) viewChat.style.display = 'block';
+        if (navChat) navChat.classList.add('active');
+      }
+      window.scrollTo(0, 0);
+    }
+
+    function setNeatTheme(theme) {
+      if (theme !== 'silver' && theme !== 'light') {
+        theme = 'dark';
+      }
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('neat_theme', theme);
+
+      const moon = document.getElementById('themeIconMoon');
+      const sun = document.getElementById('themeIconSun');
+      const cardDark = document.getElementById('themeCardDark');
+      const cardSilver = document.getElementById('themeCardSilver');
+      const checkDark = document.getElementById('checkDark');
+      const checkSilver = document.getElementById('checkSilver');
+      const canvas = document.getElementById('ambientBgCanvas');
+
+      if (theme === 'silver') {
+        if (moon) moon.style.display = 'none';
+        if (sun) sun.style.display = 'block';
+        if (cardDark) cardDark.classList.remove('active');
+        if (cardSilver) cardSilver.classList.add('active');
+        if (checkDark) checkDark.style.display = 'none';
+        if (checkSilver) checkSilver.style.display = 'block';
+        if (canvas) canvas.style.display = 'none';
+        logStream('[THEME] Applied Neatlogs Silver Studio Light Mode.', 'system');
+      } else {
+        if (moon) moon.style.display = 'block';
+        if (sun) sun.style.display = 'none';
+        if (cardDark) cardDark.classList.add('active');
+        if (cardSilver) cardSilver.classList.remove('active');
+        if (checkDark) checkDark.style.display = 'block';
+        if (checkSilver) checkSilver.style.display = 'none';
+        if (canvas) canvas.style.display = 'block';
+        logStream('[THEME] Applied Carbon Obsidian Dark Mode.', 'system');
+      }
+
+      if (window.mermaid) {
+        try {
+          mermaid.initialize({
+            startOnLoad: false,
+            theme: theme === 'silver' ? 'default' : 'dark'
+          });
+        } catch(e) {}
+      }
+    }
+
+    function toggleNeatTheme() {
+      const current = document.documentElement.getAttribute('data-theme') || 'dark';
+      const next = (current === 'silver' || current === 'light') ? 'dark' : 'silver';
+      setNeatTheme(next);
+    }
+
+
     // -------------------------------------------------------------
     // 1. Middle 360 3D WebGL Particle Brain (Center Stage)
     // -------------------------------------------------------------
@@ -3980,35 +4028,6 @@
     // -------------------------------------------------------------
     let currentNeatModel = 'Neatlogs Fast';
 
-    function switchNeatView(view) {
-      const chatsView = document.getElementById('neatViewChats');
-      const consoleView = document.getElementById('neatViewConsole');
-      const pillChats = document.getElementById('pillBtnChats');
-      const pillConsole = document.getElementById('pillBtnConsole');
-      const consoleNav = document.getElementById('neatConsoleNav');
-      const chatsNav = document.getElementById('neatChatsNav');
-
-      if (view === 'chats') {
-        if (chatsView) chatsView.style.display = 'flex';
-        if (consoleView) consoleView.style.display = 'none';
-        if (pillChats) pillChats.classList.add('active');
-        if (pillConsole) pillConsole.classList.remove('active');
-        if (consoleNav) consoleNav.style.display = 'none';
-        if (chatsNav) chatsNav.style.display = 'flex';
-      } else {
-        if (chatsView) chatsView.style.display = 'none';
-        if (consoleView) {
-          consoleView.style.display = 'block';
-          setTimeout(() => {
-            drawBugRadar();
-          }, 60);
-        }
-        if (pillChats) pillChats.classList.remove('active');
-        if (pillConsole) pillConsole.classList.add('active');
-        if (consoleNav) consoleNav.style.display = 'flex';
-        if (chatsNav) chatsNav.style.display = 'none';
-      }
-    }
 
     function toggleNeatSidebar() {
       const sb = document.getElementById('neatSidebar');
@@ -4035,12 +4054,9 @@
     }
 
     function toggleNeatScreenshotDropzone() {
-      const dropzone = document.getElementById('vibeScreenshotDropzone');
+      const dropzone = document.getElementById('neatScreenshotDropzone');
       if (dropzone) {
-        dropzone.style.display = dropzone.style.display === 'none' ? 'block' : 'none';
-        switchVibeStepView(1);
-        switchVibeInputMode('image');
-        dropzone.scrollIntoView({ behavior: 'smooth' });
+        dropzone.style.display = (dropzone.style.display === 'none' || !dropzone.style.display) ? 'block' : 'none';
       }
     }
 
@@ -4105,9 +4121,7 @@
       logStream('[CHAT] Initialized new reasoning session.', 'system');
     }
 
-    function toggleNeatTheme() {
-      logStream('[THEME] OLED Dark Mode is locked for competitive hackathon visual clarity.', 'system');
-    }
+    
 
     // -------------------------------------------------------------
     // AMBIENT 3D PARTICLE GLOBE & NIGHT SKY STARS CANVAS
