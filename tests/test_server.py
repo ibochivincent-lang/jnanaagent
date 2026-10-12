@@ -57,7 +57,7 @@ def test_create_pr_endpoint():
     response = client.post(
         "/api/create-pr",
         json={
-            "repo": "ibochivincent-lang/proof-of-search-ai",
+            "repo": "ibochivincent-lang/jnana-agent",
             "issue_ref": "Jnana-agent#482",
             "title": "fix(cli): test pr creation"
         }
@@ -90,7 +90,7 @@ def test_github_webhook_post():
 def test_github_inspect_endpoint():
     response = client.post(
         "/api/github/inspect",
-        json={"repo": "ibochivincent-lang/proof-of-search-ai"}
+        json={"repo": "ibochivincent-lang/jnana-agent"}
     )
     assert response.status_code == 200
     data = response.json()

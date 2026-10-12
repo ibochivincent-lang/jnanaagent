@@ -1,6 +1,6 @@
 #!/bin/bash
 # ==============================================================================
-# AWS EC2 Automated User Data Script for Proof of Search AI (neatHack 2026)
+# AWS EC2 Automated User Data Script for Jnana Agent (neatHack 2026)
 # Target OS: Ubuntu 24.04 LTS / 22.04 LTS
 # Team: Vincci001 (Lead: Ibochi Vincent)
 # ==============================================================================
@@ -11,20 +11,20 @@ echo "==> Updating package indices and installing prerequisites..."
 apt-get update -y
 apt-get install -y git python3 python3-pip python3-venv curl ufw
 
-echo "==> Cloning Proof of Search AI repository from GitHub..."
+echo "==> Cloning Jnana Agent repository from GitHub..."
 mkdir -p /opt
 cd /opt
-rm -rf proof-of-search-ai
-git clone https://github.com/ibochivincent-lang/proof-of-search-ai.git /opt/proof-of-search-ai
-cd /opt/proof-of-search-ai
+rm -rf /opt/jnana-agent
+git clone https://github.com/ibochivincent-lang/jnana-agent.git /opt/jnana-agent
+cd /opt/jnana-agent
 
 echo "==> Setting up Python virtual environment..."
-python3 -m venv /opt/proof-of-search-ai/venv
-/opt/proof-of-search-ai/venv/bin/pip install --upgrade pip setuptools wheel
-/opt/proof-of-search-ai/venv/bin/pip install -e .
+python3 -m venv /opt/jnana-agent/venv
+/opt/jnana-agent/venv/bin/pip install --upgrade pip setuptools wheel
+/opt/jnana-agent/venv/bin/pip install -e .
 
 echo "==> Configuring environment variables..."
-cat << 'EOF' > /opt/proof-of-search-ai/.env
+cat << 'EOF' > /opt/jnana-agent/.env
 # neatHack 2026 Credentials for Team Vincci001
 LITELLM_API_KEY=sk-G2CdcbfSft_q8UoLOs13xQ
 LITELLM_BASE_URL=https://litellm.vision.aivar.app/v1
@@ -33,21 +33,21 @@ NEATLOGS_API_KEY=g0mx_xH8a6btCYnVOH0wGk4mkzaqz1jS
 CRUSTDATA_API_KEY=cd_a6070a6b539f8eb3f46c1e9acdf19ab78ef6
 EOF
 
-chmod 600 /opt/proof-of-search-ai/.env
+chmod 600 /opt/jnana-agent/.env
 
 echo "==> Creating systemd service for 24/7 background operation..."
 cat << 'EOF' > /etc/systemd/system/proofsearch.service
 [Unit]
-Description=Proof of Search AI Web Console & Agent
+Description=Jnana Agent Web Console & Agent
 After=network.target
 
 [Service]
 Type=simple
 User=root
-WorkingDirectory=/opt/proof-of-search-ai
-EnvironmentFile=/opt/proof-of-search-ai/.env
-ExecStartPre=-/usr/bin/git -C /opt/proof-of-search-ai pull origin master
-ExecStart=/opt/proof-of-search-ai/venv/bin/python -m research_agent.server --host 0.0.0.0 --port 8000
+WorkingDirectory=/opt/jnana-agent
+EnvironmentFile=/opt/jnana-agent/.env
+ExecStartPre=-/usr/bin/git -C /opt/jnana-agent pull origin master
+ExecStart=/opt/jnana-agent/venv/bin/python -m research_agent.server --host 0.0.0.0 --port 8000
 Restart=always
 RestartSec=5
 
@@ -55,7 +55,7 @@ RestartSec=5
 WantedBy=multi-user.target
 EOF
 
-echo "==> Starting Proof of Search AI service..."
+echo "==> Starting Jnana Agent service..."
 systemctl daemon-reload
 systemctl enable proofsearch.service
 systemctl restart proofsearch.service
@@ -64,5 +64,5 @@ echo "==> Verifying service status..."
 systemctl is-active proofsearch.service
 
 echo "=========================================================="
-echo "Proof of Search AI is LIVE on http://$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4):8000"
+echo "Jnana Agent is LIVE on http://$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4):8000"
 echo "=========================================================="

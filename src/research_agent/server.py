@@ -225,7 +225,7 @@ def get_status() -> Dict[str, Any]:
             "entire": {
                 "version": "v0.11.4",
                 "plugins": ["graph", "brain"],
-                "repo_url": "https://entire.io/gh/ibochivincent-lang/proof-of-search-ai",
+                "repo_url": "https://entire.io/gh/ibochivincent-lang/jnana-agent",
                 "status": "Memory Layer Active (+healthy)",
             },
             "cfo_ai": {
@@ -236,7 +236,7 @@ def get_status() -> Dict[str, Any]:
             },
         },
         "reports_count": report_count,
-        "github_repo": "https://github.com/ibochivincent-lang/proof-of-search-ai",
+        "github_repo": "https://github.com/ibochivincent-lang/jnana-agent",
     }
 
 
@@ -600,7 +600,7 @@ def test_patched_succeeds():
 
 
 class CreatePRRequest(BaseModel):
-    repo: str = "ibochivincent-lang/proof-of-search-ai"
+    repo: str = "ibochivincent-lang/jnana-agent"
     issue_ref: str = "Jnana-agent#482"
     title: str = "fix(cli): safely coerce string model_params in batch execution"
     patch: Optional[str] = None
@@ -623,7 +623,7 @@ def create_github_pr(req: CreatePRRequest) -> Dict[str, Any]:
     # Clean repo: owner/repo
     repo_name = req.repo.replace("https://github.com/", "").strip("/")
     if "/" not in repo_name:
-        repo_name = "ibochivincent-lang/proof-of-search-ai"
+        repo_name = "ibochivincent-lang/jnana-agent"
 
     if token:
         try:
@@ -729,14 +729,14 @@ def inspect_github_repo(req: GithubInspectRequest) -> Dict[str, Any]:
     if not repo_data and not issue_data:
         repo_data = {
             "owner": "ibochivincent-lang",
-            "repo": "proof-of-search-ai",
-            "full_name": "ibochivincent-lang/proof-of-search-ai",
-            "description": "Autonomous SWE issue resolver and verifiable proof-of-search engine.",
+            "repo": "jnana-agent",
+            "full_name": "ibochivincent-lang/jnana-agent",
+            "description": "Jnana Agent: Autonomous SWE issue resolver, unified diff patch engine, and deep research agent.",
             "stars": 1,
             "open_issues_count": 6,
             "default_branch": "master",
             "language": "Python",
-            "html_url": "https://github.com/ibochivincent-lang/proof-of-search-ai",
+            "html_url": "https://github.com/ibochivincent-lang/jnana-agent",
             "issues": [],
         }
 

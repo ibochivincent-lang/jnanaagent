@@ -1,12 +1,12 @@
-# neatHack 2026: Jnana Agent
+﻿# neatHack 2026: Jnana Agent
 
 > *"Autonomous Software Engineering & Deep Knowledge Intelligence."*
-> Sanskrit *Jnana* (ज्ञान) — direct cognitive realization through autonomous inquiry and deterministic code synthesis.
+> Sanskrit *Jnana* (à¤œà¥à¤žà¤¾à¤¨) â€” direct cognitive realization through autonomous inquiry and deterministic code synthesis.
 
 ## Project Overview
 - **Name:** Jnana Agent
 - **Tagline:** Autonomous Software Engineering & Deep Knowledge Intelligence
-- **Design Aesthetic:** Monolithic dark-stage environment — constellation floating on black velvet, Electric Iris violet (`#8052ff`) CTA pill buttons, Saffron Spark (`#ffb829`) punctuation, and interactive WebGL neural brain particle constellation.
+- **Design Aesthetic:** Monolithic dark-stage environment â€” constellation floating on black velvet, Electric Iris violet (`#8052ff`) CTA pill buttons, Saffron Spark (`#ffb829`) punctuation, and interactive WebGL neural brain particle constellation.
 - **Purpose:** An autonomous software engineering and verifiable knowledge intelligence engine combining live GitHub issue ingestion, cross-repo prior-art discovery, Entire vector memory recall, unified diff code patch synthesis, end-to-end telemetry via Neatlogs, and sustainable per-query unit economics modeled on cfo.ai.
 - **Problem Solved:** Engineering teams lose over 40% of their bandwidth diagnosing regressions, localizing obscure bugs, and reconstructing missing architectural context across fragmented codebases. Jnana Agent autonomously traces root causes, recalls vector memory loci, and synthesizes production-ready unified diff code patches with zero mock data and deterministic verification.
 
@@ -15,19 +15,19 @@
 ## Team Information
 - **Team Name:** Vincci001
 - **Team Leader:** Ibochi Vincent
-- **Hackathon:** neatHack 2026 (Oct 10–11, 2026)
+- **Hackathon:** neatHack 2026 (Oct 10â€“11, 2026)
 
 ---
 
 ## Technology Stack & Core Integrations
 | Pillar | Tool / Platform | Role in Project | Verification Status |
 | :--- | :--- | :--- | :--- |
-| **Observability & Tracing** | **Neatlogs** | Telemetry, span logging, LLM token metrics, trace dashboard | ✅ Active (Project `72082073...`, 0% errors, traces finalized) |
-| **Continuous Memory & Versioning** | **Entire** | Repository index, commits sync, Entire session capture | ✅ Connected (`https://entire.io/gh/ibochivincent-lang/proof-of-search-ai`) |
-| **Unit Economics & Financial Plan** | **cfo.ai** | Pricing, unit economics ($0.056/query), 12-mo pro-forma | ✅ Modeled in [`financial_plan.md`](./financial_plan.md) (97.7% gross margin) |
-| **Live B2B & Executive Data** | **Crustdata** | Live company & people search intelligence (Zero Mock Data) | ✅ Live API Verified (`/company/enrich`, SHA-256 Hashed) |
-| **Model Access (Hackathon Sponsor)** | **LiteLLM** | neatHack sponsored model access ($20 credit, Claude Haiku/Sonnet) | ✅ Verified (`https://litellm.vision.aivar.app/v1`, 200 OK) |
-| **Agent Core Orchestration** | **LangGraph / Python** | StateGraph, interrupt-based HITL gate, citation synthesis | ✅ Live execution complete (11/11 tests passing) |
+| **Observability & Tracing** | **Neatlogs** | Telemetry, span logging, LLM token metrics, trace dashboard | âœ… Active (Project `72082073...`, 0% errors, traces finalized) |
+| **Continuous Memory & Versioning** | **Entire** | Repository index, commits sync, Entire session capture | âœ… Connected (`https://entire.io/gh/ibochivincent-lang/jnana-agent`) |
+| **Unit Economics & Financial Plan** | **cfo.ai** | Pricing, unit economics ($0.056/query), 12-mo pro-forma | âœ… Modeled in [`financial_plan.md`](./financial_plan.md) (97.7% gross margin) |
+| **Live B2B & Executive Data** | **Crustdata** | Live company & people search intelligence (Zero Mock Data) | âœ… Live API Verified (`/company/enrich`, SHA-256 Hashed) |
+| **Model Access (Hackathon Sponsor)** | **LiteLLM** | neatHack sponsored model access ($20 credit, Claude Haiku/Sonnet) | âœ… Verified (`https://litellm.vision.aivar.app/v1`, 200 OK) |
+| **Agent Core Orchestration** | **LangGraph / Python** | StateGraph, interrupt-based HITL gate, citation synthesis | âœ… Live execution complete (11/11 tests passing) |
 
 ---
 
@@ -52,7 +52,7 @@
 
 ### [2026-10-10] Repository Publishing & Remote Sync
 - **Actions:**
-  - Published project to GitHub under team lead profile: [https://github.com/ibochivincent-lang/proof-of-search-ai](https://github.com/ibochivincent-lang/proof-of-search-ai).
+  - Published project to GitHub under team lead profile: [https://github.com/ibochivincent-lang/jnana-agent](https://github.com/ibochivincent-lang/jnana-agent).
   - Configured git remotes and pushed all tracking commits and documentation.
 - **Status:** Synchronized with GitHub.
 
@@ -92,9 +92,9 @@
 ### [2026-10-10] Continuous Memory & Code Intelligence with Entire CLI, Entire Graph & Entire Brain
 - **Actions:**
   - Installed official Entire CLI v0.11.4 on Windows via `https://entire.io/install.ps1`.
-  - Authorized GitHub App and connected repository to Entire platform: [https://entire.io/gh/ibochivincent-lang/proof-of-search-ai](https://entire.io/gh/ibochivincent-lang/proof-of-search-ai).
+  - Authorized GitHub App and connected repository to Entire platform: [https://entire.io/gh/ibochivincent-lang/jnana-agent](https://entire.io/gh/ibochivincent-lang/jnana-agent).
   - Configured repository with `entire enable --agent antigravity`.
-  - Verified active status (`entire status` -> `● Enabled · branch master, Agents · Antigravity, Checkpoints sync to: origin`).
+  - Verified active status (`entire status` -> `â— Enabled Â· branch master, Agents Â· Antigravity, Checkpoints sync to: origin`).
   - Executed `entire doctor` diagnostic check -> All hooks and metadata branches verified OK.
   - Installed `entire-graph` plugin v0.4.0 (`entire plugin install graph`).
   - Installed `entire-brain` plugin v0.1.0 (`entire plugin install C:\Users\User\.local\bin\entire-brain.exe --force`).
@@ -111,7 +111,7 @@
 - **Actions:**
   - Modeled complete agent financial plan and unit economics in [`financial_plan.md`](./financial_plan.md).
   - Calculated exact COGS per query ($0.056/report across LLM tokens, Crustdata enrichment, and compute runtime).
-  - Structured 3-tier commercial model: Pay-As-You-Go ($2.50/report), Pro Analyst ($49/mo), and Enterprise Teams ($499/mo) yielding 96.5%–97.7% gross margin.
+  - Structured 3-tier commercial model: Pay-As-You-Go ($2.50/report), Pro Analyst ($49/mo), and Enterprise Teams ($499/mo) yielding 96.5%â€“97.7% gross margin.
   - Formulated 12-month pro-forma projection scaling to $98,720 MRR with under 7-day break-even.
 - **Status:** Complete & formatted for cfo.ai AI CFO chat input.
 
@@ -132,8 +132,8 @@
 - **Status:** Functional Web Console & CLI agent with live Crustdata, LiteLLM, Neatlogs telemetry, and Entire continuous memory
 - **Live AWS Public URL:** **[http://23.22.195.38:8000](http://23.22.195.38:8000)**
 - **AWS Instance ID:** `i-02ca2ab76b811bb1` (`us-east-1`, `t2.micro`)
-- **Repository URL:** [https://github.com/ibochivincent-lang/proof-of-search-ai](https://github.com/ibochivincent-lang/proof-of-search-ai)
-- **Entire Repository Index:** [https://entire.io/gh/ibochivincent-lang/proof-of-search-ai](https://entire.io/gh/ibochivincent-lang/proof-of-search-ai)
+- **Repository URL:** [https://github.com/ibochivincent-lang/jnana-agent](https://github.com/ibochivincent-lang/jnana-agent)
+- **Entire Repository Index:** [https://entire.io/gh/ibochivincent-lang/jnana-agent](https://entire.io/gh/ibochivincent-lang/jnana-agent)
 - **Financial Model:** [`financial_plan.md`](./financial_plan.md)
 - **Sample Verified Research Report:** [`reports/report-stripe-and-openai-collaboration-in-financial-ai.md`](./reports/report-stripe-and-openai-collaboration-in-financial-ai.md)
 - **AWS Cloud Deployment (EC2 / Docker)**:
@@ -142,8 +142,8 @@
   - Target AWS Region: `us-east-1` (N. Virginia).
 - **Reproduction Instructions:**
   ```bash
-  git clone https://github.com/ibochivincent-lang/proof-of-search-ai.git
-  cd proof-of-search-ai
+  git clone https://github.com/ibochivincent-lang/jnana-agent.git
+  cd jnana-agent
   pip install -e .
   # Option A: Run web console
   python -m research_agent.server --port 8000
@@ -182,7 +182,7 @@
   - **Cross-Repository Prior Art & PR Recall:** Enhanced `github_search_issues()` with merged PR search (`is:pr is:merged`) to locate historical code fixes for related errors.
   - **Entire Brain Vector Memory Integration:** Built `entire_search_memory()` invoking `entire brain recall` to extract verified architectural facts, locus paths, and prior commit provenance into verified `Source` objects.
   - **Specialized SWE Reasoning Prompts:** Engineered `SWE_PLAN_PROMPT` and `SWE_SYNTHESIZE_PROMPT` enforcing 5 rigorous sections: Executive Summary, Similar Issues & Prior Art (GitHub + Entire Memory), Root Cause Analysis, Unified Diff Code Patch (`diff --git a/... b/...`), and Executable Reproduction & Verification Test Plan.
-  - **Console Drawer "💻 Code Fix & Patch" Viewer:** Added interactive tab with syntax-highlighted unified diffs (color-coded additions, deletions, chunk headers), "📋 Copy Patch", "⬇️ Download .patch", "📋 Copy Test Code", and cards linking similar external issues and Entire Memory provenance.
+  - **Console Drawer "ðŸ’» Code Fix & Patch" Viewer:** Added interactive tab with syntax-highlighted unified diffs (color-coded additions, deletions, chunk headers), "ðŸ“‹ Copy Patch", "â¬‡ï¸ Download .patch", "ðŸ“‹ Copy Test Code", and cards linking similar external issues and Entire Memory provenance.
   - **Unit Testing:** Added 6 new unit tests (`test_is_code_issue_task`, `test_extract_code_patch`, `test_extract_test_verification`, `test_extract_similar_issues`, `test_parse_github_issue_ref`, `test_entire_search_memory_live`). Total suite now **21 passed in 6.5s (100% green)**.
 - **Status:** Complete, verified, and pushed to production.
 
@@ -191,10 +191,10 @@
   - Modern AI developers ("vibe coders") frequently build complex multi-tier apps using LLM code generation, but get stuck when encountering cryptic framework errors, missing routes, unauthenticated middleware, or unhandled exceptions.
   - Built a 4-step interactive debugging studio inspired by `dapih/visualkan`, `aryandey-dev/code-explainer-visualizer`, and `khatvangi/chitra-katha`, tightly coupled with Neatlogs telemetry.
 - **Actions & Implementations:**
-  - **Step 1 — Submit Problem:** Multi-modal problem intake supporting pasted error tracebacks, code blocks, drag-and-drop screenshot upload, GitHub issue import, and live Neatlogs detected issue ingestion (`/api/neatlogs/issues`).
-  - **Step 2 — Plain-English Diagnosis:** Root cause analysis explaining what broke in simple language with zero compiler jargon, pinpointing affected file/line and explaining downstream consequences.
-  - **Step 3 — Interactive Mermaid Flowchart:** Generates valid Mermaid.js 10 graphs with clear status coloring (🟢 Healthy Components `#15846e`, 🟡 Missing/Lacking Dependencies `#ffb829`, 🔴 Exact Failure Point `#ef4444`) plus modular system cards detailing Database, Backend, Client, and Auth states.
-  - **Step 4 — Show The Fix & Test:** Delivers clean corrected code with side-by-side diffs, plain-English "Why It Works" rationale, 1-click test reproduction runner (`/api/reproduce-test`), and 1-click GitHub PR creation (`/api/create-pr`).
+  - **Step 1 â€” Submit Problem:** Multi-modal problem intake supporting pasted error tracebacks, code blocks, drag-and-drop screenshot upload, GitHub issue import, and live Neatlogs detected issue ingestion (`/api/neatlogs/issues`).
+  - **Step 2 â€” Plain-English Diagnosis:** Root cause analysis explaining what broke in simple language with zero compiler jargon, pinpointing affected file/line and explaining downstream consequences.
+  - **Step 3 â€” Interactive Mermaid Flowchart:** Generates valid Mermaid.js 10 graphs with clear status coloring (ðŸŸ¢ Healthy Components `#15846e`, ðŸŸ¡ Missing/Lacking Dependencies `#ffb829`, ðŸ”´ Exact Failure Point `#ef4444`) plus modular system cards detailing Database, Backend, Client, and Auth states.
+  - **Step 4 â€” Show The Fix & Test:** Delivers clean corrected code with side-by-side diffs, plain-English "Why It Works" rationale, 1-click test reproduction runner (`/api/reproduce-test`), and 1-click GitHub PR creation (`/api/create-pr`).
   - **End-to-End Test Suite:** Added comprehensive endpoint tests in `tests/test_server.py`. 100% green test pass rate.
 - **Status:** Complete, verified in browser, committed, and synchronized.
 
@@ -216,6 +216,8 @@
 - [x] Autonomous SWE Code Fix Engine with unified diff patch viewer and reproduction test suite
 - [x] 4-Step Visual Code Explainer & Debugger for Vibe Coders powered by Neatlogs and Mermaid.js
 - [x] Working reproduction commands and sample verified report generated
+
+
 
 
 
