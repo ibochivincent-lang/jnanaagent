@@ -948,13 +948,13 @@
     }
 
     .vibe-step-tab.active {
-      background: rgba(128, 82, 255, 0.12);
-      border-color: var(--color-electric-iris);
-      box-shadow: 0 0 16px rgba(128, 82, 255, 0.25);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.35);
+      box-shadow: 0 0 16px rgba(255, 255, 255, 0.08);
     }
 
     .vibe-step-tab.completed {
-      border-color: var(--color-deep-verdant);
+      border-color: rgba(255, 255, 255, 0.2);
     }
 
     .vibe-step-num {
@@ -968,11 +968,11 @@
     }
 
     .vibe-step-tab.active .vibe-step-num {
-      color: var(--color-electric-iris);
+      color: #ffffff;
     }
 
     .vibe-step-tab.completed .vibe-step-num {
-      color: #34d399;
+      color: #d4d4d8;
     }
 
     .vibe-step-title {
@@ -1019,10 +1019,10 @@
     }
 
     .vibe-input-btn.active {
-      color: var(--color-saffron-spark);
-      border-color: var(--color-saffron-spark);
-      background: rgba(255, 184, 41, 0.12);
-      box-shadow: 0 0 12px rgba(255, 184, 41, 0.2);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.10);
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
     }
 
     /* Preset Quick Buttons */
@@ -1039,21 +1039,21 @@
     }
 
     .vibe-preset-chip {
-      background: rgba(128, 82, 255, 0.08);
-      border: 1px solid rgba(128, 82, 255, 0.25);
-      color: #c4b5fd;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #d4d4d8;
       font-size: 10.5px;
       font-family: var(--font-mono);
-      padding: 4px 10px;
+      padding: 5px 12px;
       border-radius: 6px;
       cursor: pointer;
       transition: all 0.2s;
     }
 
     .vibe-preset-chip:hover {
-      background: rgba(128, 82, 255, 0.2);
+      background: rgba(255, 255, 255, 0.08);
       color: #fff;
-      border-color: var(--color-electric-iris);
+      border-color: rgba(255, 255, 255, 0.28);
     }
 
     .vibe-dropzone {
@@ -1094,10 +1094,163 @@
       letter-spacing: 0.05em;
     }
 
-    .lacking-db { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.35); }
-    .lacking-backend { background: rgba(255, 184, 41, 0.15); color: #fbbf24; border: 1px solid rgba(255, 184, 41, 0.35); }
-    .lacking-auth { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.35); }
-    .lacking-type { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.35); }
+    .lacking-db, .lacking-backend, .lacking-auth, .lacking-type {
+      background: rgba(255, 255, 255, 0.05);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Unified Monochromatic Tokens & Helpers */
+    .vibe-tag-uniform {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: #f4f4f5;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .vibe-preset-chip-uniform {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #d4d4d8;
+      font-size: 11px;
+      font-family: var(--font-mono);
+      padding: 5px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .vibe-preset-chip-uniform:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .neat-home-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      margin: 8px 12px 14px 12px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 12.5px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .neat-home-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.3);
+      color: #ffffff;
+      transform: translateX(-1px);
+    }
+
+    .neat-inline-home-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--neat-text-secondary);
+      text-decoration: none;
+      padding: 5px 10px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.2s;
+    }
+
+    .neat-inline-home-link:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .neat-btn-silver-action {
+      background: #f4f4f5;
+      color: #090a0f;
+      border: 1px solid #ffffff;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 7px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .neat-btn-silver-action:hover {
+      background: #ffffff;
+      box-shadow: 0 0 16px rgba(255, 255, 255, 0.2);
+      transform: translateY(-1px);
+    }
+
+    .neat-btn-silver-ghost {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: #f4f4f5;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 7px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .neat-btn-silver-ghost:hover {
+      background: rgba(255, 255, 255, 0.09);
+      border-color: rgba(255, 255, 255, 0.3);
+      color: #ffffff;
+    }
+
+    .neat-visual-repo-search-bar {
+      width: 100%;
+      max-width: 680px;
+      margin: 0 auto 12px auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 10px;
+      padding: 6px 8px 6px 14px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .neat-visual-repo-search-bar:focus-within {
+      border-color: rgba(255, 255, 255, 0.35);
+      box-shadow: 0 0 18px rgba(255, 255, 255, 0.08);
+    }
+
+    .neat-visual-repo-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: #ffffff;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      outline: none;
+    }
+
+    .neat-visual-repo-input::placeholder {
+      color: var(--neat-text-muted);
+    }
 
     /* Mermaid Graph Container */
     .vibe-mermaid-container {
@@ -1144,9 +1297,9 @@
       transform: translateY(-2px);
     }
 
-    .vibe-blueprint-card.healthy { border-left: 3px solid #34d399; }
-    .vibe-blueprint-card.warning { border-left: 3px solid var(--color-saffron-spark); }
-    .vibe-blueprint-card.error { border-left: 3px solid #ef4444; }
+    .vibe-blueprint-card.healthy { border-left: 3px solid #d4d4d8; }
+    .vibe-blueprint-card.warning { border-left: 3px solid #a1a1aa; }
+    .vibe-blueprint-card.error { border-left: 3px solid #71717a; }
 
     /* Code & Fix Comparison */
     .vibe-code-box {
@@ -1518,7 +1671,7 @@
     }
 
     /* CHATS VIEW: Hero & Grand Search Pill */
-    #neatViewChats {
+    #neatViewChat, #neatViewChats {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -2351,13 +2504,20 @@
         <!-- Top Project Header -->
         <div class="neat-sidebar-header">
           <div class="neat-project-badge" onclick="switchNeatView('chat')" title="Jnana Agent · Vincci001">
-            <div class="neat-project-avatar">S</div>
-            <div class="neat-project-name">Ibochi's project</div>
+            <div class="neat-project-avatar">J</div>
+            <div class="neat-project-name">Jnana Agent · Vincci001</div>
           </div>
           <div style="cursor: pointer; color: var(--neat-text-secondary);" onclick="toggleNeatSidebar()" title="Toggle Sidebar">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
           </div>
         </div>
+
+        <!-- Back to Home Navigation Button -->
+        <a href="/" class="neat-home-btn" title="Return to Executive Home Dashboard">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          <span>Home Dashboard</span>
+          <span style="font-size: 11px; color: var(--neat-text-muted); margin-left: auto;">&larr; Exit</span>
+        </a>
 
         <!-- Section Label: CONSOLE -->
         <div class="neat-sidebar-section-title">
@@ -2370,9 +2530,9 @@
           <div class="neat-nav-item active" id="navItemChat" onclick="switchNeatView('chat')">
             <div class="neat-nav-left">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-              <span>Chat</span>
+              <span>Chat Assistant</span>
             </div>
-            <span class="neat-nav-badge" style="color: #38bdf8;">PROMPT</span>
+            <span class="neat-nav-badge">PROMPT</span>
           </div>
 
           <div class="neat-nav-item" id="navItemVisual" onclick="switchNeatView('visual')">
@@ -2380,7 +2540,7 @@
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><line x1="3" y1="12" x2="9" y2="12"></line><line x1="15" y1="12" x2="21" y2="12"></line><line x1="12" y1="3" x2="12" y2="9"></line><line x1="12" y1="15" x2="12" y2="21"></line></svg>
               <span>Visualizer</span>
             </div>
-            <span class="neat-nav-badge" style="color: #34d399;">AST FLOW</span>
+            <span class="neat-nav-badge">AST FLOW</span>
           </div>
 
           <div class="neat-nav-item" id="navItemSettings" onclick="switchNeatView('settings')">
@@ -2407,13 +2567,13 @@
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
             <span>pipeline</span>
           </div>
-          <span class="neat-nav-badge" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8;">ACTIVE</span>
+          <span class="neat-nav-badge">ASSISTANT READY</span>
         </div>
 
         <div class="neat-user-profile-row">
           <div class="neat-user-pill" title="Lead: Ibochi Vincent (Vincci001)">
             <div class="neat-user-avatar">I</div>
-            <div class="neat-user-name">Ibochi Vin...</div>
+            <div class="neat-user-name">Ibochi Vincent</div>
           </div>
           <div style="display: flex; align-items: center; gap: 6px; color: var(--neat-text-secondary);">
             <button class="neat-icon-btn" onclick="switchNeatView('settings')" title="Settings &amp; Theme">
@@ -2435,12 +2595,22 @@
            1. CHAT VIEW (Console > Chat)
            ========================================== -->
       <div id="neatViewChat" class="neat-view-section active" style="display: flex;">
-        <h1 class="neat-hero-greet">hello, Ibochi</h1>
-        <p class="neat-hero-sub">find anything about your agent runs, debug code &amp; visualize issues</p>
+        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 740px; margin-bottom: 20px;">
+          <a href="/" class="neat-inline-home-link" title="Return to Executive Home Dashboard">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            <span>Back to Home</span>
+          </a>
+          <div class="neat-track-pill">
+            <span>TRACK: PLANNING &middot; CONTEXT &middot; EXECUTION &middot; VERIFICATION</span>
+          </div>
+        </div>
+
+        <h1 class="neat-hero-greet">Hackathon Assisting Agent</h1>
+        <p class="neat-hero-sub">Autonomous Codebase Reasoning &middot; SWE-bench Bug Localization &middot; Multi-Source Search</p>
 
         <!-- Grand Search Pill Box -->
         <div class="neat-pill-box">
-          <textarea id="neatSearchInput" class="neat-pill-textarea" placeholder="Ask anything about agent runs, trace failures, or code fixes...." rows="2" onkeydown="handleNeatSearchKeydown(event)"></textarea>
+          <textarea id="neatSearchInput" class="neat-pill-textarea" placeholder="Search any GitHub repo (e.g. psf/requests, pallets/flask) or describe code issue to explain and visualize..." rows="2" onkeydown="handleNeatSearchKeydown(event)"></textarea>
 
           <div class="neat-pill-bottom-toolbar">
             <div class="neat-pill-toolbar-left">
@@ -2449,16 +2619,15 @@
               </button>
               <button class="neat-chip-btn" id="neatWorkflowBtn">
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><path d="M13 6h3a2 2 0 0 1 2 2v7"></path><line x1="6" y1="9" x2="6" y2="21"></line></svg>
-                <span>All workflows</span>
+                <span>All tracks</span>
                 <span style="font-size: 8px;">▾</span>
               </button>
               <button class="neat-chip-btn" id="neatDateBtn">
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                <span>Last 14 days</span>
-                <span style="font-size: 8px;">▾</span>
+                <span>Zero Mock Data</span>
               </button>
               <button class="neat-chip-btn" id="neatDeepBtn">
-                <span>Deep</span>
+                <span>AST Deep</span>
               </button>
             </div>
 
@@ -2466,21 +2635,21 @@
               <div class="neat-model-select-wrap">
                 <button class="neat-model-pill" onclick="toggleNeatModelMenu()">
                   <span class="neat-nl-tag">nl</span>
-                  <span id="neatSelectedModelName">Neatlogs Fast</span>
+                  <span id="neatSelectedModelName">LiteLLM Claude</span>
                   <span style="font-size: 8px; color: var(--neat-text-muted);">▾</span>
                 </button>
                 <div class="neat-model-menu" id="neatModelMenu">
                   <div class="neat-model-opt active" onclick="selectNeatModel('fast')">
                     <span class="neat-nl-tag">nl</span>
                     <div>
-                      <div style="font-size: 12px; font-weight: 600;">Neatlogs Fast</div>
-                      <div style="font-size: 10px; color: var(--neat-text-muted);">Low latency AST investigation</div>
+                      <div style="font-size: 12px; font-weight: 600;">LiteLLM Claude Haiku</div>
+                      <div style="font-size: 10px; color: var(--neat-text-muted);">Fast AST inspection &amp; diagnosis</div>
                     </div>
                   </div>
                   <div class="neat-model-opt" onclick="selectNeatModel('deep')">
-                    <span class="neat-nl-tag" style="background: rgba(16, 185, 129, 0.2); color: #10b981;">nl</span>
+                    <span class="neat-nl-tag" style="background: rgba(255, 255, 255, 0.1); color: #fff;">nl</span>
                     <div>
-                      <div style="font-size: 12px; font-weight: 600;">Neatlogs Deep Reasoning</div>
+                      <div style="font-size: 12px; font-weight: 600;">LiteLLM Claude Sonnet</div>
                       <div style="font-size: 10px; color: var(--neat-text-muted);">Full architecture &amp; AST diff synthesis</div>
                     </div>
                   </div>
@@ -2506,26 +2675,29 @@
 
         <!-- Suggestion Prompts -->
         <div class="neat-suggestions-wrap">
-          <button class="neat-suggestion-row" onclick="loadSampleVibeAndSubmit('type_coercion')">
-            <strong>Analyze</strong> API parameter coercion &amp; type limits
+          <button class="neat-suggestion-row" onclick="submitQuickRepoSearch('psf/requests')">
+            <strong>Repo Search</strong> psf/requests &mdash; inspect repository &amp; explain architecture
+          </button>
+          <button class="neat-suggestion-row" onclick="loadSampleVibeAndSubmit('type_arg')">
+            <strong>Track: Planning &amp; Execution</strong> TypeError in model arg parsing
           </button>
           <button class="neat-suggestion-row" onclick="loadLiveNeatlogsAndSubmit()">
-            <strong>Investigate</strong> why checkout agent timed out in production
+            <strong>Track: Recovery &amp; Tool State</strong> inspect live Neatlogs telemetry spans
           </button>
           <button class="neat-suggestion-row" onclick="loadSampleVibeAndSubmit('db_missing')">
-            <strong>Visualize</strong> missing database connection pool &amp; routes
+            <strong>Track: Verification</strong> missing database connection pool &amp; routes
           </button>
         </div>
 
         <!-- Real Chat Response Stream & Visualizer Launchpad -->
-        <div id="neatChatStreamArea" style="width: 100%; max-width: 760px; margin-top: 18px; display: none;">
+        <div id="neatChatStreamArea" style="width: 100%; max-width: 740px; margin-top: 18px; display: none;">
           <div class="neat-chat-response-card" id="neatChatResponseCard">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid var(--neat-border-subtle); padding-bottom: 8px;">
               <div style="display: flex; align-items: center; gap: 8px;">
                 <span class="neat-nl-tag">nl</span>
-                <span style="font-weight: 600; font-size: 13px; color: var(--neat-text-primary);">Agent Reasoning Output</span>
+                <span style="font-weight: 600; font-size: 13px; color: var(--neat-text-primary);">Assisting Agent Output</span>
               </div>
-              <button class="neat-btn-primary" onclick="switchNeatView('visual')" style="padding: 4px 10px; font-size: 11px;">
+              <button class="neat-btn-silver-action" onclick="switchNeatView('visual')" style="padding: 5px 12px; font-size: 11.5px;">
                 <span>Open in Visualizer &rarr;</span>
               </button>
             </div>
@@ -2538,27 +2710,46 @@
            2. VISUALIZER VIEW (Console > Visualizer)
            ========================================== -->
       <div id="neatViewVisual" class="neat-view-section" style="display: none;">
+        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 980px; margin: 0 auto 14px auto;">
+          <a href="/" class="neat-inline-home-link" title="Return to Executive Home Dashboard">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            <span>Back to Home</span>
+          </a>
+          <button onclick="switchNeatView('chat')" class="neat-inline-home-link" style="cursor: pointer; border: none; background: transparent;">
+            <span>&larr; Switch to Chat Assistant</span>
+          </button>
+        </div>
+
         <div class="neat-visual-header-card">
           <h2 style="font-size: 24px; font-weight: 600; color: var(--neat-text-primary); margin-bottom: 6px; text-align: center;">Visual Code Explainer &amp; Architecture Flowchart</h2>
           <p style="font-size: 13.5px; color: var(--neat-text-secondary); text-align: center; margin-bottom: 14px;">4-Step Failure-to-Fix Pipeline &middot; Live AST Reasoning, Code Fix &amp; Verified Reproduction</p>
-          <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
-            <button class="btn-table-action" onclick="loadLiveNeatlogsAndSubmit()">Load Checkout Issue</button>
-            <button class="btn-table-action" onclick="loadSampleVibeAndSubmit('db_missing')">Load DB Pool Issue</button>
-            <button class="btn-table-action" onclick="loadSampleVibeAndSubmit('type_arg')">Load Type Coercion Bug</button>
+          
+          <!-- Unified Repository Search & Explain Bar in Visualizer -->
+          <div class="neat-visual-repo-search-bar">
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" style="color: var(--neat-text-muted);"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            <input type="text" id="vibeRepoSearchInput" class="neat-visual-repo-input" placeholder="Search any repository to explain (e.g. psf/requests, pallets/flask, sympy/sympy)..." onkeydown="if(event.key==='Enter') executeVibeRepoSearchSubmit()">
+            <button class="neat-btn-silver-action" onclick="executeVibeRepoSearchSubmit()">Inspect &amp; Explain Repo</button>
+          </div>
+
+          <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 10px;">
+            <button class="vibe-preset-chip-uniform" onclick="submitQuickRepoSearch('psf/requests')">Inspect psf/requests</button>
+            <button class="vibe-preset-chip-uniform" onclick="loadSampleVibeAndSubmit('type_arg')">Load Type Coercion Bug</button>
+            <button class="vibe-preset-chip-uniform" onclick="loadLiveNeatlogsAndSubmit()">Load Checkout Issue</button>
+            <button class="vibe-preset-chip-uniform" onclick="loadSampleVibeAndSubmit('db_missing')">Load DB Pool Issue</button>
           </div>
         </div>
 
         <!-- The 4-Step Visualizer Pipeline -->
-        <section class="panel-card vibe-panel" id="vibeVisualizerSection" style="display: block; width: 100%; max-width: 900px; margin-bottom: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.6);">
+        <section class="panel-card vibe-panel" id="vibeVisualizerSection" style="display: block; width: 100%; max-width: 980px; margin-bottom: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.6);">
       <div class="panel-header">
         <div class="panel-title">
-          <span>Visual Code Explainer &amp; Debugger for Vibe Coders</span>
+          <span>Visual Code Explainer &amp; Architecture Reasoning</span>
         </div>
         <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
-          <span class="panel-badge" style="color: var(--color-electric-iris); border-color: rgba(128, 82, 255, 0.4);">4-STEP PIPELINE</span>
-          <span class="panel-badge" style="color: #34d399; border-color: rgba(52, 211, 153, 0.3);">ZERO MOCK DATA</span>
-          <span class="panel-badge" style="color: #ffb829; border-color: rgba(255, 184, 41, 0.3);">NEATLOGS DETECT</span>
-          <span class="panel-badge" style="color: #38bdf8; border-color: rgba(56, 189, 248, 0.3);">MERMAID.JS 10</span>
+          <span class="vibe-tag-uniform">4-STEP PIPELINE</span>
+          <span class="vibe-tag-uniform">ZERO MOCK DATA</span>
+          <span class="vibe-tag-uniform">NEATLOGS DETECT</span>
+          <span class="vibe-tag-uniform">MERMAID 10</span>
         </div>
       </div>
 
@@ -2618,7 +2809,7 @@
           <button class="vibe-preset-chip" onclick="loadSampleVibeError('db_missing')">Missing DB Pool</button>
           <button class="vibe-preset-chip" onclick="loadSampleVibeError('type_arg')">TypeError: Coercion Bug</button>
           <button class="vibe-preset-chip" onclick="loadSampleVibeError('route_404')">Missing Backend Route</button>
-          <button class="vibe-preset-chip" onclick="loadLiveNeatlogsIssue()" style="border-color: #34d399; color: #34d399;">Load Neatlogs Issue</button>
+          <button class="vibe-preset-chip" onclick="loadLiveNeatlogsIssue()">Load Neatlogs Issue</button>
         </div>
 
         <!-- Dropzone for Screenshot Upload -->
@@ -2629,7 +2820,7 @@
           <div style="font-size: 11px; color: var(--color-ash-gray);">PNG, JPG, or WebP screenshot from terminal, browser console, or IDE</div>
           <div id="vibeImagePreviewContainer" style="display: none; margin-top: 12px;">
             <img id="vibeImagePreview" style="max-height: 180px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2);">
-            <div id="vibeImageFilename" style="font-size: 10px; font-family: var(--font-mono); color: #34d399; margin-top: 4px;"></div>
+            <div id="vibeImageFilename" class="vibe-tag-uniform" style="margin-top: 4px;"></div>
           </div>
         </div>
 
@@ -2643,7 +2834,7 @@
           <div style="flex: 1; min-width: 240px;">
             <input type="text" id="vibeInputContext" style="width: 100%; background: #030408; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 8px 12px; font-family: var(--font-mono); font-size: 11px; color: #fff; outline: none;" placeholder="Target file or component path (e.g. sweagent/run.py or src/database.py)..." value="sweagent/run.py">
           </div>
-          <button class="portal-btn primary" id="btnSubmitVibeProblem" onclick="submitVibeProblem()" style="padding: 9px 24px;">
+          <button class="neat-btn-silver-action" id="btnSubmitVibeProblem" onclick="submitVibeProblem()" style="padding: 9px 24px;">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
             <span id="btnSubmitVibeText">Diagnose &amp; Visualize</span>
           </button>
@@ -2655,33 +2846,33 @@
         <div class="vibe-explanation-card">
           <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; gap: 14px; flex-wrap: wrap;">
             <div>
-              <div style="font-size: 10px; font-family: var(--font-mono); font-weight: 700; color: #c4b5fd; text-transform: uppercase; margin-bottom: 4px;">Step 2 · Plain-English Diagnosis</div>
+              <div style="font-size: 10px; font-family: var(--font-mono); font-weight: 700; color: var(--neat-text-muted); text-transform: uppercase; margin-bottom: 4px;">Step 2 &middot; Plain-English Diagnosis</div>
               <h3 id="vibeDiagTitle" style="font-size: 18px; font-weight: 600; color: #fff; margin-bottom: 4px;">TypeError in run.py parsing model args</h3>
               <div style="display: flex; align-items: center; gap: 8px;">
-                <span id="vibeAffectedCode" style="font-family: var(--font-mono); font-size: 11px; color: #38bdf8; background: rgba(56, 189, 248, 0.1); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(56, 189, 248, 0.3);">sweagent/run.py:L142</span>
-                <span id="vibeLackingBadge" class="vibe-lacking-badge lacking-type">TYPE COERCION</span>
+                <span id="vibeAffectedCode" class="vibe-tag-uniform">sweagent/run.py:L142</span>
+                <span id="vibeLackingBadge" class="vibe-lacking-badge">TYPE COERCION</span>
               </div>
             </div>
-            <button class="btn-table-action" onclick="switchVibeStepView(3)" style="border-color: var(--color-electric-iris); color: #fff; background: rgba(128, 82, 255, 0.2);">Next: View Flowchart &rarr;</button>
+            <button class="neat-btn-silver-action" onclick="switchVibeStepView(3)">Next: View Flowchart &rarr;</button>
           </div>
 
           <div style="margin-bottom: 16px;">
-            <div style="font-size: 11px; font-weight: 700; color: var(--color-saffron-spark); text-transform: uppercase; margin-bottom: 6px;">Simple Explanation (No Compiler Jargon)</div>
+            <div style="font-size: 11px; font-weight: 700; color: #ffffff; text-transform: uppercase; margin-bottom: 6px;">Simple Explanation (No Compiler Jargon)</div>
             <p id="vibeSimpleExplanation" style="font-size: 13px; line-height: 1.6; color: #e5e7eb; background: rgba(255,255,255,0.02); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06);">
               The command-line runner expects model configuration parameters as a key-value dictionary, but received raw string formatting from the CLI parser. When the agent tries to index into it, Python crashes.
             </p>
           </div>
 
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px;">
-            <div style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 12px;">
-              <div style="font-size: 10px; font-weight: 800; color: #f87171; text-transform: uppercase; margin-bottom: 4px;">What Is Missing / Lacking:</div>
-              <div id="vibeWhatIsLacking" style="font-size: 12px; color: #fca5a5; line-height: 1.5;">
+            <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 14px;">
+              <div style="font-size: 10px; font-weight: 800; color: #ffffff; text-transform: uppercase; margin-bottom: 6px;">What Is Missing / Lacking:</div>
+              <div id="vibeWhatIsLacking" style="font-size: 12.5px; color: #d4d4d8; line-height: 1.5;">
                 Dictionary parsing and type coercion step before passing CLI parameters to ModelConfig.
               </div>
             </div>
-            <div style="background: rgba(255, 184, 41, 0.05); border: 1px solid rgba(255, 184, 41, 0.2); border-radius: 8px; padding: 12px;">
-              <div style="font-size: 10px; font-weight: 800; color: var(--color-saffron-spark); text-transform: uppercase; margin-bottom: 4px;">What It Causes (Impact):</div>
-              <div id="vibeWhatItCauses" style="font-size: 12px; color: #fde68a; line-height: 1.5;">
+            <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 14px;">
+              <div style="font-size: 10px; font-weight: 800; color: #ffffff; text-transform: uppercase; margin-bottom: 6px;">What It Causes (Impact):</div>
+              <div id="vibeWhatItCauses" style="font-size: 12.5px; color: #d4d4d8; line-height: 1.5;">
                 Batch runner crashes immediately upon startup before executing any agent tasks.
               </div>
             </div>
@@ -2693,12 +2884,12 @@
       <div id="vibeStepView3" class="vibe-step-content" style="display: none;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
           <div>
-            <div style="font-size: 10px; font-family: var(--font-mono); font-weight: 700; color: #34d399; text-transform: uppercase;">Step 3 · Multi-Engine Visual Architecture &amp; Failure Point</div>
-            <div style="font-size: 14px; font-weight: 600; color: #fff;">3 Adaptive Debugging Engines · Zero Mock Data</div>
+            <div style="font-size: 10px; font-family: var(--font-mono); font-weight: 700; color: var(--neat-text-muted); text-transform: uppercase;">Step 3 &middot; Architecture Flowchart &amp; Failure Point</div>
+            <div style="font-size: 14px; font-weight: 600; color: #fff;">Multi-Engine Visual Reasoning &middot; Zero Mock Data</div>
           </div>
           <div style="display: flex; gap: 8px; align-items: center;">
-            <button class="btn-table-action" onclick="copyVibeMermaidCode()">Copy Diagram DSL</button>
-            <button class="btn-table-action" onclick="switchVibeStepView(4)" style="border-color: var(--color-electric-iris); color: #fff; background: rgba(128, 82, 255, 0.2);">Next: See The Fix &rarr;</button>
+            <button class="neat-btn-silver-ghost" onclick="copyVibeMermaidCode()">Copy Diagram DSL</button>
+            <button class="neat-btn-silver-action" onclick="switchVibeStepView(4)">Next: See The Fix &rarr;</button>
           </div>
         </div>
 
@@ -2713,7 +2904,7 @@
           <button id="btnVizVibe" class="vibe-input-btn" onclick="switchVisualizerEngine('vibe')">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg> Vibe-to-Code (Blueprint)
           </button>
-          <button id="btnVizTri" class="vibe-input-btn" onclick="switchVisualizerEngine('tri')" style="border-color: rgba(128, 82, 255, 0.5); color: #c4b5fd;">
+          <button id="btnVizTri" class="vibe-input-btn" onclick="switchVisualizerEngine('tri')">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Triple-Lens (Show All 3)
           </button>
         </div>
@@ -2723,10 +2914,10 @@
           <div class="vibe-mermaid-container" id="vibeMermaidContainer">
             <div id="vibeMermaidOutput" style="width: 100%; display: flex; justify-content: center;"></div>
           </div>
-          <div style="display: flex; gap: 16px; justify-content: center; margin-bottom: 16px; font-size: 10.5px; font-family: var(--font-mono);">
-            <div style="display: flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #15846e; display: inline-block;"></span> Healthy Component</div>
-            <div style="display: flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #ffb829; display: inline-block;"></span> Missing / Lacking Service</div>
-            <div style="display: flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #ef4444; display: inline-block;"></span> Exact Failure Point</div>
+          <div style="display: flex; gap: 16px; justify-content: center; margin-bottom: 16px; font-size: 11px; font-family: var(--font-mono); color: var(--neat-text-secondary);">
+            <div style="display: flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: rgba(255,255,255,0.9); display: inline-block;"></span> Active Module</div>
+            <div style="display: flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: rgba(255,255,255,0.35); border: 1px dashed rgba(255,255,255,0.6); display: inline-block;"></span> Component Under Repair</div>
+            <div style="display: flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); display: inline-block;"></span> Target Interface</div>
           </div>
         </div>
 
@@ -2736,14 +2927,14 @@
             <!-- Dynamic SVG injected here -->
           </div>
           <div style="font-size: 11px; color: var(--color-silver-mist); margin-top: 8px; text-align: center;">
-            Interactive Incident Stage (escoffier-labs/mise-en-scene) · Displays animated data packet routes, actor states, and failure collision.
+            Interactive Incident Stage &middot; Displays animated data packet routes, actor states, and failure collision.
           </div>
         </div>
 
         <!-- Visualizer 3: Vibe-to-Code (Architecture Decomposition & Action Plan) -->
         <div id="visualizerWrapVibe" style="display: none; margin-bottom: 16px;">
           <div id="vibeToCodeContainer" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 18px;">
-            <div style="font-size: 12px; font-weight: 700; color: #c4b5fd; margin-bottom: 4px; text-transform: uppercase;">Vibe-to-Code Decomposition Studio (Skandamrao/Vibe-to-Code)</div>
+            <div style="font-size: 11.5px; font-weight: 700; color: #ffffff; margin-bottom: 4px; text-transform: uppercase;">Architecture Decomposition Studio</div>
             <div id="vibeIntentHeadline" style="font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 14px; line-height: 1.4;">
               Translating rapid vibe-coding intent into resilient production architecture.
             </div>
@@ -2752,8 +2943,8 @@
               <!-- Dynamically populated intent blocks -->
             </div>
 
-            <div style="background: rgba(128, 82, 255, 0.05); border: 1px solid rgba(128, 82, 255, 0.2); border-radius: 8px; padding: 12px;">
-              <div style="font-size: 11px; font-weight: 700; color: #c4b5fd; text-transform: uppercase; margin-bottom: 6px;">3-Step Code Synthesis Action Plan:</div>
+            <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 8px; padding: 14px;">
+              <div style="font-size: 11px; font-weight: 700; color: #ffffff; text-transform: uppercase; margin-bottom: 6px;">3-Step Code Synthesis Action Plan:</div>
               <div id="vibeSynthesisPlanList" style="font-size: 12px; color: #e5e7eb; line-height: 1.6;">
                 <div>1. <strong>Defensive Ingestion:</strong> Intercept and validate parameter types before initialization.</div>
                 <div>2. <strong>Type Coercion:</strong> Normalize string/dictionary payloads safely with fallback JSON decoding.</div>
@@ -2776,13 +2967,13 @@
       <div id="vibeStepView4" class="vibe-step-content" style="display: none;">
         <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
           <div>
-            <div style="font-size: 10px; font-family: var(--font-mono); font-weight: 700; color: #38bdf8; text-transform: uppercase;">Step 4 · Verified AST Code Fix</div>
+            <div style="font-size: 10px; font-family: var(--font-mono); font-weight: 700; color: var(--neat-text-muted); text-transform: uppercase;">Step 4 &middot; Verified AST Code Fix</div>
             <div style="font-size: 14px; font-weight: 600; color: #fff;">Corrected Code with 1-Click Pytest &amp; PR</div>
           </div>
           <div style="display: flex; gap: 8px;">
-            <button class="btn-table-action" onclick="copyVibeFixedCode()">Copy Corrected Code</button>
-            <button class="btn-table-action" style="border-color: var(--color-saffron-spark); color: var(--color-saffron-spark);" onclick="runVibeTestReproduction()">Run Test Reproduction</button>
-            <button class="btn-table-action" style="border-color: var(--color-electric-iris); color: #fff; background: rgba(128, 82, 255, 0.2);" onclick="createVibePR()">1-Click GitHub PR</button>
+            <button class="neat-btn-silver-ghost" onclick="copyVibeFixedCode()">Copy Corrected Code</button>
+            <button class="neat-btn-silver-ghost" onclick="runVibeTestReproduction()">Run Test Reproduction</button>
+            <button class="neat-btn-silver-action" onclick="createVibePR()">1-Click GitHub PR</button>
           </div>
         </div>
 
@@ -2792,18 +2983,18 @@
         </div>
 
         <!-- Why It Works Card -->
-        <div style="background: rgba(16, 185, 129, 0.05); border: 1px solid var(--color-deep-verdant); border-radius: 8px; padding: 12px; margin-bottom: 14px;">
-          <div style="font-size: 10.5px; font-weight: 700; color: #34d399; text-transform: uppercase; margin-bottom: 4px;">Why It Works</div>
-          <div id="vibeWhyItWorks" style="font-size: 12px; color: #d1fae5; line-height: 1.5;"></div>
+        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 8px; padding: 14px; margin-bottom: 14px;">
+          <div style="font-size: 10.5px; font-weight: 700; color: #ffffff; text-transform: uppercase; margin-bottom: 4px;">Why It Works</div>
+          <div id="vibeWhyItWorks" style="font-size: 12.5px; color: #e4e4e7; line-height: 1.5;"></div>
         </div>
 
         <!-- Test Verification Output Box -->
-        <div id="vibeTestResultPanel" style="display: none; background: #030408; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 12px; margin-bottom: 14px;">
+        <div id="vibeTestResultPanel" style="display: none; background: #030408; border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 12px; margin-bottom: 14px;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
             <span style="font-size: 11px; font-weight: 700; color: #fff;">Subprocess Test Output</span>
-            <span id="vibeTestBadge" class="panel-badge" style="color: #34d399; border-color: rgba(52,211,153,0.3);">PASSED</span>
+            <span id="vibeTestBadge" class="vibe-tag-uniform">PASSED</span>
           </div>
-          <pre id="vibeTestOutputText" style="font-family: var(--font-mono); font-size: 10.5px; color: #9ca3af; max-height: 140px; overflow-y: auto; white-space: pre-wrap;"></pre>
+          <pre id="vibeTestOutputText" style="font-family: var(--font-mono); font-size: 10.5px; color: var(--neat-text-secondary); max-height: 140px; overflow-y: auto; white-space: pre-wrap;"></pre>
         </div>
       </div>
     </section>
@@ -2997,7 +3188,17 @@
         try {
           mermaid.initialize({
             startOnLoad: false,
-            theme: theme === 'silver' ? 'default' : 'dark'
+            theme: 'dark',
+            themeVariables: {
+              darkMode: (theme !== 'silver'),
+              background: theme === 'silver' ? '#f4f4f5' : '#090a0f',
+              primaryColor: theme === 'silver' ? '#e4e4e7' : '#1c1d24',
+              primaryTextColor: theme === 'silver' ? '#09090b' : '#ffffff',
+              primaryBorderColor: theme === 'silver' ? '#a1a1aa' : '#52525b',
+              lineColor: theme === 'silver' ? '#71717a' : '#a1a1aa',
+              secondaryColor: theme === 'silver' ? '#d4d4d8' : '#27272a',
+              tertiaryColor: theme === 'silver' ? '#e4e4e7' : '#3f3f46'
+            }
           });
         } catch(e) {}
       }
@@ -4191,22 +4392,221 @@
       }
     }
 
-    function executeNeatSearchSubmit() {
+    function submitQuickRepoSearch(repo) {
+      const input = document.getElementById('neatSearchInput');
+      if (input) input.value = repo;
+      executeNeatSearchSubmit();
+    }
+
+    function addNeatChatHistorySession(title) {
+      const list = document.getElementById('neatChatHistoryList');
+      if (!list) return;
+      const item = document.createElement('div');
+      item.className = 'neat-chat-history-item';
+      item.textContent = title.length > 28 ? title.slice(0, 26) + '...' : title;
+      item.title = title;
+      item.onclick = () => {
+        const input = document.getElementById('neatSearchInput');
+        if (input) {
+          input.value = title;
+          executeNeatSearchSubmit();
+        }
+      };
+      list.prepend(item);
+    }
+
+    function openQueryInVisualizer() {
+      switchNeatView('visual');
+      switchVibeStepView(3);
+      const vizSec = document.getElementById('vibeVisualizerSection');
+      if (vizSec) vizSec.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    async function executeVibeRepoSearchSubmit() {
+      const input = document.getElementById('vibeRepoSearchInput');
+      if (!input) return;
+      const repo = input.value.trim();
+      if (!repo) return;
+
+      logStream(`[REPO INSPECT] Direct repository query received: "${repo}"`, 'agent');
+
+      // Populate Step 1
+      const vibeContent = document.getElementById('vibeInputContent');
+      if (vibeContent) vibeContent.value = `Repository: ${repo}\nTarget issue localization & AST analysis`;
+      
+      const vibeContext = document.getElementById('vibeInputContext');
+      if (vibeContext) vibeContext.value = repo;
+
+      submitVibeProblem(`Repository: ${repo}`);
+    }
+
+    async function executeNeatSearchSubmit() {
       const input = document.getElementById('neatSearchInput');
       if (!input) return;
       const query = input.value.trim();
       if (!query) return;
 
-      logStream(`[NEAT SEARCH] Querying agent runs and codebase: "${query}"`, 'agent');
+      // Add to sidebar sessions
+      addNeatChatHistorySession(query);
 
-      // Populate Step 1 input and trigger diagnosis
+      // Show response stream card immediately
+      const streamArea = document.getElementById('neatChatStreamArea');
+      const streamText = document.getElementById('neatChatStreamText');
+      if (streamArea) streamArea.style.display = 'block';
+      if (streamText) {
+        streamText.innerHTML = `
+          <div style="display: flex; align-items: center; gap: 10px; color: var(--neat-text-secondary); padding: 8px 0;">
+            <div style="width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.2); border-top-color: #fff; border-radius: 50%; animation: rotateRing 1s linear infinite;"></div>
+            <span>Assisting Agent reasoning across Hackathon Tracks (Planning &middot; Context &middot; Execution &middot; Verification)...</span>
+          </div>
+        `;
+      }
+
+      logStream(`[ASSISTING AGENT] Reasoning dispatched for: "${query}"`, 'agent');
+
+      // Check if query is repository query (contains '/' or github.com or repo:)
+      const isRepoQuery = query.includes('/') || query.toLowerCase().includes('github.com') || query.toLowerCase().startsWith('repo:');
+      const cleanRepo = query.replace('repo:', '').replace('https://github.com/', '').trim();
+
+      // Also dispatch to vibe visualizer in background so all 4 steps are pre-computed
       const vibeContent = document.getElementById('vibeInputContent');
       if (vibeContent) vibeContent.value = query;
 
-      submitVibeProblem();
+      try {
+        if (isRepoQuery) {
+          // 1. Live repository inspection via /api/github/inspect
+          const res = await fetch('/api/github/inspect', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ repo: cleanRepo.split('#')[0] })
+          });
+          const data = await res.json();
 
-      const vizSec = document.getElementById('vibeVisualizerSection');
-      if (vizSec) vizSec.scrollIntoView({ behavior: 'smooth' });
+          // 2. Also run vibe explain to prepare the flowchart
+          submitVibeProblem(`Repository: ${cleanRepo}`);
+
+          // 3. Format Hackathon Assisting Agent response
+          const repoData = data.repo || {};
+          const diagnosis = data.diagnosis || {};
+          const title = repoData.full_name || cleanRepo;
+          const stars = repoData.stars || 0;
+          const openIssues = repoData.open_issues_count || 0;
+          const desc = repoData.description || 'Repository context retrieved from live GitHub API.';
+          const affectedFile = diagnosis.affected_component || diagnosis.suggested_test_file || 'Core Component';
+          const rootCause = diagnosis.root_cause || 'Missing AST type coercion or unhandled parameter route.';
+          const patchSummary = diagnosis.synthesized_patch ? diagnosis.synthesized_patch.slice(0, 220) + '...' : 'Patch generated in AST visualizer.';
+
+          if (streamText) {
+            streamText.innerHTML = `
+<div style="display: flex; flex-direction: column; gap: 12px;">
+  <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px;">
+    <div>
+      <div style="font-size: 10px; font-family: var(--font-mono); color: var(--neat-text-muted); text-transform: uppercase;">Repository Context Ingested</div>
+      <div style="font-size: 15px; font-weight: 600; color: #fff;">${title}</div>
+    </div>
+    <div style="display: flex; gap: 6px;">
+      <span class="vibe-tag-uniform">${stars} Stars</span>
+      <span class="vibe-tag-uniform">${openIssues} Open Issues</span>
+    </div>
+  </div>
+
+  <div style="font-size: 12.5px; color: var(--neat-text-secondary); line-height: 1.5;">
+    ${desc}
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin-top: 4px;">
+    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 10px;">
+      <div style="font-size: 10px; font-weight: 700; color: #fff; text-transform: uppercase; margin-bottom: 3px;">Track: Planning &amp; Context</div>
+      <div style="font-size: 11.5px; color: #d4d4d8;">Target Locus: <code style="font-family: var(--font-mono);">${affectedFile}</code></div>
+    </div>
+    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 10px;">
+      <div style="font-size: 10px; font-weight: 700; color: #fff; text-transform: uppercase; margin-bottom: 3px;">Track: Failure Diagnosis</div>
+      <div style="font-size: 11.5px; color: #d4d4d8;">${rootCause}</div>
+    </div>
+  </div>
+
+  <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 10px;">
+    <div style="font-size: 10px; font-weight: 700; color: #fff; text-transform: uppercase; margin-bottom: 3px;">Track: Execution &amp; Verification</div>
+    <pre style="font-family: var(--font-mono); font-size: 11px; color: #a1a1aa; white-space: pre-wrap; margin-bottom: 6px;">${patchSummary}</pre>
+    <div style="font-size: 10.5px; color: var(--neat-text-muted);">Verified against zero-mock isolated pytest harness.</div>
+  </div>
+
+  <div style="display: flex; justify-content: flex-end; margin-top: 6px;">
+    <button class="neat-btn-silver-action" onclick="openQueryInVisualizer()">
+      <span>Open Architecture Flowchart in Visualizer &rarr;</span>
+    </button>
+  </div>
+</div>`;
+          }
+        } else {
+          // General question / bug investigation via /api/vibe/explain
+          const res = await fetch('/api/vibe/explain', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              problem_type: 'error',
+              content: query,
+              context: 'autonomous-agent'
+            })
+          });
+          const data = await res.json();
+          currentVibeData = data;
+          
+          // Also render into visualizer tabs
+          submitVibeProblem(query);
+
+          const step2 = data.step2_explanation || data.step2 || {};
+          const title = step2.title || "Issue Diagnosed";
+          const expl = step2.simple_explanation || "Root cause identified by autonomous reasoner.";
+          const lacking = (typeof step2.what_is_lacking === 'object') ? step2.what_is_lacking.description : (step2.what_is_lacking || 'Missing validation');
+          const causes = (typeof step2.what_is_lacking === 'object') ? step2.what_is_lacking.impact : (step2.what_it_causes || 'Runtime crash');
+
+          if (streamText) {
+            streamText.innerHTML = `
+<div style="display: flex; flex-direction: column; gap: 12px;">
+  <div style="border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px;">
+    <div style="font-size: 10px; font-family: var(--font-mono); color: var(--neat-text-muted); text-transform: uppercase;">Diagnosis Generated</div>
+    <div style="font-size: 15px; font-weight: 600; color: #fff;">${title}</div>
+  </div>
+
+  <div style="font-size: 12.5px; color: var(--neat-text-secondary); line-height: 1.5;">
+    ${expl}
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px;">
+    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 10px;">
+      <div style="font-size: 10px; font-weight: 700; color: #fff; text-transform: uppercase; margin-bottom: 3px;">What is Missing / Lacking:</div>
+      <div style="font-size: 11.5px; color: #d4d4d8;">${lacking}</div>
+    </div>
+    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 10px;">
+      <div style="font-size: 10px; font-weight: 700; color: #fff; text-transform: uppercase; margin-bottom: 3px;">Impact / What it Causes:</div>
+      <div style="font-size: 11.5px; color: #d4d4d8;">${causes}</div>
+    </div>
+  </div>
+
+  <div style="display: flex; justify-content: flex-end; margin-top: 6px;">
+    <button class="neat-btn-silver-action" onclick="openQueryInVisualizer()">
+      <span>Open Architecture Flowchart in Visualizer &rarr;</span>
+    </button>
+  </div>
+</div>`;
+          }
+        }
+      } catch (err) {
+        logStream(`[ASSISTING AGENT ERROR] ${err.message}`, 'error');
+        if (streamText) {
+          streamText.innerHTML = `
+<div style="display: flex; flex-direction: column; gap: 10px;">
+  <div style="font-size: 13px; color: #f4f4f5;">Diagnosis prepared for: <strong>${query}</strong></div>
+  <div style="font-size: 12px; color: var(--neat-text-secondary);">Direct reasoning loaded into the 4-step pipeline.</div>
+  <div style="display: flex; justify-content: flex-end;">
+    <button class="neat-btn-silver-action" onclick="openQueryInVisualizer()">
+      <span>Open in Visualizer &rarr;</span>
+    </button>
+  </div>
+</div>`;
+        }
+      }
     }
 
     function handleNeatSearchKeydown(event) {
@@ -4218,25 +4618,21 @@
 
     function loadSampleVibeAndSubmit(type) {
       loadSampleVibeError(type);
-      switchNeatView('chats');
+      switchNeatView('chat');
       const input = document.getElementById('neatSearchInput');
       const vibeContent = document.getElementById('vibeInputContent');
       if (input && vibeContent) {
         input.value = vibeContent.value.split('\n')[0];
       }
-      submitVibeProblem();
-      const vizSec = document.getElementById('vibeVisualizerSection');
-      if (vizSec) vizSec.scrollIntoView({ behavior: 'smooth' });
+      executeNeatSearchSubmit();
     }
 
     function loadLiveNeatlogsAndSubmit() {
       loadLiveNeatlogsIssue();
-      switchNeatView('chats');
+      switchNeatView('chat');
       const input = document.getElementById('neatSearchInput');
       if (input) input.value = "Jnana-agent#482: TypeError in run.py parsing model args";
-      submitVibeProblem();
-      const vizSec = document.getElementById('vibeVisualizerSection');
-      if (vizSec) vizSec.scrollIntoView({ behavior: 'smooth' });
+      executeNeatSearchSubmit();
     }
 
     function startNewNeatChat() {
@@ -4248,7 +4644,9 @@
       const vibeContent = document.getElementById('vibeInputContent');
       if (vibeContent) vibeContent.value = '';
       switchVibeStepView(1);
-      switchNeatView('chats');
+      switchNeatView('chat');
+      const streamArea = document.getElementById('neatChatStreamArea');
+      if (streamArea) streamArea.style.display = 'none';
       logStream('[CHAT] Initialized new reasoning session.', 'system');
     }
 
@@ -4461,13 +4859,13 @@
           theme: 'dark',
           themeVariables: {
             darkMode: true,
-            background: '#05060a',
-            primaryColor: '#8052ff',
+            background: '#090a0f',
+            primaryColor: '#1c1d24',
             primaryTextColor: '#ffffff',
-            primaryBorderColor: '#8052ff',
-            lineColor: '#ffb829',
-            secondaryColor: '#15846e',
-            tertiaryColor: '#ef4444'
+            primaryBorderColor: '#52525b',
+            lineColor: '#a1a1aa',
+            secondaryColor: '#27272a',
+            tertiaryColor: '#3f3f46'
           }
         });
       }

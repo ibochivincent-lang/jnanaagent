@@ -74,7 +74,7 @@ You MUST return a strictly valid JSON object matching this schema without any ma
   }},
   "step3": {{
     "diagram_title": "Visual System Flow & Breakpoint",
-    "mermaid_syntax": "graph TD\\n  A[User / Frontend Action] -->|Sends Request| B[API Controller / Route]\\n  B -->|Passes Data| C[Core Logic / Parser]\\n  C -->|💥 Point of Failure: Exact Error| D[Target Resource / DB]\\n  style A fill:#15846e,stroke:#34d399,color:#fff\\n  style B fill:#15846e,stroke:#34d399,color:#fff\\n  style C fill:#ffb829,stroke:#f59e0b,color:#000\\n  style D fill:#ef4444,stroke:#f87171,color:#fff",
+    "mermaid_syntax": "graph TD\\n  A[User / Frontend Action] -->|Sends Request| B[API Controller / Route]\\n  B -->|Passes Data| C[Core Logic / Parser]\\n  C -->|💥 Point of Failure: Exact Error| D[Target Resource / DB]\\n  style A fill:#18181b,stroke:#52525b,color:#fff\\n  style B fill:#18181b,stroke:#52525b,color:#fff\\n  style C fill:#27272a,stroke:#71717a,color:#fff\\n  style D fill:#27272a,stroke:#d4d4d8,color:#fff",
     "nodes": [
       {{"id": "A", "label": "Client / Frontend", "status": "healthy", "badge": "Input OK"}},
       {{"id": "B", "label": "API Layer / Controller", "status": "healthy", "badge": "Active"}},
@@ -440,10 +440,10 @@ def _generate_fallback_mermaid(content: str) -> str:
             "  A[Client / Web Request] -->|Invokes Query| B[API Route Handler]\n"
             "  B -->|Attempts Connection| C[Database Client Pool]\n"
             "  C -->|💥 Connection Refused / Missing DB| D[(Database Server: Port 5432)]\n"
-            "  style A fill:#15846e,stroke:#34d399,color:#fff\n"
-            "  style B fill:#15846e,stroke:#34d399,color:#fff\n"
-            "  style C fill:#ffb829,stroke:#f59e0b,color:#000\n"
-            "  style D fill:#ef4444,stroke:#f87171,color:#fff"
+            "  style A fill:#18181b,stroke:#52525b,color:#fff\n"
+            "  style B fill:#18181b,stroke:#52525b,color:#fff\n"
+            "  style C fill:#27272a,stroke:#71717a,color:#fff\n"
+            "  style D fill:#27272a,stroke:#d4d4d8,color:#fff"
         )
     elif is_type:
         return (
@@ -451,10 +451,10 @@ def _generate_fallback_mermaid(content: str) -> str:
             "  A[User Action / Input] -->|Sends Raw Value| B[Parser Function]\n"
             "  B -->|⚠️ Missing Type Coercion| C[Object Config Init]\n"
             "  C -->|💥 TypeError / Crash| D[Batch Execution Engine]\n"
-            "  style A fill:#15846e,stroke:#34d399,color:#fff\n"
-            "  style B fill:#ffb829,stroke:#f59e0b,color:#000\n"
-            "  style C fill:#ef4444,stroke:#f87171,color:#fff\n"
-            "  style D fill:#374151,stroke:#6b7280,color:#9ca3af"
+            "  style A fill:#18181b,stroke:#52525b,color:#fff\n"
+            "  style B fill:#27272a,stroke:#71717a,color:#fff\n"
+            "  style C fill:#27272a,stroke:#d4d4d8,color:#fff\n"
+            "  style D fill:#18181b,stroke:#52525b,color:#9ca3af"
         )
     else:
         return (
@@ -462,10 +462,10 @@ def _generate_fallback_mermaid(content: str) -> str:
             "  A[Trigger Event] -->|Passes Payload| B[Service Layer]\n"
             "  B -->|Calls Dependency| C[Downstream Module]\n"
             "  C -->|💥 Localized Error| D[Runtime Environment]\n"
-            "  style A fill:#15846e,stroke:#34d399,color:#fff\n"
-            "  style B fill:#15846e,stroke:#34d399,color:#fff\n"
-            "  style C fill:#ef4444,stroke:#f87171,color:#fff\n"
-            "  style D fill:#374151,stroke:#6b7280,color:#9ca3af"
+            "  style A fill:#18181b,stroke:#52525b,color:#fff\n"
+            "  style B fill:#18181b,stroke:#52525b,color:#fff\n"
+            "  style C fill:#27272a,stroke:#d4d4d8,color:#fff\n"
+            "  style D fill:#18181b,stroke:#52525b,color:#9ca3af"
         )
 
 
