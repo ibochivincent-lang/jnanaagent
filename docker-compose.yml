@@ -1,9 +1,9 @@
 version: "3.8"
 
 services:
-  jnana-agent:
+  jnanaagent:
     build: .
-    container_name: jnana-agent
+    container_name: jnanaagent
     restart: unless-stopped
     ports:
       - "8000:8000"

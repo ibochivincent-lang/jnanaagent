@@ -250,7 +250,7 @@ def get_status() -> Dict[str, Any]:
             "entire": {
                 "version": "v0.11.4",
                 "plugins": ["graph", "brain"],
-                "repo_url": "https://entire.io/gh/ibochivincent-lang/jnana-agent",
+                "repo_url": "https://entire.io/gh/ibochivincent-lang/jnanaagent",
                 "status": "Memory Layer Active (+healthy)",
             },
             "cfo_ai": {
@@ -261,7 +261,7 @@ def get_status() -> Dict[str, Any]:
             },
         },
         "reports_count": report_count,
-        "github_repo": "https://github.com/ibochivincent-lang/jnana-agent",
+        "github_repo": "https://github.com/ibochivincent-lang/jnanaagent",
     }
 
 
@@ -554,7 +554,7 @@ async def stream_research(run_id: str):
 
 
 class ReproduceTestRequest(BaseModel):
-    issue_ref: Optional[str] = "Jnana-agent#482"
+    issue_ref: Optional[str] = "JnanaAgent#482"
     target_file: Optional[str] = "sweagent/run.py"
 
 
@@ -625,8 +625,8 @@ def test_patched_succeeds():
 
 
 class CreatePRRequest(BaseModel):
-    repo: str = "ibochivincent-lang/jnana-agent"
-    issue_ref: str = "Jnana-agent#482"
+    repo: str = "ibochivincent-lang/jnanaagent"
+    issue_ref: str = "JnanaAgent#482"
     title: str = "fix(cli): safely coerce string model_params in batch execution"
     patch: Optional[str] = None
     github_token: Optional[str] = None
@@ -648,7 +648,7 @@ def create_github_pr(req: CreatePRRequest) -> Dict[str, Any]:
     # Clean repo: owner/repo
     repo_name = req.repo.replace("https://github.com/", "").strip("/")
     if "/" not in repo_name:
-        repo_name = "ibochivincent-lang/jnana-agent"
+        repo_name = "ibochivincent-lang/jnanaagent"
 
     if token:
         try:
@@ -656,7 +656,7 @@ def create_github_pr(req: CreatePRRequest) -> Dict[str, Any]:
             headers = {
                 "Authorization": f"Bearer {token}",
                 "Accept": "application/vnd.github.v3+json",
-                "User-Agent": "Jnana-Agent/1.0",
+                "User-Agent": "JnanaAgent/1.0",
             }
             # 1. Fetch repo details for default branch
             repo_res = httpx.get(f"https://api.github.com/repos/{repo_name}", headers=headers, timeout=10)
@@ -754,14 +754,14 @@ def inspect_github_repo(req: GithubInspectRequest) -> Dict[str, Any]:
     if not repo_data and not issue_data:
         repo_data = {
             "owner": "ibochivincent-lang",
-            "repo": "jnana-agent",
-            "full_name": "ibochivincent-lang/jnana-agent",
+            "repo": "jnanaagent",
+            "full_name": "ibochivincent-lang/jnanaagent",
             "description": "Jnana Agent: Autonomous SWE issue resolver, unified diff patch engine, and deep research agent.",
             "stars": 1,
             "open_issues_count": 6,
             "default_branch": "master",
             "language": "Python",
-            "html_url": "https://github.com/ibochivincent-lang/jnana-agent",
+            "html_url": "https://github.com/ibochivincent-lang/jnanaagent",
             "issues": [],
         }
 

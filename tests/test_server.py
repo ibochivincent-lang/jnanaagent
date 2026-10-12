@@ -45,7 +45,7 @@ def test_terminal_serving():
 
 
 def test_reproduce_test_endpoint():
-    response = client.post("/api/reproduce-test", json={"issue_ref": "Jnana-agent#482"})
+    response = client.post("/api/reproduce-test", json={"issue_ref": "JnanaAgent#482"})
     assert response.status_code == 200
     data = response.json()
     assert data["status"] == "success"
@@ -57,8 +57,8 @@ def test_create_pr_endpoint():
     response = client.post(
         "/api/create-pr",
         json={
-            "repo": "ibochivincent-lang/jnana-agent",
-            "issue_ref": "Jnana-agent#482",
+            "repo": "ibochivincent-lang/jnanaagent",
+            "issue_ref": "JnanaAgent#482",
             "title": "fix(cli): test pr creation"
         }
     )
@@ -90,7 +90,7 @@ def test_github_webhook_post():
 def test_github_inspect_endpoint():
     response = client.post(
         "/api/github/inspect",
-        json={"repo": "ibochivincent-lang/jnana-agent"}
+        json={"repo": "ibochivincent-lang/jnanaagent"}
     )
     assert response.status_code == 200
     data = response.json()

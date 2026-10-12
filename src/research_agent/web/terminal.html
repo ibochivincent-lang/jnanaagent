@@ -2530,7 +2530,7 @@
           <div class="neat-nav-item active" id="navItemChat" onclick="switchNeatView('chat')">
             <div class="neat-nav-left">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-              <span>Chat Assistant</span>
+              <span>Chat</span>
             </div>
             <span class="neat-nav-badge">PROMPT</span>
           </div>
@@ -2595,18 +2595,15 @@
            1. CHAT VIEW (Console > Chat)
            ========================================== -->
       <div id="neatViewChat" class="neat-view-section active" style="display: flex;">
-        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 740px; margin-bottom: 20px;">
+        <div style="display: flex; align-items: center; justify-content: flex-start; width: 100%; max-width: 740px; margin-bottom: 20px;">
           <a href="/" class="neat-inline-home-link" title="Return to Executive Home Dashboard">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
             <span>Back to Home</span>
           </a>
-          <div class="neat-track-pill">
-            <span>TRACK: PLANNING &middot; CONTEXT &middot; EXECUTION &middot; VERIFICATION</span>
-          </div>
         </div>
 
-        <h1 class="neat-hero-greet">Hackathon Assisting Agent</h1>
-        <p class="neat-hero-sub">Autonomous Codebase Reasoning &middot; SWE-bench Bug Localization &middot; Multi-Source Search</p>
+        <h1 class="neat-hero-greet">hello, Ibochi</h1>
+        <p class="neat-hero-sub">find anything about your agent runs, debug code &amp; visualize issues</p>
 
         <!-- Grand Search Pill Box -->
         <div class="neat-pill-box">
@@ -2676,16 +2673,16 @@
         <!-- Suggestion Prompts -->
         <div class="neat-suggestions-wrap">
           <button class="neat-suggestion-row" onclick="submitQuickRepoSearch('psf/requests')">
-            <strong>Repo Search</strong> psf/requests &mdash; inspect repository &amp; explain architecture
+            <strong>Repo Search:</strong> psf/requests &mdash; inspect repository &amp; explain architecture
           </button>
           <button class="neat-suggestion-row" onclick="loadSampleVibeAndSubmit('type_arg')">
-            <strong>Track: Planning &amp; Execution</strong> TypeError in model arg parsing
+            <strong>TypeError in model args:</strong> sweagent/run.py#482
           </button>
           <button class="neat-suggestion-row" onclick="loadLiveNeatlogsAndSubmit()">
-            <strong>Track: Recovery &amp; Tool State</strong> inspect live Neatlogs telemetry spans
+            <strong>Neatlogs anomaly:</strong> inspect live project telemetry spans
           </button>
           <button class="neat-suggestion-row" onclick="loadSampleVibeAndSubmit('db_missing')">
-            <strong>Track: Verification</strong> missing database connection pool &amp; routes
+            <strong>Postgres missing:</strong> connection refused on port 5432
           </button>
         </div>
 
@@ -2695,7 +2692,7 @@
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid var(--neat-border-subtle); padding-bottom: 8px;">
               <div style="display: flex; align-items: center; gap: 8px;">
                 <span class="neat-nl-tag">nl</span>
-                <span style="font-weight: 600; font-size: 13px; color: var(--neat-text-primary);">Assisting Agent Output</span>
+                <span style="font-weight: 600; font-size: 13px; color: var(--neat-text-primary);">Agent Reasoning Output</span>
               </div>
               <button class="neat-btn-silver-action" onclick="switchNeatView('visual')" style="padding: 5px 12px; font-size: 11.5px;">
                 <span>Open in Visualizer &rarr;</span>
@@ -3088,7 +3085,7 @@
               </div>
               <div style="display: flex; justify-content: space-between;">
                 <span style="color: var(--neat-text-secondary);">GitHub Repository:</span>
-                <span style="color: var(--neat-text-primary);">Vincci001/jnana-agent (master)</span>
+                <span style="color: var(--neat-text-primary);">ibochivincent-lang/jnanaagent (master)</span>
               </div>
               <div style="display: flex; justify-content: space-between;">
                 <span style="color: var(--neat-text-secondary);">Zero Mock Data Verification:</span>
@@ -3494,8 +3491,8 @@
         if (btnResearch) btnResearch.classList.remove('primary');
         if (btnVibe) btnVibe.classList.remove('primary');
         if (input) {
-          input.placeholder = "Enter repo (e.g. owner/repo) or issue # (e.g. Jnana-agent#482)...";
-          input.value = "Jnana-agent#482: TypeError in run.py parsing model args";
+          input.placeholder = "Enter repo (e.g. owner/repo) or issue # (e.g. JnanaAgent#482)...";
+          input.value = "JnanaAgent#482: TypeError in run.py parsing model args";
         }
         if (submitText) submitText.textContent = "Inspect Repo";
         if (caseBoard) caseBoard.style.display = 'block';
@@ -3841,8 +3838,8 @@
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            repo: 'ibochivincent-lang/jnana-agent',
-            issue_ref: 'Jnana-agent#482',
+            repo: 'ibochivincent-lang/jnanaagent',
+            issue_ref: 'JnanaAgent#482',
             title: 'fix(cli): safely coerce string model_params in batch execution',
             patch: currentPatchText || undefined,
             github_token: token || undefined,
@@ -3928,7 +3925,7 @@
         const res = await fetch('/api/reproduce-test', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ issue_ref: 'Jnana-agent#482', target_file: 'sweagent/run.py' })
+          body: JSON.stringify({ issue_ref: 'JnanaAgent#482', target_file: 'sweagent/run.py' })
         });
         const data = await res.json();
         if (term) {
@@ -3972,7 +3969,7 @@
     }
 
     function switchCaseBoard() {
-      logStream(`Case Board: Active target Jnana-agent #482 (Priority: Critical)`, 'system');
+      logStream(`Case Board: Active target JnanaAgent #482 (Priority: Critical)`, 'system');
     }
 
     function switchEvidenceTab() {
@@ -4319,7 +4316,7 @@
         const res = await fetch('/api/reproduce-test', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ issue_ref: 'Jnana-agent#482', target_file: 'sweagent/run.py' })
+          body: JSON.stringify({ issue_ref: 'JnanaAgent#482', target_file: 'sweagent/run.py' })
         });
         const data = await res.json();
         if (text) text.textContent = `[EXIT CODE: ${data.exit_code}]\n${data.summary}\n\nSTDOUT:\n${data.stdout}`;
@@ -4341,7 +4338,7 @@
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            issue_ref: 'Jnana-agent#482',
+            issue_ref: 'JnanaAgent#482',
             branch: 'vibe-fix-autonomy',
             title: 'fix(vibe): resolve parameter coercion and missing dependencies'
           })
@@ -4457,12 +4454,12 @@
         streamText.innerHTML = `
           <div style="display: flex; align-items: center; gap: 10px; color: var(--neat-text-secondary); padding: 8px 0;">
             <div style="width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.2); border-top-color: #fff; border-radius: 50%; animation: rotateRing 1s linear infinite;"></div>
-            <span>Assisting Agent reasoning across Hackathon Tracks (Planning &middot; Context &middot; Execution &middot; Verification)...</span>
+            <span>Agent reasoning across codebase and logs...</span>
           </div>
         `;
       }
 
-      logStream(`[ASSISTING AGENT] Reasoning dispatched for: "${query}"`, 'agent');
+      logStream(`[REASONING] Reasoning dispatched for: "${query}"`, 'agent');
 
       // Check if query is repository query (contains '/' or github.com or repo:)
       const isRepoQuery = query.includes('/') || query.toLowerCase().includes('github.com') || query.toLowerCase().startsWith('repo:');
@@ -4485,7 +4482,7 @@
           // 2. Also run vibe explain to prepare the flowchart
           submitVibeProblem(`Repository: ${cleanRepo}`);
 
-          // 3. Format Hackathon Assisting Agent response
+          // 3. Format Agent reasoning response
           const repoData = data.repo || {};
           const diagnosis = data.diagnosis || {};
           const title = repoData.full_name || cleanRepo;
@@ -4516,17 +4513,17 @@
 
   <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin-top: 4px;">
     <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 10px;">
-      <div style="font-size: 10px; font-weight: 700; color: #fff; text-transform: uppercase; margin-bottom: 3px;">Track: Planning &amp; Context</div>
-      <div style="font-size: 11.5px; color: #d4d4d8;">Target Locus: <code style="font-family: var(--font-mono);">${affectedFile}</code></div>
+      <div style="font-size: 10px; font-weight: 700; color: #fff; text-transform: uppercase; margin-bottom: 3px;">Target Locus</div>
+      <div style="font-size: 11.5px; color: #d4d4d8;"><code style="font-family: var(--font-mono);">${affectedFile}</code></div>
     </div>
     <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 10px;">
-      <div style="font-size: 10px; font-weight: 700; color: #fff; text-transform: uppercase; margin-bottom: 3px;">Track: Failure Diagnosis</div>
+      <div style="font-size: 10px; font-weight: 700; color: #fff; text-transform: uppercase; margin-bottom: 3px;">Root Cause Diagnosis</div>
       <div style="font-size: 11.5px; color: #d4d4d8;">${rootCause}</div>
     </div>
   </div>
 
   <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 10px;">
-    <div style="font-size: 10px; font-weight: 700; color: #fff; text-transform: uppercase; margin-bottom: 3px;">Track: Execution &amp; Verification</div>
+    <div style="font-size: 10px; font-weight: 700; color: #fff; text-transform: uppercase; margin-bottom: 3px;">Synthesized Patch &amp; Verification</div>
     <pre style="font-family: var(--font-mono); font-size: 11px; color: #a1a1aa; white-space: pre-wrap; margin-bottom: 6px;">${patchSummary}</pre>
     <div style="font-size: 10.5px; color: var(--neat-text-muted);">Verified against zero-mock isolated pytest harness.</div>
   </div>
@@ -4631,7 +4628,7 @@
       loadLiveNeatlogsIssue();
       switchNeatView('chat');
       const input = document.getElementById('neatSearchInput');
-      if (input) input.value = "Jnana-agent#482: TypeError in run.py parsing model args";
+      if (input) input.value = "JnanaAgent#482: TypeError in run.py parsing model args";
       executeNeatSearchSubmit();
     }
 

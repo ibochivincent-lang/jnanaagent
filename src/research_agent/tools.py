@@ -411,7 +411,7 @@ def crustdata_enrich_company(identifier: str) -> Source | None:
             "x-api-version": "2025-11-01",
             "Content-Type": "application/json",
             "Host": "api.crustdata.com",
-            "User-Agent": "proof-of-search-agent/1.0",
+            "User-Agent": "JnanaAgent/1.0",
         },
         data=json.dumps(payload).encode("utf-8"),
     )

@@ -14,17 +14,17 @@ apt-get install -y git python3 python3-pip python3-venv curl ufw
 echo "==> Cloning Jnana Agent repository from GitHub..."
 mkdir -p /opt
 cd /opt
-rm -rf /opt/jnana-agent
-git clone https://github.com/ibochivincent-lang/jnana-agent.git /opt/jnana-agent
-cd /opt/jnana-agent
+rm -rf /opt/jnanaagent
+git clone https://github.com/ibochivincent-lang/jnanaagent.git /opt/jnanaagent
+cd /opt/jnanaagent
 
 echo "==> Setting up Python virtual environment..."
-python3 -m venv /opt/jnana-agent/venv
-/opt/jnana-agent/venv/bin/pip install --upgrade pip setuptools wheel
-/opt/jnana-agent/venv/bin/pip install -e .
+python3 -m venv /opt/jnanaagent/venv
+/opt/jnanaagent/venv/bin/pip install --upgrade pip setuptools wheel
+/opt/jnanaagent/venv/bin/pip install -e .
 
 echo "==> Configuring environment variables..."
-cat << 'EOF' > /opt/jnana-agent/.env
+cat << 'EOF' > /opt/jnanaagent/.env
 # neatHack 2026 Credentials for Team Vincci001
 LITELLM_API_KEY=sk-G2CdcbfSft_q8UoLOs13xQ
 LITELLM_BASE_URL=https://litellm.vision.aivar.app/v1
@@ -33,7 +33,7 @@ NEATLOGS_API_KEY=g0mx_xH8a6btCYnVOH0wGk4mkzaqz1jS
 CRUSTDATA_API_KEY=cd_a6070a6b539f8eb3f46c1e9acdf19ab78ef6
 EOF
 
-chmod 600 /opt/jnana-agent/.env
+chmod 600 /opt/jnanaagent/.env
 
 echo "==> Creating systemd service for 24/7 background operation..."
 cat << 'EOF' > /etc/systemd/system/proofsearch.service
@@ -44,10 +44,10 @@ After=network.target
 [Service]
 Type=simple
 User=root
-WorkingDirectory=/opt/jnana-agent
-EnvironmentFile=/opt/jnana-agent/.env
-ExecStartPre=-/usr/bin/git -C /opt/jnana-agent pull origin master
-ExecStart=/opt/jnana-agent/venv/bin/python -m research_agent.server --host 0.0.0.0 --port 8000
+WorkingDirectory=/opt/jnanaagent
+EnvironmentFile=/opt/jnanaagent/.env
+ExecStartPre=-/usr/bin/git -C /opt/jnanaagent pull origin master
+ExecStart=/opt/jnanaagent/venv/bin/python -m research_agent.server --host 0.0.0.0 --port 8000
 Restart=always
 RestartSec=5
 

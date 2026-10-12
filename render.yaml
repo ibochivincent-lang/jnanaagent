@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: jnana-agent
+    name: jnanaagent
     env: python
     plan: free
     region: oregon

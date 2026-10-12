@@ -2,10 +2,10 @@
 
 ## Executive Summary & Fault Localization
 
-**Issue:** `jnana-agent#482` reports a `TypeError` during model argument parsing in `run.py` when command-line arguments contain names that collide with Pydantic-reserved model configuration keywords (e.g., `model_config`, `model_fields`, `model_computed_fields`).
+**Issue:** `JnanaAgent#482` reports a `TypeError` during model argument parsing in `run.py` when command-line arguments contain names that collide with Pydantic-reserved model configuration keywords (e.g., `model_config`, `model_fields`, `model_computed_fields`).
 
 **Root Fault Location:**
-- **Repository:** `jnana-agent` (inferred from issue tracking)
+- **Repository:** `jnanaagent` (inferred from issue tracking)
 - **Primary File:** `run.py` (model argument parsing logic)
 - **Secondary File:** Any module calling `argparse.ArgumentParser.add_argument()` that subsequently passes parsed arguments to Pydantic's `create_model()` without validation
 - **Triggering Pattern:** When `argparse` namespace attributes are converted to keyword arguments for Pydantic `BaseModel` field construction
@@ -110,7 +110,7 @@ The reserved kwarg names that Pydantic intercepts include:
 
 When a `FieldInfo` object is assigned to these keys, the config wrapper's `.update()` method fails because it expects a dict-like object.
 
-### Impact on jnana-agent#482
+### Impact on JnanaAgent#482
 
 In `run.py`, the parsing flow likely resembles:
 ```python
@@ -141,7 +141,7 @@ diff --git a/run.py b/run.py
 --- a/run.py
 +++ b/run.py
 @@ -1,6 +1,7 @@
- """Run module for jnana-agent."""
+ """Run module for Jnana Agent."""
  import argparse
  import sys
 +from typing import Any, Dict
@@ -272,7 +272,7 @@ diff --git a/run.py b/run.py
 
 ```python
 """
-Test suite for jnana-agent#482: TypeError in run.py model argument parsing.
+Test suite for JnanaAgent#482: TypeError in run.py model argument parsing.
 Reproduces the bug and validates the fix against reserved Pydantic names.
 """
 import pytest
@@ -473,7 +473,7 @@ class TestAgentStatePreservation:
 
 if __name__ == '__main__':
     print("=" * 70)
-    print("Testing jnana-agent#482: TypeError in run.py model argument parsing")
+    print("Testing JnanaAgent#482: TypeError in run.py model argument parsing")
     print("=" * 70)
     
     # Run with pytest
@@ -605,7 +605,7 @@ if reserved_config:
 
 ## Conclusion
 
-The patch resolves **jnana-agent#482** by:
+The patch resolves **JnanaAgent#482** by:
 1. **Detecting** Pydantic reserved names in CLI arguments via centralized `PYDANTIC_RESERVED_NAMES` set
 2. **Renaming** reserved keywords with `cli_` prefix to avoid collision
 3. **Preserving** original reserved values in `_reserved_model_config` for metadata/durability

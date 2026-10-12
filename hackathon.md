@@ -1,4 +1,4 @@
-﻿# neatHack 2026: Jnana Agent
+# neatHack 2026: Jnana Agent
 
 > *"Autonomous Software Engineering & Deep Knowledge Intelligence."*
 > Sanskrit *Jnana* (à¤œà¥à¤žà¤¾à¤¨) â€” direct cognitive realization through autonomous inquiry and deterministic code synthesis.
@@ -23,7 +23,7 @@
 | Pillar | Tool / Platform | Role in Project | Verification Status |
 | :--- | :--- | :--- | :--- |
 | **Observability & Tracing** | **Neatlogs** | Telemetry, span logging, LLM token metrics, trace dashboard | âœ… Active (Project `72082073...`, 0% errors, traces finalized) |
-| **Continuous Memory & Versioning** | **Entire** | Repository index, commits sync, Entire session capture | âœ… Connected (`https://entire.io/gh/ibochivincent-lang/jnana-agent`) |
+| **Continuous Memory & Versioning** | **Entire** | Repository index, commits sync, Entire session capture | ✅ Connected (`https://entire.io/gh/ibochivincent-lang/jnanaagent`) |
 | **Unit Economics & Financial Plan** | **cfo.ai** | Pricing, unit economics ($0.056/query), 12-mo pro-forma | âœ… Modeled in [`financial_plan.md`](./financial_plan.md) (97.7% gross margin) |
 | **Live B2B & Executive Data** | **Crustdata** | Live company & people search intelligence (Zero Mock Data) | âœ… Live API Verified (`/company/enrich`, SHA-256 Hashed) |
 | **Model Access (Hackathon Sponsor)** | **LiteLLM** | neatHack sponsored model access ($20 credit, Claude Haiku/Sonnet) | âœ… Verified (`https://litellm.vision.aivar.app/v1`, 200 OK) |
@@ -52,7 +52,7 @@
 
 ### [2026-10-10] Repository Publishing & Remote Sync
 - **Actions:**
-  - Published project to GitHub under team lead profile: [https://github.com/ibochivincent-lang/jnana-agent](https://github.com/ibochivincent-lang/jnana-agent).
+  - Published project to GitHub under team lead profile: [https://github.com/ibochivincent-lang/jnanaagent](https://github.com/ibochivincent-lang/jnanaagent).
   - Configured git remotes and pushed all tracking commits and documentation.
 - **Status:** Synchronized with GitHub.
 
@@ -92,7 +92,7 @@
 ### [2026-10-10] Continuous Memory & Code Intelligence with Entire CLI, Entire Graph & Entire Brain
 - **Actions:**
   - Installed official Entire CLI v0.11.4 on Windows via `https://entire.io/install.ps1`.
-  - Authorized GitHub App and connected repository to Entire platform: [https://entire.io/gh/ibochivincent-lang/jnana-agent](https://entire.io/gh/ibochivincent-lang/jnana-agent).
+  - Authorized GitHub App and connected repository to Entire platform: [https://entire.io/gh/ibochivincent-lang/jnanaagent](https://entire.io/gh/ibochivincent-lang/jnanaagent).
   - Configured repository with `entire enable --agent antigravity`.
   - Verified active status (`entire status` -> `â— Enabled Â· branch master, Agents Â· Antigravity, Checkpoints sync to: origin`).
   - Executed `entire doctor` diagnostic check -> All hooks and metadata branches verified OK.
@@ -132,8 +132,8 @@
 - **Status:** Functional Web Console & CLI agent with live Crustdata, LiteLLM, Neatlogs telemetry, and Entire continuous memory
 - **Live AWS Public URL:** **[http://23.22.195.38:8000](http://23.22.195.38:8000)**
 - **AWS Instance ID:** `i-02ca2ab76b811bb1` (`us-east-1`, `t2.micro`)
-- **Repository URL:** [https://github.com/ibochivincent-lang/jnana-agent](https://github.com/ibochivincent-lang/jnana-agent)
-- **Entire Repository Index:** [https://entire.io/gh/ibochivincent-lang/jnana-agent](https://entire.io/gh/ibochivincent-lang/jnana-agent)
+- **Repository URL:** [https://github.com/ibochivincent-lang/jnanaagent](https://github.com/ibochivincent-lang/jnanaagent)
+- **Entire Repository Index:** [https://entire.io/gh/ibochivincent-lang/jnanaagent](https://entire.io/gh/ibochivincent-lang/jnanaagent)
 - **Financial Model:** [`financial_plan.md`](./financial_plan.md)
 - **Sample Verified Research Report:** [`reports/report-stripe-and-openai-collaboration-in-financial-ai.md`](./reports/report-stripe-and-openai-collaboration-in-financial-ai.md)
 - **AWS Cloud Deployment (EC2 / Docker)**:
@@ -142,8 +142,8 @@
   - Target AWS Region: `us-east-1` (N. Virginia).
 - **Reproduction Instructions:**
   ```bash
-  git clone https://github.com/ibochivincent-lang/jnana-agent.git
-  cd jnana-agent
+  git clone https://github.com/ibochivincent-lang/jnanaagent.git
+  cd jnanaagent
   pip install -e .
   # Option A: Run web console
   python -m research_agent.server --port 8000
