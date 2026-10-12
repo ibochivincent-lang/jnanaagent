@@ -8,7 +8,7 @@
 [![LiteLLM Gateway](https://img.shields.io/badge/LiteLLM-Claude_Proxy_Online-8052FF?style=for-the-badge)](https://litellm.vision.aivar.app)
 [![Crustdata Enriched](https://img.shields.io/badge/Crustdata-Live_B2B_Graph-059669?style=for-the-badge)](https://crustdata.com)
 [![Entire Memory](https://img.shields.io/badge/Entire_Memory-v0.11_Continuous_Brain-D97706?style=for-the-badge)](https://entire.io/gh/ibochivincent-lang/jnana-agent)
-[![Automated Tests](https://img.shields.io/badge/Automated_Tests-26%2F26_Passing-10B981?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/ibochivincent-lang/jnana-agent)
+[![Automated Tests](https://img.shields.io/badge/Automated_Tests-38%2F38_Passing-10B981?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/ibochivincent-lang/proof-of-search-ai)
 [![Zero Mock Data](https://img.shields.io/badge/Zero_Mock_Data-100%25_Deterministic-3B82F6?style=for-the-badge)](http://23.22.195.38:8000/terminal)
 
 **Author:** IboTV (`ibochivincent-lang`) â€” Sole Author, Team Vincci001 Lead & Maintainer.  
@@ -47,12 +47,13 @@ Traditional AI coding assistants suffer from three fatal structural limitations:
 
 | Track | Implementation & Verified Production Deliverables |
 |---|---|
-| **Visual Code Explainer & Debugger for Vibe Coders** | 4-Step visual debugging workflow powered by Mermaid.js, LiteLLM Claude-3.5, and Neatlogs error ingestion. Transforms cryptic tracebacks and screenshots into plain-English explanations, visual data flow graphs, and verified fixes with 1-click testing. |
-| **Autonomous SWE Reasoning & Bug Localization** | 6-Stage LangGraph state machine (`planner` â†’ `search` â†’ `fetch` â†’ `synthesize` â†’ `audit` â†’ `code_patch`), AST-guided bug localization, and automated unified diff generation verified on SWE-bench targets (`sweagent/run.py#482`). |
-| **Ground-Truth Observability & Tracing (Neatlogs)** | Real-time OpenTelemetry tracing via `neatlogs.langchain_handler()`, capturing cyclic state transitions, LLM token consumption, latency metrics, and error spans streamed directly to Neatlogs Project `72082073-0485-4b6b-abb0-2a1ce5116f2b`. |
-| **Persistent Agent Memory & Line Provenance (Entire Brain)** | Bounded continuous memory via Entire CLI v0.11 (`entire brain recall`, `entire blame`), enforcing repository invariants across model configs, AST parsing routines, and test harnesses. |
-| **Live B2B & Entity Intelligence (Crustdata)** | Zero mock data executive enrichment via Crustdata API, extracting real-time founder profiles, headcounts, funding rounds, and technology stacks for analyzed repositories. |
-| **Production Cloud Deployment (AWS EC2 Linux)** | 24/7 dedicated production deployment on AWS EC2 (`us-east-1`, Ubuntu 24.04 LTS, instance `i-02ca2ab76b811bb1`) managed by `systemd` (`proofsearch.service`), live on `http://23.22.195.38:8000`. |
+| **Planning** | LangGraph dynamic planner decomposing issues into verifiable AST hypotheses and multi-model consensus matrices. |
+| **Context Retrieval** | Live GitHub repository & issue inspection (`/api/github/inspect`), Crustdata B2B intelligence, and Entire CLI continuous repository memory. |
+| **Execution** | Deterministic cyclic state machine (`planner` → `search` → `fetch` → `synthesize` → `audit` → `code_patch`) powered by LiteLLM Claude-3.5 Haiku. |
+| **Verification** | Isolated subprocess pytest execution sandbox (`/api/reproduce-test`) executing two-phase reproduction and patch regression validation with zero mock data. |
+| **Recovery** | Failure point localization, defensive fallback Mermaid graphs, automated error containment, and memory leak cleanup routines. |
+| **Tool State** | Live tool execution telemetry, AST-guided patch extraction, GitHub Webhook integration (`/api/github/webhook`), and Neatlogs OTel span streaming. |
+| **Visualizer & Assistant** | 4-step visual debugging studio and Hackathon Assisting Agent with monochromatic obsidian/silver flowcharts and 1-click test reproduction. |
 
 ---
 
@@ -150,6 +151,10 @@ sequenceDiagram
 |---|---|---|---|---|
 | `/api/research` | `POST` | `{ "topic": string, "auto": boolean, "model": string }` | Dispatches LangGraph state machine, returns `{ "run_id": string }` | LangGraph 0.4 / Claude Haiku |
 | `/api/research/{run_id}/stream` | `GET` | *(URL path parameter)* | Real-time Server-Sent Events (SSE) streaming node events and tokens | FastAPI StreamingResponse |
+| `/api/vibe/explain` | `POST` | `{ "problem_text": string, "screenshot_b64": string, "error_type": string }` | Generates 4-step root cause analysis, Mermaid flowcharts, and unified code patches | LiteLLM Claude 3.5 / Vibe Visualizer |
+| `/api/github/inspect` | `GET` | `?repo=owner/repo&issue=123` | Inspects live GitHub issues, tracebacks, and affected files | GitHub REST API |
+| `/api/neatlogs/detect` | `GET` | *None* | Fetches active runtime anomalies and exceptions from Neatlogs OTel | Neatlogs Project API |
+| `/api/github/webhook` | `POST` | GitHub Issue / PR Event Payload | HMAC-SHA256 verified webhook triggering automatic diagnosis | GitHub Webhook Handler |
 | `/api/reproduce-test` | `POST` | `{ "issue_ref": string, "target_file": string }` | Spawns isolated Python subprocess running live pytest harness | Python `subprocess.run` (Zero Mock) |
 | `/api/diff/{run_id}` | `GET` | *(URL path parameter)* | Returns synthesized unified git diff patch and verification status | In-memory Run Registry |
 | `/api/status` | `GET` | *None* | System health, sponsor integrations, AWS instance metadata | Health Check Controller |
