@@ -55,6 +55,31 @@ REPORTS_DIR.mkdir(exist_ok=True)
 RUNS: Dict[str, Dict[str, Any]] = {}
 
 
+def _start_runs_cleanup():
+    """Background thread: evict completed/errored RUNS older than 30 minutes to prevent memory leaks."""
+    import time
+
+    def _cleanup():
+        while True:
+            time.sleep(300)  # Check every 5 minutes
+            cutoff = datetime.now().timestamp() - 1800  # 30 minutes
+            stale_ids = [
+                rid for rid, state in list(RUNS.items())
+                if state["status"] in ("completed", "error")
+                and datetime.fromisoformat(state["created_at"]).timestamp() < cutoff
+            ]
+            for rid in stale_ids:
+                RUNS.pop(rid, None)
+            if stale_ids:
+                log.info("RUNS cleanup: evicted %d stale run(s)", len(stale_ids))
+
+    t = threading.Thread(target=_cleanup, daemon=True)
+    t.start()
+
+
+_start_runs_cleanup()
+
+
 class ResearchRequest(BaseModel):
     topic: str
     auto: bool = True
@@ -1047,11 +1072,28 @@ async def github_webhook(request: Request) -> Dict[str, Any]:
     """Continuous Deployment webhook: auto-pulls master and reloads on every git push from GitHub."""
     import subprocess
     import sys
+    import hmac
+    import hashlib
 
-    try:
-        payload = await request.json()
-    except Exception:
-        payload = {}
+    # Verify GitHub webhook signature if GITHUB_WEBHOOK_SECRET is set
+    webhook_secret = os.getenv("GITHUB_WEBHOOK_SECRET", "")
+    if webhook_secret:
+        sig_header = request.headers.get("X-Hub-Signature-256", "")
+        body_bytes = await request.body()
+        expected_sig = "sha256=" + hmac.new(
+            webhook_secret.encode(), body_bytes, hashlib.sha256
+        ).hexdigest()
+        if not hmac.compare_digest(sig_header, expected_sig):
+            raise HTTPException(status_code=403, detail="Invalid webhook signature")
+        try:
+            payload = json.loads(body_bytes)
+        except Exception:
+            payload = {}
+    else:
+        try:
+            payload = await request.json()
+        except Exception:
+            payload = {}
 
     ref = payload.get("ref", "")
     # Check if push is to master or main

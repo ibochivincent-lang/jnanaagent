@@ -1,4 +1,4 @@
-﻿# Jnana Agent: Autonomous Codebase Reasoning, SWE-bench Bug Localization & Multi-Source Research Engine
+# Jnana Agent: Autonomous Codebase Reasoning, SWE-bench Bug Localization & Multi-Source Research Engine
 
 [![Built with Anthropic Claude](https://img.shields.io/badge/Built_with-Claude_3.5_Haiku-8052FF?style=for-the-badge&logo=anthropic&logoColor=white)](https://anthropic.com)
 [![Live Production AWS EC2](https://img.shields.io/badge/AWS_EC2-Live_Production-FF9900?style=for-the-badge&logo=amazonec2&logoColor=white)](http://23.22.195.38:8000/terminal)
@@ -149,7 +149,7 @@ sequenceDiagram
 | Endpoint | Method | Request Payload | Response / Function | Target Engine |
 |---|---|---|---|---|
 | `/api/research` | `POST` | `{ "topic": string, "auto": boolean, "model": string }` | Dispatches LangGraph state machine, returns `{ "run_id": string }` | LangGraph 0.4 / Claude Haiku |
-| `/api/stream/{run_id}` | `GET` | *(URL path parameter)* | Real-time Server-Sent Events (SSE) streaming node events and tokens | FastAPI StreamingResponse |
+| `/api/research/{run_id}/stream` | `GET` | *(URL path parameter)* | Real-time Server-Sent Events (SSE) streaming node events and tokens | FastAPI StreamingResponse |
 | `/api/reproduce-test` | `POST` | `{ "issue_ref": string, "target_file": string }` | Spawns isolated Python subprocess running live pytest harness | Python `subprocess.run` (Zero Mock) |
 | `/api/diff/{run_id}` | `GET` | *(URL path parameter)* | Returns synthesized unified git diff patch and verification status | In-memory Run Registry |
 | `/api/status` | `GET` | *None* | System health, sponsor integrations, AWS instance metadata | Health Check Controller |

@@ -127,7 +127,12 @@ def analyze_problem_for_vibe_coders(
     )
 
     import os
-    has_api_key = bool(os.getenv("OPENAI_API_KEY") or os.getenv("ANTHROPIC_API_KEY") or os.getenv("GEMINI_API_KEY"))
+    has_api_key = bool(
+        os.getenv("LITELLM_API_KEY")
+        or os.getenv("OPENAI_API_KEY")
+        or os.getenv("ANTHROPIC_API_KEY")
+        or os.getenv("GEMINI_API_KEY")
+    )
     if not has_api_key:
         return _build_default_response(cleaned_content, problem_type)
 
