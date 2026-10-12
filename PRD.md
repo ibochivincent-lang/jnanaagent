@@ -7,7 +7,7 @@
 ## 1. Executive Summary
 
 ### 1.1 Product Vision
-**Jnana Agent** (Sanskrit *Jnana* ज्ञान — direct cognitive realization) is an autonomous software engineering and verifiable knowledge intelligence engine. It transforms raw, fragmented engineering signals (GitHub issue reports, AST call graphs, stack traces, and community prior-art) into deterministic, verified code patches with cryptographic proof of search and zero mock data.
+**Jnana Agent** (Sanskrit *Jnana* ज्ञान — direct cognitive realization) is an autonomous software engineering and verifiable knowledge intelligence engine. It transforms raw, fragmented engineering signals (GitHub issue reports, AST call graphs, stack traces, and community prior-art) into deterministic, verified code patches with verifiable cryptographic provenance and zero mock data.
 
 ### 1.2 The Problem
 Modern engineering teams spend over **40% of their development bandwidth** diagnosing regressions, localizing complex bugs across large-scale repositories, and hunting down undocumented architectural context.
@@ -131,10 +131,10 @@ graph TD
 | Feature | Cursor / Copilot | Devin / SWE-bench Bots | Jnana Agent |
 | :--- | :---: | :---: | :---: |
 | **Continuous Vector Memory** | Fragmented | Single-session only | **Entire Memory Ledger** |
-| **Cryptographic Provenance** | None | None | **SHA-256 Proof of Search** |
+| **Cryptographic Provenance** | None | None | **SHA-256 Verifiable Provenance** |
 | **Bug Classification** | None | Ad-hoc | **6-Axis Bug Assessment Radar** |
 | **Observability Tracing** | Closed Blackbox | Proprietary Logs | **Neatlogs Public Spans** |
-| **Unit Economics Transparency**| Hidden | Expensive ($5-10/run) | **$0.056/run (cfo.ai Modeled)** |
+| **Unit Economics Transparency**| Hidden | Expensive ($5-10/run) | **$0.056/run ([cfo.ai Modeled](https://cfo.ai/s/q1dyYDGXT0RqNWN1))** |
 | **Design & User Experience** | Basic Editor Panel | Generic Terminal | **Monolithic Mission Control HUD** |
 
 ---
@@ -145,7 +145,7 @@ graph TD
 - [x] Dedicated `/terminal` Mission Control workstation launched.
 - [x] 6-Axis Bug Assessment Radar integrated.
 - [x] All emojis removed for sleek, monolithic aesthetic.
-- [x] All 24 automated unit & integration tests passing.
-- [x] Deploy live to public AWS EC2 production instance (http://23.22.195.38:8000/terminal, systemd `proofsearch.service` active in `us-east-1`).
+- [x] All 45 automated unit & integration tests passing.
+- [x] Deploy live to public AWS EC2 production instance (http://23.22.195.38:8000/terminal, systemd `jnanaagent.service` active in `us-east-1`).
 - [ ] Record 2-3 minute demo video demonstrating live issue resolution.
 - [ ] Submit PRD, GitHub repository, and live URL on Devpost / neatHack portal.

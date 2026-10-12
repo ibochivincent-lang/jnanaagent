@@ -1,0 +1,32 @@
+# Jnana Agent Caddyfile
+# Automatic HTTPS Reverse Proxy with Let's Encrypt / ZeroSSL Integration
+{
+    email admin@jnanaagent.ai
+    admin off
+}
+
+# Production Endpoint: Handles both Domain Name and Direct IP Access
+:80 {
+    # Security Headers
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "SAMEORIGIN"
+        X-XSS-Protection "1; mode=block"
+        Referrer-Policy "strict-origin-when-cross-origin"
+    }
+
+    # Reverse proxy to FastAPI / Uvicorn ASGI daemon on port 8000
+    reverse_proxy 127.0.0.1:8000 {
+        header_up Host {host}
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-For {remote_host}
+        header_up X-Forwarded-Proto {scheme}
+
+        # Bufferless SSE (Server-Sent Events) streaming for real-time LangGraph traces
+        flush_interval -1
+    }
+
+    # High-efficiency compression
+    encode gzip zstd
+}

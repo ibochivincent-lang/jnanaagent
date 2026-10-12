@@ -162,7 +162,7 @@ While the specific circular reference between `SyncPregelLoop` and `PregelRunner
 
 ---
 
-## 🛡️ Proof of Search: Cryptographic Provenance Audit & Ground-Truth Verification
+## 🛡️ Jnana Agent: Cryptographic Provenance Audit & Ground-Truth Verification
 *Every citation in this research report is backed by real-time ground truth with zero mock data. Deterministic content hashing and HTTP validation provide verifiable proof of retrieved state at execution time.*
 
 | Citation | Origin / Domain | Source Engine | SHA-256 Checksum | Verification Status | Ground-Truth Proof Quote |

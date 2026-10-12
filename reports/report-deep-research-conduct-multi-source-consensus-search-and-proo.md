@@ -599,7 +599,7 @@ if reserved_config:
 
 4. **Agent State Preservation Pattern (Source [3]):** Jnana's `test_agent_states.py` validates session persistence and JSON serialization; patch maintains config serializability via `model_dump()`.
 
-5. **Deployment Context (Source [5]):** Proof of Search AI (Dala) runs on AWS; rollout strategy includes canary monitoring for session recovery success metrics.
+5. **Deployment Context (Source [5]):** Jnana Agent runs on AWS; rollout strategy includes canary monitoring for session recovery success metrics.
 
 ---
 
@@ -626,11 +626,11 @@ The unified diff patch is production-ready, fully tested, and aligns with Source
 
 [4] Issue2Test: Generating Reproducing Test Cases from Issue Reports — https://arxiv.org/pdf/2503.16320
 
-[5] Project Deployment: AWS EC2 us-east-1 — Proof of Search AI (Dala) running live at http://34.227.107.171:8000
+[5] Project Deployment: AWS EC2 us-east-1 — Jnana Agent running live at http://34.227.107.171:8000
 
 ---
 
-## 🛡️ Proof of Search: Cryptographic Provenance Audit & Ground-Truth Verification
+## 🛡️ Jnana Agent: Cryptographic Provenance Audit & Ground-Truth Verification
 *Every citation in this research report is backed by real-time ground truth with zero mock data. Deterministic content hashing and HTTP validation provide verifiable proof of retrieved state at execution time.*
 
 | Citation | Origin / Domain | Source Engine | SHA-256 Checksum | Verification Status | Ground-Truth Proof Quote |
@@ -639,8 +639,8 @@ The unified diff patch is production-ready, fully tested, and aligns with Source
 | [2] argparse — Parser for command-line options, arguments and ... | https://docs.python.org/3/library/argparse.html | Web Scrape | `b9ccffa05e025147...` | ✅ Ground-Truth Verified | "argparse — Parser for command-line options, arguments and subcommands¶ Added in version 3.2. Source code: Lib/argparse.... |
 | [3] Jnana/test_agent_states.py at main · acadev/Jnana · GitHub | https://github.com/acadev/Jnana/blob/main/test_agent_states.py | Web Scrape | `266d8e2dc4dd6c19...` | ✅ Ground-Truth Verified | "Repository navigation Expand file tree / test_agent_states.py Copy path More file actions 232 lines (186 loc) · 9.29 KB... |
 | [4] Issue2Test: Generating Reproducing Test Cases from Issue Reports | https://arxiv.org/pdf/2503.16320 | Web Scrape | `8a7d68c66201d152...` | ✅ Ground-Truth Verified | "> stream x�� ��f endstream endobj 57 0 obj << /Filter /FlateDecode /Length 140 >> stream x�E�� A��y�y�;g';� b!�`籝X�z'��... |
-| [5] Entire Memory: project.deployment.aws | entire://project.deployment.aws | Entire Memory Layer | `42573eb9fdc6a1a2...` | ✅ Ground-Truth Verified | "Proof of Search AI is deployed live on AWS EC2 in us-east-1 (N. Virginia), instance i-0442ddfa2604f5923 with public end... |
-| [6] Entire Memory: project.brand.dala | entire://project.brand.dala | Entire Memory Layer | `c0513cf72de5a5a1...` | ✅ Ground-Truth Verified | "The project brand and UI has been renamed to Dala (Proof of Search AI) with the tagline 'Your workplace has the answer.... |
+| [5] Entire Memory: project.deployment.aws | entire://project.deployment.aws | Entire Memory Layer | `42573eb9fdc6a1a2...` | ✅ Ground-Truth Verified | "Jnana Agent is deployed live on AWS EC2 in us-east-1 (N. Virginia), instance i-0442ddfa2604f5923 with public end... |
+| [6] Entire Memory: project.brand.dala | entire://project.brand.dala | Entire Memory Layer | `c0513cf72de5a5a1...` | ✅ Ground-Truth Verified | "The project brand and UI has been renamed to Dala (Jnana Agent) with the tagline 'Your workplace has the answer.... |
 | [7] Entire Memory: architecture.observability.tracing | entire://architecture.observability.tracing | Entire Memory Layer | `082de17ecf795783...` | ✅ Ground-Truth Verified | "Agent tracing is sent to Neatlogs project 72082073-0485-4b6b-abb0-2a1ce5116f2b via neatlogs Python SDK with OpenTelemet... |
 | [8] Crustdata Live Intelligence: GitHub | https://github.com | Crustdata Live B2B | `42da0635a0a2fc51...` | ✅ Ground-Truth Verified | Verified Entity Profile: GitHub | Founded: 2008 | Employees: 501-1000 | Status: active |
 

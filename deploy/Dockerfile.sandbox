@@ -1,0 +1,22 @@
+# Ephemeral Execution Sandbox for Jnana Agent Test Reproduction
+# Provides gVisor-compatible container isolation for arbitrary codebases
+FROM python:3.11-slim
+
+LABEL maintainer="Jnana Agent Team Vincci001 <ibochivincent-lang>"
+LABEL description="Isolated execution sandbox for SWE-bench test reproduction and unified diff verification"
+
+# Prevent non-root privilege escalation
+RUN groupadd -r sandbox && useradd -r -g sandbox -d /home/sandbox -m sandbox
+
+# Install testing harnesses & dependencies
+RUN pip install --no-cache-dir \
+    pytest>=8.0.0 \
+    pydantic>=2.0.0
+
+WORKDIR /sandbox
+RUN chown -R sandbox:sandbox /sandbox
+
+USER sandbox
+
+ENTRYPOINT ["python", "-m", "pytest"]
+CMD ["-v"]

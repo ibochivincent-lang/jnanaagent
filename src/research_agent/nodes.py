@@ -460,7 +460,7 @@ def route_after_fetch(state: ResearchState) -> str:
 
 
 def synthesize(state: ResearchState) -> dict:
-    """Write the final cited markdown report from fetched sources with Proof of Search provenance."""
+    """Write the final cited markdown report from fetched sources with verifiable cryptographic provenance."""
     sources = state["sources"]
     source_blocks = "\n\n".join(
         f'<source id="{i}" title="{s.title}" url="{s.url}">\n{s.text}\n</source>'
@@ -494,7 +494,7 @@ def synthesize(state: ResearchState) -> dict:
     consensus_matrix = extract_consensus_matrix(response.text, sources)
 
     recoveries = state.get("recoveries", [])
-    # Build verifiable Proof of Search audit table (Ground Truth + Quotes + No Crypto Slop)
+    # Build verifiable Jnana cryptographic provenance audit table (Ground Truth + Quotes + No Crypto Slop)
     audit_rows = []
     for i, s in enumerate(sources, start=1):
         verified_badge = "✅ Ground-Truth Verified" if getattr(s, "verified", True) else "⚠️ Unverified"
@@ -553,7 +553,7 @@ def synthesize(state: ResearchState) -> dict:
     audit_table = (
         consensus_section
         + "\n\n---\n\n"
-        "## 🛡️ Proof of Search: Cryptographic Provenance Audit & Ground-Truth Verification\n"
+        "## 🛡️ Jnana Agent: Cryptographic Provenance Audit & Ground-Truth Verification\n"
         "*Every citation in this research report is backed by real-time ground truth with zero mock data. "
         "Deterministic content hashing and HTTP validation provide verifiable proof of retrieved state at execution time.*\n\n"
         "| Citation | Origin / Domain | Source Engine | SHA-256 Checksum | Verification Status | Ground-Truth Proof Quote |\n"

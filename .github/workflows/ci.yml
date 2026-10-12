@@ -30,5 +30,10 @@ jobs:
           pip install pytest
 
       - name: Run test suite
+        env:
+          CI: "true"
+          LITELLM_API_KEY: "sk-ci-dummy-token"
+          NEATLOGS_API_KEY: "g0mx-ci-dummy-token"
+          CRUSTDATA_API_KEY: "cd-ci-dummy-token"
         run: |
           pytest -v

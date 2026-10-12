@@ -1,20 +1,28 @@
-# Jnana Agent (ProofSearch AI) â€” Financial Model & Unit Economics
+# Jnana Agent — Financial Model & Unit Economics (via cfo.ai)
 *Prepared for cfo.ai business planning and neatHack 2026 submission*
 
 ---
 
+## 📊 Live Interactive Financial Pro-Forma on cfo.ai
+- **Official cfo.ai Model URL:** [https://cfo.ai/s/q1dyYDGXT0RqNWN1](https://cfo.ai/s/q1dyYDGXT0RqNWN1) *(Direct App: [https://app.cfo.ai/s/q1dyYDGXT0RqNWN1](https://app.cfo.ai/s/q1dyYDGXT0RqNWN1))*
+- **Financial Platform:** [cfo.ai](https://cfo.ai)
+- **Shared Report Nonce:** `q1dyYDGXT0RqNWN1`
+- **Tracked Interactive Blocks:** 6 active financial pro-forma blocks covering gross margins, dynamic COGS, multi-tier subscription models, token unit economics, and 12-month ARR projections.
+
+---
+
 ## 1. Executive Summary & Company Profile
-- **Company / Product:** Jnana Agent (Proof of Search AI)
-- **Team:** Vincci001 (Lead: Ibochi Vincent)
+- **Company / Product:** Jnana Agent
+- **Team:** Vincci001 (Lead & Founder: Ibochi Vincent — [@ibochivincent](https://twitter.com/ibochivincent))
 - **Website / Repository:** [https://github.com/ibochivincent-lang/jnanaagent](https://github.com/ibochivincent-lang/jnanaagent)
-- **Core Value Proposition:** Autonomous, verifiable research agent pipeline that guarantees zero hallucinations and zero mock data through cryptographic SHA-256 source hashing, real-time Crustdata B2B entity enrichment, and complete Neatlogs execution observability.
-- **Target Audience:** VC/PE investment associates, corporate development analysts, competitive intelligence professionals, and due diligence compliance teams.
+- **Core Value Proposition:** Autonomous, verifiable software engineering and research agent pipeline that guarantees zero hallucinations and zero mock data through cryptographic SHA-256 source hashing, real-time Crustdata B2B entity enrichment, and complete Neatlogs execution observability.
+- **Target Audience:** Engineering teams, VC/PE investment associates, corporate development analysts, competitive intelligence professionals, and due diligence compliance teams.
 
 ---
 
 ## 2. Pricing & Revenue Model
 
-| Tier | Monthly Price | Included Monthly Reports | Overage Cost / Report | Key Features |
+| Tier | Monthly Price | Included Monthly Reports / Runs | Overage Cost / Report | Key Features |
 | :--- | :--- | :--- | :--- | :--- |
 | **Pay-As-You-Go** | $0 / mo | 0 | $2.50 | On-demand research queries, SHA-256 audit, Neatlogs trace link |
 | **Pro Analyst** | $49 / mo | 30 reports | $1.50 | Claude Sonnet reasoning, 10 Crustdata live entity lookups/mo, markdown & PDF export |
@@ -32,7 +40,7 @@ Every single research report runs through a multi-node LangGraph execution: plan
   - Blended model cost (Claude Haiku / Sonnet via LiteLLM): **$0.0042**
 - **Data Enrichment & Ingestion (Crustdata API):**
   - Live B2B company profile enrichment (headcount, founding year, funding, headquarters): **$0.0500**
-- **Compute & Networking Infrastructure (AWS Lambda / ECS):**
+- **Compute & Networking Infrastructure (AWS Lambda / EC2):**
   - Average agent execution runtime (40 seconds @ 512MB RAM): **$0.0007**
 - **Observability & Storage (Neatlogs & S3 Provenance Hash Store):**
   - Span telemetry streaming + immutable hash archive: **$0.0011**
@@ -62,10 +70,9 @@ Every single research report runs through a multi-node LangGraph execution: plan
 ---
 
 ## 5. Runway & Capital Strategy
-1. **Zero Cash-Burn Starting Point:** Built entirely during neatHack utilizing sponsor credits (Neatlogs free tier, Crustdata 5,000 credits, $20 LiteLLM allowance, Entire GitHub app).
+1. **Zero Cash-Burn Starting Point:** Built entirely during neatHack utilizing sponsor credits (Neatlogs free tier, Crustdata 5,000 credits, $20 LiteLLM allowance, Entire GitHub app, cfo.ai pro-forma model).
 2. **Break-Even:** Achieved at customer #3 (under 7 days post-launch).
 3. **Reinvestment Strategy:**
    - 40% of net margin allocated to acquiring high-volume enterprise Crustdata data licenses.
    - 30% allocated to R&D for local verifiable ZK/SHA cryptographic provenance attestations.
    - 30% retained for operations and growth reserve.
-

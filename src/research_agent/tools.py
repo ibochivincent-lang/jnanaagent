@@ -1,7 +1,7 @@
 """Web search, live Crustdata company intelligence, and page fetching.
 
 Pure I/O — no LLM calls here, so each piece is unit-testable.
-Incorporates verifiable SHA-256 content hashing for Proof of Search.
+Incorporates verifiable SHA-256 content hashing for Jnana Agent cryptographic provenance.
 """
 
 import hashlib

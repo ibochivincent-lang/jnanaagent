@@ -5,6 +5,8 @@ services:
     build: .
     container_name: jnanaagent
     restart: unless-stopped
+    expose:
+      - "8000"
     ports:
       - "8000:8000"
     environment:
@@ -13,5 +15,27 @@ services:
       - LITELLM_API_KEY=${LITELLM_API_KEY}
       - NEATLOGS_API_KEY=${NEATLOGS_API_KEY}
       - CRUSTDATA_API_KEY=${CRUSTDATA_API_KEY}
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+      - GITHUB_WEBHOOK_SECRET=${GITHUB_WEBHOOK_SECRET}
     volumes:
       - ./reports:/app/reports
+      - ./data:/app/data
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: jnanaagent-proxy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - jnanaagent
+
+volumes:
+  caddy_data:
+  caddy_config:

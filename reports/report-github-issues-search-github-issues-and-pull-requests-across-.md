@@ -43,7 +43,7 @@ Based on the provided sources, the most common failure pattern in GitHub issues 
 ### Inferred CareerAce Architecture (from Memory Layers)
 
 ```
-CareerAce (Proof of Search AI / Dala)
+CareerAce (Jnana Agent)
 │
 ├── architecture.ui.design_system
 │   ├── Canvas: Pure #000000 black void
@@ -65,7 +65,7 @@ CareerAce (Proof of Search AI / Dala)
     ├── Region: us-east-1
     ├── Endpoint: http://34.227.107.171:8000
     ├── Status Endpoint: /api/status
-    └── Service: proofsearch.service (systemd)
+    └── Service: jnanaagent.service (systemd)
 ```
 
 ### Module Dependency Graph
@@ -821,7 +821,7 @@ class TestLLMProviderEndpointValidation:
 
 ---
 
-## 🛡️ Proof of Search: Cryptographic Provenance Audit & Ground-Truth Verification
+## 🛡️ Jnana Agent: Cryptographic Provenance Audit & Ground-Truth Verification
 *Every citation in this research report is backed by real-time ground truth with zero mock data. Deterministic content hashing and HTTP validation provide verifiable proof of retrieved state at execution time.*
 
 | Citation | Origin / Domain | Source Engine | SHA-256 Checksum | Verification Status | Ground-Truth Proof Quote |
@@ -833,8 +833,8 @@ class TestLLMProviderEndpointValidation:
 | [5] Entire Memory: architecture.ui.design_system | entire://architecture.ui.design_system | Entire Memory Layer | `10ed5d4e26cbaa49...` | ✅ Ground-Truth Verified | "The repository incorporates the official DESIGN.md specification implementing the Dala dark-stage design system: pure #... |
 | [6] Entire Memory: constraints.data.rules | entire://constraints.data.rules | Entire Memory Layer | `20dd6224aafa672e...` | ✅ Ground-Truth Verified | "Never use mock data: all company enrichment must query live Crustdata API and cite SHA-256 hashes." |
 | [7] Entire Memory: architecture.llm.provider | entire://architecture.llm.provider | Entire Memory Layer | `9373e83c9537dd4f...` | ✅ Ground-Truth Verified | "neatHack sponsored LLM provider uses LiteLLM proxy at https://litellm.vision.aivar.app/v1 with claude-haiku." |
-| [8] Entire Memory: project.deployment.aws | entire://project.deployment.aws | Entire Memory Layer | `42573eb9fdc6a1a2...` | ✅ Ground-Truth Verified | "Proof of Search AI is deployed live on AWS EC2 in us-east-1 (N. Virginia), instance i-0442ddfa2604f5923 with public end... |
-| [9] Entire Memory: project.brand.dala | entire://project.brand.dala | Entire Memory Layer | `c0513cf72de5a5a1...` | ✅ Ground-Truth Verified | "The project brand and UI has been renamed to Dala (Proof of Search AI) with the tagline 'Your workplace has the answer.... |
+| [8] Entire Memory: project.deployment.aws | entire://project.deployment.aws | Entire Memory Layer | `42573eb9fdc6a1a2...` | ✅ Ground-Truth Verified | "Jnana Agent is deployed live on AWS EC2 in us-east-1 (N. Virginia), instance i-0442ddfa2604f5923 with public end... |
+| [9] Entire Memory: project.brand.dala | entire://project.brand.dala | Entire Memory Layer | `c0513cf72de5a5a1...` | ✅ Ground-Truth Verified | "The project brand and UI has been renamed to Dala (Jnana Agent) with the tagline 'Your workplace has the answer.... |
 | [10] Crustdata Live Intelligence: Marker.io | https://marker.io | Crustdata Live B2B | `41018a8f69dc1b69...` | ✅ Ground-Truth Verified | Verified Entity Profile: Marker.io | Founded: 2016 | Employees: 11-50 | Status: active |
 
 

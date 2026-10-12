@@ -110,7 +110,7 @@ While the sources demonstrate the collaboration's scope and benefits, several qu
 
 ---
 
-## 🛡️ Proof of Search: Cryptographic Provenance Audit
+## 🛡️ Jnana Agent: Cryptographic Provenance Audit
 *Every citation in this research report is backed by real-time ground truth with zero mock data. Cryptographic SHA-256 fingerprints provide immutable proof of retrieved state at execution time.*
 
 | Citation | Origin / Domain | Source Engine | SHA-256 Checksum | Verification Status |

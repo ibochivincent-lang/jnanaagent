@@ -96,7 +96,7 @@ def test_route_after_fetch(n_sources, search_round, expected):
     assert nodes.route_after_fetch(state) == expected
 
 
-def test_synthesize_appends_proof_of_search_audit(monkeypatch):
+def test_synthesize_appends_cryptographic_provenance_audit(monkeypatch):
     class StubLLMResponse:
         text = "# Sample Report\n\nExecutive summary."
     
@@ -113,7 +113,7 @@ def test_synthesize_appends_proof_of_search_audit(monkeypatch):
         ],
     }
     out = nodes.synthesize(state)
-    assert "Proof of Search: Cryptographic Provenance Audit" in out["report"]
+    assert "Jnana Agent: Cryptographic Provenance Audit" in out["report"]
     assert "abc1234567890def"[:16] in out["report"]
 
 

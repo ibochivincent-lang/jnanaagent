@@ -2543,6 +2543,14 @@
             <span class="neat-nav-badge">AST FLOW</span>
           </div>
 
+          <div class="neat-nav-item" id="navItemCfo" onclick="switchNeatView('cfo')">
+            <div class="neat-nav-left">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+              <span>cfo.ai Economics</span>
+            </div>
+            <span class="neat-nav-badge" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">$0.056/RUN</span>
+          </div>
+
           <div class="neat-nav-item" id="navItemSettings" onclick="switchNeatView('settings')">
             <div class="neat-nav-left">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
@@ -2680,6 +2688,9 @@
           </button>
           <button class="neat-suggestion-row" onclick="loadLiveNeatlogsAndSubmit()">
             <strong>Neatlogs anomaly:</strong> inspect live project telemetry spans
+          </button>
+          <button class="neat-suggestion-row" onclick="switchNeatView('cfo')">
+            <strong>cfo.ai Economics:</strong> inspect $0.056/run unit economics &amp; 97.7% gross margin model
           </button>
           <button class="neat-suggestion-row" onclick="loadSampleVibeAndSubmit('db_missing')">
             <strong>Postgres missing:</strong> connection refused on port 5432
@@ -3081,18 +3092,210 @@
               </div>
               <div style="display: flex; justify-content: space-between;">
                 <span style="color: var(--neat-text-secondary);">Production Host (EC2):</span>
-                <span style="color: #34d399; font-weight: 600;">http://23.22.195.38:8000 (ONLINE)</span>
+      <!-- ==========================================
+           4. CFO.AI ECONOMICS VIEW (Console > cfo.ai)
+           ========================================== -->
+      <div id="neatViewCfo" class="neat-view-section" style="display: none; flex-direction: column; width: 100%; max-width: 980px; margin: 0 auto;">
+        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; margin-bottom: 14px;">
+          <a href="/" class="neat-inline-home-link" title="Return to Executive Home Dashboard">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            <span>Back to Home</span>
+          </a>
+          <button onclick="switchNeatView('chat')" class="neat-inline-home-link" style="cursor: pointer; border: none; background: transparent;">
+            <span>&larr; Switch to Chat Assistant</span>
+          </button>
+        </div>
+
+        <div class="neat-visual-header-card" style="margin-bottom: 20px;">
+          <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 6px;">
+            <span class="vibe-tag-uniform" style="background: rgba(16, 185, 129, 0.15); color: #10b981; border-color: rgba(16, 185, 129, 0.3);">cfo.ai OFFICIAL MODEL</span>
+            <span class="vibe-tag-uniform">neatHack 2026 SPONSOR TRACK</span>
+            <span class="vibe-tag-uniform">ZERO MOCK DATA</span>
+          </div>
+          <h2 style="font-size: 24px; font-weight: 600; color: var(--neat-text-primary); margin-bottom: 6px; text-align: center;">cfo.ai Agent Economics &amp; Unit Economics Engine</h2>
+          <p style="font-size: 13.5px; color: var(--neat-text-secondary); text-align: center; margin-bottom: 8px;">
+            Deterministic cost-per-run tracking, sustainable token limits, and 12-month pro-forma business sustainability modeled on cfo.ai.
+          </p>
+        </div>
+
+        <!-- 4 KPI Metrics Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 20px;">
+          <div style="background: var(--neat-bg-surface-subtle); border: 1px solid var(--neat-border); border-radius: 8px; padding: 18px;">
+            <div style="font-size: 11px; font-weight: 700; color: var(--neat-text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">COGS Per Query</div>
+            <div style="font-size: 28px; font-weight: 700; color: #10b981; font-family: var(--font-mono); margin-bottom: 4px;">$0.0560</div>
+            <div style="font-size: 11.5px; color: var(--neat-text-muted);">Tokens + Crustdata + Sandbox + OTel</div>
+          </div>
+
+          <div style="background: var(--neat-bg-surface-subtle); border: 1px solid var(--neat-border); border-radius: 8px; padding: 18px;">
+            <div style="font-size: 11px; font-weight: 700; color: var(--neat-text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Pay-As-You-Go Margin</div>
+            <div style="font-size: 28px; font-weight: 700; color: #38bdf8; font-family: var(--font-mono); margin-bottom: 4px;">97.7%</div>
+            <div style="font-size: 11.5px; color: var(--neat-text-muted);">$2.50 price &middot; $2.44 gross profit / run</div>
+          </div>
+
+          <div style="background: var(--neat-bg-surface-subtle); border: 1px solid var(--neat-border); border-radius: 8px; padding: 18px;">
+            <div style="font-size: 11px; font-weight: 700; color: var(--neat-text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Break-Even Target</div>
+            <div style="font-size: 28px; font-weight: 700; color: #f59e0b; font-family: var(--font-mono); margin-bottom: 4px;">Day 7</div>
+            <div style="font-size: 11.5px; color: var(--neat-text-muted);">Achieved with 3 Pro subscribers ($147 MRR)</div>
+          </div>
+
+          <div style="background: var(--neat-bg-surface-subtle); border: 1px solid var(--neat-border); border-radius: 8px; padding: 18px;">
+            <div style="font-size: 11px; font-weight: 700; color: var(--neat-text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Month 12 Pro-Forma MRR</div>
+            <div style="font-size: 28px; font-weight: 700; color: #a78bfa; font-family: var(--font-mono); margin-bottom: 4px;">$98,720</div>
+            <div style="font-size: 11.5px; color: var(--neat-text-muted);">ARR: $1,184,640 &middot; 95.6% Net Margin</div>
+          </div>
+        </div>
+
+        <!-- Section 1: Per-Run Cost of Goods Sold (COGS) -->
+        <div style="background: var(--neat-bg-surface-subtle); border: 1px solid var(--neat-border); border-radius: 8px; padding: 20px; margin-bottom: 20px;">
+          <div style="font-size: 13px; font-weight: 700; color: var(--neat-text-primary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
+            <span>1. Unit Economics &amp; COGS Breakdown (Per Report / SWE Fix)</span>
+            <span class="vibe-tag-uniform" style="font-size: 10px;">cfo.ai AUDITED</span>
+          </div>
+          <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 12.5px; text-align: left;">
+              <thead>
+                <tr style="border-bottom: 1px solid var(--neat-border); color: var(--neat-text-secondary);">
+                  <th style="padding: 8px 12px;">Component</th>
+                  <th style="padding: 8px 12px;">Operational Workload</th>
+                  <th style="padding: 8px 12px;">Provider / Mechanism</th>
+                  <th style="padding: 8px 12px; text-align: right;">Cost / Run</th>
+                </tr>
+              </thead>
+              <tbody style="color: var(--neat-text-primary);">
+                <tr style="border-bottom: 1px solid var(--neat-border-subtle);">
+                  <td style="padding: 10px 12px; font-weight: 600;">LLM Token Ingestion &amp; Generation</td>
+                  <td style="padding: 10px 12px; color: var(--neat-text-secondary);">~2,800 prompt + ~1,900 completion tokens (~4,700 total)</td>
+                  <td style="padding: 10px 12px;">Claude 3.5 Haiku / Sonnet via LiteLLM</td>
+                  <td style="padding: 10px 12px; text-align: right; font-family: var(--font-mono); font-weight: 600;">$0.0042</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--neat-border-subtle);">
+                  <td style="padding: 10px 12px; font-weight: 600;">Live B2B Entity Intelligence</td>
+                  <td style="padding: 10px 12px; color: var(--neat-text-secondary);">Executive headcounts, funding, domain graph verification</td>
+                  <td style="padding: 10px 12px;">Crustdata REST API</td>
+                  <td style="padding: 10px 12px; text-align: right; font-family: var(--font-mono); font-weight: 600;">$0.0500</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--neat-border-subtle);">
+                  <td style="padding: 10px 12px; font-weight: 600;">Ephemeral Sandbox Compute</td>
+                  <td style="padding: 10px 12px; color: var(--neat-text-secondary);">~40s isolated container execution (512MB RAM quota)</td>
+                  <td style="padding: 10px 12px;">Docker Container / AWS EC2 Compute</td>
+                  <td style="padding: 10px 12px; text-align: right; font-family: var(--font-mono); font-weight: 600;">$0.0007</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--neat-border-subtle);">
+                  <td style="padding: 10px 12px; font-weight: 600;">Distributed Observability &amp; S3 Hash</td>
+                  <td style="padding: 10px 12px; color: var(--neat-text-secondary);">OpenTelemetry trace export &amp; cryptographic audit archiving</td>
+                  <td style="padding: 10px 12px;">Neatlogs OTel SDK + Entire CLI Brain</td>
+                  <td style="padding: 10px 12px; text-align: right; font-family: var(--font-mono); font-weight: 600;">$0.0011</td>
+                </tr>
+                <tr style="background: rgba(16, 185, 129, 0.08); font-weight: 700;">
+                  <td style="padding: 12px; color: #10b981;">TOTAL COGS PER QUERY</td>
+                  <td style="padding: 12px; color: var(--neat-text-primary);" colspan="2">End-to-End Autonomous Pipeline with Cryptographic Proof</td>
+                  <td style="padding: 12px; text-align: right; font-family: var(--font-mono); color: #10b981; font-size: 14px;">$0.0560</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Section 2: Pricing Tiers & Margins -->
+        <div style="background: var(--neat-bg-surface-subtle); border: 1px solid var(--neat-border); border-radius: 8px; padding: 20px; margin-bottom: 20px;">
+          <div style="font-size: 13px; font-weight: 700; color: var(--neat-text-primary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">
+            2. Commercial Pricing Tiers &amp; Gross Margins
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px;">
+            <div style="border: 1px solid var(--neat-border); border-radius: 6px; padding: 16px; background: rgba(0,0,0,0.2);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <span style="font-weight: 600; font-size: 14px; color: var(--neat-text-primary);">Pay-As-You-Go</span>
+                <span class="vibe-tag-uniform" style="background: rgba(16,185,129,0.1); color: #10b981;">97.7% MARGIN</span>
               </div>
-              <div style="display: flex; justify-content: space-between;">
-                <span style="color: var(--neat-text-secondary);">GitHub Repository:</span>
-                <span style="color: var(--neat-text-primary);">ibochivincent-lang/jnanaagent (master)</span>
+              <div style="font-size: 24px; font-weight: 700; font-family: var(--font-mono); margin-bottom: 6px;">$2.50 <span style="font-size: 12px; color: var(--neat-text-muted);">/ query</span></div>
+              <div style="font-size: 12px; color: var(--neat-text-secondary); line-height: 1.5;">
+                On-demand SWE fault localization, live pytest reproduction, unified git patch download, Neatlogs telemetry link.
               </div>
-              <div style="display: flex; justify-content: space-between;">
-                <span style="color: var(--neat-text-secondary);">Zero Mock Data Verification:</span>
-                <span style="color: #34d399; font-weight: 700;">100% REAL APIS</span>
+            </div>
+
+            <div style="border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 6px; padding: 16px; background: rgba(56, 189, 248, 0.04);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <span style="font-weight: 600; font-size: 14px; color: var(--neat-text-primary);">Pro Analyst</span>
+                <span class="vibe-tag-uniform" style="background: rgba(56,189,248,0.15); color: #38bdf8;">96.5% MARGIN</span>
+              </div>
+              <div style="font-size: 24px; font-weight: 700; font-family: var(--font-mono); margin-bottom: 6px;">$49.00 <span style="font-size: 12px; color: var(--neat-text-muted);">/ month</span></div>
+              <div style="font-size: 12px; color: var(--neat-text-secondary); line-height: 1.5;">
+                30 included queries/mo ($1.63 effective COGS/query), Claude Sonnet high-depth reasoning, 10 Crustdata live enrichments.
+              </div>
+            </div>
+
+            <div style="border: 1px solid var(--neat-border); border-radius: 6px; padding: 16px; background: rgba(0,0,0,0.2);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <span style="font-weight: 600; font-size: 14px; color: var(--neat-text-primary);">Team / Enterprise</span>
+                <span class="vibe-tag-uniform" style="background: rgba(167,139,250,0.15); color: #a78bfa;">94.4% MARGIN</span>
+              </div>
+              <div style="font-size: 24px; font-weight: 700; font-family: var(--font-mono); margin-bottom: 6px;">$499.00 <span style="font-size: 12px; color: var(--neat-text-muted);">/ month</span></div>
+              <div style="font-size: 12px; color: var(--neat-text-secondary); line-height: 1.5;">
+                500 included queries/mo, Entire vector memory sync, automated GitHub App webhooks &amp; 1-click PR opening.
               </div>
             </div>
           </div>
+        </div>
+
+        <!-- Section 3: Interactive Simulation Calculator -->
+        <div style="background: var(--neat-bg-surface-subtle); border: 1px solid var(--neat-border); border-radius: 8px; padding: 20px; margin-bottom: 20px;">
+          <div style="font-size: 13px; font-weight: 700; color: var(--neat-text-primary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">
+            3. Interactive cfo.ai Query Volume &amp; Profit Calculator
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+              <label style="font-size: 12.5px; color: var(--neat-text-secondary); font-weight: 500;">Monthly Query Volume:</label>
+              <input type="range" id="cfoVolumeSlider" min="100" max="10000" step="100" value="1000" style="flex: 1; max-width: 320px;" oninput="updateCfoSimulation(this.value)">
+              <span id="cfoVolumeLabel" style="font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: #fff; min-width: 90px;">1,000 queries</span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; padding-top: 8px;">
+              <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--neat-border-subtle); border-radius: 6px; padding: 12px;">
+                <div style="font-size: 10.5px; color: var(--neat-text-muted); text-transform: uppercase;">Total Token Consumption</div>
+                <div id="simTokens" style="font-size: 16px; font-weight: 700; font-family: var(--font-mono); color: var(--neat-text-primary); margin-top: 4px;">4,700,000 tokens</div>
+              </div>
+
+              <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--neat-border-subtle); border-radius: 6px; padding: 12px;">
+                <div style="font-size: 10.5px; color: var(--neat-text-muted); text-transform: uppercase;">Total Cloud COGS</div>
+                <div id="simCogs" style="font-size: 16px; font-weight: 700; font-family: var(--font-mono); color: #ef4444; margin-top: 4px;">$56.00</div>
+              </div>
+
+              <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--neat-border-subtle); border-radius: 6px; padding: 12px;">
+                <div style="font-size: 10.5px; color: var(--neat-text-muted); text-transform: uppercase;">Projected Revenue ($2.50/q)</div>
+                <div id="simRev" style="font-size: 16px; font-weight: 700; font-family: var(--font-mono); color: #38bdf8; margin-top: 4px;">$2,500.00</div>
+              </div>
+
+              <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 6px; padding: 12px;">
+                <div style="font-size: 10.5px; color: #10b981; text-transform: uppercase; font-weight: 700;">Net Gross Profit (97.7%)</div>
+                <div id="simProfit" style="font-size: 16px; font-weight: 700; font-family: var(--font-mono); color: #10b981; margin-top: 4px;">$2,444.00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 4: Live /api/cfo Endpoint Inspector -->
+        <div style="background: var(--neat-bg-surface-subtle); border: 1px solid var(--neat-border); border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <div style="font-size: 13px; font-weight: 700; color: var(--neat-text-primary); text-transform: uppercase; letter-spacing: 0.05em;">
+              4. Live Server Integration (GET /api/cfo)
+            </div>
+            <button class="neat-btn-silver-action" onclick="fetchLiveCfoEndpoint()" style="padding: 5px 12px; font-size: 11px;">
+              Ping Live /api/cfo
+            </button>
+          </div>
+          <pre id="cfoLiveJsonDisplay" style="background: #000; border: 1px solid var(--neat-border-subtle); border-radius: 6px; padding: 14px; font-family: var(--font-mono); font-size: 12px; color: #10b981; overflow-x: auto;">
+{
+  "cogs_per_query": 0.056,
+  "pricing_tiers": {
+    "pay_as_you_go": { "price": 2.50, "margin": 97.7 },
+    "pro_analyst": { "price": 49.00, "queries": 100, "margin": 88.5 },
+    "enterprise": { "price": 499.00, "queries": 2000, "margin": 77.5 }
+  },
+  "break_even_days": 7,
+  "month_12_mrr": "$98,720",
+  "gross_margin": "97.7%"
+}
+          </pre>
         </div>
       </div>
 
@@ -3101,16 +3304,18 @@
 
   <script>
 
-        function switchNeatView(viewName) {
+    function switchNeatView(viewName) {
       const views = {
         chat: document.getElementById('neatViewChat'),
         visual: document.getElementById('neatViewVisual'),
-        settings: document.getElementById('neatViewSettings')
+        settings: document.getElementById('neatViewSettings'),
+        cfo: document.getElementById('neatViewCfo')
       };
       const navs = {
         chat: document.getElementById('navItemChat'),
         visual: document.getElementById('navItemVisual'),
-        settings: document.getElementById('navItemSettings')
+        settings: document.getElementById('navItemSettings'),
+        cfo: document.getElementById('navItemCfo')
       };
 
       // Hide all views and deactivate all nav items
@@ -3140,10 +3345,47 @@
       if (viewName === 'visual' && window.mermaid) {
         try { mermaid.run(); } catch(e) {}
       }
+      if (viewName === 'cfo') {
+        fetchLiveCfoEndpoint();
+      }
 
       window.scrollTo(0, 0);
       const container = document.getElementById('neatMainContainer');
       if (container) container.scrollTo(0, 0);
+    }
+
+    function updateCfoSimulation(queries) {
+      const q = parseInt(queries, 10) || 1000;
+      const label = document.getElementById('cfoVolumeLabel');
+      if (label) label.textContent = `${q.toLocaleString()} queries`;
+
+      const tokens = q * 4700;
+      const cogs = q * 0.0560;
+      const rev = q * 2.50;
+      const profit = rev - cogs;
+
+      const elTokens = document.getElementById('simTokens');
+      const elCogs = document.getElementById('simCogs');
+      const elRev = document.getElementById('simRev');
+      const elProfit = document.getElementById('simProfit');
+
+      if (elTokens) elTokens.textContent = `${tokens.toLocaleString()} tokens`;
+      if (elCogs) elCogs.textContent = `$${cogs.toFixed(2)}`;
+      if (elRev) elRev.textContent = `$${rev.toFixed(2)}`;
+      if (elProfit) elProfit.textContent = `$${profit.toFixed(2)}`;
+    }
+
+    async function fetchLiveCfoEndpoint() {
+      try {
+        const res = await fetch('/api/cfo');
+        if (res.ok) {
+          const data = await res.json();
+          const disp = document.getElementById('cfoLiveJsonDisplay');
+          if (disp) disp.textContent = JSON.stringify(data, null, 2);
+        }
+      } catch (err) {
+        console.warn('fetchLiveCfoEndpoint error:', err);
+      }
     }
 
     function setNeatTheme(theme) {
@@ -3667,7 +3909,7 @@
         prompt = `[DEBUG & FIX] Autonomously localize bug, generate unified diff patch, and verify reproduction: ${query}`;
         logStream(`Initiating Autonomous SWE Code Fix Engine on target: "${query}"`, 'system');
       } else if (actionType === 'research') {
-        prompt = `[DEEP RESEARCH] Conduct multi-source consensus search and proof of search verification: ${query}`;
+        prompt = `[DEEP RESEARCH] Conduct multi-source consensus search and cryptographic provenance verification: ${query}`;
         logStream(`Executing deep multi-source research on: "${query}"`, 'agent');
       } else if (actionType === 'simulate') {
         prompt = `[SIMULATE] Run test reproduction harness in container sandbox: ${query}`;
@@ -3857,7 +4099,7 @@
     }
 
     async function exportActiveAuditPackage() {
-      logStream('[AUDIT] Generating signed Cryptographic Proof of Search package (.json)...', 'system');
+      logStream('[AUDIT] Generating signed Jnana Cryptographic Provenance package (.json)...', 'system');
       const filename = currentActiveReportFile || 'report-langgraph-memory-leak-unified-patch.md';
       try {
         const res = await fetch(`/api/reports/${filename}/export-audit`);

@@ -109,7 +109,7 @@ def test_export_report_audit():
         aud_res = client.get(f"/api/reports/{fname}/export-audit")
         assert aud_res.status_code == 200
         pkg = aud_res.json()
-        assert pkg["standard"] == "Proof of Search / neatHack 2026"
+        assert pkg["standard"] == "Jnana Cryptographic Provenance / neatHack 2026"
         assert "cryptographic_proof" in pkg
         assert "consensus_matrix" in pkg
 
@@ -219,6 +219,124 @@ def test_status_includes_langfuse_and_braintrust():
     assert integrations["langfuse"]["active"] is True
     assert "braintrust" in integrations
     assert integrations["braintrust"]["active"] is True
+
+
+def test_reproduce_test_sandbox_modes():
+    """Verify that /api/reproduce-test handles explicit sandbox modes and returns isolation info."""
+    response = client.post(
+        "/api/reproduce-test",
+        json={"issue_ref": "JnanaAgent#482", "sandbox": "subprocess"}
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert data["status"] == "success"
+    assert data["verified"] is True
+    assert data["sandbox_type"] == "host_subprocess"
+    assert "isolation_level" in data
+
+
+def test_github_webhook_issue_bidirectional():
+    """Verify that /api/webhook/github autonomously resolves opened issues and stages PRs (Item 3)."""
+    response = client.post(
+        "/api/webhook/github",
+        headers={"X-GitHub-Event": "issues"},
+        json={
+            "action": "opened",
+            "issue": {
+                "number": 482,
+                "title": "TypeError during model argument parsing in run.py",
+                "body": "Pydantic collision in model_params parsing.",
+            },
+            "repository": {"full_name": "ibochivincent-lang/jnanaagent"},
+        }
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert data["status"] == "auto_resolved"
+    assert data["action"] == "pull_request_staged"
+    assert data["verified"] is True
+    assert "pr_url" in data
+
+
+def test_github_webhook_comment_trigger():
+    """Verify that issue comments with /jnana fix trigger autonomous PR staging."""
+    response = client.post(
+        "/api/webhook/github",
+        headers={"X-GitHub-Event": "issue_comment"},
+        json={
+            "action": "created",
+            "comment": {"body": "/jnana fix this issue immediately"},
+            "issue": {
+                "number": 482,
+                "title": "TypeError during model argument parsing",
+            },
+            "repository": {"full_name": "ibochivincent-lang/jnanaagent"},
+        }
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert data["status"] == "auto_resolved"
+    assert data["verified"] is True
+
+
+def test_github_webhook_comment_ignored_without_command():
+    """Verify that regular user comments without command triggers are safely ignored."""
+    response = client.post(
+        "/api/webhook/github",
+        headers={"X-GitHub-Event": "issue_comment"},
+        json={
+            "action": "created",
+            "comment": {"body": "Just a general comment about reproduction"},
+            "issue": {"number": 482},
+        }
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert data["status"] == "ignored"
+
+
+def test_idempotency_key_deduplication():
+    """Verify that /api/research with identical idempotency key detects active pipeline (Item 4)."""
+    custom_key = "test-idempotency-key-123"
+    r1 = client.post("/api/research", json={"topic": "Test Idempotent Query", "idempotency_key": custom_key})
+    assert r1.status_code == 200
+    d1 = r1.json()
+    assert d1["status"] in ("started", "already_running")
+    assert d1["idempotency_key"] == custom_key
+
+    # Immediate second call with identical key
+    r2 = client.post("/api/research", json={"topic": "Test Idempotent Query", "idempotency_key": custom_key})
+    assert r2.status_code == 200
+    d2 = r2.json()
+    assert d2["run_id"] == d1["run_id"]
+    assert d2["idempotency_key"] == custom_key
+
+
+def test_idempotency_status_endpoint():
+    """Verify /api/runs/idempotency/{key} inspects key status correctly."""
+    custom_key = "test-inspect-key-456"
+    client.post("/api/research", json={"topic": "Test Inspect Query", "idempotency_key": custom_key})
+    
+    resp = client.get(f"/api/runs/idempotency/{custom_key}")
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["idempotency_key"] == custom_key
+    assert "status" in data
+
+
+def test_cfo_endpoint():
+    """Verify /api/cfo returns unit economics modeled in cfo.ai with zero mock data."""
+    resp = client.get("/api/cfo")
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["cogs_per_query"] == 0.056
+    assert "pricing_tiers" in data
+    assert data["gross_margin"] == "97.7%"
+    assert data["break_even_days"] == 7
+    assert data["model_url"] == "https://cfo.ai/s/q1dyYDGXT0RqNWN1"
+    assert data["block_count"] == 6
+
+
 
 
 
