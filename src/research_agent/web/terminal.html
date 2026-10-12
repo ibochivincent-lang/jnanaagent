@@ -2216,6 +2216,129 @@
       color: #ffffff !important;
     }
 
+
+    
+    /* ========================================================
+       CLEAN TAB SWITCHING & ZERO-DRIFT CENTRALIZATION
+       ======================================================== */
+    .neat-main-container {
+      flex: 1;
+      height: 100vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+      background: var(--neat-bg-main) !important;
+      color: var(--neat-text-primary) !important;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .neat-view-section {
+      display: none !important;
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 40px 24px 60px 24px;
+      box-sizing: border-box;
+    }
+
+    .neat-view-section.active {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      margin: 0 auto !important;
+      width: 100% !important;
+    }
+
+    /* Centralized Visualizer View Styles */
+    .neat-visual-header-card {
+      width: 100% !important;
+      max-width: 980px !important;
+      margin: 0 auto 22px auto !important;
+      text-align: center !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+
+    .vibe-panel {
+      width: 100% !important;
+      max-width: 980px !important;
+      margin: 0 auto 32px auto !important;
+      align-self: center !important;
+    }
+
+    .vibe-stepper {
+      width: 100% !important;
+      max-width: 980px !important;
+      margin: 0 auto 20px auto !important;
+    }
+
+    .vibe-input-tabs {
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      gap: 8px !important;
+      flex-wrap: wrap !important;
+      margin-bottom: 16px !important;
+    }
+
+    .vibe-presets-row {
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      gap: 8px !important;
+      flex-wrap: wrap !important;
+      margin-bottom: 16px !important;
+    }
+
+    .vibe-context-row {
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      gap: 12px !important;
+      margin-bottom: 16px !important;
+      flex-wrap: wrap !important;
+      width: 100% !important;
+      max-width: 820px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+
+    .vibe-mermaid-container {
+      width: 100% !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      margin: 0 auto 16px auto !important;
+      overflow-x: auto !important;
+    }
+
+    #vibeMermaidOutput {
+      width: 100% !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      text-align: center !important;
+    }
+
+    #vibeMermaidOutput svg {
+      margin: 0 auto !important;
+      display: block !important;
+    }
+
+    .neat-settings-card-wrapper {
+      width: 100% !important;
+      max-width: 760px !important;
+      margin: 0 auto !important;
+      align-self: center !important;
+    }
+
 </style>
 </head>
 <body>
@@ -2311,7 +2434,7 @@
       <!-- ==========================================
            1. CHAT VIEW (Console > Chat)
            ========================================== -->
-      <div id="neatViewChat" class="neat-view-section">
+      <div id="neatViewChat" class="neat-view-section active" style="display: flex;">
         <h1 class="neat-hero-greet">hello, Ibochi</h1>
         <p class="neat-hero-sub">find anything about your agent runs, debug code &amp; visualize issues</p>
 
@@ -2415,14 +2538,13 @@
            2. VISUALIZER VIEW (Console > Visualizer)
            ========================================== -->
       <div id="neatViewVisual" class="neat-view-section" style="display: none;">
-        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 900px; margin-bottom: 16px;">
-          <div>
-            <h2 style="font-size: 20px; font-weight: 600; color: var(--neat-text-primary); margin-bottom: 4px;">Visual Code Explainer &amp; Architecture Flowchart</h2>
-            <p style="font-size: 12.5px; color: var(--neat-text-secondary);">4-Step Failure-to-Fix Pipeline &middot; Live AST Reasoning, Code Fix &amp; Verified Reproduction</p>
-          </div>
-          <div style="display: flex; gap: 8px;">
+        <div class="neat-visual-header-card">
+          <h2 style="font-size: 24px; font-weight: 600; color: var(--neat-text-primary); margin-bottom: 6px; text-align: center;">Visual Code Explainer &amp; Architecture Flowchart</h2>
+          <p style="font-size: 13.5px; color: var(--neat-text-secondary); text-align: center; margin-bottom: 14px;">4-Step Failure-to-Fix Pipeline &middot; Live AST Reasoning, Code Fix &amp; Verified Reproduction</p>
+          <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
             <button class="btn-table-action" onclick="loadLiveNeatlogsAndSubmit()">Load Checkout Issue</button>
             <button class="btn-table-action" onclick="loadSampleVibeAndSubmit('db_missing')">Load DB Pool Issue</button>
+            <button class="btn-table-action" onclick="loadSampleVibeAndSubmit('type_arg')">Load Type Coercion Bug</button>
           </div>
         </div>
 
@@ -2540,7 +2662,7 @@
                 <span id="vibeLackingBadge" class="vibe-lacking-badge lacking-type">TYPE COERCION</span>
               </div>
             </div>
-            <button class="btn-table-action" onclick="switchVibeStepView(3)" style="border-color: var(--color-electric-iris); color: #fff; background: rgba(128, 82, 255, 0.2);">Next: View Flowchart ➔</button>
+            <button class="btn-table-action" onclick="switchVibeStepView(3)" style="border-color: var(--color-electric-iris); color: #fff; background: rgba(128, 82, 255, 0.2);">Next: View Flowchart &rarr;</button>
           </div>
 
           <div style="margin-bottom: 16px;">
@@ -2576,23 +2698,23 @@
           </div>
           <div style="display: flex; gap: 8px; align-items: center;">
             <button class="btn-table-action" onclick="copyVibeMermaidCode()">Copy Diagram DSL</button>
-            <button class="btn-table-action" onclick="switchVibeStepView(4)" style="border-color: var(--color-electric-iris); color: #fff; background: rgba(128, 82, 255, 0.2);">Next: See The Fix ➔</button>
+            <button class="btn-table-action" onclick="switchVibeStepView(4)" style="border-color: var(--color-electric-iris); color: #fff; background: rgba(128, 82, 255, 0.2);">Next: See The Fix &rarr;</button>
           </div>
         </div>
 
         <!-- 3-Engine Visualizer Switcher Tabs -->
         <div style="display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; background: rgba(255,255,255,0.02); padding: 6px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.06);">
           <button id="btnVizDiagram" class="vibe-input-btn active" onclick="switchVisualizerEngine('diagram')">
-            <span>📊</span> Diagram-Copilot (Flowchart)
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg> Diagram-Copilot (Flowchart)
           </button>
           <button id="btnVizMise" class="vibe-input-btn" onclick="switchVisualizerEngine('mise')">
-            <span>🎬</span> Mise-en-scène (Incident Stage)
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg> Mise-en-scène (Incident Stage)
           </button>
           <button id="btnVizVibe" class="vibe-input-btn" onclick="switchVisualizerEngine('vibe')">
-            <span>⚡</span> Vibe-to-Code (Blueprint)
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg> Vibe-to-Code (Blueprint)
           </button>
           <button id="btnVizTri" class="vibe-input-btn" onclick="switchVisualizerEngine('tri')" style="border-color: rgba(128, 82, 255, 0.5); color: #c4b5fd;">
-            <span>👁️</span> Triple-Lens (Show All 3)
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Triple-Lens (Show All 3)
           </button>
         </div>
 
@@ -2791,40 +2913,49 @@
 
   <script>
 
-    function switchNeatView(viewName) {
-      const viewChat = document.getElementById('neatViewChat');
-      const viewVisual = document.getElementById('neatViewVisual');
-      const viewSettings = document.getElementById('neatViewSettings');
+        function switchNeatView(viewName) {
+      const views = {
+        chat: document.getElementById('neatViewChat'),
+        visual: document.getElementById('neatViewVisual'),
+        settings: document.getElementById('neatViewSettings')
+      };
+      const navs = {
+        chat: document.getElementById('navItemChat'),
+        visual: document.getElementById('navItemVisual'),
+        settings: document.getElementById('navItemSettings')
+      };
 
-      const navChat = document.getElementById('navItemChat');
-      const navVisual = document.getElementById('navItemVisual');
-      const navSettings = document.getElementById('navItemSettings');
-
-      // Hide all
-      if (viewChat) viewChat.style.display = 'none';
-      if (viewVisual) viewVisual.style.display = 'none';
-      if (viewSettings) viewSettings.style.display = 'none';
-
-      // Deactivate all navs
-      if (navChat) navChat.classList.remove('active');
-      if (navVisual) navVisual.classList.remove('active');
-      if (navSettings) navSettings.classList.remove('active');
-
-      if (viewName === 'visual') {
-        if (viewVisual) viewVisual.style.display = 'block';
-        if (navVisual) navVisual.classList.add('active');
-        if (window.mermaid) {
-          try { mermaid.run(); } catch(e) {}
+      // Hide all views and deactivate all nav items
+      Object.keys(views).forEach(key => {
+        const v = views[key];
+        if (v) {
+          v.classList.remove('active');
+          v.style.display = 'none';
         }
-      } else if (viewName === 'settings') {
-        if (viewSettings) viewSettings.style.display = 'block';
-        if (navSettings) navSettings.classList.add('active');
-      } else {
-        // default: chat
-        if (viewChat) viewChat.style.display = 'block';
-        if (navChat) navChat.classList.add('active');
+      });
+      Object.keys(navs).forEach(key => {
+        const n = navs[key];
+        if (n) n.classList.remove('active');
+      });
+
+      const activeView = views[viewName] || views.chat;
+      const activeNav = navs[viewName] || navs.chat;
+
+      if (activeView) {
+        activeView.classList.add('active');
+        activeView.style.display = 'flex';
       }
+      if (activeNav) {
+        activeNav.classList.add('active');
+      }
+
+      if (viewName === 'visual' && window.mermaid) {
+        try { mermaid.run(); } catch(e) {}
+      }
+
       window.scrollTo(0, 0);
+      const container = document.getElementById('neatMainContainer');
+      if (container) container.scrollTo(0, 0);
     }
 
     function setNeatTheme(theme) {
